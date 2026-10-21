@@ -1,0 +1,2500 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<title>ProfiVUZ — выбери вуз за 5 минут</title>
+<style>
+/* ============================================================
+   СБРОС И ПЕРЕМЕННЫЕ
+   ============================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    --accent: #10b981;
+    --accent-dark: #059669;
+    --accent-light: #d1fae5;
+    --gray-bg: #f9fafb;
+    --gray-text: #1f2937;
+    --gray-muted: #6b7280;
+    --card-bg: #ffffff;
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.04);
+    --shadow-md: 0 8px 24px rgba(0,0,0,0.06);
+    --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
+    --radius: 24px;
+    --radius-sm: 16px;
+    --font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    --mono-width: 260px;
+    --gold: #f59e0b;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font);
+    background: #ffffff;
+    color: var(--gray-text);
+    line-height: 1.5;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   ОБЩИЙ КОНТЕЙНЕР
+   ============================================================ */
+#app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 16px 100px;
+    min-height: 100vh;
+}
+@media (min-width: 900px) { #app { padding-bottom: 40px; } }
+
+.app-inner {
+    max-width: 1100px;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 20px 0 12px;
+    flex-wrap: wrap;
+}
+.app-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 1.6rem;
+    letter-spacing: -0.02em;
+    color: var(--gray-text);
+    text-decoration: none;
+    cursor: pointer;
+}
+.app-logo-icon { font-size: 2rem; line-height: 1; }
+.app-logo-accent { color: var(--accent); }
+
+/* ============================================================
+   СТРАНИЦЫ
+   ============================================================ */
+.page { display: none; flex-direction: column; animation: fade 0.3s ease; }
+.page.active { display: flex; }
+@keyframes fade {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   ГЛАВНАЯ (ЛЕНДИНГ)
+   ============================================================ */
+.hero {
+    min-height: calc(100vh - 80px);
+    min-height: calc(100svh - 80px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    text-align: center;
+}
+.hero-content {
+    max-width: 720px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.hero h1 {
+    font-size: clamp(1.8rem, 6.5vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    max-width: 640px;
+}
+.hero-sub {
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
+    color: var(--gray-muted);
+    max-width: 560px;
+    line-height: 1.5;
+}
+.hero-proof {
+    font-size: clamp(0.85rem, 3vw, 1rem);
+    color: var(--accent-dark);
+    font-weight: 600;
+    background: var(--accent-light);
+    padding: 10px 18px;
+    border-radius: 60px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px 48px;
+    border-radius: 60px;
+    font-weight: 700;
+    font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--font);
+    text-decoration: none;
+    background: var(--accent);
+    color: #ffffff;
+    box-shadow: 0 10px 24px rgba(16,185,129,0.3);
+    margin-top: 8px;
+}
+.btn-primary:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(16,185,129,0.4);
+}
+.btn-primary:active { transform: translateY(0); }
+
+.section {
+    padding: 64px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+.section-title {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.steps {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 560px;
+    margin: 0 auto;
+}
+.step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: var(--gray-bg);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    border: 1px solid #f0f0f0;
+}
+.step-num {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.step-text {
+    font-size: 1rem;
+    line-height: 1.5;
+    padding-top: 8px;
+}
+.step-text strong { color: var(--accent-dark); }
+
+/* Плашка с профориентацией внутри "Как это работает" */
+.step-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    background: var(--accent-light);
+    border: 1px solid var(--accent);
+    border-radius: 40px;
+    padding: 4px 12px;
+}
+
+.for-whom {
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: clamp(1rem, 3.5vw, 1.15rem);
+    line-height: 1.65;
+    text-align: center;
+}
+.for-whom strong { color: var(--accent-dark); }
+
+/* Возможности */
+.features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+@media (min-width: 600px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .features-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.feature {
+    background: var(--gray-bg);
+    border: 1px solid #f0f0f0;
+    border-radius: var(--radius-sm);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: border-color 0.2s, transform 0.2s;
+}
+.feature:hover {
+    border-color: var(--accent-light);
+    transform: translateY(-2px);
+}
+.feature-icon {
+    font-size: 1.8rem;
+    line-height: 1;
+    margin-bottom: 2px;
+}
+.feature-title {
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: var(--gray-text);
+}
+.feature-text {
+    font-size: 0.9rem;
+    color: var(--gray-muted);
+    line-height: 1.5;
+}
+
+.pricing {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 560px;
+    margin: 0 auto;
+}
+.price-item {
+    background: var(--gray-bg);
+    border-radius: var(--radius-sm);
+    padding: 20px 24px;
+    border: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.price-item.highlight {
+    background: var(--accent-light);
+    border-color: var(--accent);
+}
+.price-who { font-weight: 700; font-size: 1.05rem; }
+.price-what { font-size: 0.95rem; color: var(--gray-muted); }
+.price-amount {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--accent-dark);
+    margin-top: 4px;
+}
+
+.cta-section {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    padding: 64px 24px;
+    text-align: center;
+    color: #ffffff;
+    border-radius: var(--radius);
+    margin: 0 20px 32px;
+    scroll-margin-top: 24px;
+}
+.cta-section h2 {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cta-section p {
+    font-size: clamp(1rem, 3.5vw, 1.15rem);
+    color: rgba(255,255,255,0.9);
+    max-width: 520px;
+    margin: 0 auto 28px;
+}
+.cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 380px;
+    margin: 0 auto;
+    width: 100%;
+}
+@media (min-width: 600px) {
+    .cta-buttons { flex-direction: row; justify-content: center; }
+    .cta-buttons .btn-cta { flex: 1; }
+}
+.btn-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 28px;
+    border-radius: 60px;
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--font);
+    background: #ffffff;
+    color: var(--accent-dark);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    text-decoration: none;
+}
+.btn-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+}
+.btn-cta:active { transform: translateY(0); }
+.btn-cta.secondary {
+    background: rgba(255,255,255,0.15);
+    color: #ffffff;
+    border: 2px solid rgba(255,255,255,0.7);
+    box-shadow: none;
+}
+.btn-cta.secondary:hover {
+    background: rgba(255,255,255,0.25);
+    border-color: #ffffff;
+}
+
+/* ============================================================
+   СТРАНИЦА ВУЗОВ
+   ============================================================ */
+.page-header { padding: 16px 0 8px; display: flex; flex-direction: column; }
+.page-header h2 {
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+}
+.page-header p { color: var(--gray-muted); font-size: 1rem; }
+
+.btn-back {
+    align-self: flex-start;
+    margin: 12px 0 8px;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 0;
+    font-family: var(--font);
+    transition: opacity 0.2s;
+}
+.btn-back:hover { opacity: 0.7; }
+
+/* ---------- БАННЕР ПРОФОРИЕНТАЦИИ ---------- */
+.prof-banner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    border: 1.5px solid var(--accent);
+    border-radius: var(--radius-sm);
+    padding: 16px 18px;
+    margin: 16px 0 8px;
+    animation: slideDown 0.4s ease;
+    position: relative;
+}
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.prof-banner-emoji {
+    font-size: 2rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+.prof-banner-body { flex: 1; min-width: 0; }
+.prof-banner-title {
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--gray-text);
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+.prof-banner-text {
+    font-size: 0.88rem;
+    color: var(--gray-muted);
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+.prof-banner-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 40px;
+    padding: 9px 18px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    font-family: var(--font);
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(16,185,129,0.25);
+}
+.prof-banner-btn:hover {
+    background: var(--accent-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(16,185,129,0.35);
+}
+
+@media (max-width: 480px) {
+    .prof-banner { flex-direction: column; align-items: flex-start; padding: 16px; }
+    .prof-banner-emoji { font-size: 1.6rem; }
+}
+
+/* ---------- ПОИСК ---------- */
+.search-wrap {
+    margin: 16px 0 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.search-box { position: relative; width: 100%; }
+.search-box-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.1rem;
+    pointer-events: none;
+    color: var(--gray-muted);
+}
+.search-input {
+    width: 100%;
+    padding: 14px 44px 14px 44px;
+    border-radius: 60px;
+    border: 2px solid #e5e7eb;
+    background: #ffffff;
+    font-family: var(--font);
+    font-size: 1rem;
+    color: var(--gray-text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+}
+.search-input::placeholder { color: var(--gray-muted); }
+.search-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(16,185,129,0.12);
+}
+.search-clear {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--gray-bg);
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: var(--gray-muted);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+.search-clear.visible { display: flex; }
+.search-clear:hover { background: #e5e7eb; color: var(--gray-text); }
+
+.search-hint {
+    font-size: 0.85rem;
+    color: var(--gray-muted);
+    padding-left: 6px;
+}
+.search-hint strong { color: var(--accent-dark); }
+
+.search-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 2px;
+}
+.search-chip {
+    background: var(--gray-bg);
+    border: 1px solid #f0f0f0;
+    border-radius: 40px;
+    padding: 5px 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--gray-muted);
+    cursor: pointer;
+    font-family: var(--font);
+    transition: all 0.2s;
+}
+.search-chip:hover {
+    background: var(--accent-light);
+    border-color: var(--accent);
+    color: var(--accent-dark);
+}
+
+.search-empty {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--gray-muted);
+    background: var(--gray-bg);
+    border-radius: var(--radius-sm);
+    margin: 8px 0 16px;
+    font-size: 0.95rem;
+    border: 1px dashed #e5e7eb;
+}
+.search-empty.visible { display: block; }
+.search-empty-emoji {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* ---------- СЕТКА КАРТОЧЕК ---------- */
+.cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px 0 32px;
+}
+@media (min-width: 600px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .cards-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.card {
+    background: var(--card-bg);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #f0f0f0;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-light);
+    transform: translateY(-3px);
+}
+.card:active { transform: translateY(-1px); }
+
+.card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+.card-emoji {
+    font-size: 2rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+.card-title-wrap { flex: 1; min-width: 0; }
+.card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+    margin-bottom: 4px;
+}
+.card-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--gold);
+    background: #fffbeb;
+    padding: 2px 8px;
+    border-radius: 20px;
+    border: 1px solid #fde68a;
+}
+.card-direction {
+    font-size: 0.85rem;
+    color: var(--gray-muted);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.card-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 12px;
+    font-size: 0.85rem;
+    color: var(--gray-text);
+    padding-top: 10px;
+    border-top: 1px solid #f0f0f0;
+}
+.card-stat {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--gray-muted);
+}
+.card-stat strong { color: var(--gray-text); font-weight: 700; }
+.card-stat.accent strong { color: var(--accent-dark); }
+
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 2px;
+}
+.card-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 20px;
+    background: var(--gray-bg);
+    color: var(--gray-muted);
+    border: 1px solid #f0f0f0;
+}
+.card-tag.green {
+    background: var(--accent-light);
+    color: var(--accent-dark);
+    border-color: var(--accent);
+}
+.card-hint {
+    font-size: 0.8rem;
+    color: var(--accent-dark);
+    font-weight: 600;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.match-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    background: var(--accent-light);
+    border: 1px solid var(--accent);
+    border-radius: 20px;
+    padding: 3px 10px;
+    margin-top: 4px;
+    align-self: flex-start;
+}
+
+/* ============================================================
+   ПОДВАЛ
+   ============================================================ */
+.site-footer {
+    width: 100%;
+    background: #0f172a;
+    color: #cbd5e1;
+    margin-top: 40px;
+    padding: 56px 24px 24px;
+    font-size: 0.9rem;
+}
+.site-footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+}
+.footer-top {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #1e293b;
+}
+@media (min-width: 600px) {
+    .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 900px) {
+    .footer-top { grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; }
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.footer-brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: #ffffff;
+    text-decoration: none;
+}
+.footer-brand-logo span:last-child { color: var(--accent); }
+.footer-brand-desc {
+    font-size: 0.88rem;
+    color: #94a3b8;
+    line-height: 1.6;
+    max-width: 340px;
+}
+.footer-brand-stats {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+.footer-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.footer-stat-num {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1;
+}
+.footer-stat-label {
+    font-size: 0.78rem;
+    color: #94a3b8;
+}
+.footer-social {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+.footer-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #1e293b;
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.2s;
+}
+.footer-social a:hover {
+    background: var(--accent);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.footer-col h4 {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+.footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+.footer-col a,
+.footer-link-btn {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: color 0.2s;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: var(--font);
+    text-align: left;
+    cursor: pointer;
+}
+.footer-col a:hover,
+.footer-link-btn:hover { color: var(--accent); }
+
+.footer-contact {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: #94a3b8;
+    font-size: 0.88rem;
+    line-height: 1.4;
+}
+.footer-contact-icon { flex-shrink: 0; }
+
+.footer-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 20px;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+@media (min-width: 700px) {
+    .footer-bottom {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+.footer-bottom-links {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+.footer-bottom-links a {
+    color: #64748b;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.footer-bottom-links a:hover { color: var(--accent); }
+.footer-bottom-note {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* ============================================================
+   МОНЕТИЗАЦИЯ
+   ============================================================ */
+.monetization {
+    position: fixed;
+    left: 16px;
+    bottom: 16px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: var(--mono-width);
+    max-width: calc(100vw - 32px);
+    font-family: var(--font);
+    align-items: flex-start;
+}
+.mono-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-lg);
+    transition: transform 0.25s ease, background 0.2s ease;
+    flex-shrink: 0;
+}
+.mono-toggle:hover {
+    transform: scale(1.08);
+    background: var(--accent-dark);
+}
+.mono-toggle:active { transform: scale(0.98); }
+.mono-card {
+    display: none;
+    background: #ffffff;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid #f0f0f0;
+    overflow: hidden;
+    width: 100%;
+    animation: slideUp 0.25s ease;
+    position: relative;
+}
+.monetization.open .mono-card { display: block; }
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.mono-header {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    color: #fff;
+    padding: 10px 40px 10px 14px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+.mono-header span:last-child { font-size: 1rem; }
+.mono-close {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.25);
+    border: none;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+.mono-close:hover { background: rgba(255,255,255,0.45); }
+.mono-body { padding: 12px; display: flex; flex-direction: column; gap: 12px; }
+.mono-item {
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    padding: 10px 12px;
+    background: var(--gray-bg);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: border-color 0.2s;
+}
+.mono-item:hover { border-color: var(--accent-light); }
+.mono-item-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+.mono-item-title .icon { font-size: 1.1rem; }
+.mono-value { font-size: 0.8rem; color: var(--gray-muted); line-height: 1.35; }
+.mono-value strong { color: var(--accent-dark); }
+.mono-price {
+    font-size: 0.85rem;
+    font-weight: 700;
+    background: #fff;
+    padding: 4px 8px;
+    border-radius: 8px;
+    display: inline-block;
+    align-self: flex-start;
+    border: 1px solid #e5e7eb;
+}
+.mono-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-family: var(--font);
+    transition: all 0.2s;
+    width: 100%;
+}
+.mono-btn:hover { background: var(--accent-dark); }
+.mono-btn.secondary {
+    background: #ffffff;
+    color: var(--accent-dark);
+    border: 1.5px solid var(--accent);
+}
+.mono-btn.secondary:hover { background: var(--accent-light); }
+.monetization.open .mono-toggle {
+    transform: rotate(45deg);
+    background: var(--accent-dark);
+}
+
+/* ============================================================
+   МОДАЛЬНЫЕ ОКНА
+   ============================================================ */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 16px;
+    animation: fadeIn 0.2s ease;
+}
+.modal-overlay.open { display: flex; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal {
+    background: #ffffff;
+    border-radius: var(--radius-sm);
+    padding: 24px;
+    max-width: 520px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.3s ease;
+}
+.modal h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 8px; }
+.modal p { color: var(--gray-muted); font-size: 0.95rem; margin-bottom: 16px; }
+.modal .form-group { margin-bottom: 12px; }
+.modal label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+.modal input, .modal select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1.5px solid #e5e7eb;
+    font-family: var(--font);
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+.modal input:focus, .modal select:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.modal-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+}
+.modal-actions .mono-btn { flex: 1; }
+.modal-actions .mono-btn.cancel {
+    background: #ffffff;
+    color: var(--gray-muted);
+    border: 1.5px solid #e5e7eb;
+}
+.modal-actions .mono-btn.cancel:hover {
+    background: var(--gray-bg);
+    color: var(--gray-text);
+}
+
+/* ---------- МОДАЛКА ПРОФОРИЕНТАЦИИ ---------- */
+.prof-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2500;
+    padding: 16px;
+    animation: fadeIn 0.25s ease;
+}
+.prof-modal-overlay.open { display: flex; }
+
+.prof-modal {
+    background: #ffffff;
+    border-radius: var(--radius);
+    padding: 0;
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.prof-modal-hero {
+    background: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 100%);
+    padding: 28px 24px 24px;
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid #d1fae5;
+}
+.prof-modal-hero-emoji {
+    font-size: 3rem;
+    line-height: 1;
+    margin-bottom: 10px;
+    display: block;
+}
+.prof-modal-hero h3 {
+    font-size: clamp(1.3rem, 5vw, 1.6rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--gray-text);
+    margin-bottom: 8px;
+    line-height: 1.25;
+}
+.prof-modal-hero p {
+    font-size: clamp(0.9rem, 3.5vw, 1rem);
+    color: var(--gray-muted);
+    line-height: 1.45;
+    max-width: 420px;
+    margin: 0 auto;
+}
+.prof-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255,255,255,0.7);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--gray-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+.prof-modal-close:hover {
+    background: #ffffff;
+    color: var(--gray-text);
+}
+
+.prof-modal-body {
+    padding: 20px 24px 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.prof-modal-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+.prof-modal-benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.92rem;
+    color: var(--gray-text);
+    line-height: 1.4;
+}
+.prof-modal-benefit-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+.prof-modal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+}
+.prof-modal-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 15px 24px;
+    border-radius: 60px;
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font);
+    transition: all 0.2s;
+    width: 100%;
+}
+.prof-modal-btn.primary {
+    background: var(--accent);
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(16,185,129,0.3);
+}
+.prof-modal-btn.ghost {
+    background: transparent;
+    color: var(--gray-muted);
+    border: 1.5px solid #e5e7eb;
+}
+.prof-modal-btn.ghost:hover {
+    background: var(--gray-bg);
+    color: var(--gray-text);
+}
+.prof-modal-btn.disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    pointer-events: none;
+    background: #d1fae5;
+    color: var(--accent-dark);
+    box-shadow: none;
+}
+
+@media (max-width: 480px) {
+    .prof-modal-hero { padding: 32px 16px 20px; }
+    .prof-modal-body { padding: 16px 16px 20px; }
+    .prof-modal { max-height: 92vh; }
+}
+
+/* ---------- МОДАЛКА ВУЗА ---------- */
+.vuz-modal-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.vuz-modal-emoji { font-size: 2.5rem; line-height: 1; flex-shrink: 0; }
+.vuz-modal-header h3 { margin: 0; font-size: 1.25rem; line-height: 1.3; }
+.vuz-modal-header p { margin: 4px 0 0; font-size: 0.85rem; color: var(--gray-muted); }
+
+.vuz-facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 8px 0 16px;
+}
+.vuz-fact {
+    background: var(--gray-bg);
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.vuz-fact-label {
+    font-size: 0.72rem;
+    color: var(--gray-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+.vuz-fact-value {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--gray-text);
+}
+.vuz-fact-value.accent { color: var(--accent-dark); }
+.vuz-fact-value.gold { color: var(--gold); }
+
+.faculties-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+}
+.faculty-item {
+    background: var(--gray-bg);
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    padding: 12px 14px;
+    transition: border-color 0.2s;
+}
+.faculty-item:hover { border-color: var(--accent-light); }
+.faculty-item.highlighted {
+    border-color: var(--accent);
+    background: #ecfdf5;
+}
+.faculty-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.faculty-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    font-size: 0.85rem;
+    color: var(--gray-muted);
+}
+.faculty-stat { display: flex; align-items: center; gap: 4px; }
+.faculty-stat .badge {
+    background: #fff;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    color: var(--accent-dark);
+    border: 1px solid #e5e7eb;
+    font-size: 0.85rem;
+}
+.faculty-stat .badge.seats { color: var(--gray-text); }
+.faculty-stat .badge.exam { color: #7c3aed; }
+
+.modal-close-x {
+    position: sticky;
+    top: 0;
+    float: right;
+    background: var(--gray-bg);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: var(--gray-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    margin-left: 8px;
+}
+.modal-close-x:hover { background: #e5e7eb; color: var(--gray-text); }
+
+.hidden { display: none !important; }
+
+/* ============================================================
+   АДАПТИВ
+   ============================================================ */
+@media (max-width: 480px) {
+    .section { padding: 48px 16px; }
+    .hero { padding: 32px 16px; min-height: calc(100vh - 70px); min-height: calc(100svh - 70px); }
+    .step { padding: 16px; gap: 12px; }
+    .step-num { width: 36px; height: 36px; font-size: 1rem; }
+    .step-text { padding-top: 4px; font-size: 0.95rem; }
+    .price-item { padding: 16px 18px; }
+    .cta-section { margin: 0 0 32px; border-radius: var(--radius-sm); padding: 48px 20px; }
+    .card-stats { grid-template-columns: 1fr; }
+    .vuz-facts { grid-template-columns: 1fr; }
+    .monetization { width: calc(100vw - 32px); max-width: 320px; }
+    .site-footer { padding: 40px 16px 20px; }
+    .footer-top { gap: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div id="app">
+    <div class="app-inner">
+        <header class="app-header">
+            <a href="#" class="app-logo" id="appLogo">
+                <span class="app-logo-icon">🎓</span>
+                <span>Profi<span class="app-logo-accent">VUZ</span></span>
+            </a>
+        </header>
+
+        <!-- ====================================================
+             ГЛАВНАЯ = ЛЕНДИНГ
+             ==================================================== -->
+        <section id="page-home" class="page active">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Ты поступишь туда, где тебе будет хорошо</h1>
+                    <p class="hero-sub">Подбираем вуз Москвы по баллам, специальностям и местам — за 5 минут, а не за месяц</p>
+                    <button class="btn-primary" id="heroStart">Подобрать вуз →</button>
+                    <div class="hero-proof">📊 20 вузов Москвы · 100+ специальностей · поиск и профориентация</div>
+                </div>
+            </div>
+
+            <!-- Как это работает -->
+            <section class="section">
+                <h2 class="section-title">Как это работает</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-num">1</div>
+                        <div class="step-text">
+                            Пройди <strong>профориентацию</strong> — узнаешь, какие специальности тебе подходят
+                            <span class="step-note">🧭 5–7 минут · без регистрации</span>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">2</div>
+                        <div class="step-text">Найди специальность через <strong>поиск по направлениям</strong> — например, IT или медицину</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">3</div>
+                        <div class="step-text">Нажми на вуз — увидишь <strong>факультеты</strong> с баллами, местами и ДВИ</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Что внутри -->
+            <section class="section">
+                <h2 class="section-title">Что ты найдёшь на ProfiVUZ</h2>
+                <div class="features-grid">
+                    <div class="feature">
+                        <span class="feature-icon">🧭</span>
+                        <div class="feature-title">Профориентация</div>
+                        <div class="feature-text">Поможем понять, какие специальности подходят именно тебе, и подберём вуз.</div>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">🔍</span>
+                        <div class="feature-title">Поиск по специальностям</div>
+                        <div class="feature-text">Введи «IT», «медицина» или «экономика» — увидишь вузы и факультеты, где это есть.</div>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">🏛️</span>
+                        <div class="feature-title">20 вузов Москвы</div>
+                        <div class="feature-text">Рейтинг, проходные баллы, бюджетные и платные места, ДВИ, общежитие, ВУЦ.</div>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">🎓</span>
+                        <div class="feature-title">100+ факультетов</div>
+                        <div class="feature-text">Проходной балл, места, бюджет и платно — по каждому факультету и направлению.</div>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">📚</span>
+                        <div class="feature-title">Подбор курсов</div>
+                        <div class="feature-text">Найдём подготовительные курсы по нужным предметам и формату обучения.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Для кого -->
+            <section class="section">
+                <h2 class="section-title">Для кого</h2>
+                <p class="for-whom">
+                    Ты учишься в <strong>10 или 11 классе</strong> и уже понял: пора выбирать вуз, но в голове — каша из названий, баллов и факультетов. Ты не хочешь гуглить 20 сайтов и сравнивать таблицы вручную. Тебе нужно за один вечер увидеть: <strong>куда ты проходишь по баллам</strong> и на каком факультете тебе будет интересно. ProfiVUZ собирает это в одном месте — без воды и лишних кликов.
+                </p>
+            </section>
+
+            <!-- Сколько стоит -->
+            <section class="section">
+                <h2 class="section-title">Сколько стоит</h2>
+                <div class="pricing">
+                    <div class="price-item highlight">
+                        <div class="price-who">Для школьников</div>
+                        <div class="price-what">Профориентация, поиск, вузы, факультеты, баллы, места</div>
+                        <div class="price-amount">0 ₽ — бесплатно</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-who">Для вузов</div>
+                        <div class="price-what">Размещение рекламы в подборке вузов</div>
+                        <div class="price-amount">от 5 000 ₽ / неделя</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-who">Для тех, кто хочет поддержать</div>
+                        <div class="price-what">Донат на развитие проекта и корм котикам</div>
+                        <div class="price-amount">100 ₽ / 300 ₽ / своя сумма</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <section class="cta-section" id="ctaBlock">
+                <h2>Открой список вузов — и выбери свой за 5 минут</h2>
+                <p>20 вузов Москвы. Поиск по специальностям. Без регистрации.</p>
+                <div class="cta-buttons">
+                    <button class="btn-cta" id="ctaVuz">Посмотреть вузы →</button>
+                    <button class="btn-cta secondary" id="ctaCourses">📚 Найти курсы</button>
+                </div>
+            </section>
+        </section>
+
+        <!-- ====================================================
+             СТРАНИЦА ВУЗОВ
+             ==================================================== -->
+        <section id="page-vuz" class="page">
+            <div class="page-header">
+                <button class="btn-back" id="back-from-vuz">← На главную</button>
+                <h2>Вузы Москвы</h2>
+                <p>Рейтинг, баллы, места, стоимость и другие данные для поступления</p>
+            </div>
+
+            <div class="prof-banner" id="profBanner">
+                <div class="prof-banner-emoji">🧭</div>
+                <div class="prof-banner-body">
+                    <div class="prof-banner-title">Не знаешь, с чего начать?</div>
+                    <div class="prof-banner-text">Пройди профориентацию — и мы подберём тебе вуз и специальность под твои интересы и баллы.</div>
+                    <button class="prof-banner-btn" id="profBannerStart">Пройти профориентацию →</button>
+                </div>
+            </div>
+
+            <div class="search-wrap">
+                <div class="search-box">
+                    <span class="search-box-icon">🔍</span>
+                    <input
+                        type="search"
+                        class="search-input"
+                        id="searchInput"
+                        placeholder="Найти специальность: IT, медицина, экономика…"
+                        autocomplete="off"
+                        aria-label="Поиск по направлениям и специальностям"
+                    >
+                    <button class="search-clear" id="searchClear" aria-label="Очистить поиск">✕</button>
+                </div>
+                <div class="search-hint" id="searchHint">Популярные запросы:</div>
+                <div class="search-chips" id="searchChips">
+                    <button class="search-chip" data-q="IT">IT</button>
+                    <button class="search-chip" data-q="медицина">Медицина</button>
+                    <button class="search-chip" data-q="экономика">Экономика</button>
+                    <button class="search-chip" data-q="физика">Физика</button>
+                    <button class="search-chip" data-q="юриспруденция">Юриспруденция</button>
+                    <button class="search-chip" data-q="педагогика">Педагогика</button>
+                </div>
+            </div>
+
+            <div class="search-empty" id="searchEmpty">
+                <span class="search-empty-emoji">🔍</span>
+                Ничего не нашлось. Попробуй другой запрос — например, «IT», «медицина», «экономика».
+            </div>
+
+            <div class="cards-grid" id="vuz-grid"></div>
+        </section>
+    </div>
+</div>
+
+<!-- ============================================================
+     ПОДВАЛ
+     ============================================================ -->
+<footer class="site-footer" id="siteFooter">
+    <div class="site-footer-inner">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="#" class="footer-brand-logo" id="footerLogo">
+                    <span>🎓</span>
+                    <span>ProfiVUZ</span>
+                </a>
+                <p class="footer-brand-desc">
+                    Помогаем школьникам 10–11 классов выбрать вуз Москвы по баллам, специальностям и местам — быстро и без воды.
+                </p>
+                <div class="footer-brand-stats">
+                    <div class="footer-stat">
+                        <span class="footer-stat-num">20</span>
+                        <span class="footer-stat-label">вузов Москвы</span>
+                    </div>
+                    <div class="footer-stat">
+                        <span class="footer-stat-num">100+</span>
+                        <span class="footer-stat-label">специальностей</span>
+                    </div>
+                    <div class="footer-stat">
+                        <span class="footer-stat-num">0 ₽</span>
+                        <span class="footer-stat-label">для школьников</span>
+                    </div>
+                </div>
+                <div class="footer-social">
+                    <a href="#" aria-label="Telegram" title="Telegram">✈️</a>
+                    <a href="#" aria-label="ВКонтакте" title="ВКонтакте">🌐</a>
+                    <a href="#" aria-label="YouTube" title="YouTube">▶️</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Продукт</h4>
+                <ul>
+                    <li><button class="footer-link-btn" data-footer-action="vuz">Список вузов</button></li>
+                    <li><button class="footer-link-btn" data-footer-action="search">Поиск специальностей</button></li>
+                    <li><button class="footer-link-btn" data-footer-action="prof">Профориентация</button></li>
+                    <li><button class="footer-link-btn" data-footer-action="courses">Подбор курсов</button></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Сотрудничество</h4>
+                <ul>
+                    <li><button class="footer-link-btn" data-footer-action="ad">Разместить рекламу</button></li>
+                    <li><button class="footer-link-btn" data-footer-action="donate">Поддержать проект</button></li>
+                    <li><a href="#" data-footer-action="ad">Вузам и школам</a></li>
+                    <li><a href="#" data-footer-action="ad">Онлайн-курсам</a></li>
+                    <li><a href="#" data-footer-action="ad">Репетиторам</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Контакты</h4>
+                <ul>
+                    <li>
+                        <div class="footer-contact">
+                            <span class="footer-contact-icon">✉️</span>
+                            <span>hello@profivuz.ru</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="footer-contact">
+                            <span class="footer-contact-icon">📣</span>
+                            <span>ads@profivuz.ru</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="footer-contact">
+                            <span class="footer-contact-icon">💬</span>
+                            <span>Telegram: @profivuz</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="footer-contact">
+                            <span class="footer-contact-icon">📍</span>
+                            <span>Москва, Россия</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="footer-contact">
+                            <span class="footer-contact-icon">⏱️</span>
+                            <span>Отвечаем пн–пт, 10:00–19:00</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-note">
+                <span>© 2025 ProfiVUZ</span>
+                <span>·</span>
+                <span>Ускоряем подбор вуза для 10–11 классов</span>
+            </div>
+            <div class="footer-bottom-links">
+                <a href="#" data-footer-action="privacy">Политика конфиденциальности</a>
+                <a href="#" data-footer-action="terms">Пользовательское соглашение</a>
+                <a href="#" data-footer-action="cookies">Cookies</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ============================================================
+     МОНЕТИЗАЦИЯ
+     ============================================================ -->
+<div class="monetization" id="monetization">
+    <button class="mono-toggle" id="monoToggle" aria-label="Монетизация" aria-expanded="false">💰</button>
+    <div class="mono-card" id="monoCard">
+        <div class="mono-header">
+            <span>Поддержи ProfiVUZ</span>
+            <button class="mono-close" id="monoClose" aria-label="Закрыть">✕</button>
+        </div>
+        <div class="mono-body">
+            <div class="mono-item">
+                <div class="mono-item-title">
+                    <span class="icon">📣</span> Разместить рекламу
+                </div>
+                <div class="mono-value">
+                    Ваш вуз увидят <strong>10 000+ школьников</strong> Москвы каждый месяц.
+                </div>
+                <div class="mono-price">от 5 000 ₽ / неделя</div>
+                <button class="mono-btn" id="btnAd">Разместить →</button>
+            </div>
+            <div class="mono-item">
+                <div class="mono-item-title">
+                    <span class="icon">☕</span> Задонать
+                </div>
+                <div class="mono-value">
+                    Поддержи проект — мы <strong>бесплатно</strong> помогаем школьникам.
+                </div>
+                <div class="mono-price">100 ₽ / 300 ₽ / своя сумма</div>
+                <button class="mono-btn secondary" id="btnDonate">Поддержать →</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     МОДАЛКА ПРОФОРИЕНТАЦИИ
+     ============================================================ -->
+<div class="prof-modal-overlay" id="profModalOverlay">
+    <div class="prof-modal" role="dialog" aria-modal="true" aria-labelledby="profModalTitle">
+        <div class="prof-modal-hero">
+            <button class="prof-modal-close" id="profModalClose" aria-label="Закрыть">✕</button>
+            <span class="prof-modal-hero-emoji">🧭</span>
+            <h3 id="profModalTitle">Не знаешь, с чего начать?</h3>
+            <p>Пройди профориентацию — и мы подберём тебе вуз и специальность под твои интересы и баллы.</p>
+        </div>
+        <div class="prof-modal-body">
+            <div class="prof-modal-benefits">
+                <div class="prof-modal-benefit">
+                    <span class="prof-modal-benefit-icon">🎯</span>
+                    <span>Узнаешь, какие специальности подходят именно тебе</span>
+                </div>
+                <div class="prof-modal-benefit">
+                    <span class="prof-modal-benefit-icon">🏛️</span>
+                    <span>Получишь список вузов, куда проходишь по баллам</span>
+                </div>
+                <div class="prof-modal-benefit">
+                    <span class="prof-modal-benefit-icon">⏱️</span>
+                    <span>Займёт 5–7 минут — без регистрации</span>
+                </div>
+            </div>
+            <div class="prof-modal-actions">
+                <button class="prof-modal-btn primary disabled" disabled aria-disabled="true">Пройти профориентацию →</button>
+                <button class="prof-modal-btn ghost" id="profModalSkip">Сначала посмотрю вузы</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- МОДАЛЬНОЕ ОКНО -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modalContent"></div>
+</div>
+
+<script>
+(function() {
+    'use strict';
+
+    // ==================== ДАННЫЕ ВУЗОВ ====================
+    const UNIVERSITIES = [
+        { name: 'МГУ им. М.В. Ломоносова', emoji: '🏛️', score: 320, places: 4000, direction: 'Широкий профиль',
+          rating: 1, minScore: 180, paidFrom: 420000, budgetPlaces: 3500, paidPlaces: 500,
+          dormitory: true, military: true, exams: 'ДВИ по профилю',
+          faculties: [
+            { name: 'Факультет вычислительной математики и кибернетики', score: 340, places: 350, budget: 320, paid: 30, exams: 'Математика (ДВИ), информатика' },
+            { name: 'Экономический факультет', score: 330, places: 400, budget: 350, paid: 50, exams: 'Математика (ДВИ), обществознание' },
+            { name: 'Юридический факультет', score: 335, places: 300, budget: 260, paid: 40, exams: 'Обществознание (ДВИ), история' },
+            { name: 'Физический факультет', score: 310, places: 500, budget: 470, paid: 30, exams: 'Физика (ДВИ), математика' },
+            { name: 'Филологический факультет', score: 300, places: 350, budget: 320, paid: 30, exams: 'Литература (ДВИ), русский' }
+          ]},
+        { name: 'МФТИ', emoji: '⚛️', score: 310, places: 1200, direction: 'Физика, IT',
+          rating: 2, minScore: 190, paidFrom: 380000, budgetPlaces: 1100, paidPlaces: 100,
+          dormitory: true, military: true, exams: 'ДВИ по математике и физике',
+          faculties: [
+            { name: 'Физтех-школа радиотехники и компьютерных технологий', score: 320, places: 200, budget: 185, paid: 15, exams: 'Математика (ДВИ), физика' },
+            { name: 'Физтех-школа прикладной математики и информатики', score: 325, places: 180, budget: 170, paid: 10, exams: 'Математика (ДВИ), информатика' },
+            { name: 'Физтех-школа физики и исследований им. Ландау', score: 315, places: 150, budget: 145, paid: 5, exams: 'Физика (ДВИ), математика' },
+            { name: 'Физтех-школа биологической и медицинской физики', score: 305, places: 100, budget: 95, paid: 5, exams: 'Биология (ДВИ), физика' }
+          ]},
+        { name: 'НИУ ВШЭ', emoji: '📊', score: 300, places: 3500, direction: 'Экономика, IT',
+          rating: 3, minScore: 175, paidFrom: 350000, budgetPlaces: 2800, paidPlaces: 700,
+          dormitory: true, military: true, exams: 'ДВИ по профилю',
+          faculties: [
+            { name: 'Факультет компьютерных наук', score: 315, places: 400, budget: 340, paid: 60, exams: 'Математика (ДВИ), информатика' },
+            { name: 'Факультет экономических наук', score: 310, places: 500, budget: 400, paid: 100, exams: 'Математика (ДВИ), обществознание' },
+            { name: 'Факультет гуманитарных наук', score: 290, places: 350, budget: 300, paid: 50, exams: 'История (ДВИ), литература' },
+            { name: 'Факультет социальных наук', score: 285, places: 300, budget: 260, paid: 40, exams: 'Обществознание (ДВИ), история' },
+            { name: 'Факультет права', score: 300, places: 250, budget: 200, paid: 50, exams: 'Обществознание (ДВИ), история' }
+          ]},
+        { name: 'МГТУ им. Н.Э. Баумана', emoji: '🔧', score: 290, places: 3000, direction: 'Инженерия',
+          rating: 4, minScore: 170, paidFrom: 290000, budgetPlaces: 2600, paidPlaces: 400,
+          dormitory: true, military: true, exams: 'ДВИ по математике и физике',
+          faculties: [
+            { name: 'Факультет информатики и систем управления', score: 305, places: 400, budget: 360, paid: 40, exams: 'Математика (ДВИ), информатика' },
+            { name: 'Факультет робототехники и комплексной автоматизации', score: 295, places: 350, budget: 320, paid: 30, exams: 'Математика (ДВИ), физика' },
+            { name: 'Факультет энергомашиностроения', score: 285, places: 300, budget: 280, paid: 20, exams: 'Математика (ДВИ), физика' },
+            { name: 'Факультет фундаментальных наук', score: 280, places: 250, budget: 230, paid: 20, exams: 'Математика (ДВИ), физика' }
+          ]},
+        { name: 'МГИМО', emoji: '🌍', score: 295, places: 1000, direction: 'Международные отношения',
+          rating: 5, minScore: 185, paidFrom: 450000, budgetPlaces: 700, paidPlaces: 300,
+          dormitory: true, military: true, exams: 'ДВИ по иностранному языку',
+          faculties: [
+            { name: 'Факультет международных отношений', score: 310, places: 200, budget: 150, paid: 50, exams: 'Иностранный язык (ДВИ), история' },
+            { name: 'Факультет международных экономических отношений', score: 305, places: 180, budget: 130, paid: 50, exams: 'Математика (ДВИ), иностранный язык' },
+            { name: 'Международно-правовой факультет', score: 300, places: 150, budget: 110, paid: 40, exams: 'Обществознание (ДВИ), иностранный язык' },
+            { name: 'Факультет международной журналистики', score: 295, places: 100, budget: 70, paid: 30, exams: 'Литература (ДВИ), иностранный язык' }
+          ]},
+        { name: 'РУДН', emoji: '🤝', score: 250, places: 4500, direction: 'Мультидисциплинарный',
+          rating: 8, minScore: 150, paidFrom: 220000, budgetPlaces: 3000, paidPlaces: 1500,
+          dormitory: true, military: true, exams: 'ДВИ по профилю',
+          faculties: [
+            { name: 'Медицинский институт', score: 270, places: 300, budget: 220, paid: 80, exams: 'Биология (ДВИ), химия' },
+            { name: 'Институт мировой экономики и бизнеса', score: 260, places: 250, budget: 180, paid: 70, exams: 'Математика (ДВИ), обществознание' },
+            { name: 'Юридический институт', score: 265, places: 200, budget: 140, paid: 60, exams: 'Обществознание (ДВИ), история' },
+            { name: 'Инженерная академия', score: 250, places: 280, budget: 200, paid: 80, exams: 'Математика (ДВИ), физика' }
+          ]},
+        { name: 'НИЯУ МИФИ', emoji: '☢️', score: 280, places: 1500, direction: 'Ядерная физика',
+          rating: 6, minScore: 165, paidFrom: 280000, budgetPlaces: 1300, paidPlaces: 200,
+          dormitory: true, military: true, exams: 'ДВИ по физике и математике',
+          faculties: [
+            { name: 'Институт ядерной физики и технологий', score: 290, places: 200, budget: 180, paid: 20, exams: 'Физика (ДВИ), математика' },
+            { name: 'Институт лазерных и плазменных технологий', score: 285, places: 150, budget: 130, paid: 20, exams: 'Физика (ДВИ), математика' },
+            { name: 'Институт интеллектуальных кибернетических систем', score: 295, places: 180, budget: 160, paid: 20, exams: 'Математика (ДВИ), информатика' },
+            { name: 'Инженерно-физический институт биомедицины', score: 275, places: 120, budget: 100, paid: 20, exams: 'Биология (ДВИ), физика' }
+          ]},
+        { name: 'МГМУ им. И.М. Сеченова', emoji: '🩺', score: 270, places: 2000, direction: 'Медицина',
+          rating: 7, minScore: 160, paidFrom: 320000, budgetPlaces: 1700, paidPlaces: 300,
+          dormitory: true, military: true, exams: 'ДВИ по химии и биологии',
+          faculties: [
+            { name: 'Лечебный факультет', score: 285, places: 400, budget: 360, paid: 40, exams: 'Химия (ДВИ), биология' },
+            { name: 'Педиатрический факультет', score: 275, places: 300, budget: 270, paid: 30, exams: 'Химия (ДВИ), биология' },
+            { name: 'Стоматологический факультет', score: 290, places: 150, budget: 130, paid: 20, exams: 'Химия (ДВИ), биология' },
+            { name: 'Фармацевтический факультет', score: 260, places: 200, budget: 170, paid: 30, exams: 'Химия (ДВИ), биология' }
+          ]},
+        { name: 'РЭУ им. Г.В. Плеханова', emoji: '📈', score: 260, places: 2800, direction: 'Экономика',
+          rating: 10, minScore: 155, paidFrom: 240000, budgetPlaces: 1900, paidPlaces: 900,
+          dormitory: true, military: true, exams: 'ДВИ по профилю',
+          faculties: [
+            { name: 'Факультет экономики и финансов', score: 270, places: 300, budget: 220, paid: 80, exams: 'Математика (ДВИ), обществознание' },
+            { name: 'Факультет менеджмента', score: 265, places: 250, budget: 180, paid: 70, exams: 'Математика (ДВИ), обществознание' },
+            { name: 'Факультет информационных технологий', score: 260, places: 200, budget: 150, paid: 50, exams: 'Математика (ДВИ), информатика' },
+            { name: 'Юридический факультет', score: 255, places: 180, budget: 120, paid: 60, exams: 'Обществознание (ДВИ), история' }
+          ]},
+        { name: 'МАИ', emoji: '✈️', score: 255, places: 2200, direction: 'Авиация, IT',
+          rating: 12, minScore: 150, paidFrom: 230000, budgetPlaces: 1700, paidPlaces: 500,
+          dormitory: true, military: true, exams: 'ДВИ по математике и физике',
+          faculties: [
+            { name: 'Институт информационных технологий', score: 270, places: 250, budget: 210, paid: 40, exams: 'Математика (ДВИ), информатика' },
+            { name: 'Аэрокосмический институт', score: 260, places: 300, budget: 240, paid: 60, exams: 'Математика (ДВИ), физика' },
+            { name: 'Институт двигателей и энергетики', score: 255, places: 200, budget: 160, paid: 40, exams: 'Математика (ДВИ), физика' },
+            { name: 'Институт экономики и управления', score: 245, places: 150, budget: 110, paid: 40, exams: 'Математика (ДВИ), обществознание' }
+          ]},
+        { name: 'МГПУ', emoji: '📚', score: 230, places: 3500, direction: 'Педагогика',
+          rating: 15, minScore: 140, paidFrom: 180000, budgetPlaces: 2800, paidPlaces: 700,
+          dormitory: true, military: false, exams: 'ДВИ по профилю',
+          faculties: [
+            { name: 'Институт педагогики и психологии образования', score: 240, places: 350, budget: 290, paid: 60, exams: 'Обществознание (ДВИ), биология' },
+            { name: 'Институт цифрового образования', score: 235, places: 250, budget: 200, paid: 50, exams: 'Математика (ДВИ), информатика' },
+            { name: 'Институт гуманитарных наук', score: 230, places: 300, budget: 240, paid: 60, exams: 'История (ДВИ), литература' },
+            { name: 'Институт математики, информатики и естественных наук', score: 225, places: 200, budget: 160, paid: 40, exams: 'Математика (ДВИ), физика' }
+          ]},
+        { name: 'НИТУ МИСиС', emoji: '⛏️', score: 245, places: 1800, direction: 'Материаловедение',
+          rating: 13, minScore: 145, paidFrom: 200000, budgetPlaces: 1500, paidPlaces: 300,
+          dormitory: true, military: true, exams: 'ДВИ по математике и физике',
+          faculties: [
+            { name: 'Институт новых материалов и нанотехнологий', score: 255, places: 200, budget: 170, paid: 30, exams: 'Математика (ДВИ), физика' },
+            { name: 'Институт горного дела и наук о Земле', score: 250, places: 180, budget: 155, paid: 25, exams: 'Математика (ДВИ), физика' },
+            { name: 'Институт информационных технологий', score: 260, places: 150, budget: 130, paid: 20, exams: 'Математика (ДВИ), информатика' },
+            { name: 'Институт металлургии и металловедения', score: 245, places: 200, budget: 165, paid: 35, exams: 'Математика (ДВИ), химия' }
+          ]},
+        { name: 'МПГУ', emoji: '🧑‍🏫', score: 225, places: 4000, direction: 'Педагогика',
+          rating: 16, minScore: 135, paidFrom: 170000, budgetPlaces: 3300, paidPlaces: 700,
+          dormitory: true, military: false, exams: 'ДВИ по профилю',
+          faculties: [
+            { name: 'Институт математики и информатики', score: 235, places: 300, budget: 250, paid: 50, exams: 'Математика (ДВИ), информатика' },
+            { name: 'Институт филологии', score: 230, places: 400, budget: 340, paid: 60, exams: 'Литература (ДВИ), русский' },
+            { name: 'Институт истории и политики', score: 225, places: 250, budget: 210, paid: 40, exams: 'История (ДВИ), обществознание' },
+            { name: 'Институт физической культуры и спорта', score: 220, places: 200, budget: 170, paid: 30, exams: 'Биология (ДВИ), физическая культура' }
+          ]},
+        { name: 'Финансовый университет', emoji: '💰', score: 275, places: 2500, direction: 'Финансы',
+          rating: 9, minScore: 160, paidFrom: 280000, budgetPlaces: 1900, paidPlaces: 600,
+          dormitory: true, military: true, exams: 'ДВИ по профилю',
+          faculties: [
+            { name: 'Факультет финансов и кредита', score: 285, places: 300, budget: 240, paid: 60, exams: 'Математика (ДВИ), обществознание' },
+            { name: 'Факультет экономики и бизнеса', score: 280, places: 280, budget: 220, paid: 60, exams: 'Математика (ДВИ), обществознание' },
+            { name: 'Факультет информационных технологий', score: 275, places: 250, budget: 200, paid: 50, exams: 'Математика (ДВИ), информатика' },
+            { name: 'Юридический факультет', score: 270, places: 200, budget: 150, paid: 50, exams: 'Обществознание (ДВИ), история' }
+          ]},
+        { name: 'МГЮА', emoji: '⚖️', score: 285, places: 1200, direction: 'Юриспруденция',
+          rating: 11, minScore: 170, paidFrom: 300000, budgetPlaces: 900, paidPlaces: 300,
+          dormitory: true, military: true, exams: 'ДВИ по обществознанию',
+          faculties: [
+            { name: 'Институт права и национальной безопасности', score: 290, places: 300, budget: 230, paid: 70, exams: 'Обществознание (ДВИ), история' },
+            { name: 'Институт международного права', score: 295, places: 200, budget: 150, paid: 50, exams: 'Обществознание (ДВИ), иностранный язык' },
+            { name: 'Институт судебных экспертиз', score: 285, places: 150, budget: 110, paid: 40, exams: 'Обществознание (ДВИ), химия' },
+            { name: 'Институт бизнес-права', score: 280, places: 180, budget: 130, paid: 50, exams: 'Обществознание (ДВИ), математика' }
+          ]},
+        { name: 'РНИМУ им. Н.И. Пирогова', emoji: '🧬', score: 265, places: 1600, direction: 'Медицина',
+          rating: 14, minScore: 155, paidFrom: 310000, budgetPlaces: 1300, paidPlaces: 300,
+          dormitory: true, military: true, exams: 'ДВИ по химии и биологии',
+          faculties: [
+            { name: 'Лечебный факультет', score: 280, places: 350, budget: 300, paid: 50, exams: 'Химия (ДВИ), биология' },
+            { name: 'Педиатрический факультет', score: 270, places: 250, budget: 210, paid: 40, exams: 'Химия (ДВИ), биология' },
+            { name: 'Медико-биологический факультет', score: 265, places: 150, budget: 120, paid: 30, exams: 'Биология (ДВИ), химия' },
+            { name: 'Факультет психологии', score: 255, places: 100, budget: 80, paid: 20, exams: 'Биология (ДВИ), обществознание' }
+          ]},
+        { name: 'МГТУ ГА', emoji: '🛫', score: 240, places: 900, direction: 'Гражданская авиация',
+          rating: 18, minScore: 140, paidFrom: 190000, budgetPlaces: 700, paidPlaces: 200,
+          dormitory: true, military: true, exams: 'ДВИ по математике и физике',
+          faculties: [
+            { name: 'Факультет авиационных систем и комплексов', score: 250, places: 150, budget: 120, paid: 30, exams: 'Математика (ДВИ), физика' },
+            { name: 'Факультет управления на воздушном транспорте', score: 245, places: 120, budget: 90, paid: 30, exams: 'Математика (ДВИ), обществознание' },
+            { name: 'Факультет авиационных двигателей', score: 240, places: 100, budget: 80, paid: 20, exams: 'Математика (ДВИ), физика' },
+            { name: 'Факультет радиотехники и электроники', score: 235, places: 90, budget: 70, paid: 20, exams: 'Математика (ДВИ), физика' }
+          ]},
+        { name: 'РГГУ', emoji: '📜', score: 235, places: 2000, direction: 'Гуманитарные науки',
+          rating: 17, minScore: 135, paidFrom: 180000, budgetPlaces: 1500, paidPlaces: 500,
+          dormitory: true, military: false, exams: 'ДВИ по профилю',
+          faculties: [
+            { name: 'Историко-архивный институт', score: 245, places: 250, budget: 200, paid: 50, exams: 'История (ДВИ), обществознание' },
+            { name: 'Институт филологии и истории', score: 240, places: 300, budget: 240, paid: 60, exams: 'Литература (ДВИ), история' },
+            { name: 'Институт экономики, управления и права', score: 235, places: 200, budget: 150, paid: 50, exams: 'Обществознание (ДВИ), математика' },
+            { name: 'Институт психологии и педагогики', score: 230, places: 150, budget: 110, paid: 40, exams: 'Биология (ДВИ), обществознание' }
+          ]},
+        { name: 'МГУПП', emoji: '🍞', score: 210, places: 1100, direction: 'Пищевые технологии',
+          rating: 20, minScore: 125, paidFrom: 160000, budgetPlaces: 850, paidPlaces: 250,
+          dormitory: true, military: false, exams: 'ДВИ по профилю',
+          faculties: [
+            { name: 'Институт пищевых технологий', score: 220, places: 200, budget: 150, paid: 50, exams: 'Химия (ДВИ), биология' },
+            { name: 'Институт биотехнологий', score: 215, places: 150, budget: 110, paid: 40, exams: 'Биология (ДВИ), химия' },
+            { name: 'Институт экономики и управления', score: 210, places: 120, budget: 90, paid: 30, exams: 'Математика (ДВИ), обществознание' },
+            { name: 'Институт инженерии и технологий', score: 205, places: 100, budget: 70, paid: 30, exams: 'Математика (ДВИ), физика' }
+          ]},
+        { name: 'МИРЭА', emoji: '📡', score: 250, places: 2700, direction: 'Радиотехника, IT',
+          rating: 19, minScore: 145, paidFrom: 210000, budgetPlaces: 2100, paidPlaces: 600,
+          dormitory: true, military: true, exams: 'ДВИ по математике и физике',
+          faculties: [
+            { name: 'Институт информационных технологий', score: 265, places: 300, budget: 240, paid: 60, exams: 'Математика (ДВИ), информатика' },
+            { name: 'Институт радиотехнических и телекоммуникационных систем', score: 255, places: 250, budget: 200, paid: 50, exams: 'Математика (ДВИ), физика' },
+            { name: 'Институт кибербезопасности', score: 260, places: 200, budget: 160, paid: 40, exams: 'Математика (ДВИ), информатика' },
+            { name: 'Институт экономики и права', score: 240, places: 150, budget: 110, paid: 40, exams: 'Обществознание (ДВИ), математика' }
+          ]}
+    ];
+
+    // ==================== УТИЛИТЫ ====================
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => document.querySelectorAll(sel);
+
+    function formatMoney(n) {
+        return n.toLocaleString('ru-RU') + ' ₽';
+    }
+
+    function normalize(str) {
+        return String(str || '')
+            .toLowerCase()
+            .replace(/ё/g, 'е')
+            .replace(/\s+/g, ' ')
+            .trim();
+    }
+
+    function showPage(pageId) {
+        $$('.page').forEach(p => p.classList.remove('active'));
+        const page = document.getElementById('page-' + pageId);
+        if (page) page.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ==================== НАВИГАЦИЯ ====================
+    $('#heroStart').addEventListener('click', () => {
+        const target = document.getElementById('ctaBlock');
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    $('#ctaVuz').addEventListener('click', () => {
+        renderVuzCards();
+        showPage('vuz');
+        openProfModal();
+    });
+
+    $('#ctaCourses').addEventListener('click', () => {
+        openCoursesModal();
+    });
+
+    // ==================== МОДАЛКА КУРСОВ ====================
+    function openCoursesModal() {
+        openModal(`
+            <h3>📚 Найти курсы</h3>
+            <p>Подберём подготовительные курсы для поступления в вуз мечты — по нужным предметам и формату.</p>
+            <form id="coursesForm">
+                <div class="form-group">
+                    <label>Какие предметы нужно подтянуть?</label>
+                    <select name="subject" required>
+                        <option value="math">Математика</option>
+                        <option value="russian">Русский язык</option>
+                        <option value="physics">Физика</option>
+                        <option value="chemistry">Химия</option>
+                        <option value="biology">Биология</option>
+                        <option value="it">Информатика</option>
+                        <option value="social">Обществознание</option>
+                        <option value="history">История</option>
+                        <option value="english">Иностранный язык</option>
+                        <option value="literature">Литература</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Формат занятий</label>
+                    <select name="format" required>
+                        <option value="online">Онлайн</option>
+                        <option value="offline">Офлайн в Москве</option>
+                        <option value="hybrid">Гибрид</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Класс</label>
+                    <select name="grade" required>
+                        <option value="10">10 класс</option>
+                        <option value="11">11 класс</option>
+                        <option value="graduate">Выпускник</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="mono-btn cancel" id="coursesCancel">Отмена</button>
+                    <button type="submit" class="mono-btn">Подобрать курсы</button>
+                </div>
+            </form>
+        `);
+
+        setTimeout(() => {
+            $('#coursesCancel').addEventListener('click', closeModal);
+            $('#coursesForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const subject = e.target.subject.options[e.target.subject.selectedIndex].text;
+                const format = e.target.format.options[e.target.format.selectedIndex].text;
+                const grade = e.target.grade.options[e.target.grade.selectedIndex].text;
+                closeModal();
+                alert(`📚 Заявка принята!\nПредмет: ${subject}\nФормат: ${format}\nКласс: ${grade}\n\nМы подберём подходящие курсы и свяжемся с вами.`);
+            });
+        }, 0);
+    }
+
+    // ==================== МОДАЛКА ПРОФОРИЕНТАЦИИ ====================
+    const profModalOverlay = $('#profModalOverlay');
+
+    function openProfModal() {
+        profModalOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeProfModal() {
+        profModalOverlay.classList.remove('open');
+        if (!modalOverlay.classList.contains('open')) {
+            document.body.style.overflow = '';
+        }
+    }
+
+    $('#profModalClose').addEventListener('click', closeProfModal);
+    $('#profModalSkip').addEventListener('click', closeProfModal);
+
+    profModalOverlay.addEventListener('click', (e) => {
+        if (e.target === profModalOverlay) closeProfModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && profModalOverlay.classList.contains('open')) {
+            closeProfModal();
+        }
+    });
+
+    // ==================== БАННЕР ПРОФОРИЕНТАЦИИ ====================
+    $('#profBannerStart').addEventListener('click', () => {
+        alert('🧭 Профориентация скоро появится!\nМы подберём тебе вуз и специальность по интересам и баллам.\nА пока посмотри вузы или найди специальность через поиск 😉');
+    });
+
+    // ==================== НАВИГАЦИЯ ====================
+    $('#back-from-vuz').addEventListener('click', () => showPage('home'));
+    $('#appLogo').addEventListener('click', (e) => {
+        e.preventDefault();
+        showPage('home');
+    });
+
+    // ==================== МОДАЛЬНОЕ ОКНО ====================
+    const modalOverlay = $('#modalOverlay');
+    const modalContent = $('#modalContent');
+
+    function openModal(html) {
+        modalContent.innerHTML = html;
+        modalOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modalOverlay.classList.remove('open');
+        if (!profModalOverlay.classList.contains('open')) {
+            document.body.style.overflow = '';
+        }
+    }
+
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalOverlay.classList.contains('open')) closeModal();
+    });
+
+    // ==================== МОДАЛКА ВУЗА ====================
+    function openVuzModal(vuz, highlightQuery) {
+        const q = highlightQuery ? normalize(highlightQuery) : '';
+
+        const facultiesHtml = vuz.faculties.map(f => {
+            const isMatch = q && (
+                normalize(f.name).includes(q) ||
+                normalize(f.exams).includes(q)
+            );
+            return `
+                <div class="faculty-item ${isMatch ? 'highlighted' : ''}">
+                    <div class="faculty-name">🎓 ${f.name}</div>
+                    <div class="faculty-stats">
+                        <span class="faculty-stat">🎯 Проходной: <span class="badge">${f.score} б.</span></span>
+                        <span class="faculty-stat">🪑 Всего мест: <span class="badge seats">${f.places}</span></span>
+                        <span class="faculty-stat">🆓 Бюджет: <span class="badge seats">${f.budget}</span></span>
+                        <span class="faculty-stat">💰 Платно: <span class="badge seats">${f.paid}</span></span>
+                        <span class="faculty-stat">📝 <span class="badge exam">${f.exams}</span></span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        openModal(`
+            <button class="modal-close-x" id="vuzModalClose" aria-label="Закрыть">✕</button>
+            <div class="vuz-modal-header">
+                <div class="vuz-modal-emoji">${vuz.emoji}</div>
+                <div>
+                    <h3>${vuz.name}</h3>
+                    <p>${vuz.direction} · Рейтинг №${vuz.rating} по Москве</p>
+                </div>
+            </div>
+
+            <div class="vuz-facts">
+                <div class="vuz-fact">
+                    <span class="vuz-fact-label">Рейтинг</span>
+                    <span class="vuz-fact-value gold">🏆 №${vuz.rating}</span>
+                </div>
+                <div class="vuz-fact">
+                    <span class="vuz-fact-label">Средний проходной</span>
+                    <span class="vuz-fact-value accent">${vuz.score} б.</span>
+                </div>
+                <div class="vuz-fact">
+                    <span class="vuz-fact-label">Минимальный балл</span>
+                    <span class="vuz-fact-value">${vuz.minScore} б.</span>
+                </div>
+                <div class="vuz-fact">
+                    <span class="vuz-fact-label">Всего мест</span>
+                    <span class="vuz-fact-value">${vuz.places.toLocaleString('ru-RU')}</span>
+                </div>
+                <div class="vuz-fact">
+                    <span class="vuz-fact-label">Бюджет / платно</span>
+                    <span class="vuz-fact-value">${vuz.budgetPlaces.toLocaleString('ru-RU')} / ${vuz.paidPlaces.toLocaleString('ru-RU')}</span>
+                </div>
+                <div class="vuz-fact">
+                    <span class="vuz-fact-label">Платное обучение</span>
+                    <span class="vuz-fact-value">от ${formatMoney(vuz.paidFrom)}/год</span>
+                </div>
+                <div class="vuz-fact">
+                    <span class="vuz-fact-label">ДВИ</span>
+                    <span class="vuz-fact-value">${vuz.exams}</span>
+                </div>
+                <div class="vuz-fact">
+                    <span class="vuz-fact-label">Общежитие</span>
+                    <span class="vuz-fact-value">${vuz.dormitory ? '✅ Есть' : '❌ Нет'}</span>
+                </div>
+                <div class="vuz-fact">
+                    <span class="vuz-fact-label">Военный учебный центр</span>
+                    <span class="vuz-fact-value">${vuz.military ? '✅ Есть' : '❌ Нет'}</span>
+                </div>
+            </div>
+
+            <p style="margin-bottom: 12px; font-weight: 600; color: var(--gray-text);">Факультеты и направления:</p>
+            <div class="faculties-list">${facultiesHtml}</div>
+            <div class="modal-actions">
+                <button class="mono-btn cancel" id="vuzModalCancel">Закрыть</button>
+            </div>
+        `);
+
+        setTimeout(() => {
+            $('#vuzModalClose').addEventListener('click', closeModal);
+            $('#vuzModalCancel').addEventListener('click', closeModal);
+        }, 0);
+    }
+
+    // ==================== ВУЗЫ ====================
+    const vuzGrid = $('#vuz-grid');
+
+    function initVuzCards() {
+        if (vuzGrid.children.length > 0) return;
+        const sorted = [...UNIVERSITIES].sort((a, b) => a.rating - b.rating);
+        sorted.forEach((vuz) => {
+            const originalIndex = UNIVERSITIES.indexOf(vuz);
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.setAttribute('role', 'button');
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('data-vuz-index', originalIndex);
+
+            const militaryTag = vuz.military
+                ? '<span class="card-tag green">🎖 ВУЦ</span>'
+                : '<span class="card-tag">Без ВУЦ</span>';
+            const dormTag = vuz.dormitory
+                ? '<span class="card-tag green">🏠 Общежитие</span>'
+                : '<span class="card-tag">Без общежития</span>';
+
+            card.innerHTML = `
+                <div class="card-top">
+                    <div class="card-emoji">${vuz.emoji}</div>
+                    <div class="card-title-wrap">
+                        <h3>${vuz.name}</h3>
+                        <span class="card-rating">🏆 Рейтинг №${vuz.rating}</span>
+                    </div>
+                </div>
+                <div class="card-direction">📖 ${vuz.direction}</div>
+                <div class="card-stats">
+                    <span class="card-stat accent">🎯 Проходной: <strong>${vuz.score}</strong></span>
+                    <span class="card-stat">📉 Мин. балл: <strong>${vuz.minScore}</strong></span>
+                    <span class="card-stat">🪑 Мест: <strong>${vuz.places.toLocaleString('ru-RU')}</strong></span>
+                    <span class="card-stat">🆓 Бюджет: <strong>${vuz.budgetPlaces.toLocaleString('ru-RU')}</strong></span>
+                    <span class="card-stat">💰 Платно: <strong>${vuz.paidPlaces.toLocaleString('ru-RU')}</strong></span>
+                    <span class="card-stat">💵 от <strong>${(vuz.paidFrom / 1000).toFixed(0)}к ₽/год</strong></span>
+                </div>
+                <div class="card-tags">
+                    ${militaryTag}
+                    ${dormTag}
+                </div>
+                <div class="card-hint">👆 Нажми, чтобы увидеть факультеты и ДВИ</div>
+            `;
+
+            card.onclick = () => openVuzModal(vuz);
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openVuzModal(vuz);
+                }
+            });
+
+            vuzGrid.appendChild(card);
+        });
+    }
+
+    function renderVuzCards() { initVuzCards(); }
+
+    // ==================== ПОИСК ====================
+    const searchInput = $('#searchInput');
+    const searchClear = $('#searchClear');
+    const searchHint = $('#searchHint');
+    const searchChips = $('#searchChips');
+    const searchEmpty = $('#searchEmpty');
+
+    function matchVuz(vuz, query) {
+        const q = normalize(query);
+        if (!q) return { matches: [], hasMatch: true };
+        const matches = [];
+        if (normalize(vuz.direction).includes(q)) matches.push({ type: 'direction', text: vuz.direction });
+        if (normalize(vuz.name).includes(q)) matches.push({ type: 'name', text: vuz.name });
+        vuz.faculties.forEach(f => {
+            if (normalize(f.name).includes(q) || normalize(f.exams).includes(q)) {
+                matches.push({ type: 'faculty', text: f.name });
+            }
+        });
+        return { matches, hasMatch: matches.length > 0 };
+    }
+
+    function applySearch() {
+        const query = searchInput.value.trim();
+        searchClear.classList.toggle('visible', query.length > 0);
+
+        const cards = Array.from(vuzGrid.children);
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const idx = parseInt(card.getAttribute('data-vuz-index'), 10);
+            if (isNaN(idx)) return;
+            const vuz = UNIVERSITIES[idx];
+            const { matches, hasMatch } = matchVuz(vuz, query);
+
+            const oldBadge = card.querySelector('.match-badge');
+            if (oldBadge) oldBadge.remove();
+
+            card.onclick = () => openVuzModal(vuz, query);
+
+            if (!query || hasMatch) {
+                card.style.display = '';
+                visibleCount++;
+                if (query && matches.length > 0) {
+                    const badge = document.createElement('div');
+                    badge.className = 'match-badge';
+                    const facultyMatches = matches.filter(m => m.type === 'faculty');
+                    badge.textContent = facultyMatches.length > 0
+                        ? `🔍 ${facultyMatches.length} факультет(ов) по запросу`
+                        : `🔍 Совпадение по направлению`;
+                    card.appendChild(badge);
+                }
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        if (query && visibleCount === 0) {
+            searchEmpty.classList.add('visible');
+        } else {
+            searchEmpty.classList.remove('visible');
+        }
+
+        if (query) {
+            searchHint.innerHTML = visibleCount > 0
+                ? `Найдено вузов: <strong>${visibleCount}</strong>`
+                : '';
+            searchChips.style.display = 'none';
+        } else {
+            searchHint.innerHTML = 'Популярные запросы:';
+            searchChips.style.display = '';
+        }
+    }
+
+    searchInput.addEventListener('input', applySearch);
+
+    searchClear.addEventListener('click', () => {
+        searchInput.value = '';
+        applySearch();
+        searchInput.focus();
+    });
+
+    searchChips.addEventListener('click', (e) => {
+        const chip = e.target.closest('.search-chip');
+        if (!chip) return;
+        searchInput.value = chip.getAttribute('data-q') || '';
+        applySearch();
+        searchInput.focus();
+    });
+
+    // ==================== МОНЕТИЗАЦИЯ ====================
+    const monetization = $('#monetization');
+    const monoToggle = $('#monoToggle');
+    const monoClose = $('#monoClose');
+
+    function openMono() {
+        monetization.classList.add('open');
+        monoToggle.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMono() {
+        monetization.classList.remove('open');
+        monoToggle.setAttribute('aria-expanded', 'false');
+    }
+
+    monoToggle.addEventListener('click', () => {
+        if (monetization.classList.contains('open')) {
+            closeMono();
+        } else {
+            openMono();
+        }
+    });
+
+    monoClose.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeMono();
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!monetization.classList.contains('open')) return;
+        if (!monetization.contains(e.target)) closeMono();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && monetization.classList.contains('open')) closeMono();
+    });
+
+    // ==================== МОДАЛКА РЕКЛАМЫ ====================
+    function openAdModal() {
+        openModal(`
+            <h3>📣 Разместить рекламу</h3>
+            <p>Расскажите о своём вузе <strong>10 000+ школьникам</strong> Москвы. Мы покажем ваш баннер в подборке вузов.</p>
+            <form id="adForm">
+                <div class="form-group">
+                    <label>Название вуза / компании</label>
+                    <input type="text" name="name" required placeholder="Например, МГУ">
+                </div>
+                <div class="form-group">
+                    <label>Email для связи</label>
+                    <input type="email" name="email" required placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Тариф</label>
+                    <select name="tariff" required>
+                        <option value="week">1 неделя — 5 000 ₽</option>
+                        <option value="month">1 месяц — 15 000 ₽ (выгодно)</option>
+                        <option value="quarter">3 месяца — 40 000 ₽ (максимум)</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="mono-btn cancel" id="adCancel">Отмена</button>
+                    <button type="submit" class="mono-btn">Отправить заявку</button>
+                </div>
+            </form>
+        `);
+
+        setTimeout(() => {
+            $('#adCancel').addEventListener('click', closeModal);
+            $('#adForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = e.target.name.value;
+                const tariff = e.target.tariff.value;
+                const tariffLabel = { week: '1 неделя — 5 000 ₽', month: '1 месяц — 15 000 ₽', quarter: '3 месяца — 40 000 ₽' }[tariff];
+                closeModal();
+                alert(`✅ Спасибо, ${name}!\nЗаявка на тариф «${tariffLabel}» принята.\nМы свяжемся с вами в течение дня.`);
+            });
+        }, 0);
+    }
+
+    // ==================== МОДАЛКА ДОНАТА ====================
+    function openDonateModal() {
+        openModal(`
+            <h3>☕ Поддержать ProfiVUZ</h3>
+            <p>Мы <strong>бесплатно</strong> помогаем школьникам выбирать вуз и кормим котиков. Любая сумма — это вклад в будущее образование.</p>
+            <form id="donateForm">
+                <div class="form-group">
+                    <label>Сумма (₽)</label>
+                    <select name="amount" required>
+                        <option value="100">100 ₽ — чашка кофе</option>
+                        <option value="300">300 ₽ — корм для котика</option>
+                        <option value="500">500 ₽ — поддержка сервера</option>
+                        <option value="custom">Своя сумма</option>
+                    </select>
+                </div>
+                <div class="form-group hidden" id="customAmountGroup">
+                    <label>Введите сумму</label>
+                    <input type="number" name="customAmount" min="1" placeholder="1000">
+                </div>
+                <div class="form-group">
+                    <label>Способ оплаты</label>
+                    <select name="method" required>
+                        <option value="card">Банковская карта</option>
+                        <option value="sbp">СБП</option>
+                        <option value="yoomoney">ЮMoney</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="mono-btn cancel" id="donateCancel">Отмена</button>
+                    <button type="submit" class="mono-btn">Перейти к оплате</button>
+                </div>
+            </form>
+        `);
+
+        setTimeout(() => {
+            const amountSelect = $('#donateForm select[name="amount"]');
+            const customGroup = $('#customAmountGroup');
+            amountSelect.addEventListener('change', (e) => {
+                if (e.target.value === 'custom') customGroup.classList.remove('hidden');
+                else customGroup.classList.add('hidden');
+            });
+
+            $('#donateCancel').addEventListener('click', closeModal);
+            $('#donateForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const amount = e.target.amount.value === 'custom'
+                    ? e.target.customAmount.value
+                    : e.target.amount.value;
+                const method = e.target.method.value;
+                const methodLabel = { card: 'банковской карты', sbp: 'СБП', yoomoney: 'ЮMoney' }[method];
+                closeModal();
+                alert(`💚 Спасибо за поддержку!\nСумма: ${amount} ₽\nСпособ: ${methodLabel}.\n\nПеренаправляем на страницу оплаты...`);
+            });
+        }, 0);
+    }
+
+    // Кнопки монетизации
+    $('#btnAd').addEventListener('click', () => { closeMono(); openAdModal(); });
+    $('#btnDonate').addEventListener('click', () => { closeMono(); openDonateModal(); });
+
+    // ==================== ПОДВАЛ: ДЕЙСТВИЯ ====================
+    document.querySelectorAll('[data-footer-action]').forEach(el => {
+        el.addEventListener('click', (e) => {
+            e.preventDefault();
+            const action = el.getAttribute('data-footer-action');
+            switch (action) {
+                case 'vuz':
+                    renderVuzCards();
+                    showPage('vuz');
+                    break;
+                case 'search':
+                    renderVuzCards();
+                    showPage('vuz');
+                    setTimeout(() => { searchInput.focus(); }, 400);
+                    break;
+                case 'prof':
+                    openProfModal();
+                    break;
+                case 'courses':
+                    openCoursesModal();
+                    break;
+                case 'ad':
+                    openAdModal();
+                    break;
+                case 'donate':
+                    openDonateModal();
+                    break;
+                case 'privacy':
+                    alert('🔒 Политика конфиденциальности\n\nМы собираем только email при отправке заявок и не передаём данные третьим лицам.');
+                    break;
+                case 'terms':
+                    alert('📄 Пользовательское соглашение\n\nСервис предоставляется «как есть» для личного некоммерческого использования.');
+                    break;
+                case 'cookies':
+                    alert('🍪 Cookies\n\nМы используем cookies для корректной работы интерфейса. Продолжая пользоваться сайтом, вы соглашаетесь с этим.');
+                    break;
+            }
+        });
+    });
+
+    $('#footerLogo').addEventListener('click', (e) => {
+        e.preventDefault();
+        showPage('home');
+    });
+
+    // ==================== ИНИЦИАЛИЗАЦИЯ ====================
+    initVuzCards();
+})();
+</script>
+</body>
+</html>
