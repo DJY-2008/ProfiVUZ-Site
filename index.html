@@ -26,6 +26,7 @@
     --font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
     --mono-width: 260px;
     --gold: #f59e0b;
+    --danger: #ef4444;
 }
 
 html { scroll-behavior: smooth; }
@@ -39,9 +40,6 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* ============================================================
-   ОБЩИЙ КОНТЕЙНЕР
-   ============================================================ */
 #app {
     display: flex;
     flex-direction: column;
@@ -164,6 +162,30 @@ body {
 }
 .btn-primary:active { transform: translateY(0); }
 
+.btn-my-result {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: 60px;
+    font-weight: 700;
+    font-size: 0.92rem;
+    border: 1.5px solid var(--accent);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font);
+    background: var(--accent-light);
+    color: var(--accent-dark);
+    margin-top: 4px;
+}
+.btn-my-result:hover {
+    background: var(--accent);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+.btn-my-result.hidden { display: none; }
+
 .section {
     padding: 64px 20px;
     max-width: 900px;
@@ -214,7 +236,6 @@ body {
 }
 .step-text strong { color: var(--accent-dark); }
 
-/* Плашка с профориентацией внутри "Как это работает" */
 .step-note {
     display: inline-flex;
     align-items: center;
@@ -238,7 +259,6 @@ body {
 }
 .for-whom strong { color: var(--accent-dark); }
 
-/* Возможности */
 .features-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -408,7 +428,6 @@ body {
 }
 .btn-back:hover { opacity: 0.7; }
 
-/* ---------- БАННЕР ПРОФОРИЕНТАЦИИ ---------- */
 .prof-banner {
     display: flex;
     align-items: center;
@@ -425,24 +444,15 @@ body {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
-.prof-banner-emoji {
-    font-size: 2rem;
-    line-height: 1;
-    flex-shrink: 0;
-}
+.prof-banner-emoji { font-size: 2rem; line-height: 1; flex-shrink: 0; }
 .prof-banner-body { flex: 1; min-width: 0; }
-.prof-banner-title {
-    font-weight: 800;
-    font-size: 1rem;
-    color: var(--gray-text);
-    margin-bottom: 4px;
-    line-height: 1.3;
-}
-.prof-banner-text {
-    font-size: 0.88rem;
-    color: var(--gray-muted);
-    line-height: 1.4;
-    margin-bottom: 10px;
+.prof-banner-title { font-weight: 800; font-size: 1rem; color: var(--gray-text); margin-bottom: 4px; line-height: 1.3; }
+.prof-banner-text { font-size: 0.88rem; color: var(--gray-muted); line-height: 1.4; margin-bottom: 10px; }
+.prof-banner-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
 }
 .prof-banner-btn {
     display: inline-flex;
@@ -465,13 +475,21 @@ body {
     transform: translateY(-1px);
     box-shadow: 0 6px 16px rgba(16,185,129,0.35);
 }
+.prof-banner-btn.ghost {
+    background: #ffffff;
+    color: var(--accent-dark);
+    border: 1.5px solid var(--accent);
+    box-shadow: none;
+}
+.prof-banner-btn.ghost:hover {
+    background: var(--accent-light);
+}
 
 @media (max-width: 480px) {
     .prof-banner { flex-direction: column; align-items: flex-start; padding: 16px; }
     .prof-banner-emoji { font-size: 1.6rem; }
 }
 
-/* ---------- ПОИСК ---------- */
 .search-wrap {
     margin: 16px 0 8px;
     display: flex;
@@ -576,7 +594,6 @@ body {
     margin-bottom: 8px;
 }
 
-/* ---------- СЕТКА КАРТОЧЕК ---------- */
 .cards-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -705,6 +722,27 @@ body {
     align-self: flex-start;
 }
 
+/* Плашка с рейтингом отзывов на карточке */
+.card-reviews {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #b45309;
+    background: #fef3c7;
+    border: 1px solid #fde68a;
+    border-radius: 20px;
+    padding: 4px 10px;
+    margin-top: 4px;
+    align-self: flex-start;
+}
+.card-reviews.empty {
+    background: var(--gray-bg);
+    color: var(--gray-muted);
+    border-color: #f0f0f0;
+}
+
 /* ============================================================
    ПОДВАЛ
    ============================================================ */
@@ -728,18 +766,10 @@ body {
     padding-bottom: 40px;
     border-bottom: 1px solid #1e293b;
 }
-@media (min-width: 600px) {
-    .footer-top { grid-template-columns: 1fr 1fr; }
-}
-@media (min-width: 900px) {
-    .footer-top { grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; }
-}
+@media (min-width: 600px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 900px) { .footer-top { grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; } }
 
-.footer-brand {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
+.footer-brand { display: flex; flex-direction: column; gap: 12px; }
 .footer-brand-logo {
     display: flex;
     align-items: center;
@@ -750,39 +780,12 @@ body {
     text-decoration: none;
 }
 .footer-brand-logo span:last-child { color: var(--accent); }
-.footer-brand-desc {
-    font-size: 0.88rem;
-    color: #94a3b8;
-    line-height: 1.6;
-    max-width: 340px;
-}
-.footer-brand-stats {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 4px;
-}
-.footer-stat {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-.footer-stat-num {
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: #ffffff;
-    line-height: 1;
-}
-.footer-stat-label {
-    font-size: 0.78rem;
-    color: #94a3b8;
-}
-.footer-social {
-    display: flex;
-    gap: 8px;
-    margin-top: 8px;
-    flex-wrap: wrap;
-}
+.footer-brand-desc { font-size: 0.88rem; color: #94a3b8; line-height: 1.6; max-width: 340px; }
+.footer-brand-stats { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 4px; }
+.footer-stat { display: flex; flex-direction: column; gap: 2px; }
+.footer-stat-num { font-size: 1.3rem; font-weight: 800; color: #ffffff; line-height: 1; }
+.footer-stat-label { font-size: 0.78rem; color: #94a3b8; }
+.footer-social { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
 .footer-social a {
     display: inline-flex;
     align-items: center;
@@ -796,11 +799,7 @@ body {
     font-size: 1.1rem;
     transition: all 0.2s;
 }
-.footer-social a:hover {
-    background: var(--accent);
-    color: #fff;
-    transform: translateY(-2px);
-}
+.footer-social a:hover { background: var(--accent); color: #fff; transform: translateY(-2px); }
 
 .footer-col h4 {
     font-size: 0.82rem;
@@ -810,12 +809,7 @@ body {
     font-weight: 700;
     margin-bottom: 14px;
 }
-.footer-col ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
 .footer-col a,
 .footer-link-btn {
     color: #94a3b8;
@@ -832,14 +826,7 @@ body {
 .footer-col a:hover,
 .footer-link-btn:hover { color: var(--accent); }
 
-.footer-contact {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    color: #94a3b8;
-    font-size: 0.88rem;
-    line-height: 1.4;
-}
+.footer-contact { display: flex; align-items: flex-start; gap: 8px; color: #94a3b8; font-size: 0.88rem; line-height: 1.4; }
 .footer-contact-icon { flex-shrink: 0; }
 
 .footer-bottom {
@@ -850,29 +837,11 @@ body {
     font-size: 0.8rem;
     color: #64748b;
 }
-@media (min-width: 700px) {
-    .footer-bottom {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
-}
-.footer-bottom-links {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-}
-.footer-bottom-links a {
-    color: #64748b;
-    text-decoration: none;
-    transition: color 0.2s;
-}
+@media (min-width: 700px) { .footer-bottom { flex-direction: row; align-items: center; justify-content: space-between; } }
+.footer-bottom-links { display: flex; gap: 16px; flex-wrap: wrap; }
+.footer-bottom-links a { color: #64748b; text-decoration: none; transition: color 0.2s; }
 .footer-bottom-links a:hover { color: var(--accent); }
-.footer-bottom-note {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
+.footer-bottom-note { display: flex; align-items: center; gap: 6px; }
 
 /* ============================================================
    МОНЕТИЗАЦИЯ
@@ -906,10 +875,7 @@ body {
     transition: transform 0.25s ease, background 0.2s ease;
     flex-shrink: 0;
 }
-.mono-toggle:hover {
-    transform: scale(1.08);
-    background: var(--accent-dark);
-}
+.mono-toggle:hover { transform: scale(1.08); background: var(--accent-dark); }
 .mono-toggle:active { transform: scale(0.98); }
 .mono-card {
     display: none;
@@ -972,13 +938,7 @@ body {
     transition: border-color 0.2s;
 }
 .mono-item:hover { border-color: var(--accent-light); }
-.mono-item-title {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-weight: 700;
-    font-size: 0.95rem;
-}
+.mono-item-title { display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 0.95rem; }
 .mono-item-title .icon { font-size: 1.1rem; }
 .mono-value { font-size: 0.8rem; color: var(--gray-muted); line-height: 1.35; }
 .mono-value strong { color: var(--accent-dark); }
@@ -1016,13 +976,10 @@ body {
     border: 1.5px solid var(--accent);
 }
 .mono-btn.secondary:hover { background: var(--accent-light); }
-.monetization.open .mono-toggle {
-    transform: rotate(45deg);
-    background: var(--accent-dark);
-}
+.monetization.open .mono-toggle { transform: rotate(45deg); background: var(--accent-dark); }
 
 /* ============================================================
-   МОДАЛЬНЫЕ ОКНА
+   МОДАЛЬНЫЕ ОКНА (общие)
    ============================================================ */
 .modal-overlay {
     position: fixed;
@@ -1052,13 +1009,8 @@ body {
 .modal h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 8px; }
 .modal p { color: var(--gray-muted); font-size: 0.95rem; margin-bottom: 16px; }
 .modal .form-group { margin-bottom: 12px; }
-.modal label {
-    display: block;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 4px;
-}
-.modal input, .modal select {
+.modal label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
+.modal input, .modal select, .modal textarea {
     width: 100%;
     padding: 10px 12px;
     border-radius: 10px;
@@ -1066,26 +1018,18 @@ body {
     font-family: var(--font);
     font-size: 0.95rem;
     transition: border-color 0.2s;
+    resize: vertical;
 }
-.modal input:focus, .modal select:focus {
-    outline: none;
-    border-color: var(--accent);
-}
-.modal-actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 16px;
-}
+.modal textarea { min-height: 80px; }
+.modal input:focus, .modal select:focus, .modal textarea:focus { outline: none; border-color: var(--accent); }
+.modal-actions { display: flex; gap: 8px; margin-top: 16px; }
 .modal-actions .mono-btn { flex: 1; }
 .modal-actions .mono-btn.cancel {
     background: #ffffff;
     color: var(--gray-muted);
     border: 1.5px solid #e5e7eb;
 }
-.modal-actions .mono-btn.cancel:hover {
-    background: var(--gray-bg);
-    color: var(--gray-text);
-}
+.modal-actions .mono-btn.cancel:hover { background: var(--gray-bg); color: var(--gray-text); }
 
 /* ---------- МОДАЛКА ПРОФОРИЕНТАЦИИ ---------- */
 .prof-modal-overlay {
@@ -1122,12 +1066,7 @@ body {
     position: relative;
     border-bottom: 1px solid #d1fae5;
 }
-.prof-modal-hero-emoji {
-    font-size: 3rem;
-    line-height: 1;
-    margin-bottom: 10px;
-    display: block;
-}
+.prof-modal-hero-emoji { font-size: 3rem; line-height: 1; margin-bottom: 10px; display: block; }
 .prof-modal-hero h3 {
     font-size: clamp(1.3rem, 5vw, 1.6rem);
     font-weight: 800;
@@ -1160,10 +1099,7 @@ body {
     justify-content: center;
     transition: all 0.2s;
 }
-.prof-modal-close:hover {
-    background: #ffffff;
-    color: var(--gray-text);
-}
+.prof-modal-close:hover { background: #ffffff; color: var(--gray-text); }
 
 .prof-modal-body {
     padding: 20px 24px 24px;
@@ -1172,32 +1108,10 @@ body {
     flex-direction: column;
     gap: 12px;
 }
-.prof-modal-benefits {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 8px;
-}
-.prof-modal-benefit {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 0.92rem;
-    color: var(--gray-text);
-    line-height: 1.4;
-}
-.prof-modal-benefit-icon {
-    font-size: 1.2rem;
-    line-height: 1;
-    flex-shrink: 0;
-    margin-top: 1px;
-}
-.prof-modal-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 4px;
-}
+.prof-modal-benefits { display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px; }
+.prof-modal-benefit { display: flex; align-items: flex-start; gap: 10px; font-size: 0.92rem; color: var(--gray-text); line-height: 1.4; }
+.prof-modal-benefit-icon { font-size: 1.2rem; line-height: 1; flex-shrink: 0; margin-top: 1px; }
+.prof-modal-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
 .prof-modal-btn {
     display: inline-flex;
     align-items: center;
@@ -1218,23 +1132,17 @@ body {
     color: #ffffff;
     box-shadow: 0 8px 20px rgba(16,185,129,0.3);
 }
+.prof-modal-btn.primary:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(16,185,129,0.4);
+}
 .prof-modal-btn.ghost {
     background: transparent;
     color: var(--gray-muted);
     border: 1.5px solid #e5e7eb;
 }
-.prof-modal-btn.ghost:hover {
-    background: var(--gray-bg);
-    color: var(--gray-text);
-}
-.prof-modal-btn.disabled {
-    opacity: 0.55;
-    cursor: not-allowed;
-    pointer-events: none;
-    background: #d1fae5;
-    color: var(--accent-dark);
-    box-shadow: none;
-}
+.prof-modal-btn.ghost:hover { background: var(--gray-bg); color: var(--gray-text); }
 
 @media (max-width: 480px) {
     .prof-modal-hero { padding: 32px 16px 20px; }
@@ -1242,23 +1150,353 @@ body {
     .prof-modal { max-height: 92vh; }
 }
 
-/* ---------- МОДАЛКА ВУЗА ---------- */
-.vuz-modal-header {
+/* ============================================================
+   ТЕСТ ПО ПРОФОРИЕНТАЦИИ
+   ============================================================ */
+.test-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2600;
+    padding: 16px;
+    animation: fadeIn 0.25s ease;
+}
+.test-modal-overlay.open { display: flex; }
+
+.test-modal {
+    background: #ffffff;
+    border-radius: var(--radius);
+    width: 100%;
+    max-width: 620px;
+    max-height: 92vh;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.test-header {
+    background: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 100%);
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid #d1fae5;
+    position: relative;
+}
+.test-header-top {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 12px;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
 }
+.test-header-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--gray-text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.test-counter {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    background: #ffffff;
+    border: 1px solid var(--accent);
+    border-radius: 40px;
+    padding: 4px 12px;
+    white-space: nowrap;
+}
+.test-progress-bar {
+    height: 8px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 40px;
+    overflow: hidden;
+}
+.test-progress-fill {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+    border-radius: 40px;
+    transition: width 0.3s ease;
+}
+.test-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255,255,255,0.7);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--gray-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    z-index: 2;
+}
+.test-close:hover { background: #ffffff; color: var(--gray-text); }
+
+.test-body {
+    padding: 24px;
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.test-question {
+    font-size: clamp(1.05rem, 4vw, 1.25rem);
+    font-weight: 800;
+    color: var(--gray-text);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+}
+.test-question-hint { font-size: 0.88rem; color: var(--gray-muted); margin-top: 4px; font-weight: 400; }
+
+.test-options { display: flex; flex-direction: column; gap: 10px; }
+.test-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--gray-bg);
+    border: 2px solid #f0f0f0;
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    cursor: pointer;
+    font-family: var(--font);
+    text-align: left;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: var(--gray-text);
+    transition: all 0.2s;
+    width: 100%;
+}
+.test-option:hover { border-color: var(--accent); background: var(--accent-light); }
+.test-option-radio {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--gray-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+    transition: all 0.2s;
+    background: #ffffff;
+}
+.test-option-radio::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    transform: scale(0);
+    transition: transform 0.2s;
+}
+.test-option:hover .test-option-radio { border-color: var(--accent); }
+.test-option.selected { border-color: var(--accent); background: #ecfdf5; }
+.test-option.selected .test-option-radio { border-color: var(--accent); }
+.test-option.selected .test-option-radio::after { transform: scale(1); }
+
+.test-footer {
+    padding: 16px 24px 24px;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    border-top: 1px solid #f0f0f0;
+    background: #ffffff;
+    align-items: stretch;
+    width: 100%;
+    box-sizing: border-box;
+}
+.test-footer .prof-modal-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 14px 16px;
+    font-size: 0.98rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+}
+.test-footer .prof-modal-btn:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+.test-btn-back {
+    background: #ffffff !important;
+    color: var(--gray-muted) !important;
+    border: 1.5px solid #e5e7eb !important;
+    box-shadow: none !important;
+    flex: 0 0 auto !important;
+    padding: 14px 14px !important;
+    font-size: 0.95rem !important;
+    white-space: nowrap !important;
+    width: auto !important;
+    min-width: 0 !important;
+    box-sizing: border-box;
+}
+.test-btn-back:hover { background: var(--gray-bg) !important; color: var(--gray-text) !important; }
+
+@media (max-width: 480px) {
+    .test-footer { padding: 12px 16px 16px; gap: 8px; }
+    .test-footer .prof-modal-btn { font-size: 0.9rem; padding: 12px 10px; }
+    .test-btn-back { font-size: 0.9rem !important; padding: 12px 12px !important; flex: 0 0 auto !important; }
+    .test-btn-back .test-back-label { display: none; }
+}
+
+.test-result {
+    padding: 28px 24px;
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.test-result-hero { text-align: center; padding-bottom: 8px; border-bottom: 1px solid #f0f0f0; }
+.test-result-emoji { font-size: 3rem; display: block; margin-bottom: 8px; line-height: 1; }
+.test-result-hero h3 {
+    font-size: clamp(1.3rem, 5vw, 1.6rem);
+    font-weight: 800;
+    color: var(--gray-text);
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+}
+.test-result-hero p { font-size: 0.95rem; color: var(--gray-muted); max-width: 440px; margin: 0 auto; line-height: 1.5; }
+
+.test-saved-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    background: var(--accent-light);
+    border: 1px solid var(--accent);
+    border-radius: 40px;
+    padding: 4px 12px;
+    margin: 4px auto 0;
+}
+
+.test-result-subtitle {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    color: var(--gray-muted);
+    margin-top: 4px;
+}
+
+.test-directions { display: flex; flex-direction: column; gap: 10px; }
+.test-direction-card {
+    background: var(--gray-bg);
+    border: 1.5px solid #f0f0f0;
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: all 0.2s;
+}
+.test-direction-card.top { border-color: var(--accent); background: #ecfdf5; }
+.test-direction-rank {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid var(--accent);
+    color: var(--accent-dark);
+    font-weight: 800;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.test-direction-card.top .test-direction-rank { background: var(--accent); color: #ffffff; }
+.test-direction-body { flex: 1; min-width: 0; }
+.test-direction-name {
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--gray-text);
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.test-direction-desc { font-size: 0.85rem; color: var(--gray-muted); line-height: 1.4; }
+.test-direction-bar {
+    margin-top: 6px;
+    height: 6px;
+    background: #ffffff;
+    border-radius: 40px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+}
+.test-direction-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+    border-radius: 40px;
+    transition: width 0.5s ease;
+}
+
+.test-result-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+
+.test-result-vuz-list { display: flex; flex-direction: column; gap: 8px; }
+.test-result-vuz-item {
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font);
+    text-align: left;
+    width: 100%;
+}
+.test-result-vuz-item:hover { border-color: var(--accent); background: #ecfdf5; }
+.test-result-vuz-emoji { font-size: 1.4rem; line-height: 1; flex-shrink: 0; }
+.test-result-vuz-body { flex: 1; min-width: 0; }
+.test-result-vuz-name { font-weight: 700; font-size: 0.92rem; color: var(--gray-text); margin-bottom: 2px; line-height: 1.3; }
+.test-result-vuz-faculty { font-size: 0.82rem; color: var(--gray-muted); line-height: 1.35; }
+.test-result-vuz-score {
+    flex-shrink: 0;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    background: var(--accent-light);
+    border: 1px solid var(--accent);
+    border-radius: 20px;
+    padding: 3px 9px;
+    white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+    .test-header { padding: 16px 16px 12px; }
+    .test-body { padding: 16px; }
+    .test-result { padding: 20px 16px; }
+    .test-header-title { font-size: 0.95rem; }
+    .test-option { padding: 12px 14px; font-size: 0.92rem; }
+}
+
+/* ============================================================
+   МОДАЛКА ВУЗА
+   ============================================================ */
+.vuz-modal-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
 .vuz-modal-emoji { font-size: 2.5rem; line-height: 1; flex-shrink: 0; }
 .vuz-modal-header h3 { margin: 0; font-size: 1.25rem; line-height: 1.3; }
 .vuz-modal-header p { margin: 4px 0 0; font-size: 0.85rem; color: var(--gray-muted); }
 
-.vuz-facts {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin: 8px 0 16px;
-}
+.vuz-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 8px 0 16px; }
 .vuz-fact {
     background: var(--gray-bg);
     border: 1px solid #f0f0f0;
@@ -1275,20 +1513,11 @@ body {
     text-transform: uppercase;
     letter-spacing: 0.02em;
 }
-.vuz-fact-value {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--gray-text);
-}
+.vuz-fact-value { font-size: 0.95rem; font-weight: 700; color: var(--gray-text); }
 .vuz-fact-value.accent { color: var(--accent-dark); }
 .vuz-fact-value.gold { color: var(--gold); }
 
-.faculties-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 8px;
-}
+.faculties-list { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
 .faculty-item {
     background: var(--gray-bg);
     border: 1px solid #f0f0f0;
@@ -1297,25 +1526,9 @@ body {
     transition: border-color 0.2s;
 }
 .faculty-item:hover { border-color: var(--accent-light); }
-.faculty-item.highlighted {
-    border-color: var(--accent);
-    background: #ecfdf5;
-}
-.faculty-name {
-    font-weight: 700;
-    font-size: 0.95rem;
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-.faculty-stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px 14px;
-    font-size: 0.85rem;
-    color: var(--gray-muted);
-}
+.faculty-item.highlighted { border-color: var(--accent); background: #ecfdf5; }
+.faculty-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.faculty-stats { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 0.85rem; color: var(--gray-muted); }
 .faculty-stat { display: flex; align-items: center; gap: 4px; }
 .faculty-stat .badge {
     background: #fff;
@@ -1349,11 +1562,213 @@ body {
 }
 .modal-close-x:hover { background: #e5e7eb; color: var(--gray-text); }
 
+/* ============================================================
+   ОТЗЫВЫ
+   ============================================================ */
+.reviews-section {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 2px dashed #e5e7eb;
+}
+.reviews-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+.reviews-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--gray-text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.reviews-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #b45309;
+    background: #fef3c7;
+    border: 1px solid #fde68a;
+    border-radius: 40px;
+    padding: 4px 12px;
+}
+.reviews-rating.empty {
+    color: var(--gray-muted);
+    background: var(--gray-bg);
+    border-color: #f0f0f0;
+}
+
+.btn-write-review {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 40px;
+    padding: 9px 16px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    font-family: var(--font);
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(16,185,129,0.25);
+}
+.btn-write-review:hover {
+    background: var(--accent-dark);
+    transform: translateY(-1px);
+}
+
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.review-card {
+    background: var(--gray-bg);
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    padding: 14px 16px;
+    position: relative;
+}
+.review-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+.review-avatar {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-light), #a7f3d0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+.review-author {
+    font-weight: 800;
+    font-size: 0.92rem;
+    color: var(--gray-text);
+    line-height: 1.2;
+}
+.review-date {
+    font-size: 0.75rem;
+    color: var(--gray-muted);
+}
+.review-stars {
+    margin-left: auto;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+.review-stars .filled { color: var(--gold); }
+.review-stars .empty { color: #e5e7eb; }
+.review-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--gray-text);
+}
+.review-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+}
+.review-block-icon { flex-shrink: 0; font-size: 0.95rem; line-height: 1.4; }
+.review-block-text { flex: 1; min-width: 0; }
+.review-block-label {
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--gray-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 2px;
+    display: block;
+}
+.review-text { color: var(--gray-text); word-break: break-word; white-space: pre-wrap; }
+
+.review-delete {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: transparent;
+    border: none;
+    color: var(--gray-muted);
+    cursor: pointer;
+    font-size: 0.9rem;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+.review-delete:hover { background: rgba(239,68,68,0.1); color: var(--danger); }
+
+.reviews-empty {
+    text-align: center;
+    padding: 24px 16px;
+    color: var(--gray-muted);
+    background: var(--gray-bg);
+    border: 1px dashed #e5e7eb;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+.reviews-empty-emoji {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 6px;
+}
+
+/* Модалка формы отзыва */
+.review-form-stars {
+    display: flex;
+    gap: 6px;
+    margin: 4px 0 8px;
+}
+.review-star-btn {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #e5e7eb;
+    padding: 0;
+    line-height: 1;
+    transition: transform 0.15s;
+}
+.review-star-btn:hover { transform: scale(1.1); }
+.review-star-btn.active { color: var(--gold); }
+
+.review-form-hint {
+    font-size: 0.82rem;
+    color: var(--gray-muted);
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+
+/* Мобильное */
+@media (max-width: 480px) {
+    .reviews-header { flex-direction: column; align-items: flex-start; }
+    .btn-write-review { width: 100%; justify-content: center; }
+    .review-head { flex-wrap: wrap; }
+    .review-stars { margin-left: 0; width: 100%; }
+}
+
 .hidden { display: none !important; }
 
-/* ============================================================
-   АДАПТИВ
-   ============================================================ */
 @media (max-width: 480px) {
     .section { padding: 48px 16px; }
     .hero { padding: 32px 16px; min-height: calc(100vh - 70px); min-height: calc(100svh - 70px); }
@@ -1390,11 +1805,11 @@ body {
                     <h1>Ты поступишь туда, где тебе будет хорошо</h1>
                     <p class="hero-sub">Подбираем вуз Москвы по баллам, специальностям и местам — за 5 минут, а не за месяц</p>
                     <button class="btn-primary" id="heroStart">Подобрать вуз →</button>
-                    <div class="hero-proof">📊 20 вузов Москвы · 100+ специальностей · поиск и профориентация</div>
+                    <button class="btn-my-result hidden" id="heroMyResult">📋 Мой результат профориентации</button>
+                    <div class="hero-proof">📊 20 вузов Москвы · 100+ специальностей · поиск, отзывы и профориентация</div>
                 </div>
             </div>
 
-            <!-- Как это работает -->
             <section class="section">
                 <h2 class="section-title">Как это работает</h2>
                 <div class="steps">
@@ -1402,7 +1817,7 @@ body {
                         <div class="step-num">1</div>
                         <div class="step-text">
                             Пройди <strong>профориентацию</strong> — узнаешь, какие специальности тебе подходят
-                            <span class="step-note">🧭 5–7 минут · без регистрации</span>
+                            <span class="step-note">🧭 8 вопросов · 2–3 минуты</span>
                         </div>
                     </div>
                     <div class="step">
@@ -1411,24 +1826,28 @@ body {
                     </div>
                     <div class="step">
                         <div class="step-num">3</div>
-                        <div class="step-text">Нажми на вуз — увидишь <strong>факультеты</strong> с баллами, местами и ДВИ</div>
+                        <div class="step-text">Прочитай <strong>реальные отзывы</strong> студентов и оставь свой — плюсы, минусы и скрытые изъяны</div>
                     </div>
                 </div>
             </section>
 
-            <!-- Что внутри -->
             <section class="section">
                 <h2 class="section-title">Что ты найдёшь на ProfiVUZ</h2>
                 <div class="features-grid">
                     <div class="feature">
                         <span class="feature-icon">🧭</span>
                         <div class="feature-title">Профориентация</div>
-                        <div class="feature-text">Поможем понять, какие специальности подходят именно тебе, и подберём вуз.</div>
+                        <div class="feature-text">Тест из 8 вопросов: узнаешь свои направления и вузы, куда проходишь по баллам.</div>
                     </div>
                     <div class="feature">
                         <span class="feature-icon">🔍</span>
                         <div class="feature-title">Поиск по специальностям</div>
                         <div class="feature-text">Введи «IT», «медицина» или «экономика» — увидишь вузы и факультеты, где это есть.</div>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">💬</span>
+                        <div class="feature-title">Отзывы студентов</div>
+                        <div class="feature-text">Реальные плюсы, минусы и скрытые изъяны вузов — от тех, кто там учится.</div>
                     </div>
                     <div class="feature">
                         <span class="feature-icon">🏛️</span>
@@ -1448,7 +1867,6 @@ body {
                 </div>
             </section>
 
-            <!-- Для кого -->
             <section class="section">
                 <h2 class="section-title">Для кого</h2>
                 <p class="for-whom">
@@ -1456,13 +1874,12 @@ body {
                 </p>
             </section>
 
-            <!-- Сколько стоит -->
             <section class="section">
                 <h2 class="section-title">Сколько стоит</h2>
                 <div class="pricing">
                     <div class="price-item highlight">
                         <div class="price-who">Для школьников</div>
-                        <div class="price-what">Профориентация, поиск, вузы, факультеты, баллы, места</div>
+                        <div class="price-what">Профориентация, поиск, вузы, факультеты, баллы, места, отзывы</div>
                         <div class="price-amount">0 ₽ — бесплатно</div>
                     </div>
                     <div class="price-item">
@@ -1478,7 +1895,6 @@ body {
                 </div>
             </section>
 
-            <!-- CTA -->
             <section class="cta-section" id="ctaBlock">
                 <h2>Открой список вузов — и выбери свой за 5 минут</h2>
                 <p>20 вузов Москвы. Поиск по специальностям. Без регистрации.</p>
@@ -1496,7 +1912,7 @@ body {
             <div class="page-header">
                 <button class="btn-back" id="back-from-vuz">← На главную</button>
                 <h2>Вузы Москвы</h2>
-                <p>Рейтинг, баллы, места, стоимость и другие данные для поступления</p>
+                <p>Рейтинг, баллы, места, стоимость, отзывы и другие данные для поступления</p>
             </div>
 
             <div class="prof-banner" id="profBanner">
@@ -1504,7 +1920,10 @@ body {
                 <div class="prof-banner-body">
                     <div class="prof-banner-title">Не знаешь, с чего начать?</div>
                     <div class="prof-banner-text">Пройди профориентацию — и мы подберём тебе вуз и специальность под твои интересы и баллы.</div>
-                    <button class="prof-banner-btn" id="profBannerStart">Пройти профориентацию →</button>
+                    <div class="prof-banner-actions">
+                        <button class="prof-banner-btn" id="profBannerStart">Пройти профориентацию →</button>
+                        <button class="prof-banner-btn ghost hidden" id="profBannerViewResult">📋 Посмотреть мой результат</button>
+                    </div>
                 </div>
             </div>
 
@@ -1708,14 +2127,45 @@ body {
                 </div>
                 <div class="prof-modal-benefit">
                     <span class="prof-modal-benefit-icon">⏱️</span>
-                    <span>Займёт 5–7 минут — без регистрации</span>
+                    <span>8 вопросов · 2–3 минуты · результат сохранится</span>
                 </div>
             </div>
             <div class="prof-modal-actions">
-                <button class="prof-modal-btn primary disabled" disabled aria-disabled="true">Пройти профориентацию →</button>
+                <button class="prof-modal-btn primary" id="profModalStart">Пройти профориентацию →</button>
+                <button class="prof-modal-btn ghost hidden" id="profModalViewSaved">📋 Посмотреть сохранённый результат</button>
                 <button class="prof-modal-btn ghost" id="profModalSkip">Сначала посмотрю вузы</button>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     ТЕСТ ПО ПРОФОРИЕНТАЦИИ
+     ============================================================ -->
+<div class="test-modal-overlay" id="testModalOverlay">
+    <div class="test-modal" role="dialog" aria-modal="true" aria-labelledby="testModalTitle">
+        <button class="test-close" id="testClose" aria-label="Закрыть тест">✕</button>
+
+        <div class="test-header" id="testHeader">
+            <div class="test-header-top">
+                <div class="test-header-title" id="testModalTitle">🧭 Профориентация</div>
+                <div class="test-counter" id="testCounter">Вопрос 1 из 8</div>
+            </div>
+            <div class="test-progress-bar">
+                <div class="test-progress-fill" id="testProgressFill" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <div class="test-body" id="testBody"></div>
+
+        <div class="test-footer" id="testFooter">
+            <button class="prof-modal-btn test-btn-back" id="testBack" style="display:none">
+                ←<span class="test-back-label"> Назад</span>
+            </button>
+            <button class="prof-modal-btn primary" id="testNext" disabled>Далее →</button>
+        </div>
+
+        <div class="test-result hidden" id="testResult"></div>
     </div>
 </div>
 
@@ -1734,200 +2184,263 @@ body {
           rating: 1, minScore: 180, paidFrom: 420000, budgetPlaces: 3500, paidPlaces: 500,
           dormitory: true, military: true, exams: 'ДВИ по профилю',
           faculties: [
-            { name: 'Факультет вычислительной математики и кибернетики', score: 340, places: 350, budget: 320, paid: 30, exams: 'Математика (ДВИ), информатика' },
-            { name: 'Экономический факультет', score: 330, places: 400, budget: 350, paid: 50, exams: 'Математика (ДВИ), обществознание' },
-            { name: 'Юридический факультет', score: 335, places: 300, budget: 260, paid: 40, exams: 'Обществознание (ДВИ), история' },
-            { name: 'Физический факультет', score: 310, places: 500, budget: 470, paid: 30, exams: 'Физика (ДВИ), математика' },
-            { name: 'Филологический факультет', score: 300, places: 350, budget: 320, paid: 30, exams: 'Литература (ДВИ), русский' }
+            { name: 'Факультет вычислительной математики и кибернетики', score: 340, places: 350, budget: 320, paid: 30, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+            { name: 'Экономический факультет', score: 330, places: 400, budget: 350, paid: 50, exams: 'Математика (ДВИ), обществознание', tags: ['economics', 'business'] },
+            { name: 'Юридический факультет', score: 335, places: 300, budget: 260, paid: 40, exams: 'Обществознание (ДВИ), история', tags: ['law'] },
+            { name: 'Физический факультет', score: 310, places: 500, budget: 470, paid: 30, exams: 'Физика (ДВИ), математика', tags: ['physics', 'engineering'] },
+            { name: 'Филологический факультет', score: 300, places: 350, budget: 320, paid: 30, exams: 'Литература (ДВИ), русский', tags: ['humanities'] }
           ]},
         { name: 'МФТИ', emoji: '⚛️', score: 310, places: 1200, direction: 'Физика, IT',
           rating: 2, minScore: 190, paidFrom: 380000, budgetPlaces: 1100, paidPlaces: 100,
           dormitory: true, military: true, exams: 'ДВИ по математике и физике',
           faculties: [
-            { name: 'Физтех-школа радиотехники и компьютерных технологий', score: 320, places: 200, budget: 185, paid: 15, exams: 'Математика (ДВИ), физика' },
-            { name: 'Физтех-школа прикладной математики и информатики', score: 325, places: 180, budget: 170, paid: 10, exams: 'Математика (ДВИ), информатика' },
-            { name: 'Физтех-школа физики и исследований им. Ландау', score: 315, places: 150, budget: 145, paid: 5, exams: 'Физика (ДВИ), математика' },
-            { name: 'Физтех-школа биологической и медицинской физики', score: 305, places: 100, budget: 95, paid: 5, exams: 'Биология (ДВИ), физика' }
+            { name: 'Физтех-школа радиотехники и компьютерных технологий', score: 320, places: 200, budget: 185, paid: 15, exams: 'Математика (ДВИ), физика', tags: ['it', 'engineering'] },
+            { name: 'Физтех-школа прикладной математики и информатики', score: 325, places: 180, budget: 170, paid: 10, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+            { name: 'Физтех-школа физики и исследований им. Ландау', score: 315, places: 150, budget: 145, paid: 5, exams: 'Физика (ДВИ), математика', tags: ['physics'] },
+            { name: 'Физтех-школа биологической и медицинской физики', score: 305, places: 100, budget: 95, paid: 5, exams: 'Биология (ДВИ), физика', tags: ['medicine', 'physics'] }
           ]},
         { name: 'НИУ ВШЭ', emoji: '📊', score: 300, places: 3500, direction: 'Экономика, IT',
           rating: 3, minScore: 175, paidFrom: 350000, budgetPlaces: 2800, paidPlaces: 700,
           dormitory: true, military: true, exams: 'ДВИ по профилю',
           faculties: [
-            { name: 'Факультет компьютерных наук', score: 315, places: 400, budget: 340, paid: 60, exams: 'Математика (ДВИ), информатика' },
-            { name: 'Факультет экономических наук', score: 310, places: 500, budget: 400, paid: 100, exams: 'Математика (ДВИ), обществознание' },
-            { name: 'Факультет гуманитарных наук', score: 290, places: 350, budget: 300, paid: 50, exams: 'История (ДВИ), литература' },
-            { name: 'Факультет социальных наук', score: 285, places: 300, budget: 260, paid: 40, exams: 'Обществознание (ДВИ), история' },
-            { name: 'Факультет права', score: 300, places: 250, budget: 200, paid: 50, exams: 'Обществознание (ДВИ), история' }
+            { name: 'Факультет компьютерных наук', score: 315, places: 400, budget: 340, paid: 60, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+            { name: 'Факультет экономических наук', score: 310, places: 500, budget: 400, paid: 100, exams: 'Математика (ДВИ), обществознание', tags: ['economics'] },
+            { name: 'Факультет гуманитарных наук', score: 290, places: 350, budget: 300, paid: 50, exams: 'История (ДВИ), литература', tags: ['humanities'] },
+            { name: 'Факультет социальных наук', score: 285, places: 300, budget: 260, paid: 40, exams: 'Обществознание (ДВИ), история', tags: ['humanities'] },
+            { name: 'Факультет права', score: 300, places: 250, budget: 200, paid: 50, exams: 'Обществознание (ДВИ), история', tags: ['law'] }
           ]},
         { name: 'МГТУ им. Н.Э. Баумана', emoji: '🔧', score: 290, places: 3000, direction: 'Инженерия',
           rating: 4, minScore: 170, paidFrom: 290000, budgetPlaces: 2600, paidPlaces: 400,
           dormitory: true, military: true, exams: 'ДВИ по математике и физике',
           faculties: [
-            { name: 'Факультет информатики и систем управления', score: 305, places: 400, budget: 360, paid: 40, exams: 'Математика (ДВИ), информатика' },
-            { name: 'Факультет робототехники и комплексной автоматизации', score: 295, places: 350, budget: 320, paid: 30, exams: 'Математика (ДВИ), физика' },
-            { name: 'Факультет энергомашиностроения', score: 285, places: 300, budget: 280, paid: 20, exams: 'Математика (ДВИ), физика' },
-            { name: 'Факультет фундаментальных наук', score: 280, places: 250, budget: 230, paid: 20, exams: 'Математика (ДВИ), физика' }
+            { name: 'Факультет информатики и систем управления', score: 305, places: 400, budget: 360, paid: 40, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+            { name: 'Факультет робототехники и комплексной автоматизации', score: 295, places: 350, budget: 320, paid: 30, exams: 'Математика (ДВИ), физика', tags: ['engineering', 'it'] },
+            { name: 'Факультет энергомашиностроения', score: 285, places: 300, budget: 280, paid: 20, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+            { name: 'Факультет фундаментальных наук', score: 280, places: 250, budget: 230, paid: 20, exams: 'Математика (ДВИ), физика', tags: ['physics', 'engineering'] }
           ]},
         { name: 'МГИМО', emoji: '🌍', score: 295, places: 1000, direction: 'Международные отношения',
           rating: 5, minScore: 185, paidFrom: 450000, budgetPlaces: 700, paidPlaces: 300,
           dormitory: true, military: true, exams: 'ДВИ по иностранному языку',
           faculties: [
-            { name: 'Факультет международных отношений', score: 310, places: 200, budget: 150, paid: 50, exams: 'Иностранный язык (ДВИ), история' },
-            { name: 'Факультет международных экономических отношений', score: 305, places: 180, budget: 130, paid: 50, exams: 'Математика (ДВИ), иностранный язык' },
-            { name: 'Международно-правовой факультет', score: 300, places: 150, budget: 110, paid: 40, exams: 'Обществознание (ДВИ), иностранный язык' },
-            { name: 'Факультет международной журналистики', score: 295, places: 100, budget: 70, paid: 30, exams: 'Литература (ДВИ), иностранный язык' }
+            { name: 'Факультет международных отношений', score: 310, places: 200, budget: 150, paid: 50, exams: 'Иностранный язык (ДВИ), история', tags: ['humanities'] },
+            { name: 'Факультет международных экономических отношений', score: 305, places: 180, budget: 130, paid: 50, exams: 'Математика (ДВИ), иностранный язык', tags: ['economics'] },
+            { name: 'Международно-правовой факультет', score: 300, places: 150, budget: 110, paid: 40, exams: 'Обществознание (ДВИ), иностранный язык', tags: ['law'] },
+            { name: 'Факультет международной журналистики', score: 295, places: 100, budget: 70, paid: 30, exams: 'Литература (ДВИ), иностранный язык', tags: ['humanities'] }
           ]},
         { name: 'РУДН', emoji: '🤝', score: 250, places: 4500, direction: 'Мультидисциплинарный',
           rating: 8, minScore: 150, paidFrom: 220000, budgetPlaces: 3000, paidPlaces: 1500,
           dormitory: true, military: true, exams: 'ДВИ по профилю',
           faculties: [
-            { name: 'Медицинский институт', score: 270, places: 300, budget: 220, paid: 80, exams: 'Биология (ДВИ), химия' },
-            { name: 'Институт мировой экономики и бизнеса', score: 260, places: 250, budget: 180, paid: 70, exams: 'Математика (ДВИ), обществознание' },
-            { name: 'Юридический институт', score: 265, places: 200, budget: 140, paid: 60, exams: 'Обществознание (ДВИ), история' },
-            { name: 'Инженерная академия', score: 250, places: 280, budget: 200, paid: 80, exams: 'Математика (ДВИ), физика' }
+            { name: 'Медицинский институт', score: 270, places: 300, budget: 220, paid: 80, exams: 'Биология (ДВИ), химия', tags: ['medicine'] },
+            { name: 'Институт мировой экономики и бизнеса', score: 260, places: 250, budget: 180, paid: 70, exams: 'Математика (ДВИ), обществознание', tags: ['economics', 'business'] },
+            { name: 'Юридический институт', score: 265, places: 200, budget: 140, paid: 60, exams: 'Обществознание (ДВИ), история', tags: ['law'] },
+            { name: 'Инженерная академия', score: 250, places: 280, budget: 200, paid: 80, exams: 'Математика (ДВИ), физика', tags: ['engineering'] }
           ]},
         { name: 'НИЯУ МИФИ', emoji: '☢️', score: 280, places: 1500, direction: 'Ядерная физика',
           rating: 6, minScore: 165, paidFrom: 280000, budgetPlaces: 1300, paidPlaces: 200,
           dormitory: true, military: true, exams: 'ДВИ по физике и математике',
           faculties: [
-            { name: 'Институт ядерной физики и технологий', score: 290, places: 200, budget: 180, paid: 20, exams: 'Физика (ДВИ), математика' },
-            { name: 'Институт лазерных и плазменных технологий', score: 285, places: 150, budget: 130, paid: 20, exams: 'Физика (ДВИ), математика' },
-            { name: 'Институт интеллектуальных кибернетических систем', score: 295, places: 180, budget: 160, paid: 20, exams: 'Математика (ДВИ), информатика' },
-            { name: 'Инженерно-физический институт биомедицины', score: 275, places: 120, budget: 100, paid: 20, exams: 'Биология (ДВИ), физика' }
+            { name: 'Институт ядерной физики и технологий', score: 290, places: 200, budget: 180, paid: 20, exams: 'Физика (ДВИ), математика', tags: ['physics', 'engineering'] },
+            { name: 'Институт лазерных и плазменных технологий', score: 285, places: 150, budget: 130, paid: 20, exams: 'Физика (ДВИ), математика', tags: ['physics', 'engineering'] },
+            { name: 'Институт интеллектуальных кибернетических систем', score: 295, places: 180, budget: 160, paid: 20, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+            { name: 'Инженерно-физический институт биомедицины', score: 275, places: 120, budget: 100, paid: 20, exams: 'Биология (ДВИ), физика', tags: ['medicine', 'physics'] }
           ]},
         { name: 'МГМУ им. И.М. Сеченова', emoji: '🩺', score: 270, places: 2000, direction: 'Медицина',
           rating: 7, minScore: 160, paidFrom: 320000, budgetPlaces: 1700, paidPlaces: 300,
           dormitory: true, military: true, exams: 'ДВИ по химии и биологии',
           faculties: [
-            { name: 'Лечебный факультет', score: 285, places: 400, budget: 360, paid: 40, exams: 'Химия (ДВИ), биология' },
-            { name: 'Педиатрический факультет', score: 275, places: 300, budget: 270, paid: 30, exams: 'Химия (ДВИ), биология' },
-            { name: 'Стоматологический факультет', score: 290, places: 150, budget: 130, paid: 20, exams: 'Химия (ДВИ), биология' },
-            { name: 'Фармацевтический факультет', score: 260, places: 200, budget: 170, paid: 30, exams: 'Химия (ДВИ), биология' }
+            { name: 'Лечебный факультет', score: 285, places: 400, budget: 360, paid: 40, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
+            { name: 'Педиатрический факультет', score: 275, places: 300, budget: 270, paid: 30, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
+            { name: 'Стоматологический факультет', score: 290, places: 150, budget: 130, paid: 20, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
+            { name: 'Фармацевтический факультет', score: 260, places: 200, budget: 170, paid: 30, exams: 'Химия (ДВИ), биология', tags: ['medicine'] }
           ]},
         { name: 'РЭУ им. Г.В. Плеханова', emoji: '📈', score: 260, places: 2800, direction: 'Экономика',
           rating: 10, minScore: 155, paidFrom: 240000, budgetPlaces: 1900, paidPlaces: 900,
           dormitory: true, military: true, exams: 'ДВИ по профилю',
           faculties: [
-            { name: 'Факультет экономики и финансов', score: 270, places: 300, budget: 220, paid: 80, exams: 'Математика (ДВИ), обществознание' },
-            { name: 'Факультет менеджмента', score: 265, places: 250, budget: 180, paid: 70, exams: 'Математика (ДВИ), обществознание' },
-            { name: 'Факультет информационных технологий', score: 260, places: 200, budget: 150, paid: 50, exams: 'Математика (ДВИ), информатика' },
-            { name: 'Юридический факультет', score: 255, places: 180, budget: 120, paid: 60, exams: 'Обществознание (ДВИ), история' }
+            { name: 'Факультет экономики и финансов', score: 270, places: 300, budget: 220, paid: 80, exams: 'Математика (ДВИ), обществознание', tags: ['economics'] },
+            { name: 'Факультет менеджмента', score: 265, places: 250, budget: 180, paid: 70, exams: 'Математика (ДВИ), обществознание', tags: ['business'] },
+            { name: 'Факультет информационных технологий', score: 260, places: 200, budget: 150, paid: 50, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+            { name: 'Юридический факультет', score: 255, places: 180, budget: 120, paid: 60, exams: 'Обществознание (ДВИ), история', tags: ['law'] }
           ]},
         { name: 'МАИ', emoji: '✈️', score: 255, places: 2200, direction: 'Авиация, IT',
           rating: 12, minScore: 150, paidFrom: 230000, budgetPlaces: 1700, paidPlaces: 500,
           dormitory: true, military: true, exams: 'ДВИ по математике и физике',
           faculties: [
-            { name: 'Институт информационных технологий', score: 270, places: 250, budget: 210, paid: 40, exams: 'Математика (ДВИ), информатика' },
-            { name: 'Аэрокосмический институт', score: 260, places: 300, budget: 240, paid: 60, exams: 'Математика (ДВИ), физика' },
-            { name: 'Институт двигателей и энергетики', score: 255, places: 200, budget: 160, paid: 40, exams: 'Математика (ДВИ), физика' },
-            { name: 'Институт экономики и управления', score: 245, places: 150, budget: 110, paid: 40, exams: 'Математика (ДВИ), обществознание' }
+            { name: 'Институт информационных технологий', score: 270, places: 250, budget: 210, paid: 40, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+            { name: 'Аэрокосмический институт', score: 260, places: 300, budget: 240, paid: 60, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+            { name: 'Институт двигателей и энергетики', score: 255, places: 200, budget: 160, paid: 40, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+            { name: 'Институт экономики и управления', score: 245, places: 150, budget: 110, paid: 40, exams: 'Математика (ДВИ), обществознание', tags: ['economics', 'business'] }
           ]},
         { name: 'МГПУ', emoji: '📚', score: 230, places: 3500, direction: 'Педагогика',
           rating: 15, minScore: 140, paidFrom: 180000, budgetPlaces: 2800, paidPlaces: 700,
           dormitory: true, military: false, exams: 'ДВИ по профилю',
           faculties: [
-            { name: 'Институт педагогики и психологии образования', score: 240, places: 350, budget: 290, paid: 60, exams: 'Обществознание (ДВИ), биология' },
-            { name: 'Институт цифрового образования', score: 235, places: 250, budget: 200, paid: 50, exams: 'Математика (ДВИ), информатика' },
-            { name: 'Институт гуманитарных наук', score: 230, places: 300, budget: 240, paid: 60, exams: 'История (ДВИ), литература' },
-            { name: 'Институт математики, информатики и естественных наук', score: 225, places: 200, budget: 160, paid: 40, exams: 'Математика (ДВИ), физика' }
+            { name: 'Институт педагогики и психологии образования', score: 240, places: 350, budget: 290, paid: 60, exams: 'Обществознание (ДВИ), биология', tags: ['humanities'] },
+            { name: 'Институт цифрового образования', score: 235, places: 250, budget: 200, paid: 50, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+            { name: 'Институт гуманитарных наук', score: 230, places: 300, budget: 240, paid: 60, exams: 'История (ДВИ), литература', tags: ['humanities'] },
+            { name: 'Институт математики, информатики и естественных наук', score: 225, places: 200, budget: 160, paid: 40, exams: 'Математика (ДВИ), физика', tags: ['it', 'physics'] }
           ]},
         { name: 'НИТУ МИСиС', emoji: '⛏️', score: 245, places: 1800, direction: 'Материаловедение',
           rating: 13, minScore: 145, paidFrom: 200000, budgetPlaces: 1500, paidPlaces: 300,
           dormitory: true, military: true, exams: 'ДВИ по математике и физике',
           faculties: [
-            { name: 'Институт новых материалов и нанотехнологий', score: 255, places: 200, budget: 170, paid: 30, exams: 'Математика (ДВИ), физика' },
-            { name: 'Институт горного дела и наук о Земле', score: 250, places: 180, budget: 155, paid: 25, exams: 'Математика (ДВИ), физика' },
-            { name: 'Институт информационных технологий', score: 260, places: 150, budget: 130, paid: 20, exams: 'Математика (ДВИ), информатика' },
-            { name: 'Институт металлургии и металловедения', score: 245, places: 200, budget: 165, paid: 35, exams: 'Математика (ДВИ), химия' }
+            { name: 'Институт новых материалов и нанотехнологий', score: 255, places: 200, budget: 170, paid: 30, exams: 'Математика (ДВИ), физика', tags: ['engineering', 'physics'] },
+            { name: 'Институт горного дела и наук о Земле', score: 250, places: 180, budget: 155, paid: 25, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+            { name: 'Институт информационных технологий', score: 260, places: 150, budget: 130, paid: 20, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+            { name: 'Институт металлургии и металловедения', score: 245, places: 200, budget: 165, paid: 35, exams: 'Математика (ДВИ), химия', tags: ['engineering'] }
           ]},
         { name: 'МПГУ', emoji: '🧑‍🏫', score: 225, places: 4000, direction: 'Педагогика',
           rating: 16, minScore: 135, paidFrom: 170000, budgetPlaces: 3300, paidPlaces: 700,
           dormitory: true, military: false, exams: 'ДВИ по профилю',
           faculties: [
-            { name: 'Институт математики и информатики', score: 235, places: 300, budget: 250, paid: 50, exams: 'Математика (ДВИ), информатика' },
-            { name: 'Институт филологии', score: 230, places: 400, budget: 340, paid: 60, exams: 'Литература (ДВИ), русский' },
-            { name: 'Институт истории и политики', score: 225, places: 250, budget: 210, paid: 40, exams: 'История (ДВИ), обществознание' },
-            { name: 'Институт физической культуры и спорта', score: 220, places: 200, budget: 170, paid: 30, exams: 'Биология (ДВИ), физическая культура' }
+            { name: 'Институт математики и информатики', score: 235, places: 300, budget: 250, paid: 50, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+            { name: 'Институт филологии', score: 230, places: 400, budget: 340, paid: 60, exams: 'Литература (ДВИ), русский', tags: ['humanities'] },
+            { name: 'Институт истории и политики', score: 225, places: 250, budget: 210, paid: 40, exams: 'История (ДВИ), обществознание', tags: ['humanities'] },
+            { name: 'Институт физической культуры и спорта', score: 220, places: 200, budget: 170, paid: 30, exams: 'Биология (ДВИ), физическая культура', tags: ['medicine'] }
           ]},
         { name: 'Финансовый университет', emoji: '💰', score: 275, places: 2500, direction: 'Финансы',
           rating: 9, minScore: 160, paidFrom: 280000, budgetPlaces: 1900, paidPlaces: 600,
           dormitory: true, military: true, exams: 'ДВИ по профилю',
           faculties: [
-            { name: 'Факультет финансов и кредита', score: 285, places: 300, budget: 240, paid: 60, exams: 'Математика (ДВИ), обществознание' },
-            { name: 'Факультет экономики и бизнеса', score: 280, places: 280, budget: 220, paid: 60, exams: 'Математика (ДВИ), обществознание' },
-            { name: 'Факультет информационных технологий', score: 275, places: 250, budget: 200, paid: 50, exams: 'Математика (ДВИ), информатика' },
-            { name: 'Юридический факультет', score: 270, places: 200, budget: 150, paid: 50, exams: 'Обществознание (ДВИ), история' }
+            { name: 'Факультет финансов и кредита', score: 285, places: 300, budget: 240, paid: 60, exams: 'Математика (ДВИ), обществознание', tags: ['economics'] },
+            { name: 'Факультет экономики и бизнеса', score: 280, places: 280, budget: 220, paid: 60, exams: 'Математика (ДВИ), обществознание', tags: ['economics', 'business'] },
+            { name: 'Факультет информационных технологий', score: 275, places: 250, budget: 200, paid: 50, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+            { name: 'Юридический факультет', score: 270, places: 200, budget: 150, paid: 50, exams: 'Обществознание (ДВИ), история', tags: ['law'] }
           ]},
         { name: 'МГЮА', emoji: '⚖️', score: 285, places: 1200, direction: 'Юриспруденция',
           rating: 11, minScore: 170, paidFrom: 300000, budgetPlaces: 900, paidPlaces: 300,
           dormitory: true, military: true, exams: 'ДВИ по обществознанию',
           faculties: [
-            { name: 'Институт права и национальной безопасности', score: 290, places: 300, budget: 230, paid: 70, exams: 'Обществознание (ДВИ), история' },
-            { name: 'Институт международного права', score: 295, places: 200, budget: 150, paid: 50, exams: 'Обществознание (ДВИ), иностранный язык' },
-            { name: 'Институт судебных экспертиз', score: 285, places: 150, budget: 110, paid: 40, exams: 'Обществознание (ДВИ), химия' },
-            { name: 'Институт бизнес-права', score: 280, places: 180, budget: 130, paid: 50, exams: 'Обществознание (ДВИ), математика' }
+            { name: 'Институт права и национальной безопасности', score: 290, places: 300, budget: 230, paid: 70, exams: 'Обществознание (ДВИ), история', tags: ['law'] },
+            { name: 'Институт международного права', score: 295, places: 200, budget: 150, paid: 50, exams: 'Обществознание (ДВИ), иностранный язык', tags: ['law'] },
+            { name: 'Институт судебных экспертиз', score: 285, places: 150, budget: 110, paid: 40, exams: 'Обществознание (ДВИ), химия', tags: ['law'] },
+            { name: 'Институт бизнес-права', score: 280, places: 180, budget: 130, paid: 50, exams: 'Обществознание (ДВИ), математика', tags: ['law', 'business'] }
           ]},
         { name: 'РНИМУ им. Н.И. Пирогова', emoji: '🧬', score: 265, places: 1600, direction: 'Медицина',
           rating: 14, minScore: 155, paidFrom: 310000, budgetPlaces: 1300, paidPlaces: 300,
           dormitory: true, military: true, exams: 'ДВИ по химии и биологии',
           faculties: [
-            { name: 'Лечебный факультет', score: 280, places: 350, budget: 300, paid: 50, exams: 'Химия (ДВИ), биология' },
-            { name: 'Педиатрический факультет', score: 270, places: 250, budget: 210, paid: 40, exams: 'Химия (ДВИ), биология' },
-            { name: 'Медико-биологический факультет', score: 265, places: 150, budget: 120, paid: 30, exams: 'Биология (ДВИ), химия' },
-            { name: 'Факультет психологии', score: 255, places: 100, budget: 80, paid: 20, exams: 'Биология (ДВИ), обществознание' }
+            { name: 'Лечебный факультет', score: 280, places: 350, budget: 300, paid: 50, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
+            { name: 'Педиатрический факультет', score: 270, places: 250, budget: 210, paid: 40, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
+            { name: 'Медико-биологический факультет', score: 265, places: 150, budget: 120, paid: 30, exams: 'Биология (ДВИ), химия', tags: ['medicine'] },
+            { name: 'Факультет психологии', score: 255, places: 100, budget: 80, paid: 20, exams: 'Биология (ДВИ), обществознание', tags: ['humanities', 'medicine'] }
           ]},
         { name: 'МГТУ ГА', emoji: '🛫', score: 240, places: 900, direction: 'Гражданская авиация',
           rating: 18, minScore: 140, paidFrom: 190000, budgetPlaces: 700, paidPlaces: 200,
           dormitory: true, military: true, exams: 'ДВИ по математике и физике',
           faculties: [
-            { name: 'Факультет авиационных систем и комплексов', score: 250, places: 150, budget: 120, paid: 30, exams: 'Математика (ДВИ), физика' },
-            { name: 'Факультет управления на воздушном транспорте', score: 245, places: 120, budget: 90, paid: 30, exams: 'Математика (ДВИ), обществознание' },
-            { name: 'Факультет авиационных двигателей', score: 240, places: 100, budget: 80, paid: 20, exams: 'Математика (ДВИ), физика' },
-            { name: 'Факультет радиотехники и электроники', score: 235, places: 90, budget: 70, paid: 20, exams: 'Математика (ДВИ), физика' }
+            { name: 'Факультет авиационных систем и комплексов', score: 250, places: 150, budget: 120, paid: 30, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+            { name: 'Факультет управления на воздушном транспорте', score: 245, places: 120, budget: 90, paid: 30, exams: 'Математика (ДВИ), обществознание', tags: ['business'] },
+            { name: 'Факультет авиационных двигателей', score: 240, places: 100, budget: 80, paid: 20, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+            { name: 'Факультет радиотехники и электроники', score: 235, places: 90, budget: 70, paid: 20, exams: 'Математика (ДВИ), физика', tags: ['engineering', 'it'] }
           ]},
         { name: 'РГГУ', emoji: '📜', score: 235, places: 2000, direction: 'Гуманитарные науки',
           rating: 17, minScore: 135, paidFrom: 180000, budgetPlaces: 1500, paidPlaces: 500,
           dormitory: true, military: false, exams: 'ДВИ по профилю',
           faculties: [
-            { name: 'Историко-архивный институт', score: 245, places: 250, budget: 200, paid: 50, exams: 'История (ДВИ), обществознание' },
-            { name: 'Институт филологии и истории', score: 240, places: 300, budget: 240, paid: 60, exams: 'Литература (ДВИ), история' },
-            { name: 'Институт экономики, управления и права', score: 235, places: 200, budget: 150, paid: 50, exams: 'Обществознание (ДВИ), математика' },
-            { name: 'Институт психологии и педагогики', score: 230, places: 150, budget: 110, paid: 40, exams: 'Биология (ДВИ), обществознание' }
+            { name: 'Историко-архивный институт', score: 245, places: 250, budget: 200, paid: 50, exams: 'История (ДВИ), обществознание', tags: ['humanities'] },
+            { name: 'Институт филологии и истории', score: 240, places: 300, budget: 240, paid: 60, exams: 'Литература (ДВИ), история', tags: ['humanities'] },
+            { name: 'Институт экономики, управления и права', score: 235, places: 200, budget: 150, paid: 50, exams: 'Обществознание (ДВИ), математика', tags: ['economics', 'law'] },
+            { name: 'Институт психологии и педагогики', score: 230, places: 150, budget: 110, paid: 40, exams: 'Биология (ДВИ), обществознание', tags: ['humanities'] }
           ]},
         { name: 'МГУПП', emoji: '🍞', score: 210, places: 1100, direction: 'Пищевые технологии',
           rating: 20, minScore: 125, paidFrom: 160000, budgetPlaces: 850, paidPlaces: 250,
           dormitory: true, military: false, exams: 'ДВИ по профилю',
           faculties: [
-            { name: 'Институт пищевых технологий', score: 220, places: 200, budget: 150, paid: 50, exams: 'Химия (ДВИ), биология' },
-            { name: 'Институт биотехнологий', score: 215, places: 150, budget: 110, paid: 40, exams: 'Биология (ДВИ), химия' },
-            { name: 'Институт экономики и управления', score: 210, places: 120, budget: 90, paid: 30, exams: 'Математика (ДВИ), обществознание' },
-            { name: 'Институт инженерии и технологий', score: 205, places: 100, budget: 70, paid: 30, exams: 'Математика (ДВИ), физика' }
+            { name: 'Институт пищевых технологий', score: 220, places: 200, budget: 150, paid: 50, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
+            { name: 'Институт биотехнологий', score: 215, places: 150, budget: 110, paid: 40, exams: 'Биология (ДВИ), химия', tags: ['medicine'] },
+            { name: 'Институт экономики и управления', score: 210, places: 120, budget: 90, paid: 30, exams: 'Математика (ДВИ), обществознание', tags: ['economics', 'business'] },
+            { name: 'Институт инженерии и технологий', score: 205, places: 100, budget: 70, paid: 30, exams: 'Математика (ДВИ), физика', tags: ['engineering'] }
           ]},
         { name: 'МИРЭА', emoji: '📡', score: 250, places: 2700, direction: 'Радиотехника, IT',
           rating: 19, minScore: 145, paidFrom: 210000, budgetPlaces: 2100, paidPlaces: 600,
           dormitory: true, military: true, exams: 'ДВИ по математике и физике',
           faculties: [
-            { name: 'Институт информационных технологий', score: 265, places: 300, budget: 240, paid: 60, exams: 'Математика (ДВИ), информатика' },
-            { name: 'Институт радиотехнических и телекоммуникационных систем', score: 255, places: 250, budget: 200, paid: 50, exams: 'Математика (ДВИ), физика' },
-            { name: 'Институт кибербезопасности', score: 260, places: 200, budget: 160, paid: 40, exams: 'Математика (ДВИ), информатика' },
-            { name: 'Институт экономики и права', score: 240, places: 150, budget: 110, paid: 40, exams: 'Обществознание (ДВИ), математика' }
+            { name: 'Институт информационных технологий', score: 265, places: 300, budget: 240, paid: 60, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+            { name: 'Институт радиотехнических и телекоммуникационных систем', score: 255, places: 250, budget: 200, paid: 50, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+            { name: 'Институт кибербезопасности', score: 260, places: 200, budget: 160, paid: 40, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+            { name: 'Институт экономики и права', score: 240, places: 150, budget: 110, paid: 40, exams: 'Обществознание (ДВИ), математика', tags: ['economics', 'law'] }
           ]}
+    ];
+
+    // ==================== НАПРАВЛЕНИЯ ====================
+    const DIRECTIONS = {
+        it: { name: 'IT и программирование', emoji: '💻', desc: 'Разработка, анализ данных, кибербезопасность, искусственный интеллект' },
+        engineering: { name: 'Инженерия и технологии', emoji: '🔧', desc: 'Робототехника, авиация, энергетика, материаловедение, радиоэлектроника' },
+        medicine: { name: 'Медицина и биология', emoji: '🩺', desc: 'Лечебное дело, педиатрия, фармация, биотехнологии, психология' },
+        economics: { name: 'Экономика и финансы', emoji: '📊', desc: 'Финансы, экономика, анализ данных, банковское дело' },
+        business: { name: 'Менеджмент и бизнес', emoji: '💼', desc: 'Менеджмент, маркетинг, предпринимательство, управление' },
+        law: { name: 'Юриспруденция', emoji: '⚖️', desc: 'Право, международное право, судебные экспертизы, бизнес-право' },
+        humanities: { name: 'Гуманитарные науки', emoji: '📚', desc: 'История, филология, международные отношения, журналистика' },
+        physics: { name: 'Физика и математика', emoji: '🔬', desc: 'Фундаментальная физика, ядерная физика, прикладная математика' }
+    };
+
+    // ==================== ВОПРОСЫ ТЕСТА ====================
+    const TEST_QUESTIONS = [
+        { question: 'Что тебе интереснее делать в свободное время?', hint: 'Выбери один вариант', options: [
+            { text: 'Собирать и разбирать гаджеты, программы, сайты', weights: { it: 2, engineering: 1 } },
+            { text: 'Читать книги, смотреть документалки, писать тексты', weights: { humanities: 2, law: 1 } },
+            { text: 'Помогать людям, разбираться в здоровье', weights: { medicine: 2, humanities: 1 } },
+            { text: 'Считать, считать деньги, анализировать цифры', weights: { economics: 2, business: 1 } }
+        ]},
+        { question: 'Какой предмет в школе даётся тебе легче всего?', hint: 'Выбери один вариант', options: [
+            { text: 'Математика и информатика', weights: { it: 2, economics: 1, physics: 1 } },
+            { text: 'Физика и химия', weights: { engineering: 2, physics: 1, medicine: 1 } },
+            { text: 'Биология и химия', weights: { medicine: 2, physics: 1 } },
+            { text: 'История, литература, обществознание', weights: { humanities: 2, law: 1 } }
+        ]},
+        { question: 'Какая задача кажется тебе самой интересной?', hint: 'Выбери один вариант', options: [
+            { text: 'Написать программу, которая решает задачу', weights: { it: 2 } },
+            { text: 'Спроектировать двигатель или робота', weights: { engineering: 2, physics: 1 } },
+            { text: 'Поставить диагноз и назначить лечение', weights: { medicine: 2 } },
+            { text: 'Защитить человека в суде или составить договор', weights: { law: 2, humanities: 1 } },
+            { text: 'Запустить бизнес и управлять командой', weights: { business: 2, economics: 1 } }
+        ]},
+        { question: 'Какая работа кажется тебе привлекательнее?', hint: 'Выбери один вариант', options: [
+            { text: 'В офисе с компьютером, в IT-компании', weights: { it: 2, economics: 1 } },
+            { text: 'На производстве, в лаборатории, в конструкторском бюро', weights: { engineering: 2, physics: 1 } },
+            { text: 'В больнице или клинике, рядом с пациентами', weights: { medicine: 2 } },
+            { text: 'В суде, юридической фирме или госорганах', weights: { law: 2 } },
+            { text: 'В своей компании, с клиентами и проектами', weights: { business: 2, economics: 1 } }
+        ]},
+        { question: 'Что тебе ближе?', hint: 'Выбери один вариант', options: [
+            { text: 'Точные науки, формулы, логика, код', weights: { it: 1, physics: 2, engineering: 1 } },
+            { text: 'Живые организмы, здоровье, медицина', weights: { medicine: 2 } },
+            { text: 'Общение с людьми, переговоры, тексты', weights: { humanities: 2, business: 1, law: 1 } },
+            { text: 'Цифры, деньги, экономика, рынки', weights: { economics: 2, business: 2 } }
+        ]},
+        { question: 'Какой проект ты бы выбрал для школьной конференции?', hint: 'Выбери один вариант', options: [
+            { text: 'Приложение или сайт с полезной функцией', weights: { it: 2 } },
+            { text: 'Модель робота, дрона или двигателя', weights: { engineering: 2, physics: 1 } },
+            { text: 'Исследование о здоровье, питании или мозге', weights: { medicine: 2 } },
+            { text: 'Анализ рынка или бизнес-план', weights: { economics: 2, business: 2 } },
+            { text: 'Исследование по истории, праву или литературе', weights: { humanities: 2, law: 1 } }
+        ]},
+        { question: 'Что для тебя важнее в будущей профессии?', hint: 'Выбери один вариант', options: [
+            { text: 'Постоянно учиться новому и решать сложные задачи', weights: { it: 2, physics: 1, engineering: 1 } },
+            { text: 'Помогать людям и видеть результат сразу', weights: { medicine: 2, humanities: 1 } },
+            { text: 'Хорошо зарабатывать и строить карьеру', weights: { economics: 2, business: 2 } },
+            { text: 'Иметь стабильную и уважаемую профессию', weights: { law: 2, medicine: 1 } },
+            { text: 'Заниматься творчеством и самовыражением', weights: { humanities: 2 } }
+        ]},
+        { question: 'Какая тема тебе интереснее всего?', hint: 'Выбери один вариант', options: [
+            { text: 'Искусственный интеллект и нейросети', weights: { it: 2, physics: 1 } },
+            { text: 'Космос, самолёты, новые материалы', weights: { engineering: 2, physics: 2 } },
+            { text: 'Генетика, мозг, новые лекарства', weights: { medicine: 2 } },
+            { text: 'Биржи, инвестиции, стартапы', weights: { economics: 2, business: 2 } },
+            { text: 'Права человека, политика, культура', weights: { law: 2, humanities: 2 } }
+        ]}
     ];
 
     // ==================== УТИЛИТЫ ====================
     const $ = (sel) => document.querySelector(sel);
     const $$ = (sel) => document.querySelectorAll(sel);
 
-    function formatMoney(n) {
-        return n.toLocaleString('ru-RU') + ' ₽';
-    }
+    function formatMoney(n) { return n.toLocaleString('ru-RU') + ' ₽'; }
 
     function normalize(str) {
-        return String(str || '')
-            .toLowerCase()
-            .replace(/ё/g, 'е')
-            .replace(/\s+/g, ' ')
-            .trim();
+        return String(str || '').toLowerCase().replace(/ё/g, 'е').replace(/\s+/g, ' ').trim();
     }
 
     function showPage(pageId) {
@@ -1937,10 +2450,117 @@ body {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    function escapeHtml(str) {
+        return String(str || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    function formatDate(ts) {
+        try {
+            return new Date(ts).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+        } catch (e) { return ''; }
+    }
+
+    // ==================== РЕЗУЛЬТАТ ПРОФОРИЕНТАЦИИ ====================
+    const STORAGE_KEY = 'profivuz_prof_result_v1';
+
+    function saveTestResult(scores) {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({ scores, savedAt: Date.now() }));
+        } catch (e) {}
+    }
+
+    function loadTestResult() {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return null;
+            const data = JSON.parse(raw);
+            if (!data || !data.scores) return null;
+            const scores = {};
+            Object.keys(DIRECTIONS).forEach(k => { scores[k] = Number(data.scores[k]) || 0; });
+            return { scores, savedAt: data.savedAt || null };
+        } catch (e) { return null; }
+    }
+
+    function hasTestResult() { return loadTestResult() !== null; }
+    function clearTestResult() { try { localStorage.removeItem(STORAGE_KEY); } catch (e) {} }
+
+    function refreshResultButtons() {
+        const has = hasTestResult();
+        $('#heroMyResult').classList.toggle('hidden', !has);
+        $('#profBannerViewResult').classList.toggle('hidden', !has);
+        $('#profModalViewSaved').classList.toggle('hidden', !has);
+    }
+
+    // ==================== ОТЗЫВЫ ====================
+    const REVIEWS_KEY = 'profivuz_reviews_v1';
+
+    // reviews = { [vuzName]: [ {id, author, rating, pros, cons, flaws, text, createdAt} ] }
+    function loadAllReviews() {
+        try {
+            const raw = localStorage.getItem(REVIEWS_KEY);
+            if (!raw) return {};
+            const data = JSON.parse(raw);
+            return (data && typeof data === 'object') ? data : {};
+        } catch (e) { return {}; }
+    }
+
+    function saveAllReviews(all) {
+        try { localStorage.setItem(REVIEWS_KEY, JSON.stringify(all)); } catch (e) {}
+    }
+
+    function getReviewsForVuz(vuzName) {
+        const all = loadAllReviews();
+        return Array.isArray(all[vuzName]) ? all[vuzName] : [];
+    }
+
+    function getVuzStats(vuzName) {
+        const reviews = getReviewsForVuz(vuzName);
+        if (reviews.length === 0) return { count: 0, avg: 0 };
+        const sum = reviews.reduce((s, r) => s + (Number(r.rating) || 0), 0);
+        return { count: reviews.length, avg: sum / reviews.length };
+    }
+
+    function addReview(vuzName, review) {
+        const all = loadAllReviews();
+        if (!Array.isArray(all[vuzName])) all[vuzName] = [];
+        all[vuzName].unshift(review);
+        saveAllReviews(all);
+    }
+
+    function deleteReview(vuzName, reviewId) {
+        const all = loadAllReviews();
+        if (!Array.isArray(all[vuzName])) return;
+        all[vuzName] = all[vuzName].filter(r => r.id !== reviewId);
+        saveAllReviews(all);
+    }
+
+    function renderStars(rating, max) {
+        max = max || 5;
+        let html = '';
+        for (let i = 1; i <= max; i++) {
+            html += `<span class="${i <= rating ? 'filled' : 'empty'}">★</span>`;
+        }
+        return html;
+    }
+
+    function formatAvg(avg) {
+        return avg > 0 ? avg.toFixed(1) : '0.0';
+    }
+
     // ==================== НАВИГАЦИЯ ====================
     $('#heroStart').addEventListener('click', () => {
         const target = document.getElementById('ctaBlock');
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    $('#heroMyResult').addEventListener('click', () => {
+        const saved = loadTestResult();
+        if (saved) openSavedResult(saved);
     });
 
     $('#ctaVuz').addEventListener('click', () => {
@@ -1949,9 +2569,7 @@ body {
         openProfModal();
     });
 
-    $('#ctaCourses').addEventListener('click', () => {
-        openCoursesModal();
-    });
+    $('#ctaCourses').addEventListener('click', () => { openCoursesModal(); });
 
     // ==================== МОДАЛКА КУРСОВ ====================
     function openCoursesModal() {
@@ -2014,13 +2632,14 @@ body {
     const profModalOverlay = $('#profModalOverlay');
 
     function openProfModal() {
+        refreshResultButtons();
         profModalOverlay.classList.add('open');
         document.body.style.overflow = 'hidden';
     }
 
     function closeProfModal() {
         profModalOverlay.classList.remove('open');
-        if (!modalOverlay.classList.contains('open')) {
+        if (!modalOverlay.classList.contains('open') && !testModalOverlay.classList.contains('open')) {
             document.body.style.overflow = '';
         }
     }
@@ -2028,19 +2647,284 @@ body {
     $('#profModalClose').addEventListener('click', closeProfModal);
     $('#profModalSkip').addEventListener('click', closeProfModal);
 
+    $('#profModalStart').addEventListener('click', () => { closeProfModal(); startTest(); });
+
+    $('#profModalViewSaved').addEventListener('click', () => {
+        const saved = loadTestResult();
+        if (saved) { closeProfModal(); openSavedResult(saved); }
+    });
+
     profModalOverlay.addEventListener('click', (e) => {
         if (e.target === profModalOverlay) closeProfModal();
     });
 
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && profModalOverlay.classList.contains('open')) {
-            closeProfModal();
+        if (e.key === 'Escape' && profModalOverlay.classList.contains('open')) closeProfModal();
+    });
+
+    // ==================== ТЕСТ ====================
+    const testModalOverlay = $('#testModalOverlay');
+    const testBody = $('#testBody');
+    const testFooter = $('#testFooter');
+    const testResult = $('#testResult');
+    const testHeader = $('#testHeader');
+    const testCounter = $('#testCounter');
+    const testProgressFill = $('#testProgressFill');
+    const testNextBtn = $('#testNext');
+    const testBackBtn = $('#testBack');
+
+    let testState = {
+        current: 0,
+        answers: new Array(TEST_QUESTIONS.length).fill(null),
+        scores: {}
+    };
+
+    function startTest() {
+        testState.current = 0;
+        testState.answers = new Array(TEST_QUESTIONS.length).fill(null);
+        testState.scores = {};
+        Object.keys(DIRECTIONS).forEach(k => testState.scores[k] = 0);
+
+        testHeader.style.display = '';
+        testFooter.style.display = '';
+        testBody.classList.remove('hidden');
+        testResult.classList.add('hidden');
+
+        testModalOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+
+        renderQuestion();
+    }
+
+    function closeTest() {
+        testModalOverlay.classList.remove('open');
+        if (!modalOverlay.classList.contains('open') && !profModalOverlay.classList.contains('open')) {
+            document.body.style.overflow = '';
+        }
+    }
+
+    $('#testClose').addEventListener('click', closeTest);
+    testModalOverlay.addEventListener('click', (e) => {
+        if (e.target === testModalOverlay) closeTest();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && testModalOverlay.classList.contains('open')) closeTest();
+    });
+
+    function renderQuestion() {
+        const q = TEST_QUESTIONS[testState.current];
+        const selectedIndex = testState.answers[testState.current];
+
+        testCounter.textContent = `Вопрос ${testState.current + 1} из ${TEST_QUESTIONS.length}`;
+        testProgressFill.style.width = `${(testState.current / TEST_QUESTIONS.length) * 100}%`;
+
+        testBackBtn.style.display = testState.current > 0 ? 'inline-flex' : 'none';
+
+        testNextBtn.disabled = selectedIndex === null;
+        testNextBtn.textContent = testState.current === TEST_QUESTIONS.length - 1 ? 'Показать результат →' : 'Далее →';
+
+        let html = `
+            <div>
+                <div class="test-question">${q.question}</div>
+                <div class="test-question-hint">${q.hint}</div>
+            </div>
+            <div class="test-options">
+        `;
+
+        q.options.forEach((opt, i) => {
+            const isSelected = selectedIndex === i;
+            html += `
+                <button class="test-option ${isSelected ? 'selected' : ''}" data-option-index="${i}">
+                    <span class="test-option-radio"></span>
+                    <span>${opt.text}</span>
+                </button>
+            `;
+        });
+
+        html += '</div>';
+        testBody.innerHTML = html;
+
+        testBody.querySelectorAll('.test-option').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const idx = parseInt(btn.getAttribute('data-option-index'), 10);
+                testState.answers[testState.current] = idx;
+                testBody.querySelectorAll('.test-option').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                testNextBtn.disabled = false;
+            });
+        });
+    }
+
+    testNextBtn.addEventListener('click', () => {
+        const selectedIndex = testState.answers[testState.current];
+        if (selectedIndex === null) return;
+
+        const weights = TEST_QUESTIONS[testState.current].options[selectedIndex].weights;
+        Object.entries(weights).forEach(([dir, points]) => {
+            if (testState.scores[dir] !== undefined) testState.scores[dir] += points;
+        });
+
+        if (testState.current < TEST_QUESTIONS.length - 1) {
+            testState.current++;
+            renderQuestion();
+        } else {
+            saveTestResult(testState.scores);
+            refreshResultButtons();
+            renderTestResult(testState.scores, { fromSaved: false });
         }
     });
 
-    // ==================== БАННЕР ПРОФОРИЕНТАЦИИ ====================
-    $('#profBannerStart').addEventListener('click', () => {
-        alert('🧭 Профориентация скоро появится!\nМы подберём тебе вуз и специальность по интересам и баллам.\nА пока посмотри вузы или найди специальность через поиск 😉');
+    testBackBtn.addEventListener('click', () => {
+        if (testState.current > 0) {
+            const prevSelected = testState.answers[testState.current];
+            if (prevSelected !== null) {
+                const weights = TEST_QUESTIONS[testState.current].options[prevSelected].weights;
+                Object.entries(weights).forEach(([dir, points]) => {
+                    if (testState.scores[dir] !== undefined) testState.scores[dir] -= points;
+                });
+            }
+            testState.current--;
+            renderQuestion();
+        }
+    });
+
+    function openSavedResult(saved) {
+        testHeader.style.display = 'none';
+        testFooter.style.display = 'none';
+        testBody.classList.add('hidden');
+        testResult.classList.remove('hidden');
+
+        testModalOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+
+        renderTestResult(saved.scores, { fromSaved: true, savedAt: saved.savedAt });
+    }
+
+    function renderTestResult(scores, opts) {
+        opts = opts || {};
+        testProgressFill.style.width = '100%';
+        testHeader.style.display = 'none';
+        testFooter.style.display = 'none';
+        testBody.classList.add('hidden');
+        testResult.classList.remove('hidden');
+
+        const sorted = Object.entries(scores)
+            .map(([key, score]) => ({ key, score, ...DIRECTIONS[key] }))
+            .sort((a, b) => b.score - a.score);
+
+        const maxScore = sorted[0]?.score || 1;
+        const top = sorted.slice(0, 3);
+        const topDirKey = top[0]?.key;
+
+        const suitable = findVuzesByDirection(topDirKey);
+
+        const topDirectionsHtml = top.map((d, i) => {
+            const percent = Math.round((d.score / maxScore) * 100);
+            return `
+                <div class="test-direction-card ${i === 0 ? 'top' : ''}">
+                    <div class="test-direction-rank">${i + 1}</div>
+                    <div class="test-direction-body">
+                        <div class="test-direction-name">${d.emoji} ${d.name}</div>
+                        <div class="test-direction-desc">${d.desc}</div>
+                        <div class="test-direction-bar">
+                            <div class="test-direction-fill" style="width: ${percent}%"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        const vuzesHtml = suitable.length > 0 ? suitable.map(item => `
+            <button class="test-result-vuz-item" data-vuz-index="${item.vuzIndex}" data-faculty-query="${item.query}">
+                <div class="test-result-vuz-emoji">${item.vuz.emoji}</div>
+                <div class="test-result-vuz-body">
+                    <div class="test-result-vuz-name">${item.vuz.name}</div>
+                    <div class="test-result-vuz-faculty">${item.faculty.name}</div>
+                </div>
+                <div class="test-result-vuz-score">${item.faculty.score} б.</div>
+            </button>
+        `).join('') : '<p style="color: var(--gray-muted); font-size: 0.9rem;">Пока не нашли подходящих вузов — попробуй поиск по специальностям.</p>';
+
+        let savedBadge = '';
+        if (opts.fromSaved) {
+            let savedText = '📋 Сохранённый результат';
+            if (opts.savedAt) {
+                try {
+                    const d = new Date(opts.savedAt);
+                    savedText = `📋 Сохранено ${d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })}`;
+                } catch (e) {}
+            }
+            savedBadge = `<div class="test-saved-badge">${savedText}</div>`;
+        }
+
+        testResult.innerHTML = `
+            <div class="test-result-hero">
+                <span class="test-result-emoji">🎉</span>
+                <h3>${opts.fromSaved ? 'Твой результат' : 'Твои направления'}</h3>
+                <p>${opts.fromSaved
+                    ? 'Мы сохранили твой прошлый результат. Можешь посмотреть направления и подходящие вузы или пройти тест заново.'
+                    : 'Вот что тебе подходит больше всего по результатам теста. Начни с первого направления — и посмотри, куда можно поступить.'}</p>
+                ${savedBadge}
+            </div>
+
+            <div class="test-result-subtitle">Топ-3 направления</div>
+            <div class="test-directions">${topDirectionsHtml}</div>
+
+            <div class="test-result-subtitle">Куда можно поступить по топ-1 направлению</div>
+            <div class="test-result-vuz-list">${vuzesHtml}</div>
+
+            <div class="test-result-actions">
+                <button class="prof-modal-btn primary" id="testGoToVuz">Смотреть все вузы →</button>
+                <button class="prof-modal-btn ghost" id="testRestart">Пройти тест заново</button>
+                ${opts.fromSaved ? '<button class="prof-modal-btn ghost" id="testClearResult">🗑 Удалить сохранённый результат</button>' : ''}
+            </div>
+        `;
+
+        testResult.querySelectorAll('.test-result-vuz-item').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const idx = parseInt(btn.getAttribute('data-vuz-index'), 10);
+                const query = btn.getAttribute('data-faculty-query') || '';
+                closeTest();
+                setTimeout(() => { openVuzModal(UNIVERSITIES[idx], query); }, 200);
+            });
+        });
+
+        $('#testGoToVuz').addEventListener('click', () => {
+            closeTest();
+            renderVuzCards();
+            showPage('vuz');
+        });
+
+        $('#testRestart').addEventListener('click', () => { startTest(); });
+
+        if (opts.fromSaved) {
+            $('#testClearResult').addEventListener('click', () => {
+                clearTestResult();
+                refreshResultButtons();
+                closeTest();
+                alert('🗑 Сохранённый результат удалён. Можешь пройти тест заново.');
+            });
+        }
+    }
+
+    function findVuzesByDirection(dirKey) {
+        if (!dirKey) return [];
+        const result = [];
+        UNIVERSITIES.forEach((vuz, vuzIndex) => {
+            vuz.faculties.forEach(faculty => {
+                if (faculty.tags && faculty.tags.includes(dirKey)) {
+                    result.push({ vuz, vuzIndex, faculty, query: faculty.name });
+                }
+            });
+        });
+        return result.sort((a, b) => a.faculty.score - b.faculty.score).slice(0, 5);
+    }
+
+    // ==================== БАННЕР ====================
+    $('#profBannerStart').addEventListener('click', () => { startTest(); });
+    $('#profBannerViewResult').addEventListener('click', () => {
+        const saved = loadTestResult();
+        if (saved) openSavedResult(saved);
     });
 
     // ==================== НАВИГАЦИЯ ====================
@@ -2062,7 +2946,7 @@ body {
 
     function closeModal() {
         modalOverlay.classList.remove('open');
-        if (!profModalOverlay.classList.contains('open')) {
+        if (!profModalOverlay.classList.contains('open') && !testModalOverlay.classList.contains('open')) {
             document.body.style.overflow = '';
         }
     }
@@ -2075,15 +2959,12 @@ body {
         if (e.key === 'Escape' && modalOverlay.classList.contains('open')) closeModal();
     });
 
-    // ==================== МОДАЛКА ВУЗА ====================
+    // ==================== МОДАЛКА ВУЗА С ОТЗЫВАМИ ====================
     function openVuzModal(vuz, highlightQuery) {
         const q = highlightQuery ? normalize(highlightQuery) : '';
 
         const facultiesHtml = vuz.faculties.map(f => {
-            const isMatch = q && (
-                normalize(f.name).includes(q) ||
-                normalize(f.exams).includes(q)
-            );
+            const isMatch = q && (normalize(f.name).includes(q) || normalize(f.exams).includes(q));
             return `
                 <div class="faculty-item ${isMatch ? 'highlighted' : ''}">
                     <div class="faculty-name">🎓 ${f.name}</div>
@@ -2098,6 +2979,9 @@ body {
             `;
         }).join('');
 
+        const stats = getVuzStats(vuz.name);
+        const reviews = getReviewsForVuz(vuz.name);
+
         openModal(`
             <button class="modal-close-x" id="vuzModalClose" aria-label="Закрыть">✕</button>
             <div class="vuz-modal-header">
@@ -2109,46 +2993,37 @@ body {
             </div>
 
             <div class="vuz-facts">
-                <div class="vuz-fact">
-                    <span class="vuz-fact-label">Рейтинг</span>
-                    <span class="vuz-fact-value gold">🏆 №${vuz.rating}</span>
-                </div>
-                <div class="vuz-fact">
-                    <span class="vuz-fact-label">Средний проходной</span>
-                    <span class="vuz-fact-value accent">${vuz.score} б.</span>
-                </div>
-                <div class="vuz-fact">
-                    <span class="vuz-fact-label">Минимальный балл</span>
-                    <span class="vuz-fact-value">${vuz.minScore} б.</span>
-                </div>
-                <div class="vuz-fact">
-                    <span class="vuz-fact-label">Всего мест</span>
-                    <span class="vuz-fact-value">${vuz.places.toLocaleString('ru-RU')}</span>
-                </div>
-                <div class="vuz-fact">
-                    <span class="vuz-fact-label">Бюджет / платно</span>
-                    <span class="vuz-fact-value">${vuz.budgetPlaces.toLocaleString('ru-RU')} / ${vuz.paidPlaces.toLocaleString('ru-RU')}</span>
-                </div>
-                <div class="vuz-fact">
-                    <span class="vuz-fact-label">Платное обучение</span>
-                    <span class="vuz-fact-value">от ${formatMoney(vuz.paidFrom)}/год</span>
-                </div>
-                <div class="vuz-fact">
-                    <span class="vuz-fact-label">ДВИ</span>
-                    <span class="vuz-fact-value">${vuz.exams}</span>
-                </div>
-                <div class="vuz-fact">
-                    <span class="vuz-fact-label">Общежитие</span>
-                    <span class="vuz-fact-value">${vuz.dormitory ? '✅ Есть' : '❌ Нет'}</span>
-                </div>
-                <div class="vuz-fact">
-                    <span class="vuz-fact-label">Военный учебный центр</span>
-                    <span class="vuz-fact-value">${vuz.military ? '✅ Есть' : '❌ Нет'}</span>
-                </div>
+                <div class="vuz-fact"><span class="vuz-fact-label">Рейтинг</span><span class="vuz-fact-value gold">🏆 №${vuz.rating}</span></div>
+                <div class="vuz-fact"><span class="vuz-fact-label">Средний проходной</span><span class="vuz-fact-value accent">${vuz.score} б.</span></div>
+                <div class="vuz-fact"><span class="vuz-fact-label">Минимальный балл</span><span class="vuz-fact-value">${vuz.minScore} б.</span></div>
+                <div class="vuz-fact"><span class="vuz-fact-label">Всего мест</span><span class="vuz-fact-value">${vuz.places.toLocaleString('ru-RU')}</span></div>
+                <div class="vuz-fact"><span class="vuz-fact-label">Бюджет / платно</span><span class="vuz-fact-value">${vuz.budgetPlaces.toLocaleString('ru-RU')} / ${vuz.paidPlaces.toLocaleString('ru-RU')}</span></div>
+                <div class="vuz-fact"><span class="vuz-fact-label">Платное обучение</span><span class="vuz-fact-value">от ${formatMoney(vuz.paidFrom)}/год</span></div>
+                <div class="vuz-fact"><span class="vuz-fact-label">ДВИ</span><span class="vuz-fact-value">${vuz.exams}</span></div>
+                <div class="vuz-fact"><span class="vuz-fact-label">Общежитие</span><span class="vuz-fact-value">${vuz.dormitory ? '✅ Есть' : '❌ Нет'}</span></div>
+                <div class="vuz-fact"><span class="vuz-fact-label">Военный учебный центр</span><span class="vuz-fact-value">${vuz.military ? '✅ Есть' : '❌ Нет'}</span></div>
             </div>
 
             <p style="margin-bottom: 12px; font-weight: 600; color: var(--gray-text);">Факультеты и направления:</p>
             <div class="faculties-list">${facultiesHtml}</div>
+
+            <div class="reviews-section" id="reviewsSection">
+                <div class="reviews-header">
+                    <div class="reviews-title">💬 Отзывы студентов</div>
+                    <div class="reviews-rating ${stats.count === 0 ? 'empty' : ''}" id="reviewsRating">
+                        ${stats.count === 0
+                            ? 'Пока нет отзывов'
+                            : `★ ${formatAvg(stats.avg)} · ${stats.count} ${pluralReviews(stats.count)}`}
+                    </div>
+                </div>
+                <div class="reviews-list" id="reviewsList">
+                    ${renderReviewsList(reviews)}
+                </div>
+                <div style="margin-top: 12px;">
+                    <button class="btn-write-review" id="btnWriteReview" style="width:100%;justify-content:center;">✍️ Оставить отзыв</button>
+                </div>
+            </div>
+
             <div class="modal-actions">
                 <button class="mono-btn cancel" id="vuzModalCancel">Закрыть</button>
             </div>
@@ -2157,8 +3032,164 @@ body {
         setTimeout(() => {
             $('#vuzModalClose').addEventListener('click', closeModal);
             $('#vuzModalCancel').addEventListener('click', closeModal);
+            $('#btnWriteReview').addEventListener('click', () => openReviewForm(vuz));
         }, 0);
     }
+
+    function pluralReviews(n) {
+        const last = n % 10;
+        const last2 = n % 100;
+        if (last2 >= 11 && last2 <= 14) return 'отзывов';
+        if (last === 1) return 'отзыв';
+        if (last >= 2 && last <= 4) return 'отзыва';
+        return 'отзывов';
+    }
+
+    function renderReviewsList(reviews) {
+        if (!reviews || reviews.length === 0) {
+            return `
+                <div class="reviews-empty">
+                    <span class="reviews-empty-emoji">💭</span>
+                    Пока никто не оставил отзыв. Будь первым — расскажи о плюсах, минусах и скрытых изъянах.
+                </div>
+            `;
+        }
+
+        return reviews.map(r => {
+            const safeAuthor = escapeHtml(r.author || 'Аноним');
+            const pros = r.pros ? escapeHtml(r.pros) : '';
+            const cons = r.cons ? escapeHtml(r.cons) : '';
+            const flaws = r.flaws ? escapeHtml(r.flaws) : '';
+            const text = r.text ? escapeHtml(r.text) : '';
+            return `
+                <div class="review-card" data-review-id="${escapeHtml(r.id)}">
+                    <button class="review-delete" data-delete-id="${escapeHtml(r.id)}" aria-label="Удалить отзыв" title="Удалить">🗑</button>
+                    <div class="review-head">
+                        <div class="review-avatar">👤</div>
+                        <div>
+                            <div class="review-author">${safeAuthor}</div>
+                            <div class="review-date">${formatDate(r.createdAt)}</div>
+                        </div>
+                        <div class="review-stars">${renderStars(r.rating)}</div>
+                    </div>
+                    <div class="review-body">
+                        ${pros ? `<div class="review-block"><span class="review-block-icon">👍</span><div class="review-block-text"><span class="review-block-label">Плюсы</span><span class="review-text">${pros}</span></div></div>` : ''}
+                        ${cons ? `<div class="review-block"><span class="review-block-icon">👎</span><div class="review-block-text"><span class="review-block-label">Минусы</span><span class="review-text">${cons}</span></div></div>` : ''}
+                        ${flaws ? `<div class="review-block"><span class="review-block-icon">🕳</span><div class="review-block-text"><span class="review-block-label">Скрытые изъяны (не из официальных источников)</span><span class="review-text">${flaws}</span></div></div>` : ''}
+                        ${text ? `<div class="review-block"><span class="review-block-icon">📝</span><div class="review-block-text"><span class="review-block-label">Общее впечатление</span><span class="review-text">${text}</span></div></div>` : ''}
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    // ==================== ФОРМА ОТЗЫВА ====================
+    let reviewFormState = { rating: 0, vuzName: '' };
+
+    function openReviewForm(vuz) {
+        reviewFormState = { rating: 0, vuzName: vuz.name };
+
+        openModal(`
+            <h3>✍️ Отзыв о вузе</h3>
+            <p style="margin-bottom:8px;font-weight:600;color:var(--gray-text);">${escapeHtml(vuz.name)}</p>
+            <form id="reviewForm">
+                <div class="form-group">
+                    <label>Ваша оценка <span style="color:var(--danger);">*</span></label>
+                    <div class="review-form-stars" id="reviewStars">
+                        ${[1,2,3,4,5].map(i => `<button type="button" class="review-star-btn" data-star="${i}">★</button>`).join('')}
+                    </div>
+                    <div class="review-form-hint">Нажмите на звёзды, чтобы поставить оценку от 1 до 5</div>
+                </div>
+                <div class="form-group">
+                    <label>Ваше имя (или псевдоним)</label>
+                    <input type="text" name="author" maxlength="40" placeholder="Например, Аноним или Аня, 2 курс" value="">
+                </div>
+                <div class="form-group">
+                    <label>👍 Реальные плюсы</label>
+                    <textarea name="pros" maxlength="600" placeholder="Что вам нравится: сильные преподаватели, атмосфера, возможности, общежитие…"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>👎 Реальные минусы</label>
+                    <textarea name="cons" maxlength="600" placeholder="Что не нравится: расписание, бюрократия, инфраструктура, нагрузка…"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>🕳 Скрытые изъяны (не из официальных источников)</label>
+                    <textarea name="flaws" maxlength="600" placeholder="Что не пишут на сайте: проблемы с общежитием, скрытые платежи, слабые кафедры, нюансы с пересдачей…"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>📝 Общее впечатление</label>
+                    <textarea name="text" maxlength="800" placeholder="Коротко: стоит ли идти и кому этот вуз подойдёт"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="mono-btn cancel" id="reviewCancel">Отмена</button>
+                    <button type="submit" class="mono-btn">Опубликовать отзыв</button>
+                </div>
+            </form>
+        `);
+
+        setTimeout(() => {
+            const starsWrap = $('#reviewStars');
+            if (starsWrap) {
+                starsWrap.querySelectorAll('.review-star-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const val = parseInt(btn.getAttribute('data-star'), 10);
+                        reviewFormState.rating = val;
+                        starsWrap.querySelectorAll('.review-star-btn').forEach((b, idx) => {
+                            b.classList.toggle('active', idx < val);
+                        });
+                    });
+                });
+            }
+            $('#reviewCancel').addEventListener('click', closeModal);
+            $('#reviewForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (reviewFormState.rating < 1) {
+                    alert('Поставьте оценку от 1 до 5 звёзд.');
+                    return;
+                }
+                const form = e.target;
+                const review = {
+                    id: 'r_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+                    author: form.author.value.trim() || 'Аноним',
+                    rating: reviewFormState.rating,
+                    pros: form.pros.value.trim(),
+                    cons: form.cons.value.trim(),
+                    flaws: form.flaws.value.trim(),
+                    text: form.text.value.trim(),
+                    createdAt: Date.now()
+                };
+                if (!review.pros && !review.cons && !review.flaws && !review.text) {
+                    alert('Добавьте хотя бы один пункт: плюсы, минусы, изъяны или общее впечатление.');
+                    return;
+                }
+                addReview(reviewFormState.vuzName, review);
+                closeModal();
+                // Обновляем карточку и модалку
+                refreshVuzCard(reviewFormState.vuzName);
+                const vuz = UNIVERSITIES.find(v => v.name === reviewFormState.vuzName);
+                if (vuz) setTimeout(() => openVuzModal(vuz), 150);
+            });
+        }, 0);
+    }
+
+    // Делегирование удаления отзывов
+    document.addEventListener('click', (e) => {
+        const delBtn = e.target.closest('[data-delete-id]');
+        if (!delBtn) return;
+        const id = delBtn.getAttribute('data-delete-id');
+        const modal = delBtn.closest('.modal');
+        if (!modal) return;
+        // Находим имя вуза по заголовку внутри модалки
+        const titleEl = modal.querySelector('.vuz-modal-header h3');
+        if (!titleEl) return;
+        const vuzName = titleEl.textContent.trim();
+        if (!confirm('Удалить этот отзыв?')) return;
+        deleteReview(vuzName, id);
+        const vuz = UNIVERSITIES.find(v => v.name === vuzName);
+        closeModal();
+        refreshVuzCard(vuzName);
+        if (vuz) setTimeout(() => openVuzModal(vuz), 150);
+    });
 
     // ==================== ВУЗЫ ====================
     const vuzGrid = $('#vuz-grid');
@@ -2173,13 +3204,15 @@ body {
             card.setAttribute('role', 'button');
             card.setAttribute('tabindex', '0');
             card.setAttribute('data-vuz-index', originalIndex);
+            card.setAttribute('data-vuz-name', vuz.name);
 
-            const militaryTag = vuz.military
-                ? '<span class="card-tag green">🎖 ВУЦ</span>'
-                : '<span class="card-tag">Без ВУЦ</span>';
-            const dormTag = vuz.dormitory
-                ? '<span class="card-tag green">🏠 Общежитие</span>'
-                : '<span class="card-tag">Без общежития</span>';
+            const militaryTag = vuz.military ? '<span class="card-tag green">🎖 ВУЦ</span>' : '<span class="card-tag">Без ВУЦ</span>';
+            const dormTag = vuz.dormitory ? '<span class="card-tag green">🏠 Общежитие</span>' : '<span class="card-tag">Без общежития</span>';
+
+            const stats = getVuzStats(vuz.name);
+            const reviewsBadge = stats.count > 0
+                ? `<span class="card-reviews" data-reviews-badge>★ ${formatAvg(stats.avg)} · ${stats.count} ${pluralReviews(stats.count)}</span>`
+                : `<span class="card-reviews empty" data-reviews-badge>💬 Пока без отзывов</span>`;
 
             card.innerHTML = `
                 <div class="card-top">
@@ -2198,26 +3231,35 @@ body {
                     <span class="card-stat">💰 Платно: <strong>${vuz.paidPlaces.toLocaleString('ru-RU')}</strong></span>
                     <span class="card-stat">💵 от <strong>${(vuz.paidFrom / 1000).toFixed(0)}к ₽/год</strong></span>
                 </div>
-                <div class="card-tags">
-                    ${militaryTag}
-                    ${dormTag}
-                </div>
-                <div class="card-hint">👆 Нажми, чтобы увидеть факультеты и ДВИ</div>
+                <div class="card-tags">${militaryTag}${dormTag}</div>
+                ${reviewsBadge}
+                <div class="card-hint">👆 Нажми, чтобы увидеть факультеты и отзывы</div>
             `;
 
             card.onclick = () => openVuzModal(vuz);
             card.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    openVuzModal(vuz);
-                }
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openVuzModal(vuz); }
             });
-
             vuzGrid.appendChild(card);
         });
     }
 
     function renderVuzCards() { initVuzCards(); }
+
+    function refreshVuzCard(vuzName) {
+        const card = vuzGrid.querySelector(`[data-vuz-name="${CSS.escape(vuzName)}"]`);
+        if (!card) return;
+        const badge = card.querySelector('[data-reviews-badge]');
+        if (!badge) return;
+        const stats = getVuzStats(vuzName);
+        if (stats.count > 0) {
+            badge.className = 'card-reviews';
+            badge.textContent = `★ ${formatAvg(stats.avg)} · ${stats.count} ${pluralReviews(stats.count)}`;
+        } else {
+            badge.className = 'card-reviews empty';
+            badge.textContent = '💬 Пока без отзывов';
+        }
+    }
 
     // ==================== ПОИСК ====================
     const searchInput = $('#searchInput');
@@ -2233,9 +3275,7 @@ body {
         if (normalize(vuz.direction).includes(q)) matches.push({ type: 'direction', text: vuz.direction });
         if (normalize(vuz.name).includes(q)) matches.push({ type: 'name', text: vuz.name });
         vuz.faculties.forEach(f => {
-            if (normalize(f.name).includes(q) || normalize(f.exams).includes(q)) {
-                matches.push({ type: 'faculty', text: f.name });
-            }
+            if (normalize(f.name).includes(q) || normalize(f.exams).includes(q)) matches.push({ type: 'faculty', text: f.name });
         });
         return { matches, hasMatch: matches.length > 0 };
     }
@@ -2265,9 +3305,7 @@ body {
                     const badge = document.createElement('div');
                     badge.className = 'match-badge';
                     const facultyMatches = matches.filter(m => m.type === 'faculty');
-                    badge.textContent = facultyMatches.length > 0
-                        ? `🔍 ${facultyMatches.length} факультет(ов) по запросу`
-                        : `🔍 Совпадение по направлению`;
+                    badge.textContent = facultyMatches.length > 0 ? `🔍 ${facultyMatches.length} факультет(ов) по запросу` : `🔍 Совпадение по направлению`;
                     card.appendChild(badge);
                 }
             } else {
@@ -2275,16 +3313,10 @@ body {
             }
         });
 
-        if (query && visibleCount === 0) {
-            searchEmpty.classList.add('visible');
-        } else {
-            searchEmpty.classList.remove('visible');
-        }
+        searchEmpty.classList.toggle('visible', query && visibleCount === 0);
 
         if (query) {
-            searchHint.innerHTML = visibleCount > 0
-                ? `Найдено вузов: <strong>${visibleCount}</strong>`
-                : '';
+            searchHint.innerHTML = visibleCount > 0 ? `Найдено вузов: <strong>${visibleCount}</strong>` : '';
             searchChips.style.display = 'none';
         } else {
             searchHint.innerHTML = 'Популярные запросы:';
@@ -2313,28 +3345,15 @@ body {
     const monoToggle = $('#monoToggle');
     const monoClose = $('#monoClose');
 
-    function openMono() {
-        monetization.classList.add('open');
-        monoToggle.setAttribute('aria-expanded', 'true');
-    }
-
-    function closeMono() {
-        monetization.classList.remove('open');
-        monoToggle.setAttribute('aria-expanded', 'false');
-    }
+    function openMono() { monetization.classList.add('open'); monoToggle.setAttribute('aria-expanded', 'true'); }
+    function closeMono() { monetization.classList.remove('open'); monoToggle.setAttribute('aria-expanded', 'false'); }
 
     monoToggle.addEventListener('click', () => {
-        if (monetization.classList.contains('open')) {
-            closeMono();
-        } else {
-            openMono();
-        }
+        if (monetization.classList.contains('open')) closeMono();
+        else openMono();
     });
 
-    monoClose.addEventListener('click', (e) => {
-        e.stopPropagation();
-        closeMono();
-    });
+    monoClose.addEventListener('click', (e) => { e.stopPropagation(); closeMono(); });
 
     document.addEventListener('click', (e) => {
         if (!monetization.classList.contains('open')) return;
@@ -2345,20 +3364,14 @@ body {
         if (e.key === 'Escape' && monetization.classList.contains('open')) closeMono();
     });
 
-    // ==================== МОДАЛКА РЕКЛАМЫ ====================
+    // ==================== РЕКЛАМА ====================
     function openAdModal() {
         openModal(`
             <h3>📣 Разместить рекламу</h3>
             <p>Расскажите о своём вузе <strong>10 000+ школьникам</strong> Москвы. Мы покажем ваш баннер в подборке вузов.</p>
             <form id="adForm">
-                <div class="form-group">
-                    <label>Название вуза / компании</label>
-                    <input type="text" name="name" required placeholder="Например, МГУ">
-                </div>
-                <div class="form-group">
-                    <label>Email для связи</label>
-                    <input type="email" name="email" required placeholder="you@example.com">
-                </div>
+                <div class="form-group"><label>Название вуза / компании</label><input type="text" name="name" required placeholder="Например, МГУ"></div>
+                <div class="form-group"><label>Email для связи</label><input type="email" name="email" required placeholder="you@example.com"></div>
                 <div class="form-group">
                     <label>Тариф</label>
                     <select name="tariff" required>
@@ -2387,7 +3400,7 @@ body {
         }, 0);
     }
 
-    // ==================== МОДАЛКА ДОНАТА ====================
+    // ==================== ДОНАТ ====================
     function openDonateModal() {
         openModal(`
             <h3>☕ Поддержать ProfiVUZ</h3>
@@ -2432,9 +3445,7 @@ body {
             $('#donateCancel').addEventListener('click', closeModal);
             $('#donateForm').addEventListener('submit', (e) => {
                 e.preventDefault();
-                const amount = e.target.amount.value === 'custom'
-                    ? e.target.customAmount.value
-                    : e.target.amount.value;
+                const amount = e.target.amount.value === 'custom' ? e.target.customAmount.value : e.target.amount.value;
                 const method = e.target.method.value;
                 const methodLabel = { card: 'банковской карты', sbp: 'СБП', yoomoney: 'ЮMoney' }[method];
                 closeModal();
@@ -2443,11 +3454,10 @@ body {
         }, 0);
     }
 
-    // Кнопки монетизации
     $('#btnAd').addEventListener('click', () => { closeMono(); openAdModal(); });
     $('#btnDonate').addEventListener('click', () => { closeMono(); openDonateModal(); });
 
-    // ==================== ПОДВАЛ: ДЕЙСТВИЯ ====================
+    // ==================== ПОДВАЛ ====================
     document.querySelectorAll('[data-footer-action]').forEach(el => {
         el.addEventListener('click', (e) => {
             e.preventDefault();
@@ -2463,7 +3473,7 @@ body {
                     setTimeout(() => { searchInput.focus(); }, 400);
                     break;
                 case 'prof':
-                    openProfModal();
+                    startTest();
                     break;
                 case 'courses':
                     openCoursesModal();
@@ -2494,6 +3504,7 @@ body {
 
     // ==================== ИНИЦИАЛИЗАЦИЯ ====================
     initVuzCards();
+    refreshResultButtons();
 })();
 </script>
 </body>
