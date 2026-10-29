@@ -3,11 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-<title>ProfiVUZ — выбери вуз за 5 минут</title>
+<title>ПрофиВУЗ — выбери вуз за 5 минут</title>
 <style>
-/* ============================================================
-   СБРОС И ПЕРЕМЕННЫЕ
-   ============================================================ */
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
@@ -27,9 +25,14 @@
     --mono-width: 260px;
     --gold: #f59e0b;
     --danger: #ef4444;
+    --header-height: 68px;
 }
 
-html { scroll-behavior: smooth; }
+html {
+    scroll-behavior: smooth;
+}
+
+
 
 body {
     font-family: var(--font);
@@ -38,16 +41,179 @@ body {
     line-height: 1.5;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
+    padding-top: var(--header-height);
 }
+
+
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1500;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid #f0f0f0;
+    height: var(--header-height);
+}
+.site-header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 16px;
+}
+.site-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+    color: var(--gray-text);
+    text-decoration: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    font-family: var(--font);
+    padding: 0;
+}
+.site-logo-icon {
+    font-size: 1.7rem; line-height: 1;
+}
+.site-logo-accent {
+    color: var(--accent);
+}
+
+.site-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 4px 0;
+}
+.site-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 40px;
+    font-family: var(--font);
+    font-weight: 600;
+    font-size: 0.88rem;
+    border: 1.5px solid transparent;
+    background: transparent;
+    color: var(--gray-text);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+.nav-btn:hover {
+    background: var(--gray-bg);
+    border-color: #f0f0f0;
+    color: var(--accent-dark);
+}
+.nav-btn.active {
+    background: var(--accent-light);
+    border-color: var(--accent);
+    color: var(--accent-dark);
+}
+.nav-btn-icon {
+    font-size: 1rem; line-height: 1;
+}
+.nav-btn-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 20px;
+    padding: 1px 7px;
+    margin-left: 2px;
+}
+
+.nav-burger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--gray-bg);
+    border: 1px solid #f0f0f0;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--gray-text);
+    margin-left: auto;
+    flex-shrink: 0;
+    transition: background 0.2s;
+    font-family: var(--font);
+    padding: 0;
+}
+.nav-burger:hover {
+    background: var(--accent-light);
+}
+
+@media (max-width: 899px) {
+    .site-nav {
+        display: none;
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        background: #ffffff;
+        border-bottom: 1px solid #f0f0f0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        padding: 12px 16px 16px;
+        margin: 0;
+        box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+        max-height: calc(100vh - var(--header-height));
+        overflow-y: auto;
+        z-index: 1499;
+    }
+    .site-nav.open {
+        display: flex;
+    }
+    .nav-btn {
+        padding: 12px 14px;
+        border-radius: 12px;
+        font-size: 0.95rem;
+        justify-content: flex-start;
+    }
+    .nav-btn-badge {
+        margin-left: auto;
+    }
+    .nav-burger {
+        display: flex;
+    }
+}
+
 
 #app {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 0 16px 100px;
-    min-height: 100vh;
+    min-height: calc(100vh - var(--header-height));
 }
-@media (min-width: 900px) { #app { padding-bottom: 40px; } }
+@media (min-width: 900px) {
+    #app {
+        padding-bottom: 40px;
+    }
+}
 
 .app-inner {
     max-width: 1100px;
@@ -57,44 +223,25 @@ body {
     flex-direction: column;
 }
 
-.app-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 20px 0 12px;
-    flex-wrap: wrap;
+.page {
+    display: none; flex-direction: column; animation: fade 0.3s ease;
 }
-.app-logo {
+.page.active {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 700;
-    font-size: 1.6rem;
-    letter-spacing: -0.02em;
-    color: var(--gray-text);
-    text-decoration: none;
-    cursor: pointer;
 }
-.app-logo-icon { font-size: 2rem; line-height: 1; }
-.app-logo-accent { color: var(--accent); }
-
-/* ============================================================
-   СТРАНИЦЫ
-   ============================================================ */
-.page { display: none; flex-direction: column; animation: fade 0.3s ease; }
-.page.active { display: flex; }
 @keyframes fade {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0; transform: translateY(8px);
+    }
+    to {
+        opacity: 1; transform: translateY(0);
+    }
 }
 
-/* ============================================================
-   ГЛАВНАЯ (ЛЕНДИНГ)
-   ============================================================ */
+
 .hero {
-    min-height: calc(100vh - 80px);
-    min-height: calc(100svh - 80px);
+    min-height: calc(100vh - var(--header-height));
+    min-height: calc(100svh - var(--header-height));
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -160,7 +307,9 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 14px 30px rgba(16,185,129,0.4);
 }
-.btn-primary:active { transform: translateY(0); }
+.btn-primary:active {
+    transform: translateY(0);
+}
 
 .btn-my-result {
     display: inline-flex;
@@ -184,7 +333,9 @@ body {
     color: #ffffff;
     transform: translateY(-1px);
 }
-.btn-my-result.hidden { display: none; }
+.btn-my-result.hidden {
+    display: none;
+}
 
 .section {
     padding: 64px 20px;
@@ -234,7 +385,9 @@ body {
     line-height: 1.5;
     padding-top: 8px;
 }
-.step-text strong { color: var(--accent-dark); }
+.step-text strong {
+    color: var(--accent-dark);
+}
 
 .step-note {
     display: inline-flex;
@@ -257,7 +410,9 @@ body {
     line-height: 1.65;
     text-align: center;
 }
-.for-whom strong { color: var(--accent-dark); }
+.for-whom strong {
+    color: var(--accent-dark);
+}
 
 .features-grid {
     display: grid;
@@ -266,8 +421,16 @@ body {
     max-width: 900px;
     margin: 0 auto;
 }
-@media (min-width: 600px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 900px) { .features-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 600px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 900px) {
+    .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
 
 .feature {
     background: var(--gray-bg);
@@ -284,19 +447,13 @@ body {
     transform: translateY(-2px);
 }
 .feature-icon {
-    font-size: 1.8rem;
-    line-height: 1;
-    margin-bottom: 2px;
+    font-size: 1.8rem; line-height: 1; margin-bottom: 2px;
 }
 .feature-title {
-    font-weight: 800;
-    font-size: 1.05rem;
-    color: var(--gray-text);
+    font-weight: 800; font-size: 1.05rem; color: var(--gray-text);
 }
 .feature-text {
-    font-size: 0.9rem;
-    color: var(--gray-muted);
-    line-height: 1.5;
+    font-size: 0.9rem; color: var(--gray-muted); line-height: 1.5;
 }
 
 .pricing {
@@ -319,8 +476,12 @@ body {
     background: var(--accent-light);
     border-color: var(--accent);
 }
-.price-who { font-weight: 700; font-size: 1.05rem; }
-.price-what { font-size: 0.95rem; color: var(--gray-muted); }
+.price-who {
+    font-weight: 700; font-size: 1.05rem;
+}
+.price-what {
+    font-size: 0.95rem; color: var(--gray-muted);
+}
 .price-amount {
     font-weight: 800;
     font-size: 1.2rem;
@@ -361,8 +522,12 @@ body {
     width: 100%;
 }
 @media (min-width: 600px) {
-    .cta-buttons { flex-direction: row; justify-content: center; }
-    .cta-buttons .btn-cta { flex: 1; }
+    .cta-buttons {
+        flex-direction: row; justify-content: center;
+    }
+    .cta-buttons .btn-cta {
+        flex: 1;
+    }
 }
 .btn-cta {
     display: inline-flex;
@@ -383,10 +548,11 @@ body {
     text-decoration: none;
 }
 .btn-cta:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+    transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,0.2);
 }
-.btn-cta:active { transform: translateY(0); }
+.btn-cta:active {
+    transform: translateY(0);
+}
 .btn-cta.secondary {
     background: rgba(255,255,255,0.15);
     color: #ffffff;
@@ -394,21 +560,22 @@ body {
     box-shadow: none;
 }
 .btn-cta.secondary:hover {
-    background: rgba(255,255,255,0.25);
-    border-color: #ffffff;
+    background: rgba(255,255,255,0.25); border-color: #ffffff;
 }
 
-/* ============================================================
-   СТРАНИЦА ВУЗОВ
-   ============================================================ */
-.page-header { padding: 16px 0 8px; display: flex; flex-direction: column; }
+
+.page-header {
+    padding: 16px 0 8px; display: flex; flex-direction: column;
+}
 .page-header h2 {
     font-size: clamp(1.6rem, 6vw, 2.2rem);
     font-weight: 800;
     letter-spacing: -0.02em;
     margin-bottom: 4px;
 }
-.page-header p { color: var(--gray-muted); font-size: 1rem; }
+.page-header p {
+    color: var(--gray-muted); font-size: 1rem;
+}
 
 .btn-back {
     align-self: flex-start;
@@ -426,7 +593,9 @@ body {
     font-family: var(--font);
     transition: opacity 0.2s;
 }
-.btn-back:hover { opacity: 0.7; }
+.btn-back:hover {
+    opacity: 0.7;
+}
 
 .prof-banner {
     display: flex;
@@ -441,19 +610,18 @@ body {
     position: relative;
 }
 @keyframes slideDown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0; transform: translateY(-10px);
+    }
+    to {
+        opacity: 1; transform: translateY(0);
+    }
 }
 .prof-banner-emoji { font-size: 2rem; line-height: 1; flex-shrink: 0; }
 .prof-banner-body { flex: 1; min-width: 0; }
 .prof-banner-title { font-weight: 800; font-size: 1rem; color: var(--gray-text); margin-bottom: 4px; line-height: 1.3; }
 .prof-banner-text { font-size: 0.88rem; color: var(--gray-muted); line-height: 1.4; margin-bottom: 10px; }
-.prof-banner-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-}
+.prof-banner-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .prof-banner-btn {
     display: inline-flex;
     align-items: center;
@@ -481,21 +649,14 @@ body {
     border: 1.5px solid var(--accent);
     box-shadow: none;
 }
-.prof-banner-btn.ghost:hover {
-    background: var(--accent-light);
-}
+.prof-banner-btn.ghost:hover { background: var(--accent-light); }
 
 @media (max-width: 480px) {
     .prof-banner { flex-direction: column; align-items: flex-start; padding: 16px; }
     .prof-banner-emoji { font-size: 1.6rem; }
 }
 
-.search-wrap {
-    margin: 16px 0 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
+.search-wrap { margin: 16px 0 8px; display: flex; flex-direction: column; gap: 8px; }
 .search-box { position: relative; width: 100%; }
 .search-box-icon {
     position: absolute;
@@ -545,19 +706,10 @@ body {
 .search-clear.visible { display: flex; }
 .search-clear:hover { background: #e5e7eb; color: var(--gray-text); }
 
-.search-hint {
-    font-size: 0.85rem;
-    color: var(--gray-muted);
-    padding-left: 6px;
-}
+.search-hint { font-size: 0.85rem; color: var(--gray-muted); padding-left: 6px; }
 .search-hint strong { color: var(--accent-dark); }
 
-.search-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 2px;
-}
+.search-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
 .search-chip {
     background: var(--gray-bg);
     border: 1px solid #f0f0f0;
@@ -588,11 +740,7 @@ body {
     border: 1px dashed #e5e7eb;
 }
 .search-empty.visible { display: block; }
-.search-empty-emoji {
-    font-size: 2.5rem;
-    display: block;
-    margin-bottom: 8px;
-}
+.search-empty-emoji { font-size: 2.5rem; display: block; margin-bottom: 8px; }
 
 .cards-grid {
     display: grid;
@@ -623,16 +771,8 @@ body {
 }
 .card:active { transform: translateY(-1px); }
 
-.card-top {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-}
-.card-emoji {
-    font-size: 2rem;
-    line-height: 1;
-    flex-shrink: 0;
-}
+.card-top { display: flex; align-items: flex-start; gap: 12px; }
+.card-emoji { font-size: 2rem; line-height: 1; flex-shrink: 0; }
 .card-title-wrap { flex: 1; min-width: 0; }
 .card h3 {
     font-size: 1.1rem;
@@ -653,13 +793,7 @@ body {
     border-radius: 20px;
     border: 1px solid #fde68a;
 }
-.card-direction {
-    font-size: 0.85rem;
-    color: var(--gray-muted);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
+.card-direction { font-size: 0.85rem; color: var(--gray-muted); display: flex; align-items: center; gap: 4px; }
 .card-stats {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -669,21 +803,11 @@ body {
     padding-top: 10px;
     border-top: 1px solid #f0f0f0;
 }
-.card-stat {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: var(--gray-muted);
-}
+.card-stat { display: flex; align-items: center; gap: 5px; color: var(--gray-muted); }
 .card-stat strong { color: var(--gray-text); font-weight: 700; }
 .card-stat.accent strong { color: var(--accent-dark); }
 
-.card-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin-top: 2px;
-}
+.card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 2px; }
 .card-tag {
     font-size: 0.72rem;
     font-weight: 600;
@@ -721,8 +845,6 @@ body {
     margin-top: 4px;
     align-self: flex-start;
 }
-
-/* Плашка с рейтингом отзывов на карточке */
 .card-reviews {
     display: inline-flex;
     align-items: center;
@@ -743,9 +865,7 @@ body {
     border-color: #f0f0f0;
 }
 
-/* ============================================================
-   ПОДВАЛ
-   ============================================================ */
+
 .site-footer {
     width: 100%;
     background: #0f172a;
@@ -754,11 +874,7 @@ body {
     padding: 56px 24px 24px;
     font-size: 0.9rem;
 }
-.site-footer-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    width: 100%;
-}
+.site-footer-inner { max-width: 1100px; margin: 0 auto; width: 100%; }
 .footer-top {
     display: grid;
     grid-template-columns: 1fr;
@@ -778,6 +894,12 @@ body {
     font-size: 1.4rem;
     color: #ffffff;
     text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font);
+    padding: 0;
+    text-align: left;
 }
 .footer-brand-logo span:last-child { color: var(--accent); }
 .footer-brand-desc { font-size: 0.88rem; color: #94a3b8; line-height: 1.6; max-width: 340px; }
@@ -843,9 +965,7 @@ body {
 .footer-bottom-links a:hover { color: var(--accent); }
 .footer-bottom-note { display: flex; align-items: center; gap: 6px; }
 
-/* ============================================================
-   МОНЕТИЗАЦИЯ
-   ============================================================ */
+
 .monetization {
     position: fixed;
     left: 16px;
@@ -978,9 +1098,7 @@ body {
 .mono-btn.secondary:hover { background: var(--accent-light); }
 .monetization.open .mono-toggle { transform: rotate(45deg); background: var(--accent-dark); }
 
-/* ============================================================
-   МОДАЛЬНЫЕ ОКНА (общие)
-   ============================================================ */
+
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -1031,7 +1149,7 @@ body {
 }
 .modal-actions .mono-btn.cancel:hover { background: var(--gray-bg); color: var(--gray-text); }
 
-/* ---------- МОДАЛКА ПРОФОРИЕНТАЦИИ ---------- */
+
 .prof-modal-overlay {
     position: fixed;
     inset: 0;
@@ -1150,9 +1268,7 @@ body {
     .prof-modal { max-height: 92vh; }
 }
 
-/* ============================================================
-   ТЕСТ ПО ПРОФОРИЕНТАЦИИ
-   ============================================================ */
+
 .test-modal-overlay {
     position: fixed;
     inset: 0;
@@ -1448,6 +1564,45 @@ body {
 
 .test-result-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
 
+.test-share-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    background: var(--gray-bg);
+    border: 1px solid #f0f0f0;
+    border-radius: var(--radius-sm);
+    margin-top: 4px;
+}
+.test-share-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--gray-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.test-share-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+.test-share-btn {
+    flex: 1 1 140px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 14px;
+    border-radius: 40px;
+    background: #ffffff;
+    border: 1.5px solid var(--accent);
+    color: var(--accent-dark);
+    font-family: var(--font);
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+.test-share-btn:hover { background: var(--accent-light); transform: translateY(-1px); }
+.test-share-btn:active { transform: translateY(0); }
+
 .test-result-vuz-list { display: flex; flex-direction: column; gap: 8px; }
 .test-result-vuz-item {
     background: #ffffff;
@@ -1486,11 +1641,11 @@ body {
     .test-result { padding: 20px 16px; }
     .test-header-title { font-size: 0.95rem; }
     .test-option { padding: 12px 14px; font-size: 0.92rem; }
+    .test-share-buttons { flex-direction: column; }
+    .test-share-btn { flex: 1 1 auto; }
 }
 
-/* ============================================================
-   МОДАЛКА ВУЗА
-   ============================================================ */
+
 .vuz-modal-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
 .vuz-modal-emoji { font-size: 2.5rem; line-height: 1; flex-shrink: 0; }
 .vuz-modal-header h3 { margin: 0; font-size: 1.25rem; line-height: 1.3; }
@@ -1562,9 +1717,7 @@ body {
 }
 .modal-close-x:hover { background: #e5e7eb; color: var(--gray-text); }
 
-/* ============================================================
-   ОТЗЫВЫ
-   ============================================================ */
+
 .reviews-section {
     margin-top: 20px;
     padding-top: 16px;
@@ -1620,16 +1773,9 @@ body {
     transition: all 0.2s;
     box-shadow: 0 4px 12px rgba(16,185,129,0.25);
 }
-.btn-write-review:hover {
-    background: var(--accent-dark);
-    transform: translateY(-1px);
-}
+.btn-write-review:hover { background: var(--accent-dark); transform: translateY(-1px); }
 
-.reviews-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
+.reviews-list { display: flex; flex-direction: column; gap: 12px; }
 .review-card {
     background: var(--gray-bg);
     border: 1px solid #f0f0f0;
@@ -1637,12 +1783,7 @@ body {
     padding: 14px 16px;
     position: relative;
 }
-.review-head {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 8px;
-}
+.review-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
 .review-avatar {
     flex-shrink: 0;
     width: 36px;
@@ -1654,37 +1795,13 @@ body {
     justify-content: center;
     font-size: 1.1rem;
 }
-.review-author {
-    font-weight: 800;
-    font-size: 0.92rem;
-    color: var(--gray-text);
-    line-height: 1.2;
-}
-.review-date {
-    font-size: 0.75rem;
-    color: var(--gray-muted);
-}
-.review-stars {
-    margin-left: auto;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-    white-space: nowrap;
-}
+.review-author { font-weight: 800; font-size: 0.92rem; color: var(--gray-text); line-height: 1.2; }
+.review-date { font-size: 0.75rem; color: var(--gray-muted); }
+.review-stars { margin-left: auto; font-size: 0.9rem; letter-spacing: 1px; white-space: nowrap; }
 .review-stars .filled { color: var(--gold); }
 .review-stars .empty { color: #e5e7eb; }
-.review-body {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    font-size: 0.88rem;
-    line-height: 1.5;
-    color: var(--gray-text);
-}
-.review-block {
-    display: flex;
-    align-items: flex-start;
-    gap: 6px;
-}
+.review-body { display: flex; flex-direction: column; gap: 6px; font-size: 0.88rem; line-height: 1.5; color: var(--gray-text); }
+.review-block { display: flex; align-items: flex-start; gap: 6px; }
 .review-block-icon { flex-shrink: 0; font-size: 0.95rem; line-height: 1.4; }
 .review-block-text { flex: 1; min-width: 0; }
 .review-block-label {
@@ -1727,18 +1844,9 @@ body {
     font-size: 0.9rem;
     line-height: 1.5;
 }
-.reviews-empty-emoji {
-    font-size: 2rem;
-    display: block;
-    margin-bottom: 6px;
-}
+.reviews-empty-emoji { font-size: 2rem; display: block; margin-bottom: 6px; }
 
-/* Модалка формы отзыва */
-.review-form-stars {
-    display: flex;
-    gap: 6px;
-    margin: 4px 0 8px;
-}
+.review-form-stars { display: flex; gap: 6px; margin: 4px 0 8px; }
 .review-star-btn {
     background: none;
     border: none;
@@ -1751,15 +1859,8 @@ body {
 }
 .review-star-btn:hover { transform: scale(1.1); }
 .review-star-btn.active { color: var(--gold); }
+.review-form-hint { font-size: 0.82rem; color: var(--gray-muted); margin-bottom: 4px; line-height: 1.4; }
 
-.review-form-hint {
-    font-size: 0.82rem;
-    color: var(--gray-muted);
-    margin-bottom: 4px;
-    line-height: 1.4;
-}
-
-/* Мобильное */
 @media (max-width: 480px) {
     .reviews-header { flex-direction: column; align-items: flex-start; }
     .btn-write-review { width: 100%; justify-content: center; }
@@ -1771,7 +1872,7 @@ body {
 
 @media (max-width: 480px) {
     .section { padding: 48px 16px; }
-    .hero { padding: 32px 16px; min-height: calc(100vh - 70px); min-height: calc(100svh - 70px); }
+    .hero { padding: 32px 16px; }
     .step { padding: 16px; gap: 12px; }
     .step-num { width: 36px; height: 36px; font-size: 1rem; }
     .step-text { padding-top: 4px; font-size: 0.95rem; }
@@ -1787,25 +1888,47 @@ body {
 </head>
 <body>
 
+<header class="site-header" id="siteHeader">
+    <div class="site-header-inner">
+        <button class="site-logo" id="headerLogo" type="button">
+            <span class="site-logo-icon">🎓</span>
+            <span>Профи<span class="site-logo-accent">ВУЗ</span></span>
+        </button>
+
+        <nav class="site-nav" id="siteNav">
+            <button class="nav-btn" data-nav="home" type="button">
+                <span class="nav-btn-icon">🏠</span> Главная
+            </button>
+            <button class="nav-btn" data-nav="vuz" type="button">
+                <span class="nav-btn-icon">🏛️</span> Вузы
+            </button>
+            <button class="nav-btn" data-nav="search" type="button">
+                <span class="nav-btn-icon">🔍</span> Поиск
+            </button>
+            <button class="nav-btn" data-nav="prof" type="button">
+                <span class="nav-btn-icon">🧭</span> Профориентация
+            </button>
+            <button class="nav-btn" data-nav="myresult" type="button" id="navMyResult" style="display:none;">
+                <span class="nav-btn-icon">📋</span> Мой результат
+            </button>
+            <button class="nav-btn" data-nav="courses" type="button">
+                <span class="nav-btn-icon">📚</span> Курсы
+            </button>
+        </nav>
+
+        <button class="nav-burger" id="navBurger" type="button" aria-label="Меню" aria-expanded="false">☰</button>
+    </div>
+</header>
+
 <div id="app">
     <div class="app-inner">
-        <header class="app-header">
-            <a href="#" class="app-logo" id="appLogo">
-                <span class="app-logo-icon">🎓</span>
-                <span>Profi<span class="app-logo-accent">VUZ</span></span>
-            </a>
-        </header>
-
-        <!-- ====================================================
-             ГЛАВНАЯ = ЛЕНДИНГ
-             ==================================================== -->
         <section id="page-home" class="page active">
             <div class="hero">
                 <div class="hero-content">
-                    <h1>Ты поступишь туда, где тебе будет хорошо</h1>
+                    <h1>Привет, мы поможем тебе выбрать вуз</h1>
                     <p class="hero-sub">Подбираем вуз Москвы по баллам, специальностям и местам — за 5 минут, а не за месяц</p>
-                    <button class="btn-primary" id="heroStart">Подобрать вуз →</button>
-                    <button class="btn-my-result hidden" id="heroMyResult">📋 Мой результат профориентации</button>
+                    <button class="btn-primary" id="heroStart" type="button">Подобрать вуз →</button>
+                    <button class="btn-my-result hidden" id="heroMyResult" type="button">📋 Мой результат профориентации</button>
                     <div class="hero-proof">📊 20 вузов Москвы · 100+ специальностей · поиск, отзывы и профориентация</div>
                 </div>
             </div>
@@ -1832,7 +1955,7 @@ body {
             </section>
 
             <section class="section">
-                <h2 class="section-title">Что ты найдёшь на ProfiVUZ</h2>
+                <h2 class="section-title">Что ты найдёшь на ПрофиВУЗ</h2>
                 <div class="features-grid">
                     <div class="feature">
                         <span class="feature-icon">🧭</span>
@@ -1870,7 +1993,7 @@ body {
             <section class="section">
                 <h2 class="section-title">Для кого</h2>
                 <p class="for-whom">
-                    Ты учишься в <strong>10 или 11 классе</strong> и уже понял: пора выбирать вуз, но в голове — каша из названий, баллов и факультетов. Ты не хочешь гуглить 20 сайтов и сравнивать таблицы вручную. Тебе нужно за один вечер увидеть: <strong>куда ты проходишь по баллам</strong> и на каком факультете тебе будет интересно. ProfiVUZ собирает это в одном месте — без воды и лишних кликов.
+                    Ты учишься в <strong>10 или 11 классе</strong> и уже понял: пора выбирать вуз, но в голове — каша из названий, баллов и факультетов. Ты не хочешь гуглить 20 сайтов и сравнивать таблицы вручную. Тебе нужно за один вечер увидеть: <strong>куда ты проходишь по баллам</strong> и на каком факультете тебе будет интересно. ПрофиВУЗ собирает это в одном месте — без воды и лишних кликов.
                 </p>
             </section>
 
@@ -1885,7 +2008,7 @@ body {
                     <div class="price-item">
                         <div class="price-who">Для вузов</div>
                         <div class="price-what">Размещение рекламы в подборке вузов</div>
-                        <div class="price-amount">от 5 000 ₽ / неделя</div>
+                        <div class="price-amount">2 000 ₽ / месяц</div>
                     </div>
                     <div class="price-item">
                         <div class="price-who">Для тех, кто хочет поддержать</div>
@@ -1899,30 +2022,25 @@ body {
                 <h2>Открой список вузов — и выбери свой за 5 минут</h2>
                 <p>20 вузов Москвы. Поиск по специальностям. Без регистрации.</p>
                 <div class="cta-buttons">
-                    <button class="btn-cta" id="ctaVuz">Посмотреть вузы →</button>
-                    <button class="btn-cta secondary" id="ctaCourses">📚 Найти курсы</button>
+                    <button class="btn-cta" id="ctaVuz" type="button">Посмотреть вузы →</button>
+                    <button class="btn-cta secondary" id="ctaCourses" type="button">📚 Найти курсы</button>
                 </div>
             </section>
         </section>
-
-        <!-- ====================================================
-             СТРАНИЦА ВУЗОВ
-             ==================================================== -->
         <section id="page-vuz" class="page">
             <div class="page-header">
-                <button class="btn-back" id="back-from-vuz">← На главную</button>
+                <button class="btn-back" id="back-from-vuz" type="button">← На главную</button>
                 <h2>Вузы Москвы</h2>
                 <p>Рейтинг, баллы, места, стоимость, отзывы и другие данные для поступления</p>
             </div>
-
             <div class="prof-banner" id="profBanner">
                 <div class="prof-banner-emoji">🧭</div>
                 <div class="prof-banner-body">
                     <div class="prof-banner-title">Не знаешь, с чего начать?</div>
                     <div class="prof-banner-text">Пройди профориентацию — и мы подберём тебе вуз и специальность под твои интересы и баллы.</div>
                     <div class="prof-banner-actions">
-                        <button class="prof-banner-btn" id="profBannerStart">Пройти профориентацию →</button>
-                        <button class="prof-banner-btn ghost hidden" id="profBannerViewResult">📋 Посмотреть мой результат</button>
+                        <button class="prof-banner-btn" id="profBannerStart" type="button">Пройти профориентацию →</button>
+                        <button class="prof-banner-btn ghost hidden" id="profBannerViewResult" type="button">📋 Посмотреть мой результат</button>
                     </div>
                 </div>
             </div>
@@ -1938,16 +2056,16 @@ body {
                         autocomplete="off"
                         aria-label="Поиск по направлениям и специальностям"
                     >
-                    <button class="search-clear" id="searchClear" aria-label="Очистить поиск">✕</button>
+                    <button class="search-clear" id="searchClear" type="button" aria-label="Очистить поиск">✕</button>
                 </div>
                 <div class="search-hint" id="searchHint">Популярные запросы:</div>
                 <div class="search-chips" id="searchChips">
-                    <button class="search-chip" data-q="IT">IT</button>
-                    <button class="search-chip" data-q="медицина">Медицина</button>
-                    <button class="search-chip" data-q="экономика">Экономика</button>
-                    <button class="search-chip" data-q="физика">Физика</button>
-                    <button class="search-chip" data-q="юриспруденция">Юриспруденция</button>
-                    <button class="search-chip" data-q="педагогика">Педагогика</button>
+                    <button class="search-chip" data-q="IT" type="button">IT</button>
+                    <button class="search-chip" data-q="медицина" type="button">Медицина</button>
+                    <button class="search-chip" data-q="экономика" type="button">Экономика</button>
+                    <button class="search-chip" data-q="физика" type="button">Физика</button>
+                    <button class="search-chip" data-q="юриспруденция" type="button">Юриспруденция</button>
+                    <button class="search-chip" data-q="педагогика" type="button">Педагогика</button>
                 </div>
             </div>
 
@@ -1961,17 +2079,14 @@ body {
     </div>
 </div>
 
-<!-- ============================================================
-     ПОДВАЛ
-     ============================================================ -->
 <footer class="site-footer" id="siteFooter">
     <div class="site-footer-inner">
         <div class="footer-top">
             <div class="footer-brand">
-                <a href="#" class="footer-brand-logo" id="footerLogo">
+                <button class="footer-brand-logo" id="footerLogo" type="button">
                     <span>🎓</span>
-                    <span>ProfiVUZ</span>
-                </a>
+                    <span>ПрофиВУЗ</span>
+                </button>
                 <p class="footer-brand-desc">
                     Помогаем школьникам 10–11 классов выбрать вуз Москвы по баллам, специальностям и местам — быстро и без воды.
                 </p>
@@ -1999,18 +2114,18 @@ body {
             <div class="footer-col">
                 <h4>Продукт</h4>
                 <ul>
-                    <li><button class="footer-link-btn" data-footer-action="vuz">Список вузов</button></li>
-                    <li><button class="footer-link-btn" data-footer-action="search">Поиск специальностей</button></li>
-                    <li><button class="footer-link-btn" data-footer-action="prof">Профориентация</button></li>
-                    <li><button class="footer-link-btn" data-footer-action="courses">Подбор курсов</button></li>
+                    <li><button class="footer-link-btn" data-footer-action="vuz" type="button">Список вузов</button></li>
+                    <li><button class="footer-link-btn" data-footer-action="search" type="button">Поиск специальностей</button></li>
+                    <li><button class="footer-link-btn" data-footer-action="prof" type="button">Профориентация</button></li>
+                    <li><button class="footer-link-btn" data-footer-action="courses" type="button">Подбор курсов</button></li>
                 </ul>
             </div>
 
             <div class="footer-col">
                 <h4>Сотрудничество</h4>
                 <ul>
-                    <li><button class="footer-link-btn" data-footer-action="ad">Разместить рекламу</button></li>
-                    <li><button class="footer-link-btn" data-footer-action="donate">Поддержать проект</button></li>
+                    <li><button class="footer-link-btn" data-footer-action="ad" type="button">Разместить рекламу</button></li>
+                    <li><button class="footer-link-btn" data-footer-action="donate" type="button">Поддержать проект</button></li>
                     <li><a href="#" data-footer-action="ad">Вузам и школам</a></li>
                     <li><a href="#" data-footer-action="ad">Онлайн-курсам</a></li>
                     <li><a href="#" data-footer-action="ad">Репетиторам</a></li>
@@ -2056,7 +2171,7 @@ body {
 
         <div class="footer-bottom">
             <div class="footer-bottom-note">
-                <span>© 2025 ProfiVUZ</span>
+                <span>© 2025 ПрофиВУЗ</span>
                 <span>·</span>
                 <span>Ускоряем подбор вуза для 10–11 классов</span>
             </div>
@@ -2069,15 +2184,12 @@ body {
     </div>
 </footer>
 
-<!-- ============================================================
-     МОНЕТИЗАЦИЯ
-     ============================================================ -->
 <div class="monetization" id="monetization">
-    <button class="mono-toggle" id="monoToggle" aria-label="Монетизация" aria-expanded="false">💰</button>
+    <button class="mono-toggle" id="monoToggle" type="button" aria-label="Монетизация" aria-expanded="false">💰</button>
     <div class="mono-card" id="monoCard">
         <div class="mono-header">
-            <span>Поддержи ProfiVUZ</span>
-            <button class="mono-close" id="monoClose" aria-label="Закрыть">✕</button>
+            <span>Поддержи ПрофиВУЗ</span>
+            <button class="mono-close" id="monoClose" type="button" aria-label="Закрыть">✕</button>
         </div>
         <div class="mono-body">
             <div class="mono-item">
@@ -2087,8 +2199,8 @@ body {
                 <div class="mono-value">
                     Ваш вуз увидят <strong>10 000+ школьников</strong> Москвы каждый месяц.
                 </div>
-                <div class="mono-price">от 5 000 ₽ / неделя</div>
-                <button class="mono-btn" id="btnAd">Разместить →</button>
+                <div class="mono-price">2 000 ₽ / месяц</div>
+                <button class="mono-btn" id="btnAd" type="button">Разместить →</button>
             </div>
             <div class="mono-item">
                 <div class="mono-item-title">
@@ -2098,19 +2210,16 @@ body {
                     Поддержи проект — мы <strong>бесплатно</strong> помогаем школьникам.
                 </div>
                 <div class="mono-price">100 ₽ / 300 ₽ / своя сумма</div>
-                <button class="mono-btn secondary" id="btnDonate">Поддержать →</button>
+                <button class="mono-btn secondary" id="btnDonate" type="button">Поддержать →</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- ============================================================
-     МОДАЛКА ПРОФОРИЕНТАЦИИ
-     ============================================================ -->
 <div class="prof-modal-overlay" id="profModalOverlay">
     <div class="prof-modal" role="dialog" aria-modal="true" aria-labelledby="profModalTitle">
         <div class="prof-modal-hero">
-            <button class="prof-modal-close" id="profModalClose" aria-label="Закрыть">✕</button>
+            <button class="prof-modal-close" id="profModalClose" type="button" aria-label="Закрыть">✕</button>
             <span class="prof-modal-hero-emoji">🧭</span>
             <h3 id="profModalTitle">Не знаешь, с чего начать?</h3>
             <p>Пройди профориентацию — и мы подберём тебе вуз и специальность под твои интересы и баллы.</p>
@@ -2127,24 +2236,21 @@ body {
                 </div>
                 <div class="prof-modal-benefit">
                     <span class="prof-modal-benefit-icon">⏱️</span>
-                    <span>8 вопросов · 2–3 минуты · результат сохранится</span>
+                    <span>8 вопросов · 2–3 минуты · результат можно скачать или отправить на почту</span>
                 </div>
             </div>
             <div class="prof-modal-actions">
-                <button class="prof-modal-btn primary" id="profModalStart">Пройти профориентацию →</button>
-                <button class="prof-modal-btn ghost hidden" id="profModalViewSaved">📋 Посмотреть сохранённый результат</button>
-                <button class="prof-modal-btn ghost" id="profModalSkip">Сначала посмотрю вузы</button>
+                <button class="prof-modal-btn primary" id="profModalStart" type="button">Пройти профориентацию →</button>
+                <button class="prof-modal-btn ghost hidden" id="profModalViewSaved" type="button">📋 Посмотреть сохранённый результат</button>
+                <button class="prof-modal-btn ghost" id="profModalSkip" type="button">Сначала посмотрю вузы</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- ============================================================
-     ТЕСТ ПО ПРОФОРИЕНТАЦИИ
-     ============================================================ -->
 <div class="test-modal-overlay" id="testModalOverlay">
     <div class="test-modal" role="dialog" aria-modal="true" aria-labelledby="testModalTitle">
-        <button class="test-close" id="testClose" aria-label="Закрыть тест">✕</button>
+        <button class="test-close" id="testClose" type="button" aria-label="Закрыть тест">✕</button>
 
         <div class="test-header" id="testHeader">
             <div class="test-header-top">
@@ -2159,17 +2265,16 @@ body {
         <div class="test-body" id="testBody"></div>
 
         <div class="test-footer" id="testFooter">
-            <button class="prof-modal-btn test-btn-back" id="testBack" style="display:none">
+            <button class="prof-modal-btn test-btn-back" id="testBack" type="button" style="display:none">
                 ←<span class="test-back-label"> Назад</span>
             </button>
-            <button class="prof-modal-btn primary" id="testNext" disabled>Далее →</button>
+            <button class="prof-modal-btn primary" id="testNext" type="button" disabled>Далее →</button>
         </div>
 
         <div class="test-result hidden" id="testResult"></div>
     </div>
 </div>
 
-<!-- МОДАЛЬНОЕ ОКНО -->
 <div class="modal-overlay" id="modalOverlay">
     <div class="modal" id="modalContent"></div>
 </div>
@@ -2178,7 +2283,6 @@ body {
 (function() {
     'use strict';
 
-    // ==================== ДАННЫЕ ВУЗОВ ====================
     const UNIVERSITIES = [
         { name: 'МГУ им. М.В. Ломоносова', emoji: '🏛️', score: 320, places: 4000, direction: 'Широкий профиль',
           rating: 1, minScore: 180, paidFrom: 420000, budgetPlaces: 3500, paidPlaces: 500,
@@ -2364,7 +2468,6 @@ body {
           ]}
     ];
 
-    // ==================== НАПРАВЛЕНИЯ ====================
     const DIRECTIONS = {
         it: { name: 'IT и программирование', emoji: '💻', desc: 'Разработка, анализ данных, кибербезопасность, искусственный интеллект' },
         engineering: { name: 'Инженерия и технологии', emoji: '🔧', desc: 'Робототехника, авиация, энергетика, материаловедение, радиоэлектроника' },
@@ -2376,7 +2479,6 @@ body {
         physics: { name: 'Физика и математика', emoji: '🔬', desc: 'Фундаментальная физика, ядерная физика, прикладная математика' }
     };
 
-    // ==================== ВОПРОСЫ ТЕСТА ====================
     const TEST_QUESTIONS = [
         { question: 'Что тебе интереснее делать в свободное время?', hint: 'Выбери один вариант', options: [
             { text: 'Собирать и разбирать гаджеты, программы, сайты', weights: { it: 2, engineering: 1 } },
@@ -2433,47 +2535,33 @@ body {
         ]}
     ];
 
-    // ==================== УТИЛИТЫ ====================
     const $ = (sel) => document.querySelector(sel);
     const $$ = (sel) => document.querySelectorAll(sel);
 
     function formatMoney(n) { return n.toLocaleString('ru-RU') + ' ₽'; }
-
     function normalize(str) {
         return String(str || '').toLowerCase().replace(/ё/g, 'е').replace(/\s+/g, ' ').trim();
     }
-
     function showPage(pageId) {
         $$('.page').forEach(p => p.classList.remove('active'));
         const page = document.getElementById('page-' + pageId);
         if (page) page.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
     function escapeHtml(str) {
         return String(str || '')
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;');
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
-
     function formatDate(ts) {
-        try {
-            return new Date(ts).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
-        } catch (e) { return ''; }
+        try { return new Date(ts).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }); }
+        catch (e) { return ''; }
     }
 
-    // ==================== РЕЗУЛЬТАТ ПРОФОРИЕНТАЦИИ ====================
     const STORAGE_KEY = 'profivuz_prof_result_v1';
-
     function saveTestResult(scores) {
-        try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify({ scores, savedAt: Date.now() }));
-        } catch (e) {}
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ scores, savedAt: Date.now() })); } catch (e) {}
     }
-
     function loadTestResult() {
         try {
             const raw = localStorage.getItem(STORAGE_KEY);
@@ -2485,7 +2573,6 @@ body {
             return { scores, savedAt: data.savedAt || null };
         } catch (e) { return null; }
     }
-
     function hasTestResult() { return loadTestResult() !== null; }
     function clearTestResult() { try { localStorage.removeItem(STORAGE_KEY); } catch (e) {} }
 
@@ -2494,12 +2581,10 @@ body {
         $('#heroMyResult').classList.toggle('hidden', !has);
         $('#profBannerViewResult').classList.toggle('hidden', !has);
         $('#profModalViewSaved').classList.toggle('hidden', !has);
+        $('#navMyResult').style.display = has ? 'inline-flex' : 'none';
     }
 
-    // ==================== ОТЗЫВЫ ====================
     const REVIEWS_KEY = 'profivuz_reviews_v1';
-
-    // reviews = { [vuzName]: [ {id, author, rating, pros, cons, flaws, text, createdAt} ] }
     function loadAllReviews() {
         try {
             const raw = localStorage.getItem(REVIEWS_KEY);
@@ -2508,70 +2593,102 @@ body {
             return (data && typeof data === 'object') ? data : {};
         } catch (e) { return {}; }
     }
-
-    function saveAllReviews(all) {
-        try { localStorage.setItem(REVIEWS_KEY, JSON.stringify(all)); } catch (e) {}
-    }
-
+    function saveAllReviews(all) { try { localStorage.setItem(REVIEWS_KEY, JSON.stringify(all)); } catch (e) {} }
     function getReviewsForVuz(vuzName) {
         const all = loadAllReviews();
         return Array.isArray(all[vuzName]) ? all[vuzName] : [];
     }
-
     function getVuzStats(vuzName) {
         const reviews = getReviewsForVuz(vuzName);
         if (reviews.length === 0) return { count: 0, avg: 0 };
         const sum = reviews.reduce((s, r) => s + (Number(r.rating) || 0), 0);
         return { count: reviews.length, avg: sum / reviews.length };
     }
-
     function addReview(vuzName, review) {
         const all = loadAllReviews();
         if (!Array.isArray(all[vuzName])) all[vuzName] = [];
         all[vuzName].unshift(review);
         saveAllReviews(all);
     }
-
     function deleteReview(vuzName, reviewId) {
         const all = loadAllReviews();
         if (!Array.isArray(all[vuzName])) return;
         all[vuzName] = all[vuzName].filter(r => r.id !== reviewId);
         saveAllReviews(all);
     }
-
     function renderStars(rating, max) {
         max = max || 5;
         let html = '';
-        for (let i = 1; i <= max; i++) {
-            html += `<span class="${i <= rating ? 'filled' : 'empty'}">★</span>`;
-        }
+        for (let i = 1; i <= max; i++) html += `<span class="${i <= rating ? 'filled' : 'empty'}">★</span>`;
         return html;
     }
-
-    function formatAvg(avg) {
-        return avg > 0 ? avg.toFixed(1) : '0.0';
+    function formatAvg(avg) { return avg > 0 ? avg.toFixed(1) : '0.0'; }
+    function pluralReviews(n) {
+        const last = n % 10, last2 = n % 100;
+        if (last2 >= 11 && last2 <= 14) return 'отзывов';
+        if (last === 1) return 'отзыв';
+        if (last >= 2 && last <= 4) return 'отзыва';
+        return 'отзывов';
     }
 
-    // ==================== НАВИГАЦИЯ ====================
+    const navBurger = $('#navBurger');
+    const siteNav = $('#siteNav');
+
+    navBurger.addEventListener('click', () => {
+        const open = siteNav.classList.toggle('open');
+        navBurger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        navBurger.textContent = open ? '✕' : '☰';
+    });
+
+    function closeMobileNav() {
+        siteNav.classList.remove('open');
+        navBurger.setAttribute('aria-expanded', 'false');
+        navBurger.textContent = '☰';
+    }
+    function highlightNav(name) {
+        $$('.nav-btn').forEach(b => b.classList.toggle('active', b.getAttribute('data-nav') === name));
+    }
+    function handleNavClick(name) {
+        closeMobileNav();
+        switch (name) {
+            case 'home': showPage('home'); highlightNav('home'); break;
+            case 'vuz': renderVuzCards(); showPage('vuz'); highlightNav('vuz'); break;
+            case 'search': renderVuzCards(); showPage('vuz'); highlightNav('vuz'); setTimeout(() => { searchInput.focus(); }, 400); break;
+            case 'prof': highlightNav('prof'); openProfModal(); break;
+            case 'myresult': { const saved = loadTestResult(); if (saved) openSavedResult(saved); break; }
+            case 'courses': highlightNav('courses'); openCoursesModal(); break;
+        }
+    }
+    siteNav.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-nav]');
+        if (!btn) return;
+        handleNavClick(btn.getAttribute('data-nav'));
+    });
+    $('#headerLogo').addEventListener('click', () => { closeMobileNav(); showPage('home'); highlightNav('home'); });
+    document.addEventListener('click', (e) => {
+        if (!siteNav.classList.contains('open')) return;
+        if (siteNav.contains(e.target) || navBurger.contains(e.target)) return;
+        closeMobileNav();
+    });
+
     $('#heroStart').addEventListener('click', () => {
         const target = document.getElementById('ctaBlock');
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
-
     $('#heroMyResult').addEventListener('click', () => {
         const saved = loadTestResult();
         if (saved) openSavedResult(saved);
     });
-
     $('#ctaVuz').addEventListener('click', () => {
         renderVuzCards();
         showPage('vuz');
+        highlightNav('vuz');
         openProfModal();
     });
-
     $('#ctaCourses').addEventListener('click', () => { openCoursesModal(); });
+    $('#back-from-vuz').addEventListener('click', () => { showPage('home'); highlightNav('home'); });
+    $('#footerLogo').addEventListener('click', () => { showPage('home'); highlightNav('home'); });
 
-    // ==================== МОДАЛКА КУРСОВ ====================
     function openCoursesModal() {
         openModal(`
             <h3>📚 Найти курсы</h3>
@@ -2628,41 +2745,32 @@ body {
         }, 0);
     }
 
-    // ==================== МОДАЛКА ПРОФОРИЕНТАЦИИ ====================
     const profModalOverlay = $('#profModalOverlay');
-
     function openProfModal() {
         refreshResultButtons();
         profModalOverlay.classList.add('open');
         document.body.style.overflow = 'hidden';
     }
-
     function closeProfModal() {
         profModalOverlay.classList.remove('open');
         if (!modalOverlay.classList.contains('open') && !testModalOverlay.classList.contains('open')) {
             document.body.style.overflow = '';
         }
     }
-
     $('#profModalClose').addEventListener('click', closeProfModal);
     $('#profModalSkip').addEventListener('click', closeProfModal);
-
     $('#profModalStart').addEventListener('click', () => { closeProfModal(); startTest(); });
-
     $('#profModalViewSaved').addEventListener('click', () => {
         const saved = loadTestResult();
         if (saved) { closeProfModal(); openSavedResult(saved); }
     });
-
     profModalOverlay.addEventListener('click', (e) => {
         if (e.target === profModalOverlay) closeProfModal();
     });
-
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && profModalOverlay.classList.contains('open')) closeProfModal();
     });
 
-    // ==================== ТЕСТ ====================
     const testModalOverlay = $('#testModalOverlay');
     const testBody = $('#testBody');
     const testFooter = $('#testFooter');
@@ -2673,36 +2781,27 @@ body {
     const testNextBtn = $('#testNext');
     const testBackBtn = $('#testBack');
 
-    let testState = {
-        current: 0,
-        answers: new Array(TEST_QUESTIONS.length).fill(null),
-        scores: {}
-    };
+    let testState = { current: 0, answers: new Array(TEST_QUESTIONS.length).fill(null), scores: {} };
 
     function startTest() {
         testState.current = 0;
         testState.answers = new Array(TEST_QUESTIONS.length).fill(null);
         testState.scores = {};
         Object.keys(DIRECTIONS).forEach(k => testState.scores[k] = 0);
-
         testHeader.style.display = '';
         testFooter.style.display = '';
         testBody.classList.remove('hidden');
         testResult.classList.add('hidden');
-
         testModalOverlay.classList.add('open');
         document.body.style.overflow = 'hidden';
-
         renderQuestion();
     }
-
     function closeTest() {
         testModalOverlay.classList.remove('open');
         if (!modalOverlay.classList.contains('open') && !profModalOverlay.classList.contains('open')) {
             document.body.style.overflow = '';
         }
     }
-
     $('#testClose').addEventListener('click', closeTest);
     testModalOverlay.addEventListener('click', (e) => {
         if (e.target === testModalOverlay) closeTest();
@@ -2714,12 +2813,9 @@ body {
     function renderQuestion() {
         const q = TEST_QUESTIONS[testState.current];
         const selectedIndex = testState.answers[testState.current];
-
         testCounter.textContent = `Вопрос ${testState.current + 1} из ${TEST_QUESTIONS.length}`;
         testProgressFill.style.width = `${(testState.current / TEST_QUESTIONS.length) * 100}%`;
-
         testBackBtn.style.display = testState.current > 0 ? 'inline-flex' : 'none';
-
         testNextBtn.disabled = selectedIndex === null;
         testNextBtn.textContent = testState.current === TEST_QUESTIONS.length - 1 ? 'Показать результат →' : 'Далее →';
 
@@ -2730,17 +2826,15 @@ body {
             </div>
             <div class="test-options">
         `;
-
         q.options.forEach((opt, i) => {
             const isSelected = selectedIndex === i;
             html += `
-                <button class="test-option ${isSelected ? 'selected' : ''}" data-option-index="${i}">
+                <button class="test-option ${isSelected ? 'selected' : ''}" data-option-index="${i}" type="button">
                     <span class="test-option-radio"></span>
                     <span>${opt.text}</span>
                 </button>
             `;
         });
-
         html += '</div>';
         testBody.innerHTML = html;
 
@@ -2758,12 +2852,10 @@ body {
     testNextBtn.addEventListener('click', () => {
         const selectedIndex = testState.answers[testState.current];
         if (selectedIndex === null) return;
-
         const weights = TEST_QUESTIONS[testState.current].options[selectedIndex].weights;
         Object.entries(weights).forEach(([dir, points]) => {
             if (testState.scores[dir] !== undefined) testState.scores[dir] += points;
         });
-
         if (testState.current < TEST_QUESTIONS.length - 1) {
             testState.current++;
             renderQuestion();
@@ -2793,10 +2885,8 @@ body {
         testFooter.style.display = 'none';
         testBody.classList.add('hidden');
         testResult.classList.remove('hidden');
-
         testModalOverlay.classList.add('open');
         document.body.style.overflow = 'hidden';
-
         renderTestResult(saved.scores, { fromSaved: true, savedAt: saved.savedAt });
     }
 
@@ -2811,11 +2901,9 @@ body {
         const sorted = Object.entries(scores)
             .map(([key, score]) => ({ key, score, ...DIRECTIONS[key] }))
             .sort((a, b) => b.score - a.score);
-
         const maxScore = sorted[0]?.score || 1;
         const top = sorted.slice(0, 3);
         const topDirKey = top[0]?.key;
-
         const suitable = findVuzesByDirection(topDirKey);
 
         const topDirectionsHtml = top.map((d, i) => {
@@ -2835,7 +2923,7 @@ body {
         }).join('');
 
         const vuzesHtml = suitable.length > 0 ? suitable.map(item => `
-            <button class="test-result-vuz-item" data-vuz-index="${item.vuzIndex}" data-faculty-query="${item.query}">
+            <button class="test-result-vuz-item" data-vuz-index="${item.vuzIndex}" data-faculty-query="${escapeHtml(item.query)}" type="button">
                 <div class="test-result-vuz-emoji">${item.vuz.emoji}</div>
                 <div class="test-result-vuz-body">
                     <div class="test-result-vuz-name">${item.vuz.name}</div>
@@ -2873,10 +2961,18 @@ body {
             <div class="test-result-subtitle">Куда можно поступить по топ-1 направлению</div>
             <div class="test-result-vuz-list">${vuzesHtml}</div>
 
+            <div class="test-share-row">
+                <div class="test-share-title">Сохранить или отправить результат</div>
+                <div class="test-share-buttons">
+                    <button class="test-share-btn" id="btnDownloadResult" type="button">⬇️ Скачать файл</button>
+                    <button class="test-share-btn" id="btnEmailResult" type="button">✉️ Отправить на почту</button>
+                </div>
+            </div>
+
             <div class="test-result-actions">
-                <button class="prof-modal-btn primary" id="testGoToVuz">Смотреть все вузы →</button>
-                <button class="prof-modal-btn ghost" id="testRestart">Пройти тест заново</button>
-                ${opts.fromSaved ? '<button class="prof-modal-btn ghost" id="testClearResult">🗑 Удалить сохранённый результат</button>' : ''}
+                <button class="prof-modal-btn primary" id="testGoToVuz" type="button">Смотреть все вузы →</button>
+                <button class="prof-modal-btn ghost" id="testRestart" type="button">Пройти тест заново</button>
+                ${opts.fromSaved ? '<button class="prof-modal-btn ghost" id="testClearResult" type="button">🗑 Удалить сохранённый результат</button>' : ''}
             </div>
         `;
 
@@ -2893,6 +2989,7 @@ body {
             closeTest();
             renderVuzCards();
             showPage('vuz');
+            highlightNav('vuz');
         });
 
         $('#testRestart').addEventListener('click', () => { startTest(); });
@@ -2905,6 +3002,9 @@ body {
                 alert('🗑 Сохранённый результат удалён. Можешь пройти тест заново.');
             });
         }
+
+        $('#btnDownloadResult').addEventListener('click', () => downloadTestResult(scores, top, suitable));
+        $('#btnEmailResult').addEventListener('click', () => openEmailResultModal(scores, top, suitable));
     }
 
     function findVuzesByDirection(dirKey) {
@@ -2920,49 +3020,114 @@ body {
         return result.sort((a, b) => a.faculty.score - b.faculty.score).slice(0, 5);
     }
 
-    // ==================== БАННЕР ====================
+    // ==================== СКАЧИВАНИЕ / ОТПРАВКА РЕЗУЛЬТАТА ====================
+    function buildResultText(scores, top, suitable) {
+        const lines = [];
+        lines.push('ПрофиВУЗ — результат профориентации');
+        lines.push('Дата: ' + formatDate(Date.now()));
+        lines.push('');
+        lines.push('ТОП-3 НАПРАВЛЕНИЯ:');
+        top.forEach((d, i) => {
+            lines.push(`${i + 1}. ${d.emoji} ${d.name} — ${d.score} балл(ов)`);
+            lines.push(`   ${d.desc}`);
+        });
+        lines.push('');
+        lines.push('КУДА МОЖНО ПОСТУПИТЬ ПО ТОП-1 НАПРАВЛЕНИЮ:');
+        if (suitable.length > 0) {
+            suitable.forEach((item, i) => {
+                lines.push(`${i + 1}. ${item.vuz.name} — ${item.faculty.name} (проходной: ${item.faculty.score})`);
+            });
+        } else {
+            lines.push('— Пока не подобрано. Попробуй поиск по специальностям на ПрофиВУЗ.');
+        }
+        lines.push('');
+        lines.push('— — —');
+        lines.push('ПрофиВУЗ · Ускоряем подбор вуза для 10–11 классов');
+        return lines.join('\n');
+    }
+
+    function downloadTestResult(scores, top, suitable) {
+        const text = buildResultText(scores, top, suitable);
+        const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        const dateStr = new Date().toISOString().slice(0, 10);
+        a.href = url;
+        a.download = `Profivuz-result-${dateStr}.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    function openEmailResultModal(scores, top, suitable) {
+        const text = buildResultText(scores, top, suitable);
+        openModal(`
+            <h3>✉️ Отправить результат на почту</h3>
+            <p>Результат откроется в почтовом клиенте — останется ввести свой email и отправить письмо.</p>
+            <div class="form-group">
+                <label>Кому отправить (ваш email)</label>
+                <input type="email" id="emailTo" placeholder="you@example.com" required>
+            </div>
+            <div class="form-group">
+                <label>Тема</label>
+                <input type="text" id="emailSubject" value="Мой результат профориентации на ПрофиВУЗ" readonly>
+            </div>
+            <div class="form-group">
+                <label>Текст письма (можно отредактировать)</label>
+                <textarea id="emailBody" rows="6">${escapeHtml(text)}</textarea>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="mono-btn cancel" id="emailCancel">Отмена</button>
+                <button type="button" class="mono-btn" id="emailOpen">Открыть в почте</button>
+            </div>
+        `);
+
+        setTimeout(() => {
+            $('#emailCancel').addEventListener('click', closeModal);
+            $('#emailOpen').addEventListener('click', () => {
+                const to = $('#emailTo').value.trim();
+                const subj = encodeURIComponent($('#emailSubject').value);
+                const body = encodeURIComponent($('#emailBody').value);
+                if (to && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)) {
+                    alert('Похоже, email введён с ошибкой. Проверьте адрес.');
+                    return;
+                }
+                const mailto = `mailto:${to}?subject=${subj}&body=${body}`;
+                window.location.href = mailto;
+                closeModal();
+            });
+        }, 0);
+    }
+
     $('#profBannerStart').addEventListener('click', () => { startTest(); });
     $('#profBannerViewResult').addEventListener('click', () => {
         const saved = loadTestResult();
         if (saved) openSavedResult(saved);
     });
 
-    // ==================== НАВИГАЦИЯ ====================
-    $('#back-from-vuz').addEventListener('click', () => showPage('home'));
-    $('#appLogo').addEventListener('click', (e) => {
-        e.preventDefault();
-        showPage('home');
-    });
-
-    // ==================== МОДАЛЬНОЕ ОКНО ====================
     const modalOverlay = $('#modalOverlay');
     const modalContent = $('#modalContent');
-
     function openModal(html) {
         modalContent.innerHTML = html;
         modalOverlay.classList.add('open');
         document.body.style.overflow = 'hidden';
     }
-
     function closeModal() {
         modalOverlay.classList.remove('open');
         if (!profModalOverlay.classList.contains('open') && !testModalOverlay.classList.contains('open')) {
             document.body.style.overflow = '';
         }
     }
-
     modalOverlay.addEventListener('click', (e) => {
         if (e.target === modalOverlay) closeModal();
     });
-
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modalOverlay.classList.contains('open')) closeModal();
     });
 
-    // ==================== МОДАЛКА ВУЗА С ОТЗЫВАМИ ====================
     function openVuzModal(vuz, highlightQuery) {
         const q = highlightQuery ? normalize(highlightQuery) : '';
-
         const facultiesHtml = vuz.faculties.map(f => {
             const isMatch = q && (normalize(f.name).includes(q) || normalize(f.exams).includes(q));
             return `
@@ -3007,25 +3172,23 @@ body {
             <p style="margin-bottom: 12px; font-weight: 600; color: var(--gray-text);">Факультеты и направления:</p>
             <div class="faculties-list">${facultiesHtml}</div>
 
-            <div class="reviews-section" id="reviewsSection">
+            <div class="reviews-section">
                 <div class="reviews-header">
                     <div class="reviews-title">💬 Отзывы студентов</div>
-                    <div class="reviews-rating ${stats.count === 0 ? 'empty' : ''}" id="reviewsRating">
+                    <div class="reviews-rating ${stats.count === 0 ? 'empty' : ''}">
                         ${stats.count === 0
                             ? 'Пока нет отзывов'
                             : `★ ${formatAvg(stats.avg)} · ${stats.count} ${pluralReviews(stats.count)}`}
                     </div>
                 </div>
-                <div class="reviews-list" id="reviewsList">
-                    ${renderReviewsList(reviews)}
-                </div>
+                <div class="reviews-list">${renderReviewsList(reviews)}</div>
                 <div style="margin-top: 12px;">
-                    <button class="btn-write-review" id="btnWriteReview" style="width:100%;justify-content:center;">✍️ Оставить отзыв</button>
+                    <button class="btn-write-review" id="btnWriteReview" type="button" style="width:100%;justify-content:center;">✍️ Оставить отзыв</button>
                 </div>
             </div>
 
             <div class="modal-actions">
-                <button class="mono-btn cancel" id="vuzModalCancel">Закрыть</button>
+                <button class="mono-btn cancel" id="vuzModalCancel" type="button">Закрыть</button>
             </div>
         `);
 
@@ -3034,15 +3197,6 @@ body {
             $('#vuzModalCancel').addEventListener('click', closeModal);
             $('#btnWriteReview').addEventListener('click', () => openReviewForm(vuz));
         }, 0);
-    }
-
-    function pluralReviews(n) {
-        const last = n % 10;
-        const last2 = n % 100;
-        if (last2 >= 11 && last2 <= 14) return 'отзывов';
-        if (last === 1) return 'отзыв';
-        if (last >= 2 && last <= 4) return 'отзыва';
-        return 'отзывов';
     }
 
     function renderReviewsList(reviews) {
@@ -3054,7 +3208,6 @@ body {
                 </div>
             `;
         }
-
         return reviews.map(r => {
             const safeAuthor = escapeHtml(r.author || 'Аноним');
             const pros = r.pros ? escapeHtml(r.pros) : '';
@@ -3063,7 +3216,7 @@ body {
             const text = r.text ? escapeHtml(r.text) : '';
             return `
                 <div class="review-card" data-review-id="${escapeHtml(r.id)}">
-                    <button class="review-delete" data-delete-id="${escapeHtml(r.id)}" aria-label="Удалить отзыв" title="Удалить">🗑</button>
+                    <button class="review-delete" data-delete-id="${escapeHtml(r.id)}" aria-label="Удалить отзыв" title="Удалить" type="button">🗑</button>
                     <div class="review-head">
                         <div class="review-avatar">👤</div>
                         <div>
@@ -3083,12 +3236,9 @@ body {
         }).join('');
     }
 
-    // ==================== ФОРМА ОТЗЫВА ====================
     let reviewFormState = { rating: 0, vuzName: '' };
-
     function openReviewForm(vuz) {
         reviewFormState = { rating: 0, vuzName: vuz.name };
-
         openModal(`
             <h3>✍️ Отзыв о вузе</h3>
             <p style="margin-bottom:8px;font-weight:600;color:var(--gray-text);">${escapeHtml(vuz.name)}</p>
@@ -3164,7 +3314,6 @@ body {
                 }
                 addReview(reviewFormState.vuzName, review);
                 closeModal();
-                // Обновляем карточку и модалку
                 refreshVuzCard(reviewFormState.vuzName);
                 const vuz = UNIVERSITIES.find(v => v.name === reviewFormState.vuzName);
                 if (vuz) setTimeout(() => openVuzModal(vuz), 150);
@@ -3172,14 +3321,12 @@ body {
         }, 0);
     }
 
-    // Делегирование удаления отзывов
     document.addEventListener('click', (e) => {
         const delBtn = e.target.closest('[data-delete-id]');
         if (!delBtn) return;
         const id = delBtn.getAttribute('data-delete-id');
         const modal = delBtn.closest('.modal');
         if (!modal) return;
-        // Находим имя вуза по заголовку внутри модалки
         const titleEl = modal.querySelector('.vuz-modal-header h3');
         if (!titleEl) return;
         const vuzName = titleEl.textContent.trim();
@@ -3191,7 +3338,6 @@ body {
         if (vuz) setTimeout(() => openVuzModal(vuz), 150);
     });
 
-    // ==================== ВУЗЫ ====================
     const vuzGrid = $('#vuz-grid');
 
     function initVuzCards() {
@@ -3243,9 +3389,7 @@ body {
             vuzGrid.appendChild(card);
         });
     }
-
     function renderVuzCards() { initVuzCards(); }
-
     function refreshVuzCard(vuzName) {
         const card = vuzGrid.querySelector(`[data-vuz-name="${CSS.escape(vuzName)}"]`);
         if (!card) return;
@@ -3261,7 +3405,6 @@ body {
         }
     }
 
-    // ==================== ПОИСК ====================
     const searchInput = $('#searchInput');
     const searchClear = $('#searchClear');
     const searchHint = $('#searchHint');
@@ -3283,7 +3426,6 @@ body {
     function applySearch() {
         const query = searchInput.value.trim();
         searchClear.classList.toggle('visible', query.length > 0);
-
         const cards = Array.from(vuzGrid.children);
         let visibleCount = 0;
 
@@ -3292,12 +3434,9 @@ body {
             if (isNaN(idx)) return;
             const vuz = UNIVERSITIES[idx];
             const { matches, hasMatch } = matchVuz(vuz, query);
-
             const oldBadge = card.querySelector('.match-badge');
             if (oldBadge) oldBadge.remove();
-
             card.onclick = () => openVuzModal(vuz, query);
-
             if (!query || hasMatch) {
                 card.style.display = '';
                 visibleCount++;
@@ -3314,7 +3453,6 @@ body {
         });
 
         searchEmpty.classList.toggle('visible', query && visibleCount === 0);
-
         if (query) {
             searchHint.innerHTML = visibleCount > 0 ? `Найдено вузов: <strong>${visibleCount}</strong>` : '';
             searchChips.style.display = 'none';
@@ -3325,13 +3463,7 @@ body {
     }
 
     searchInput.addEventListener('input', applySearch);
-
-    searchClear.addEventListener('click', () => {
-        searchInput.value = '';
-        applySearch();
-        searchInput.focus();
-    });
-
+    searchClear.addEventListener('click', () => { searchInput.value = ''; applySearch(); searchInput.focus(); });
     searchChips.addEventListener('click', (e) => {
         const chip = e.target.closest('.search-chip');
         if (!chip) return;
@@ -3340,31 +3472,24 @@ body {
         searchInput.focus();
     });
 
-    // ==================== МОНЕТИЗАЦИЯ ====================
     const monetization = $('#monetization');
     const monoToggle = $('#monoToggle');
     const monoClose = $('#monoClose');
-
     function openMono() { monetization.classList.add('open'); monoToggle.setAttribute('aria-expanded', 'true'); }
     function closeMono() { monetization.classList.remove('open'); monoToggle.setAttribute('aria-expanded', 'false'); }
-
     monoToggle.addEventListener('click', () => {
         if (monetization.classList.contains('open')) closeMono();
         else openMono();
     });
-
     monoClose.addEventListener('click', (e) => { e.stopPropagation(); closeMono(); });
-
     document.addEventListener('click', (e) => {
         if (!monetization.classList.contains('open')) return;
         if (!monetization.contains(e.target)) closeMono();
     });
-
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && monetization.classList.contains('open')) closeMono();
     });
 
-    // ==================== РЕКЛАМА ====================
     function openAdModal() {
         openModal(`
             <h3>📣 Разместить рекламу</h3>
@@ -3375,9 +3500,7 @@ body {
                 <div class="form-group">
                     <label>Тариф</label>
                     <select name="tariff" required>
-                        <option value="week">1 неделя — 5 000 ₽</option>
-                        <option value="month">1 месяц — 15 000 ₽ (выгодно)</option>
-                        <option value="quarter">3 месяца — 40 000 ₽ (максимум)</option>
+                        <option value="month">1 месяц — 2 000 ₽</option>
                     </select>
                 </div>
                 <div class="modal-actions">
@@ -3392,18 +3515,16 @@ body {
             $('#adForm').addEventListener('submit', (e) => {
                 e.preventDefault();
                 const name = e.target.name.value;
-                const tariff = e.target.tariff.value;
-                const tariffLabel = { week: '1 неделя — 5 000 ₽', month: '1 месяц — 15 000 ₽', quarter: '3 месяца — 40 000 ₽' }[tariff];
+                const tariffLabel = '1 месяц — 2 000 ₽';
                 closeModal();
                 alert(`✅ Спасибо, ${name}!\nЗаявка на тариф «${tariffLabel}» принята.\nМы свяжемся с вами в течение дня.`);
             });
         }, 0);
     }
 
-    // ==================== ДОНАТ ====================
     function openDonateModal() {
         openModal(`
-            <h3>☕ Поддержать ProfiVUZ</h3>
+            <h3>☕ Поддержать ПрофиВУЗ</h3>
             <p>Мы <strong>бесплатно</strong> помогаем школьникам выбирать вуз и кормим котиков. Любая сумма — это вклад в будущее образование.</p>
             <form id="donateForm">
                 <div class="form-group">
@@ -3441,7 +3562,6 @@ body {
                 if (e.target.value === 'custom') customGroup.classList.remove('hidden');
                 else customGroup.classList.add('hidden');
             });
-
             $('#donateCancel').addEventListener('click', closeModal);
             $('#donateForm').addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -3457,54 +3577,27 @@ body {
     $('#btnAd').addEventListener('click', () => { closeMono(); openAdModal(); });
     $('#btnDonate').addEventListener('click', () => { closeMono(); openDonateModal(); });
 
-    // ==================== ПОДВАЛ ====================
     document.querySelectorAll('[data-footer-action]').forEach(el => {
         el.addEventListener('click', (e) => {
             e.preventDefault();
             const action = el.getAttribute('data-footer-action');
             switch (action) {
-                case 'vuz':
-                    renderVuzCards();
-                    showPage('vuz');
-                    break;
-                case 'search':
-                    renderVuzCards();
-                    showPage('vuz');
-                    setTimeout(() => { searchInput.focus(); }, 400);
-                    break;
-                case 'prof':
-                    startTest();
-                    break;
-                case 'courses':
-                    openCoursesModal();
-                    break;
-                case 'ad':
-                    openAdModal();
-                    break;
-                case 'donate':
-                    openDonateModal();
-                    break;
-                case 'privacy':
-                    alert('🔒 Политика конфиденциальности\n\nМы собираем только email при отправке заявок и не передаём данные третьим лицам.');
-                    break;
-                case 'terms':
-                    alert('📄 Пользовательское соглашение\n\nСервис предоставляется «как есть» для личного некоммерческого использования.');
-                    break;
-                case 'cookies':
-                    alert('🍪 Cookies\n\nМы используем cookies для корректной работы интерфейса. Продолжая пользоваться сайтом, вы соглашаетесь с этим.');
-                    break;
+                case 'vuz': renderVuzCards(); showPage('vuz'); highlightNav('vuz'); break;
+                case 'search': renderVuzCards(); showPage('vuz'); highlightNav('vuz'); setTimeout(() => { searchInput.focus(); }, 400); break;
+                case 'prof': openProfModal(); break;
+                case 'courses': openCoursesModal(); break;
+                case 'ad': openAdModal(); break;
+                case 'donate': openDonateModal(); break;
+                case 'privacy': alert('🔒 Политика конфиденциальности\n\nМы собираем только email при отправке заявок и не передаём данные третьим лицам.'); break;
+                case 'terms': alert('📄 Пользовательское соглашение\n\nСервис предоставляется «как есть» для личного некоммерческого использования.'); break;
+                case 'cookies': alert('🍪 Cookies\n\nМы используем cookies для корректной работы интерфейса. Продолжая пользоваться сайтом, вы соглашаетесь с этим.'); break;
             }
         });
     });
 
-    $('#footerLogo').addEventListener('click', (e) => {
-        e.preventDefault();
-        showPage('home');
-    });
-
-    // ==================== ИНИЦИАЛИЗАЦИЯ ====================
     initVuzCards();
     refreshResultButtons();
+    highlightNav('home');
 })();
 </script>
 </body>
