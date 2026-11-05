@@ -189,8 +189,8 @@ body {
     text-align: center;
 }
 .hero-content { max-width: 720px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 20px; }
-.hero-logo { max-width: 100%; width: 300px; height: auto; display: block; margin-bottom: 8px; }
-@media (max-width: 480px) { .hero-logo { width: 200px; } }
+.hero-logo { max-width: 100%; width: 320px; height: auto; display: block; margin-bottom: 8px; }
+@media (max-width: 480px) { .hero-logo { width: 220px; } }
 
 .hero h1 { font-size: clamp(1.8rem, 6.5vw, 3rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; max-width: 640px; }
 .hero-sub { font-size: clamp(1rem, 3.5vw, 1.25rem); color: var(--gray-muted); max-width: 560px; line-height: 1.5; }
