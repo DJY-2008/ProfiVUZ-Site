@@ -406,255 +406,323 @@
     'use strict';
 
     const UNIVERSITIES = [
-        { name: 'МГУ им. М.В. Ломоносова', emoji: '🏛️', score: 320, places: 4000, direction: 'Широкий профиль',
-          rating: 1, minScore: 180, paidFrom: 420000, budgetPlaces: 3500, paidPlaces: 500,
-          dormitory: true, military: true, exams: 'ДВИ по профилю',
-          faculties: [
-            { name: 'Факультет вычислительной математики и кибернетики', score: 340, places: 350, budget: 320, paid: 30, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
-            { name: 'Экономический факультет', score: 330, places: 400, budget: 350, paid: 50, exams: 'Математика (ДВИ), обществознание', tags: ['economics', 'business'] },
-            { name: 'Юридический факультет', score: 335, places: 300, budget: 260, paid: 40, exams: 'Обществознание (ДВИ), история', tags: ['law'] },
-            { name: 'Физический факультет', score: 310, places: 500, budget: 470, paid: 30, exams: 'Физика (ДВИ), математика', tags: ['physics', 'engineering'] },
-            { name: 'Филологический факультет', score: 300, places: 350, budget: 320, paid: 30, exams: 'Литература (ДВИ), русский', tags: ['humanities'] }
-          ]},
-        { name: 'МФТИ', emoji: '⚛️', score: 310, places: 1200, direction: 'Физика, IT',
-          rating: 2, minScore: 190, paidFrom: 380000, budgetPlaces: 1100, paidPlaces: 100,
-          dormitory: true, military: true, exams: 'ДВИ по математике и физике',
-          faculties: [
-            { name: 'Физтех-школа радиотехники и компьютерных технологий', score: 320, places: 200, budget: 185, paid: 15, exams: 'Математика (ДВИ), физика', tags: ['it', 'engineering'] },
-            { name: 'Физтех-школа прикладной математики и информатики', score: 325, places: 180, budget: 170, paid: 10, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
-            { name: 'Физтех-школа физики и исследований им. Ландау', score: 315, places: 150, budget: 145, paid: 5, exams: 'Физика (ДВИ), математика', tags: ['physics'] },
-            { name: 'Физтех-школа биологической и медицинской физики', score: 305, places: 100, budget: 95, paid: 5, exams: 'Биология (ДВИ), физика', tags: ['medicine', 'physics'] }
-          ]},
-        { name: 'НИУ ВШЭ', emoji: '📊', score: 300, places: 3500, direction: 'Экономика, IT',
-          rating: 3, minScore: 175, paidFrom: 350000, budgetPlaces: 2800, paidPlaces: 700,
-          dormitory: true, military: true, exams: 'ДВИ по профилю',
-          faculties: [
-            { name: 'Факультет компьютерных наук', score: 315, places: 400, budget: 340, paid: 60, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
-            { name: 'Факультет экономических наук', score: 310, places: 500, budget: 400, paid: 100, exams: 'Математика (ДВИ), обществознание', tags: ['economics'] },
-            { name: 'Факультет гуманитарных наук', score: 290, places: 350, budget: 300, paid: 50, exams: 'История (ДВИ), литература', tags: ['humanities'] },
-            { name: 'Факультет социальных наук', score: 285, places: 300, budget: 260, paid: 40, exams: 'Обществознание (ДВИ), история', tags: ['humanities'] },
-            { name: 'Факультет права', score: 300, places: 250, budget: 200, paid: 50, exams: 'Обществознание (ДВИ), история', tags: ['law'] }
-          ]},
-        { name: 'МГТУ им. Н.Э. Баумана', emoji: '🔧', score: 290, places: 3000, direction: 'Инженерия',
-          rating: 4, minScore: 170, paidFrom: 290000, budgetPlaces: 2600, paidPlaces: 400,
-          dormitory: true, military: true, exams: 'ДВИ по математике и физике',
-          faculties: [
-            { name: 'Факультет информатики и систем управления', score: 305, places: 400, budget: 360, paid: 40, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
-            { name: 'Факультет робототехники и комплексной автоматизации', score: 295, places: 350, budget: 320, paid: 30, exams: 'Математика (ДВИ), физика', tags: ['engineering', 'it'] },
-            { name: 'Факультет энергомашиностроения', score: 285, places: 300, budget: 280, paid: 20, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
-            { name: 'Факультет фундаментальных наук', score: 280, places: 250, budget: 230, paid: 20, exams: 'Математика (ДВИ), физика', tags: ['physics', 'engineering'] }
-          ]},
-        { name: 'МГИМО', emoji: '🌍', score: 295, places: 1000, direction: 'Международные отношения',
-          rating: 5, minScore: 185, paidFrom: 450000, budgetPlaces: 700, paidPlaces: 300,
-          dormitory: true, military: true, exams: 'ДВИ по иностранному языку',
-          faculties: [
-            { name: 'Факультет международных отношений', score: 310, places: 200, budget: 150, paid: 50, exams: 'Иностранный язык (ДВИ), история', tags: ['humanities'] },
-            { name: 'Факультет международных экономических отношений', score: 305, places: 180, budget: 130, paid: 50, exams: 'Математика (ДВИ), иностранный язык', tags: ['economics'] },
-            { name: 'Международно-правовой факультет', score: 300, places: 150, budget: 110, paid: 40, exams: 'Обществознание (ДВИ), иностранный язык', tags: ['law'] },
-            { name: 'Факультет международной журналистики', score: 295, places: 100, budget: 70, paid: 30, exams: 'Литература (ДВИ), иностранный язык', tags: ['humanities'] }
-          ]},
-        { name: 'РУДН', emoji: '🤝', score: 250, places: 4500, direction: 'Мультидисциплинарный',
-          rating: 8, minScore: 150, paidFrom: 220000, budgetPlaces: 3000, paidPlaces: 1500,
-          dormitory: true, military: true, exams: 'ДВИ по профилю',
-          faculties: [
-            { name: 'Медицинский институт', score: 270, places: 300, budget: 220, paid: 80, exams: 'Биология (ДВИ), химия', tags: ['medicine'] },
-            { name: 'Институт мировой экономики и бизнеса', score: 260, places: 250, budget: 180, paid: 70, exams: 'Математика (ДВИ), обществознание', tags: ['economics', 'business'] },
-            { name: 'Юридический институт', score: 265, places: 200, budget: 140, paid: 60, exams: 'Обществознание (ДВИ), история', tags: ['law'] },
-            { name: 'Инженерная академия', score: 250, places: 280, budget: 200, paid: 80, exams: 'Математика (ДВИ), физика', tags: ['engineering'] }
-          ]},
-        { name: 'НИЯУ МИФИ', emoji: '☢️', score: 280, places: 1500, direction: 'Ядерная физика',
-          rating: 6, minScore: 165, paidFrom: 280000, budgetPlaces: 1300, paidPlaces: 200,
-          dormitory: true, military: true, exams: 'ДВИ по физике и математике',
-          faculties: [
-            { name: 'Институт ядерной физики и технологий', score: 290, places: 200, budget: 180, paid: 20, exams: 'Физика (ДВИ), математика', tags: ['physics', 'engineering'] },
-            { name: 'Институт лазерных и плазменных технологий', score: 285, places: 150, budget: 130, paid: 20, exams: 'Физика (ДВИ), математика', tags: ['physics', 'engineering'] },
-            { name: 'Институт интеллектуальных кибернетических систем', score: 295, places: 180, budget: 160, paid: 20, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
-            { name: 'Инженерно-физический институт биомедицины', score: 275, places: 120, budget: 100, paid: 20, exams: 'Биология (ДВИ), физика', tags: ['medicine', 'physics'] }
-          ]},
-        { name: 'МГМУ им. И.М. Сеченова', emoji: '🩺', score: 270, places: 2000, direction: 'Медицина',
-          rating: 7, minScore: 160, paidFrom: 320000, budgetPlaces: 1700, paidPlaces: 300,
-          dormitory: true, military: true, exams: 'ДВИ по химии и биологии',
-          faculties: [
-            { name: 'Лечебный факультет', score: 285, places: 400, budget: 360, paid: 40, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
-            { name: 'Педиатрический факультет', score: 275, places: 300, budget: 270, paid: 30, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
-            { name: 'Стоматологический факультет', score: 290, places: 150, budget: 130, paid: 20, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
-            { name: 'Фармацевтический факультет', score: 260, places: 200, budget: 170, paid: 30, exams: 'Химия (ДВИ), биология', tags: ['medicine'] }
-          ]},
-        { name: 'РЭУ им. Г.В. Плеханова', emoji: '📈', score: 260, places: 2800, direction: 'Экономика',
-          rating: 10, minScore: 155, paidFrom: 240000, budgetPlaces: 1900, paidPlaces: 900,
-          dormitory: true, military: true, exams: 'ДВИ по профилю',
-          faculties: [
-            { name: 'Факультет экономики и финансов', score: 270, places: 300, budget: 220, paid: 80, exams: 'Математика (ДВИ), обществознание', tags: ['economics'] },
-            { name: 'Факультет менеджмента', score: 265, places: 250, budget: 180, paid: 70, exams: 'Математика (ДВИ), обществознание', tags: ['business'] },
-            { name: 'Факультет информационных технологий', score: 260, places: 200, budget: 150, paid: 50, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
-            { name: 'Юридический факультет', score: 255, places: 180, budget: 120, paid: 60, exams: 'Обществознание (ДВИ), история', tags: ['law'] }
-          ]},
-        { name: 'МАИ', emoji: '✈️', score: 255, places: 2200, direction: 'Авиация, IT',
-          rating: 12, minScore: 150, paidFrom: 230000, budgetPlaces: 1700, paidPlaces: 500,
-          dormitory: true, military: true, exams: 'ДВИ по математике и физике',
-          faculties: [
-            { name: 'Институт информационных технологий', score: 270, places: 250, budget: 210, paid: 40, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
-            { name: 'Аэрокосмический институт', score: 260, places: 300, budget: 240, paid: 60, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
-            { name: 'Институт двигателей и энергетики', score: 255, places: 200, budget: 160, paid: 40, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
-            { name: 'Институт экономики и управления', score: 245, places: 150, budget: 110, paid: 40, exams: 'Математика (ДВИ), обществознание', tags: ['economics', 'business'] }
-          ]},
-        { name: 'МГПУ', emoji: '📚', score: 230, places: 3500, direction: 'Педагогика',
-          rating: 15, minScore: 140, paidFrom: 180000, budgetPlaces: 2800, paidPlaces: 700,
-          dormitory: true, military: false, exams: 'ДВИ по профилю',
-          faculties: [
-            { name: 'Институт педагогики и психологии образования', score: 240, places: 350, budget: 290, paid: 60, exams: 'Обществознание (ДВИ), биология', tags: ['humanities'] },
-            { name: 'Институт цифрового образования', score: 235, places: 250, budget: 200, paid: 50, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
-            { name: 'Институт гуманитарных наук', score: 230, places: 300, budget: 240, paid: 60, exams: 'История (ДВИ), литература', tags: ['humanities'] },
-            { name: 'Институт математики, информатики и естественных наук', score: 225, places: 200, budget: 160, paid: 40, exams: 'Математика (ДВИ), физика', tags: ['it', 'physics'] }
-          ]},
-        { name: 'НИТУ МИСиС', emoji: '⛏️', score: 245, places: 1800, direction: 'Материаловедение',
-          rating: 13, minScore: 145, paidFrom: 200000, budgetPlaces: 1500, paidPlaces: 300,
-          dormitory: true, military: true, exams: 'ДВИ по математике и физике',
-          faculties: [
-            { name: 'Институт новых материалов и нанотехнологий', score: 255, places: 200, budget: 170, paid: 30, exams: 'Математика (ДВИ), физика', tags: ['engineering', 'physics'] },
-            { name: 'Институт горного дела и наук о Земле', score: 250, places: 180, budget: 155, paid: 25, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
-            { name: 'Институт информационных технологий', score: 260, places: 150, budget: 130, paid: 20, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
-            { name: 'Институт металлургии и металловедения', score: 245, places: 200, budget: 165, paid: 35, exams: 'Математика (ДВИ), химия', tags: ['engineering'] }
-          ]},
-        { name: 'МПГУ', emoji: '🧑‍🏫', score: 225, places: 4000, direction: 'Педагогика',
-          rating: 16, minScore: 135, paidFrom: 170000, budgetPlaces: 3300, paidPlaces: 700,
-          dormitory: true, military: false, exams: 'ДВИ по профилю',
-          faculties: [
-            { name: 'Институт математики и информатики', score: 235, places: 300, budget: 250, paid: 50, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
-            { name: 'Институт филологии', score: 230, places: 400, budget: 340, paid: 60, exams: 'Литература (ДВИ), русский', tags: ['humanities'] },
-            { name: 'Институт истории и политики', score: 225, places: 250, budget: 210, paid: 40, exams: 'История (ДВИ), обществознание', tags: ['humanities'] },
-            { name: 'Институт физической культуры и спорта', score: 220, places: 200, budget: 170, paid: 30, exams: 'Биология (ДВИ), физическая культура', tags: ['medicine'] }
-          ]},
-        { name: 'Финансовый университет', emoji: '💰', score: 275, places: 2500, direction: 'Финансы',
-          rating: 9, minScore: 160, paidFrom: 280000, budgetPlaces: 1900, paidPlaces: 600,
-          dormitory: true, military: true, exams: 'ДВИ по профилю',
-          faculties: [
-            { name: 'Факультет финансов и кредита', score: 285, places: 300, budget: 240, paid: 60, exams: 'Математика (ДВИ), обществознание', tags: ['economics'] },
-            { name: 'Факультет экономики и бизнеса', score: 280, places: 280, budget: 220, paid: 60, exams: 'Математика (ДВИ), обществознание', tags: ['economics', 'business'] },
-            { name: 'Факультет информационных технологий', score: 275, places: 250, budget: 200, paid: 50, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
-            { name: 'Юридический факультет', score: 270, places: 200, budget: 150, paid: 50, exams: 'Обществознание (ДВИ), история', tags: ['law'] }
-          ]},
-        { name: 'МГЮА', emoji: '⚖️', score: 285, places: 1200, direction: 'Юриспруденция',
-          rating: 11, minScore: 170, paidFrom: 300000, budgetPlaces: 900, paidPlaces: 300,
-          dormitory: true, military: true, exams: 'ДВИ по обществознанию',
-          faculties: [
-            { name: 'Институт права и национальной безопасности', score: 290, places: 300, budget: 230, paid: 70, exams: 'Обществознание (ДВИ), история', tags: ['law'] },
-            { name: 'Институт международного права', score: 295, places: 200, budget: 150, paid: 50, exams: 'Обществознание (ДВИ), иностранный язык', tags: ['law'] },
-            { name: 'Институт судебных экспертиз', score: 285, places: 150, budget: 110, paid: 40, exams: 'Обществознание (ДВИ), химия', tags: ['law'] },
-            { name: 'Институт бизнес-права', score: 280, places: 180, budget: 130, paid: 50, exams: 'Обществознание (ДВИ), математика', tags: ['law', 'business'] }
-          ]},
-        { name: 'РНИМУ им. Н.И. Пирогова', emoji: '🧬', score: 265, places: 1600, direction: 'Медицина',
-          rating: 14, minScore: 155, paidFrom: 310000, budgetPlaces: 1300, paidPlaces: 300,
-          dormitory: true, military: true, exams: 'ДВИ по химии и биологии',
-          faculties: [
-            { name: 'Лечебный факультет', score: 280, places: 350, budget: 300, paid: 50, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
-            { name: 'Педиатрический факультет', score: 270, places: 250, budget: 210, paid: 40, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
-            { name: 'Медико-биологический факультет', score: 265, places: 150, budget: 120, paid: 30, exams: 'Биология (ДВИ), химия', tags: ['medicine'] },
-            { name: 'Факультет психологии', score: 255, places: 100, budget: 80, paid: 20, exams: 'Биология (ДВИ), обществознание', tags: ['humanities', 'medicine'] }
-          ]},
-        { name: 'МГТУ ГА', emoji: '🛫', score: 240, places: 900, direction: 'Гражданская авиация',
-          rating: 18, minScore: 140, paidFrom: 190000, budgetPlaces: 700, paidPlaces: 200,
-          dormitory: true, military: true, exams: 'ДВИ по математике и физике',
-          faculties: [
-            { name: 'Факультет авиационных систем и комплексов', score: 250, places: 150, budget: 120, paid: 30, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
-            { name: 'Факультет управления на воздушном транспорте', score: 245, places: 120, budget: 90, paid: 30, exams: 'Математика (ДВИ), обществознание', tags: ['business'] },
-            { name: 'Факультет авиационных двигателей', score: 240, places: 100, budget: 80, paid: 20, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
-            { name: 'Факультет радиотехники и электроники', score: 235, places: 90, budget: 70, paid: 20, exams: 'Математика (ДВИ), физика', tags: ['engineering', 'it'] }
-          ]},
-        { name: 'РГГУ', emoji: '📜', score: 235, places: 2000, direction: 'Гуманитарные науки',
-          rating: 17, minScore: 135, paidFrom: 180000, budgetPlaces: 1500, paidPlaces: 500,
-          dormitory: true, military: false, exams: 'ДВИ по профилю',
-          faculties: [
-            { name: 'Историко-архивный институт', score: 245, places: 250, budget: 200, paid: 50, exams: 'История (ДВИ), обществознание', tags: ['humanities'] },
-            { name: 'Институт филологии и истории', score: 240, places: 300, budget: 240, paid: 60, exams: 'Литература (ДВИ), история', tags: ['humanities'] },
-            { name: 'Институт экономики, управления и права', score: 235, places: 200, budget: 150, paid: 50, exams: 'Обществознание (ДВИ), математика', tags: ['economics', 'law'] },
-            { name: 'Институт психологии и педагогики', score: 230, places: 150, budget: 110, paid: 40, exams: 'Биология (ДВИ), обществознание', tags: ['humanities'] }
-          ]},
-        { name: 'МГУПП', emoji: '🍞', score: 210, places: 1100, direction: 'Пищевые технологии',
-          rating: 20, minScore: 125, paidFrom: 160000, budgetPlaces: 850, paidPlaces: 250,
-          dormitory: true, military: false, exams: 'ДВИ по профилю',
-          faculties: [
-            { name: 'Институт пищевых технологий', score: 220, places: 200, budget: 150, paid: 50, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
-            { name: 'Институт биотехнологий', score: 215, places: 150, budget: 110, paid: 40, exams: 'Биология (ДВИ), химия', tags: ['medicine'] },
-            { name: 'Институт экономики и управления', score: 210, places: 120, budget: 90, paid: 30, exams: 'Математика (ДВИ), обществознание', tags: ['economics', 'business'] },
-            { name: 'Институт инженерии и технологий', score: 205, places: 100, budget: 70, paid: 30, exams: 'Математика (ДВИ), физика', tags: ['engineering'] }
-          ]},
-        { name: 'МИРЭА', emoji: '📡', score: 250, places: 2700, direction: 'Радиотехника, IT',
-          rating: 19, minScore: 145, paidFrom: 210000, budgetPlaces: 2100, paidPlaces: 600,
-          dormitory: true, military: true, exams: 'ДВИ по математике и физике',
-          faculties: [
-            { name: 'Институт информационных технологий', score: 265, places: 300, budget: 240, paid: 60, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
-            { name: 'Институт радиотехнических и телекоммуникационных систем', score: 255, places: 250, budget: 200, paid: 50, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
-            { name: 'Институт кибербезопасности', score: 260, places: 200, budget: 160, paid: 40, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
-            { name: 'Институт экономики и права', score: 240, places: 150, budget: 110, paid: 40, exams: 'Обществознание (ДВИ), математика', tags: ['economics', 'law'] }
-          ]}
-    ];
-
-    const DIRECTIONS = {
-        it: { name: 'IT и программирование', emoji: '💻', desc: 'Разработка, анализ данных, кибербезопасность, искусственный интеллект' },
-        engineering: { name: 'Инженерия и технологии', emoji: '🔧', desc: 'Робототехника, авиация, энергетика, материаловедение, радиоэлектроника' },
-        medicine: { name: 'Медицина и биология', emoji: '🩺', desc: 'Лечебное дело, педиатрия, фармация, биотехнологии, психология' },
-        economics: { name: 'Экономика и финансы', emoji: '📊', desc: 'Финансы, экономика, анализ данных, банковское дело' },
-        business: { name: 'Менеджмент и бизнес', emoji: '💼', desc: 'Менеджмент, маркетинг, предпринимательство, управление' },
-        law: { name: 'Юриспруденция', emoji: '⚖️', desc: 'Право, международное право, судебные экспертизы, бизнес-право' },
-        humanities: { name: 'Гуманитарные науки', emoji: '📚', desc: 'История, филология, международные отношения, журналистика' },
-        physics: { name: 'Физика и математика', emoji: '🔬', desc: 'Фундаментальная физика, ядерная физика, прикладная математика' }
-    };
-
-    const TEST_QUESTIONS = [
-        { question: 'Что тебе интереснее делать в свободное время?', hint: 'Выбери один вариант', options: [
-            { text: 'Собирать и разбирать гаджеты, программы, сайты', weights: { it: 2, engineering: 1 } },
-            { text: 'Читать книги, смотреть документалки, писать тексты', weights: { humanities: 2, law: 1 } },
-            { text: 'Помогать людям, разбираться в здоровье', weights: { medicine: 2, humanities: 1 } },
-            { text: 'Считать, считать деньги, анализировать цифры', weights: { economics: 2, business: 1 } }
-        ]},
-        { question: 'Какой предмет в школе даётся тебе легче всего?', hint: 'Выбери один вариант', options: [
-            { text: 'Математика и информатика', weights: { it: 2, economics: 1, physics: 1 } },
-            { text: 'Физика и химия', weights: { engineering: 2, physics: 1, medicine: 1 } },
-            { text: 'Биология и химия', weights: { medicine: 2, physics: 1 } },
-            { text: 'История, литература, обществознание', weights: { humanities: 2, law: 1 } }
-        ]},
-        { question: 'Какая задача кажется тебе самой интересной?', hint: 'Выбери один вариант', options: [
-            { text: 'Написать программу, которая решает задачу', weights: { it: 2 } },
-            { text: 'Спроектировать двигатель или робота', weights: { engineering: 2, physics: 1 } },
-            { text: 'Поставить диагноз и назначить лечение', weights: { medicine: 2 } },
-            { text: 'Защитить человека в суде или составить договор', weights: { law: 2, humanities: 1 } },
-            { text: 'Запустить бизнес и управлять командой', weights: { business: 2, economics: 1 } }
-        ]},
-        { question: 'Какая работа кажется тебе привлекательнее?', hint: 'Выбери один вариант', options: [
-            { text: 'В офисе с компьютером, в IT-компании', weights: { it: 2, economics: 1 } },
-            { text: 'На производстве, в лаборатории, в конструкторском бюро', weights: { engineering: 2, physics: 1 } },
-            { text: 'В больнице или клинике, рядом с пациентами', weights: { medicine: 2 } },
-            { text: 'В суде, юридической фирме или госорганах', weights: { law: 2 } },
-            { text: 'В своей компании, с клиентами и проектами', weights: { business: 2, economics: 1 } }
-        ]},
-        { question: 'Что тебе ближе?', hint: 'Выбери один вариант', options: [
-            { text: 'Точные науки, формулы, логика, код', weights: { it: 1, physics: 2, engineering: 1 } },
-            { text: 'Живые организмы, здоровье, медицина', weights: { medicine: 2 } },
-            { text: 'Общение с людьми, переговоры, тексты', weights: { humanities: 2, business: 1, law: 1 } },
-            { text: 'Цифры, деньги, экономика, рынки', weights: { economics: 2, business: 2 } }
-        ]},
-        { question: 'Какой проект ты бы выбрал для школьной конференции?', hint: 'Выбери один вариант', options: [
-            { text: 'Приложение или сайт с полезной функцией', weights: { it: 2 } },
-            { text: 'Модель робота, дрона или двигателя', weights: { engineering: 2, physics: 1 } },
-            { text: 'Исследование о здоровье, питании или мозге', weights: { medicine: 2 } },
-            { text: 'Анализ рынка или бизнес-план', weights: { economics: 2, business: 2 } },
-            { text: 'Исследование по истории, праву или литературе', weights: { humanities: 2, law: 1 } }
-        ]},
-        { question: 'Что для тебя важнее в будущей профессии?', hint: 'Выбери один вариант', options: [
-            { text: 'Постоянно учиться новому и решать сложные задачи', weights: { it: 2, physics: 1, engineering: 1 } },
-            { text: 'Помогать людям и видеть результат сразу', weights: { medicine: 2, humanities: 1 } },
-            { text: 'Хорошо зарабатывать и строить карьеру', weights: { economics: 2, business: 2 } },
-            { text: 'Иметь стабильную и уважаемую профессию', weights: { law: 2, medicine: 1 } },
-            { text: 'Заниматься творчеством и самовыражением', weights: { humanities: 2 } }
-        ]},
-        { question: 'Какая тема тебе интереснее всего?', hint: 'Выбери один вариант', options: [
-            { text: 'Искусственный интеллект и нейросети', weights: { it: 2, physics: 1 } },
-            { text: 'Космос, самолёты, новые материалы', weights: { engineering: 2, physics: 2 } },
-            { text: 'Генетика, мозг, новые лекарства', weights: { medicine: 2 } },
-            { text: 'Биржи, инвестиции, стартапы', weights: { economics: 2, business: 2 } },
-            { text: 'Права человека, политика, культура', weights: { law: 2, humanities: 2 } }
-        ]}
+        {
+            name: 'МГУ им. М.В. Ломоносова', emoji: '🏛️', score: 341, places: 4000, direction: 'Широкий профиль',
+            rating: 1, minScore: 281, paidFrom: 420000, budgetPlaces: 2531, paidPlaces: 500,
+            dormitory: true, military: true, exams: 'ДВИ по профилю',
+            faculties: [
+                { name: 'Вычислительная математика и кибернетика — Прикладная математика и информатика', score: 423, places: 312, budget: 312, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Мехмат — Математика', score: 322, places: 250, budget: 250, paid: 0, exams: 'Математика (ДВИ)', tags: ['physics', 'it'] },
+                { name: 'Физический — Фундаментальная и прикладная физика', score: 321, places: 347, budget: 347, paid: 0, exams: 'Физика (ДВИ), математика', tags: ['physics'] },
+                { name: 'Химический — Фундаментальная и прикладная химия', score: 432, places: 215, budget: 215, paid: 0, exams: 'Химия (ДВИ)', tags: ['medicine'] },
+                { name: 'Биологический — Общая биология', score: 421, places: 155, budget: 155, paid: 0, exams: 'Биология (ДВИ)', tags: ['medicine'] },
+                { name: 'Географический — Науки о земле', score: 296, places: 147, budget: 147, paid: 0, exams: 'География (ДВИ)', tags: ['humanities'] },
+                { name: 'Геологический — Геология', score: 281, places: 200, budget: 200, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Исторический — История', score: 351, places: 110, budget: 110, paid: 0, exams: 'История (ДВИ)', tags: ['humanities'] },
+                { name: 'Экономический — Экономика', score: 358, places: 170, budget: 170, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['economics'] },
+                { name: 'Юридический — Юриспруденция', score: 347, places: 305, budget: 305, paid: 0, exams: 'Обществознание (ДВИ), история', tags: ['law'] },
+                { name: 'Журналистика — Журналистика', score: 353, places: 107, budget: 107, paid: 0, exams: 'Литература (ДВИ)', tags: ['humanities'] },
+                { name: 'ИСАА — Востоковедение и африканистика', score: 358, places: 100, budget: 100, paid: 0, exams: 'История (ДВИ), иностранный язык', tags: ['humanities'] }
+            ]
+        },
+        {
+            name: 'МГТУ им. Н.Э. Баумана', emoji: '🔧', score: 271, places: 3000, direction: 'Инженерия',
+            rating: 2, minScore: 223, paidFrom: 290000, budgetPlaces: 1335, paidPlaces: 400,
+            dormitory: true, military: true, exams: 'ДВИ по математике и физике',
+            faculties: [
+                { name: 'Инженерный бизнес и менеджмент — Бизнес-информатика', score: 286, places: 40, budget: 40, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it', 'business'] },
+                { name: 'Инженерный бизнес и менеджмент — Инноватика', score: 272, places: 173, budget: 173, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['business'] },
+                { name: 'Машиностроительные технологии — Проектирование технологических машин и комплексов', score: 249, places: 277, budget: 277, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Машиностроение — Машиностроение', score: 252, places: 20, budget: 20, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Наноинженерия — Наноинженерия', score: 259, places: 38, budget: 38, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Информатика и системы управления — Информатика и вычислительная техника', score: 278, places: 213, budget: 213, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Информатика и системы управления — Прикладная математика и информатика', score: 298, places: 34, budget: 34, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Энергомашиностроение — Техносферная безопасность', score: 223, places: 42, budget: 42, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Энергомашиностроение — Электроэнергетика и электротехника', score: 248, places: 50, budget: 50, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Социальные и гуманитарные науки — Прикладная информатика', score: 280, places: 54, budget: 54, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['it', 'humanities'] },
+                { name: 'Робототехника и комплексная автоматизация — Автоматизация технологических процессов и производств', score: 298, places: 42, budget: 42, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering', 'it'] },
+                { name: 'Робототехника и комплексная автоматизация — Мехатроника и робототехника', score: 274, places: 56, budget: 56, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering', 'it'] },
+                { name: 'Специальное машиностроение — Управление в технических системах', score: 263, places: 40, budget: 40, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Специальное машиностроение — Радиоэлектронные системы и комплексы', score: 236, places: 17, budget: 17, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Биомедицинская техника — Биотехнические системы и технологии', score: 291, places: 80, budget: 80, paid: 0, exams: 'Математика (ДВИ), биология', tags: ['medicine', 'engineering'] },
+                { name: 'Фундаментальные науки — Математика и компьютерные науки', score: 281, places: 46, budget: 46, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it', 'physics'] },
+                { name: 'Фундаментальные науки — Прикладная математика', score: 288, places: 40, budget: 40, paid: 0, exams: 'Математика (ДВИ)', tags: ['physics'] },
+                { name: 'Фундаментальные науки — Техническая физика', score: 259, places: 42, budget: 42, paid: 0, exams: 'Физика (ДВИ), математика', tags: ['physics'] }
+            ]
+        },
+        {
+            name: 'МФТИ', emoji: '⚛️', score: 298, places: 1200, direction: 'Физика, IT',
+            rating: 3, minScore: 265, paidFrom: 380000, budgetPlaces: 1246, paidPlaces: 100,
+            dormitory: true, military: true, exams: 'ДВИ по математике и физике',
+            faculties: [
+                { name: 'ВШМ — Фундаментальная математика', score: 288, places: 15, budget: 15, paid: 0, exams: 'Математика (ДВИ)', tags: ['physics'] },
+                { name: 'ФРКТ — Радиотехника и компьютерные технологии', score: 292, places: 92, budget: 92, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['it', 'engineering'] },
+                { name: 'ФРКТ — Компьютерные технологии и вычислительная техника', score: 300, places: 28, budget: 28, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'ЛФИ — Общая и прикладная физика', score: 291, places: 179, budget: 179, paid: 0, exams: 'Физика (ДВИ), математика', tags: ['physics'] },
+                { name: 'ПИШ ФАЛТ — Авиационные технологии и автономные транспортные системы', score: 273, places: 28, budget: 28, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'ПИШ ФАЛТ — Программная инженерия и компьютерные технологии', score: 282, places: 32, budget: 32, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'ФАКТ — Геокосмические науки и технологии', score: 279, places: 38, budget: 38, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'ФАКТ — Техническая физика', score: 291, places: 32, budget: 32, paid: 0, exams: 'Физика (ДВИ), математика', tags: ['physics'] },
+                { name: 'ФЭФМ — Физика перспективных технологий', score: 286, places: 80, budget: 80, paid: 0, exams: 'Физика (ДВИ), математика', tags: ['physics'] },
+                { name: 'ФЭФМ — Электроника и наноэлектроника', score: 282, places: 32, budget: 32, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'ФБМФ — Биофизика и биоинформатика', score: 287, places: 66, budget: 66, paid: 0, exams: 'Биология (ДВИ), физика', tags: ['medicine', 'physics'] },
+                { name: 'ФБМФ — Биотехнология', score: 281, places: 66, budget: 66, paid: 0, exams: 'Биология (ДВИ), химия', tags: ['medicine'] },
+                { name: 'КНТ — Природоподобные, плазменные и ядерные технологии', score: 265, places: 34, budget: 34, paid: 0, exams: 'Физика (ДВИ), математика', tags: ['physics', 'engineering'] },
+                { name: 'ФПМИ — Прикладная математика и информатика', score: 303, places: 180, budget: 180, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'ФПМИ — Системное программирование и прикладная математика', score: 391, places: 30, budget: 30, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'ФПМИ — Естественные и компьютерные науки', score: 304, places: 70, budget: 70, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['it', 'physics'] },
+                { name: 'ФПМИ — Математическое моделирование и теория управления', score: 289, places: 36, budget: 36, paid: 0, exams: 'Математика (ДВИ)', tags: ['physics'] },
+                { name: 'ВШПИ — Программная инженерия', score: 299, places: 79, budget: 79, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] }
+            ]
+        },
+        {
+            name: 'НИЯУ МИФИ', emoji: '☢️', score: 277, places: 1500, direction: 'Ядерная физика',
+            rating: 4, minScore: 259, paidFrom: 280000, budgetPlaces: 1395, paidPlaces: 200,
+            dormitory: true, military: true, exams: 'ДВИ по физике и математике',
+            faculties: [
+                { name: 'Математика и механика — Прикладная математика и информатика', score: 305, places: 52, budget: 52, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Физика и астрономия — Прикладные математика и физика', score: 282, places: 117, budget: 117, paid: 0, exams: 'Физика (ДВИ), математика', tags: ['physics'] },
+                { name: 'Информатика и вычислительная техника — Информатика и вычислительная техника', score: 300, places: 120, budget: 120, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Информатика и вычислительная техника — Программная инженерия', score: 300, places: 120, budget: 120, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Информационная безопасность — Информационная безопасность', score: 278, places: 95, budget: 95, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Электроника, радиотехника и системы связи — Электроника и наноэлектроника', score: 261, places: 38, budget: 38, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Фотоника, приборостроение — Биотехнические системы и технологии', score: 272, places: 80, budget: 80, paid: 0, exams: 'Биология (ДВИ), физика', tags: ['medicine', 'engineering'] },
+                { name: 'Фотоника, приборостроение — Приборостроение', score: 267, places: 80, budget: 80, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Фотоника, приборостроение — Фотоника и оптоинформатика', score: 270, places: 80, budget: 80, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Фотоника, приборостроение — Лазерная техника и лазерные технологии', score: 266, places: 80, budget: 80, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Ядерная энергетика и технологии — Ядерные физика и технологии', score: 273, places: 115, budget: 115, paid: 0, exams: 'Физика (ДВИ), математика', tags: ['physics', 'engineering'] },
+                { name: 'Ядерная энергетика и технологии — Ядерная энергетика и теплофизика', score: 271, places: 115, budget: 115, paid: 0, exams: 'Физика (ДВИ), математика', tags: ['physics', 'engineering'] },
+                { name: 'Машиностроение — Мехатроника и робототехника', score: 270, places: 45, budget: 45, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering', 'it'] },
+                { name: 'Физико-технические науки и технологии — Техническая физика', score: 391, places: 30, budget: 30, paid: 0, exams: 'Физика (ДВИ), математика', tags: ['physics'] },
+                { name: 'Технологии материалов — Материаловедение и технологии материалов', score: 259, places: 15, budget: 15, paid: 0, exams: 'Математика (ДВИ), химия', tags: ['engineering'] },
+                { name: 'Экономика и управление — Экономика', score: 275, places: 40, budget: 40, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['economics'] }
+            ]
+        },
+        {
+            name: 'МГИМО', emoji: '🌍', score: 313, places: 1000, direction: 'Международные отношения',
+            rating: 5, minScore: 277, paidFrom: 450000, budgetPlaces: 496, paidPlaces: 300,
+            dormitory: true, military: true, exams: 'ДВИ по иностранному языку',
+            faculties: [
+                { name: 'Международные отношения — Зарубежное регионоведение', score: 366, places: 87, budget: 87, paid: 0, exams: 'Иностранный язык (ДВИ), история', tags: ['humanities'] },
+                { name: 'Международные отношения — Международные отношения', score: 384, places: 29, budget: 29, paid: 0, exams: 'Иностранный язык (ДВИ), история', tags: ['humanities'] },
+                { name: 'Международно-правовой — Юриспруденция', score: 375, places: 75, budget: 75, paid: 0, exams: 'Обществознание (ДВИ), иностранный язык', tags: ['law'] },
+                { name: 'Международные экономические отношения — Экономика', score: 277, places: 63, budget: 63, paid: 0, exams: 'Математика (ДВИ), иностранный язык', tags: ['economics'] },
+                { name: 'Международная журналистика — Журналистика', score: 284, places: 30, budget: 30, paid: 0, exams: 'Литература (ДВИ), иностранный язык', tags: ['humanities'] },
+                { name: 'Реклама и связи с общественностью', score: 291, places: 18, budget: 18, paid: 0, exams: 'Обществознание (ДВИ), иностранный язык', tags: ['humanities'] },
+                { name: 'Социология', score: 281, places: 5, budget: 5, paid: 0, exams: 'Обществознание (ДВИ)', tags: ['humanities'] },
+                { name: 'Управление и политика — Политология', score: 291, places: 10, budget: 10, paid: 0, exams: 'Обществознание (ДВИ), история', tags: ['humanities'] },
+                { name: 'Международные отношения — Мировая политика и международная безопасность', score: 294, places: 10, budget: 10, paid: 0, exams: 'Иностранный язык (ДВИ), история', tags: ['humanities'] },
+                { name: 'Институт международной торговли и устойчивого развития — Экология и природопользование', score: 278, places: 20, budget: 20, paid: 0, exams: 'География (ДВИ), биология', tags: ['humanities'] },
+                { name: 'Институт международной торговли и устойчивого развития — Торговое дело', score: 283, places: 10, budget: 10, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['business'] }
+            ]
+        },
+        {
+            name: 'НИУ ВШЭ', emoji: '📊', score: 279, places: 3500, direction: 'Экономика, IT',
+            rating: 6, minScore: 236, paidFrom: 350000, budgetPlaces: 1625, paidPlaces: 700,
+            dormitory: true, military: true, exams: 'ДВИ по профилю',
+            faculties: [
+                { name: 'Математика — Математика', score: 282, places: 60, budget: 60, paid: 0, exams: 'Математика (ДВИ)', tags: ['physics'] },
+                { name: 'Прикладная математика и информатика — Прикладная математика и информатика', score: 300, places: 195, budget: 195, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Прикладная математика и информатика — Прикладная математика', score: 294, places: 80, budget: 80, paid: 0, exams: 'Математика (ДВИ)', tags: ['physics', 'it'] },
+                { name: 'Физика и астрономия — Физика', score: 243, places: 40, budget: 40, paid: 0, exams: 'Физика (ДВИ), математика', tags: ['physics'] },
+                { name: 'Информатика и вычислительная техника — Информатика и вычислительная техника', score: 278, places: 125, budget: 125, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Информатика и вычислительная техника — Программная инженерия', score: 299, places: 160, budget: 160, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Информационная безопасность — Информационная безопасность', score: 276, places: 80, budget: 80, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Инфокоммуникационные технологии — Цифровые технологии и телекоммуникации', score: 236, places: 80, budget: 80, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['it'] },
+                { name: 'Бизнес-информатика — Бизнес-информатика', score: 288, places: 100, budget: 100, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it', 'business'] },
+                { name: 'Экономика и управление — Экономика', score: 291, places: 100, budget: 100, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['economics'] },
+                { name: 'Экономика и управление — Менеджмент (Управление бизнесом)', score: 295, places: 50, budget: 50, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['business'] },
+                { name: 'Социология — Социология', score: 288, places: 115, budget: 115, paid: 0, exams: 'Обществознание (ДВИ)', tags: ['humanities'] },
+                { name: 'Юриспруденция — Юриспруденция', score: 282, places: 150, budget: 150, paid: 0, exams: 'Обществознание (ДВИ), история', tags: ['law'] },
+                { name: 'Политические науки и регионоведение — Политология', score: 297, places: 40, budget: 40, paid: 0, exams: 'Обществознание (ДВИ), история', tags: ['humanities'] },
+                { name: 'Международные отношения — Международные отношения', score: 353, places: 45, budget: 45, paid: 0, exams: 'Иностранный язык (ДВИ), история', tags: ['humanities'] },
+                { name: 'Философия, этика и религиоведение — Философия', score: 237, places: 45, budget: 45, paid: 0, exams: 'Обществознание (ДВИ)', tags: ['humanities'] },
+                { name: 'Психологические науки — Психология', score: 249, places: 80, budget: 80, paid: 0, exams: 'Биология (ДВИ), обществознание', tags: ['humanities'] },
+                { name: 'Журналистика — Журналистика', score: 279, places: 60, budget: 60, paid: 0, exams: 'Литература (ДВИ)', tags: ['humanities'] },
+                { name: 'Изобразительное искусство — Дизайн', score: 291, places: 65, budget: 65, paid: 0, exams: 'Творческий экзамен', tags: ['humanities'] },
+                { name: 'Востоковедение и африканистика — Востоковедение', score: 289, places: 50, budget: 50, paid: 0, exams: 'История (ДВИ), иностранный язык', tags: ['humanities'] }
+            ]
+        },
+        {
+            name: 'РАНХиГС', emoji: '🏛️', score: 267, places: 2000, direction: 'Госслужба, экономика',
+            rating: 7, minScore: 244, paidFrom: 300000, budgetPlaces: 434, paidPlaces: 800,
+            dormitory: true, military: true, exams: 'ДВИ по профилю',
+            faculties: [
+                { name: 'Прикладная информатика — Цифровые технологии и разработка информационных систем', score: 261, places: 23, budget: 23, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Прикладная информатика — Искусственный интеллект и машинное обучение', score: 253, places: 22, budget: 22, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Психология — Психологическое консультирование и коучинг', score: 244, places: 15, budget: 15, paid: 0, exams: 'Биология (ДВИ), обществознание', tags: ['humanities'] },
+                { name: 'Экономика — Экономика, финансы и анализ данных', score: 270, places: 50, budget: 50, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['economics'] },
+                { name: 'Менеджмент — Маркетинг', score: 280, places: 25, budget: 25, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['business'] },
+                { name: 'Государственное и муниципальное управление — Эффективное государственное управление', score: 280, places: 22, budget: 22, paid: 0, exams: 'Обществознание (ДВИ), история', tags: ['humanities'] },
+                { name: 'Бизнес-информатика — Бизнес-информатика', score: 283, places: 17, budget: 17, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it', 'business'] },
+                { name: 'Зарубежное регионоведение — Международное сотрудничество и дипломатия', score: 288, places: 40, budget: 40, paid: 0, exams: 'Иностранный язык (ДВИ), история', tags: ['humanities'] },
+                { name: 'История — История', score: 255, places: 40, budget: 40, paid: 0, exams: 'История (ДВИ)', tags: ['humanities'] },
+                { name: 'Международные отношения — Международные отношения: политика, экономика, бизнес', score: 280, places: 30, budget: 30, paid: 0, exams: 'Иностранный язык (ДВИ), история', tags: ['humanities'] }
+            ]
+        },
+        {
+            name: 'Финансовый университет', emoji: '💰', score: 272, places: 2500, direction: 'Финансы',
+            rating: 8, minScore: 234, paidFrom: 280000, budgetPlaces: 1033, paidPlaces: 600,
+            dormitory: true, military: true, exams: 'ДВИ по профилю',
+            faculties: [
+                { name: 'Инноватика — Управление цифровыми инновациями', score: 88, places: 21, budget: 21, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['business'] },
+                { name: 'Гостиничное дело — Гостиничный бизнес', score: 82, places: 40, budget: 40, paid: 0, exams: 'Обществознание (ДВИ)', tags: ['business'] },
+                { name: 'Туризм — Туристический бизнес и экономика впечатлений', score: 85, places: 35, budget: 35, paid: 0, exams: 'Обществознание (ДВИ)', tags: ['business'] },
+                { name: 'Социология — Экономическая социология', score: 85, places: 100, budget: 100, paid: 0, exams: 'Обществознание (ДВИ)', tags: ['humanities'] },
+                { name: 'Политология — Мировая политика', score: 90, places: 50, budget: 50, paid: 0, exams: 'История (ДВИ), обществознание', tags: ['humanities'] },
+                { name: 'Информационная безопасность — Безопасность автоматизированных систем в кредитно-финансовой сфере', score: 82, places: 80, budget: 80, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Прикладная математика и информатика — Прикладное машинное обучение', score: 88, places: 113, budget: 113, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Прикладная информатика — Прикладные информационные системы в экономике и финансах', score: 86, places: 79, budget: 79, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Экономика — Корпоративные финансы', score: 98, places: 56, budget: 56, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['economics'] },
+                { name: 'Экономика — Международная экономика и торговля', score: 99, places: 68, budget: 68, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['economics'] },
+                { name: 'Экономика — Мировая экономика, мировые финансы и международный бизнес', score: 98, places: 88, budget: 88, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['economics'] }
+            ]
+        },
+        {
+            name: 'РУДН', emoji: '🤝', score: 236, places: 4500, direction: 'Мультидисциплинарный',
+            rating: 9, minScore: 169, paidFrom: 220000, budgetPlaces: 3000, paidPlaces: 1500,
+            dormitory: true, military: true, exams: 'ДВИ по профилю',
+            faculties: [
+                { name: 'Аграрно-технологический институт — Землеустройство и кадастры', score: 206, places: 43, budget: 43, paid: 0, exams: 'Математика (ДВИ), география', tags: ['engineering'] },
+                { name: 'Инженерная академия — Строительство', score: 234, places: 50, budget: 50, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Инженерная академия — Наноинженерия', score: 215, places: 40, budget: 40, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Институт мировой экономики и бизнеса — Реклама и связи с общественностью', score: 296, places: 30, budget: 30, paid: 0, exams: 'Обществознание (ДВИ)', tags: ['business'] },
+                { name: 'Институт экологии — Экология и природопользование', score: 169, places: 55, budget: 55, paid: 0, exams: 'География (ДВИ), биология', tags: ['humanities'] },
+                { name: 'Факультет гуманитарных и социальных наук — Социология', score: 270, places: 30, budget: 30, paid: 0, exams: 'Обществознание (ДВИ)', tags: ['humanities'] },
+                { name: 'Факультет физико-математических и естественных наук — Прикладная математика и информатика', score: 263, places: 49, budget: 49, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] }
+            ]
+        },
+        {
+            name: 'Сеченовский университет', emoji: '🩺', score: 250, places: 2000, direction: 'Медицина',
+            rating: 10, minScore: 204, paidFrom: 320000, budgetPlaces: 1632, paidPlaces: 300,
+            dormitory: true, military: true, exams: 'ДВИ по химии и биологии',
+            faculties: [
+                { name: 'Лечебное дело', score: 260, places: 800, budget: 800, paid: 0, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
+                { name: 'Педиатрия', score: 250, places: 350, budget: 350, paid: 0, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
+                { name: 'Стоматология', score: 270, places: 150, budget: 150, paid: 0, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
+                { name: 'Фармация', score: 230, places: 200, budget: 200, paid: 0, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
+                { name: 'Бакалавриат — Менеджмент', score: 204, places: 40, budget: 40, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['business'] },
+                { name: 'Бакалавриат — Биотехнология', score: 260, places: 50, budget: 50, paid: 0, exams: 'Биология (ДВИ), химия', tags: ['medicine'] }
+            ]
+        },
+        {
+            name: 'НИТУ МИСиС', emoji: '⛏️', score: 264, places: 1800, direction: 'Материаловедение',
+            rating: 11, minScore: 216, paidFrom: 200000, budgetPlaces: 826, paidPlaces: 300,
+            dormitory: true, military: true, exams: 'ДВИ по математике и физике',
+            faculties: [
+                { name: 'Биотехнологии', score: 288, places: 30, budget: 30, paid: 0, exams: 'Биология (ДВИ), химия', tags: ['medicine'] },
+                { name: 'Бизнес-информатика', score: 287, places: 40, budget: 40, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it', 'business'] },
+                { name: 'Металлургия', score: 228, places: 100, budget: 100, paid: 0, exams: 'Математика (ДВИ), химия', tags: ['engineering'] },
+                { name: 'Геотехнология', score: 216, places: 80, budget: 80, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Информатика и вычислительная техника', score: 265, places: 120, budget: 120, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Материаловедение', score: 245, places: 90, budget: 90, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering', 'physics'] }
+            ]
+        },
+        {
+            name: 'РЭУ им. Г.В. Плеханова', emoji: '📈', score: 268, places: 2800, direction: 'Экономика',
+            rating: 12, minScore: 205, paidFrom: 240000, budgetPlaces: 1133, paidPlaces: 900,
+            dormitory: true, military: true, exams: 'ДВИ по профилю',
+            faculties: [
+                { name: 'Журналистика', score: 298, places: 20, budget: 20, paid: 0, exams: 'Литература (ДВИ)', tags: ['humanities'] },
+                { name: 'Прикладная математика и информатика', score: 291, places: 60, budget: 60, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Экономика', score: 291, places: 150, budget: 150, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['economics'] },
+                { name: 'Экология и природопользование', score: 205, places: 30, budget: 30, paid: 0, exams: 'География (ДВИ), биология', tags: ['humanities'] },
+                { name: 'Менеджмент', score: 265, places: 100, budget: 100, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['business'] },
+                { name: 'Юриспруденция', score: 280, places: 80, budget: 80, paid: 0, exams: 'Обществознание (ДВИ), история', tags: ['law'] }
+            ]
+        },
+        {
+            name: 'РНИМУ им. Н.И. Пирогова', emoji: '🧬', score: 265, places: 1600, direction: 'Медицина',
+            rating: 13, minScore: 252, paidFrom: 310000, budgetPlaces: 1640, paidPlaces: 300,
+            dormitory: true, military: true, exams: 'ДВИ по химии и биологии',
+            faculties: [
+                { name: 'Лечебное дело', score: 278, places: 800, budget: 800, paid: 0, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
+                { name: 'Педиатрия', score: 252, places: 600, budget: 600, paid: 0, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
+                { name: 'Стоматология', score: 270, places: 80, budget: 80, paid: 0, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
+                { name: 'Медицинская биохимия', score: 265, places: 60, budget: 60, paid: 0, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
+                { name: 'Клиническая психология', score: 260, places: 50, budget: 50, paid: 0, exams: 'Биология (ДВИ), обществознание', tags: ['humanities', 'medicine'] }
+            ]
+        },
+        {
+            name: 'МАИ', emoji: '✈️', score: 242, places: 2200, direction: 'Авиация, IT',
+            rating: 14, minScore: 204, paidFrom: 230000, budgetPlaces: 1700, paidPlaces: 500,
+            dormitory: true, military: true, exams: 'ДВИ по математике и физике',
+            faculties: [
+                { name: 'Программная инженерия', score: 279, places: 100, budget: 100, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Приборостроение', score: 204, places: 50, budget: 50, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Информатика и вычислительная техника', score: 270, places: 150, budget: 150, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Авиастроение', score: 255, places: 200, budget: 200, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Двигатели летательных аппаратов', score: 250, places: 100, budget: 100, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] }
+            ]
+        },
+        {
+            name: 'НИУ МЭИ', emoji: '⚡', score: 240, places: 1800, direction: 'Энергетика',
+            rating: 15, minScore: 213, paidFrom: 220000, budgetPlaces: 1500, paidPlaces: 400,
+            dormitory: true, military: true, exams: 'ДВИ по математике и физике',
+            faculties: [
+                { name: 'Фундаментальная информатика и информационные технологии', score: 271, places: 60, budget: 60, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Цифровая электротехника и электроника', score: 213, places: 100, budget: 100, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Теплоэнергетика и теплотехника', score: 240, places: 150, budget: 150, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Электроэнергетика', score: 245, places: 120, budget: 120, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Ядерная энергетика и теплофизика', score: 250, places: 80, budget: 80, paid: 0, exams: 'Физика (ДВИ), математика', tags: ['physics', 'engineering'] }
+            ]
+        },
+        {
+            name: 'МГЮА им. О.Е. Кутафина', emoji: '⚖️', score: 271, places: 1200, direction: 'Юриспруденция',
+            rating: 16, minScore: 249, paidFrom: 300000, budgetPlaces: 900, paidPlaces: 300,
+            dormitory: true, military: true, exams: 'ДВИ по обществознанию',
+            faculties: [
+                { name: 'Юриспруденция (гражданско-правовой профиль)', score: 271, places: 300, budget: 300, paid: 0, exams: 'Обществознание (ДВИ), история', tags: ['law'] },
+                { name: 'Юриспруденция (уголовно-правовой профиль)', score: 270, places: 250, budget: 250, paid: 0, exams: 'Обществознание (ДВИ), история', tags: ['law'] },
+                { name: 'Юриспруденция (международно-правовой профиль)', score: 275, places: 150, budget: 150, paid: 0, exams: 'Обществознание (ДВИ), иностранный язык', tags: ['law'] },
+                { name: 'Судебная экспертиза', score: 265, places: 100, budget: 100, paid: 0, exams: 'Обществознание (ДВИ), химия', tags: ['law'] },
+                { name: 'Право и бизнес', score: 260, places: 100, budget: 100, paid: 0, exams: 'Обществознание (ДВИ), математика', tags: ['law', 'business'] }
+            ]
+        },
+        {
+            name: 'РГУ нефти и газа им. И.М. Губкина', emoji: '🛢️', score: 245, places: 1500, direction: 'Нефтегаз',
+            rating: 17, minScore: 220, paidFrom: 250000, budgetPlaces: 1200, paidPlaces: 300,
+            dormitory: true, military: true, exams: 'ДВИ по математике и физике',
+            faculties: [
+                { name: 'Нефтегазовое дело', score: 255, places: 200, budget: 200, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Геология нефти и газа', score: 245, places: 150, budget: 150, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Химическая технология', score: 235, places: 100, budget: 100, paid: 0, exams: 'Химия (ДВИ), математика', tags: ['engineering'] },
+                { name: 'Экономика', score: 250, places: 80, budget: 80, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['economics'] }
+            ]
+        },
+        {
+            name: 'НИУ МГСУ', emoji: '🏗️', score: 240, places: 1400, direction: 'Строительство',
+            rating: 18, minScore: 200, paidFrom: 220000, budgetPlaces: 1100, paidPlaces: 300,
+            dormitory: true, military: true, exams: 'ДВИ по математике и физике',
+            faculties: [
+                { name: 'Строительство', score: 240, places: 250, budget: 250, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Строительство уникальных зданий и сооружений', score: 255, places: 100, budget: 100, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
+                { name: 'Информационные системы и технологии', score: 230, places: 80, budget: 80, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Экономика', score: 220, places: 50, budget: 50, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['economics'] }
+            ]
+        },
+        {
+            name: 'МПГУ', emoji: '🧑‍🏫', score: 235, places: 4000, direction: 'Педагогика',
+            rating: 19, minScore: 186, paidFrom: 170000, budgetPlaces: 3300, paidPlaces: 700,
+            dormitory: true, military: false, exams: 'ДВИ по профилю',
+            faculties: [
+                { name: 'Педагогическое образование (русский язык и литература)', score: 235, places: 300, budget: 300, paid: 0, exams: 'Литература (ДВИ), русский', tags: ['humanities'] },
+                { name: 'Педагогическое образование (математика и информатика)', score: 235, places: 250, budget: 250, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
+                { name: 'Педагогическое образование (история и обществознание)', score: 230, places: 200, budget: 200, paid: 0, exams: 'История (ДВИ), обществознание', tags: ['humanities'] },
+                { name: 'Психология', score: 240, places: 150, budget: 150, paid: 0, exams: 'Биология (ДВИ), обществознание', tags: ['humanities'] }
+            ]
+        },
+        {
+            name: 'МГЛУ', emoji: '🗣️', score: 250, places: 1200, direction: 'Лингвистика',
+            rating: 20, minScore: 210, paidFrom: 220000, budgetPlaces: 900, paidPlaces: 300,
+            dormitory: true, military: false, exams: 'ДВИ по иностранному языку',
+            faculties: [
+                { name: 'Лингвистика (перевод и переводоведение)', score: 260, places: 200, budget: 200, paid: 0, exams: 'Иностранный язык (ДВИ), русский', tags: ['humanities'] },
+                { name: 'Лингвистика (теория и методика преподавания)', score: 250, places: 150, budget: 150, paid: 0, exams: 'Иностранный язык (ДВИ), русский', tags: ['humanities'] },
+                { name: 'Международные отношения', score: 255, places: 100, budget: 100, paid: 0, exams: 'Иностранный язык (ДВИ), история', tags: ['humanities'] },
+                { name: 'Педагогическое образование', score: 240, places: 120, budget: 120, paid: 0, exams: 'Иностранный язык (ДВИ), обществознание', tags: ['humanities'] }
+            ]
+        }
     ];
 
     const $ = (sel) => document.querySelector(sel);
