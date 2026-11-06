@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-<title>ПрофиВУЗ — выбери вуз за 5 минут</title>
+<title>ПрофиВУЗ — выбери вуз или колледж за 5 минут</title>
 <link rel="icon" type="image/jpeg" href="images/logo.jpg">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -16,24 +16,13 @@
         </button>
 
         <nav class="site-nav" id="siteNav">
-            <button class="nav-btn" data-nav="home" type="button">
-                <span class="nav-btn-icon">🏠</span> Главная
-            </button>
-            <button class="nav-btn" data-nav="vuz" type="button">
-                <span class="nav-btn-icon">🏛️</span> Вузы
-            </button>
-            <button class="nav-btn" data-nav="search" type="button">
-                <span class="nav-btn-icon">🔍</span> Поиск
-            </button>
-            <button class="nav-btn" data-nav="prof" type="button">
-                <span class="nav-btn-icon">🧭</span> Профориентация
-            </button>
-            <button class="nav-btn" data-nav="myresult" type="button" id="navMyResult" style="display:none;">
-                <span class="nav-btn-icon">📋</span> Мой результат
-            </button>
-            <button class="nav-btn" data-nav="courses" type="button">
-                <span class="nav-btn-icon">📚</span> Курсы
-            </button>
+            <button class="nav-btn" data-nav="home" type="button"><span class="nav-btn-icon">🏠</span> Главная</button>
+            <button class="nav-btn" data-nav="vuz" type="button"><span class="nav-btn-icon">🏛️</span> Вузы</button>
+            <button class="nav-btn" data-nav="college" type="button"><span class="nav-btn-icon">🏫</span> Колледжи</button>
+            <button class="nav-btn" data-nav="search" type="button"><span class="nav-btn-icon">🔍</span> Поиск</button>
+            <button class="nav-btn" data-nav="prof" type="button"><span class="nav-btn-icon">🧭</span> Профориентация</button>
+            <button class="nav-btn" data-nav="myresult" type="button" id="navMyResult" style="display:none;"><span class="nav-btn-icon">📋</span> Мой результат</button>
+            <button class="nav-btn" data-nav="courses" type="button"><span class="nav-btn-icon">📚</span> Курсы</button>
         </nav>
 
         <button class="nav-burger" id="navBurger" type="button" aria-label="Меню" aria-expanded="false">☰</button>
@@ -42,120 +31,71 @@
 
 <div id="app">
     <div class="app-inner">
+        <!-- ГЛАВНАЯ -->
         <section id="page-home" class="page active">
             <div class="hero">
                 <div class="hero-content">
                     <img src="images/logo.jpg" alt="ПрофиВУЗ" class="hero-logo">
-                    <h1>Привет, мы поможем тебе выбрать вуз</h1>
-                    <p class="hero-sub">Подбираем вуз Москвы по баллам, специальностям и местам — за 5 минут, а не за месяц</p>
+                    <h1>Привет, мы поможем тебе выбрать вуз или колледж</h1>
+                    <p class="hero-sub">Подбираем вуз или колледж Москвы по баллам, специальностям и местам — за 5 минут, а не за месяц</p>
                     <button class="btn-primary" id="heroStart" type="button">Подобрать вуз →</button>
                     <button class="btn-my-result hidden" id="heroMyResult" type="button">📋 Мой результат профориентации</button>
-                    <div class="hero-proof">📊 20 вузов Москвы · 100+ специальностей · поиск, отзывы и профориентация</div>
+                    <div class="hero-proof">📊 20 вузов и 8 колледжей Москвы · 100+ специальностей · поиск, отзывы и профориентация</div>
                 </div>
             </div>
 
             <section class="section">
                 <h2 class="section-title">Как это работает</h2>
                 <div class="steps">
-                    <div class="step">
-                        <div class="step-num">1</div>
-                        <div class="step-text">
-                            Пройди <strong>профориентацию</strong> — узнаешь, какие специальности тебе подходят
-                            <span class="step-note">🧭 8 вопросов · 2–3 минуты</span>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <div class="step-num">2</div>
-                        <div class="step-text">Найди специальность через <strong>поиск по направлениям</strong> — например, IT или медицину</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-num">3</div>
-                        <div class="step-text">Прочитай <strong>реальные отзывы</strong> студентов и оставь свой — плюсы, минусы и скрытые изъяны</div>
-                    </div>
+                    <div class="step"><div class="step-num">1</div><div class="step-text">Пройди <strong>профориентацию</strong> — узнаешь, какие специальности тебе подходят<span class="step-note">🧭 8 вопросов · 2–3 минуты</span></div></div>
+                    <div class="step"><div class="step-num">2</div><div class="step-text">Найди специальность через <strong>поиск по направлениям</strong> — например, IT или медицину</div></div>
+                    <div class="step"><div class="step-num">3</div><div class="step-text">Прочитай <strong>реальные отзывы</strong> студентов и оставь свой — плюсы, минусы и скрытые изъяны</div></div>
                 </div>
             </section>
 
             <section class="section">
                 <h2 class="section-title">Что ты найдёшь на ПрофиВУЗ</h2>
                 <div class="features-grid">
-                    <div class="feature">
-                        <span class="feature-icon">🧭</span>
-                        <div class="feature-title">Профориентация</div>
-                        <div class="feature-text">Тест из 8 вопросов: узнаешь свои направления и вузы, куда проходишь по баллам.</div>
-                    </div>
-                    <div class="feature">
-                        <span class="feature-icon">🔍</span>
-                        <div class="feature-title">Поиск по специальностям</div>
-                        <div class="feature-text">Введи «IT», «медицина» или «экономика» — увидишь вузы и факультеты, где это есть.</div>
-                    </div>
-                    <div class="feature">
-                        <span class="feature-icon">💬</span>
-                        <div class="feature-title">Отзывы студентов</div>
-                        <div class="feature-text">Реальные плюсы, минусы и скрытые изъяны вузов — от тех, кто там учится.</div>
-                    </div>
-                    <div class="feature">
-                        <span class="feature-icon">🏛️</span>
-                        <div class="feature-title">20 вузов Москвы</div>
-                        <div class="feature-text">Рейтинг, проходные баллы, бюджетные и платные места, ДВИ, общежитие, ВУЦ.</div>
-                    </div>
-                    <div class="feature">
-                        <span class="feature-icon">🎓</span>
-                        <div class="feature-title">100+ факультетов</div>
-                        <div class="feature-text">Проходной балл, места, бюджет и платно — по каждому факультету и направлению.</div>
-                    </div>
-                    <div class="feature">
-                        <span class="feature-icon">📚</span>
-                        <div class="feature-title">Подбор курсов</div>
-                        <div class="feature-text">Найдём подготовительные курсы по нужным предметам и формату обучения.</div>
-                    </div>
+                    <div class="feature"><span class="feature-icon">🧭</span><div class="feature-title">Профориентация</div><div class="feature-text">Тест из 8 вопросов: узнаешь свои направления и вузы, куда проходишь по баллам.</div></div>
+                    <div class="feature"><span class="feature-icon">🔍</span><div class="feature-title">Поиск по специальностям</div><div class="feature-text">Введи «IT», «медицина» или «экономика» — увидишь вузы, колледжи и факультеты, где это есть.</div></div>
+                    <div class="feature"><span class="feature-icon">💬</span><div class="feature-title">Отзывы студентов</div><div class="feature-text">Реальные плюсы, минусы и скрытые изъяны вузов и колледжей — от тех, кто там учится.</div></div>
+                    <div class="feature"><span class="feature-icon">🏛️</span><div class="feature-title">20 вузов Москвы</div><div class="feature-text">Рейтинг, проходные баллы, бюджетные и платные места, ДВИ, общежитие, ВУЦ.</div></div>
+                    <div class="feature"><span class="feature-icon">🏫</span><div class="feature-title">Колледжи Москвы</div><div class="feature-text">Специальности, стоимость, бюджетные места и контакты приёмных комиссий.</div></div>
+                    <div class="feature"><span class="feature-icon">📚</span><div class="feature-title">Подбор курсов</div><div class="feature-text">Найдём подготовительные курсы по нужным предметам и формату обучения.</div></div>
                 </div>
             </section>
 
             <section class="section">
                 <h2 class="section-title">Для кого</h2>
-                <p class="for-whom">
-                    Ты учишься в <strong>10 или 11 классе</strong> и уже понял: пора выбирать вуз, но в голове — каша из названий, баллов и факультетов. Ты не хочешь гуглить 20 сайтов и сравнивать таблицы вручную. Тебе нужно за один вечер увидеть: <strong>куда ты проходишь по баллам</strong> и на каком факультете тебе будет интересно. ПрофиВУЗ собирает это в одном месте — без воды и лишних кликов.
-                </p>
+                <p class="for-whom">Ты учишься в <strong>9, 10 или 11 классе</strong> и уже понял: пора выбирать, но в голове — каша из названий, баллов и факультетов. Ты не хочешь гуглить 20 сайтов и сравнивать таблицы вручную. Тебе нужно за один вечер увидеть: <strong>куда ты проходишь по баллам</strong> и на каком направлении тебе будет интересно. ПрофиВУЗ собирает это в одном месте — без воды и лишних кликов.</p>
             </section>
 
             <section class="section">
                 <h2 class="section-title">Сколько стоит</h2>
                 <div class="pricing">
-                    <div class="price-item highlight">
-                        <div class="price-who">Для школьников</div>
-                        <div class="price-what">Профориентация, поиск, вузы, факультеты, баллы, места, отзывы</div>
-                        <div class="price-amount">0 ₽ — бесплатно</div>
-                    </div>
-                    <div class="price-item">
-                        <div class="price-who">Для вузов</div>
-                        <div class="price-what">Размещение рекламы в подборке вузов</div>
-                        <div class="price-amount">2 000 ₽ / месяц</div>
-                    </div>
-                    <div class="price-item">
-                        <div class="price-who">Для тех, кто хочет поддержать</div>
-                        <div class="price-what">Донат на развитие проекта и корм котикам</div>
-                        <div class="price-amount">100 ₽ / 300 ₽ / своя сумма</div>
-                    </div>
+                    <div class="price-item highlight"><div class="price-who">Для школьников</div><div class="price-what">Профориентация, поиск, вузы, колледжи, факультеты, баллы, места, отзывы</div><div class="price-amount">0 ₽ — бесплатно</div></div>
+                    <div class="price-item"><div class="price-who">Для вузов и колледжей</div><div class="price-what">Размещение рекламы в подборке</div><div class="price-amount">2 000 ₽ / месяц</div></div>
+                    <div class="price-item"><div class="price-who">Для тех, кто хочет поддержать</div><div class="price-what">Донат на развитие проекта и корм котикам</div><div class="price-amount">100 ₽ / 300 ₽ / своя сумма</div></div>
                 </div>
             </section>
 
             <section class="cta-section" id="ctaBlock">
-                <h2>Открой список вузов — и выбери свой за 5 минут</h2>
-                <p>20 вузов Москвы. Поиск по специальностям. Без регистрации.</p>
+                <h2>Открой список — и выбери свой вуз или колледж за 5 минут</h2>
+                <p>20 вузов и 8 колледжей Москвы. Поиск по специальностям. Без регистрации.</p>
                 <div class="cta-buttons">
                     <button class="btn-cta" id="ctaVuz" type="button">Посмотреть вузы →</button>
-                    <button class="btn-cta secondary" id="ctaCourses" type="button">📚 Найти курсы</button>
+                    <button class="btn-cta secondary" id="ctaCollege" type="button">🏫 Посмотреть колледжи</button>
                 </div>
             </section>
         </section>
 
+        <!-- ВУЗЫ -->
         <section id="page-vuz" class="page">
             <div class="page-header">
                 <button class="btn-back" id="back-from-vuz" type="button">← На главную</button>
                 <h2>Вузы Москвы</h2>
                 <p>Рейтинг, баллы, места, стоимость, отзывы и другие данные для поступления</p>
             </div>
-
             <div class="prof-banner" id="profBanner">
                 <div class="prof-banner-emoji">🧭</div>
                 <div class="prof-banner-body">
@@ -167,18 +107,10 @@
                     </div>
                 </div>
             </div>
-
             <div class="search-wrap">
                 <div class="search-box">
                     <span class="search-box-icon">🔍</span>
-                    <input
-                        type="search"
-                        class="search-input"
-                        id="searchInput"
-                        placeholder="Найти специальность: IT, медицина, экономика…"
-                        autocomplete="off"
-                        aria-label="Поиск по направлениям и специальностям"
-                    >
+                    <input type="search" class="search-input" id="searchInput" placeholder="Найти специальность: IT, медицина, экономика…" autocomplete="off">
                     <button class="search-clear" id="searchClear" type="button" aria-label="Очистить поиск">✕</button>
                 </div>
                 <div class="search-hint" id="searchHint">Популярные запросы:</div>
@@ -191,13 +123,35 @@
                     <button class="search-chip" data-q="педагогика" type="button">Педагогика</button>
                 </div>
             </div>
-
-            <div class="search-empty" id="searchEmpty">
-                <span class="search-empty-emoji">🔍</span>
-                Ничего не нашлось. Попробуй другой запрос — например, «IT», «медицина», «экономика».
-            </div>
-
+            <div class="search-empty" id="searchEmpty"><span class="search-empty-emoji">🔍</span>Ничего не нашлось. Попробуй другой запрос — например, «IT», «медицина», «экономика».</div>
             <div class="cards-grid" id="vuz-grid"></div>
+        </section>
+
+        <!-- КОЛЛЕДЖИ -->
+        <section id="page-college" class="page">
+            <div class="page-header">
+                <button class="btn-back" id="back-from-college" type="button">← На главную</button>
+                <h2>Колледжи Москвы</h2>
+                <p>Специальности, бюджетные места, стоимость и контакты приёмных комиссий</p>
+            </div>
+            <div class="search-wrap">
+                <div class="search-box">
+                    <span class="search-box-icon">🔍</span>
+                    <input type="search" class="search-input" id="collegeSearchInput" placeholder="Найти колледж или специальность: IT, медицина, дизайн…" autocomplete="off">
+                    <button class="search-clear" id="collegeSearchClear" type="button" aria-label="Очистить поиск">✕</button>
+                </div>
+                <div class="search-hint" id="collegeSearchHint">Популярные запросы:</div>
+                <div class="search-chips" id="collegeSearchChips">
+                    <button class="search-chip" data-cq="IT" type="button">IT</button>
+                    <button class="search-chip" data-cq="медицина" type="button">Медицина</button>
+                    <button class="search-chip" data-cq="дизайн" type="button">Дизайн</button>
+                    <button class="search-chip" data-cq="экономика" type="button">Экономика</button>
+                    <button class="search-chip" data-cq="педагогика" type="button">Педагогика</button>
+                    <button class="search-chip" data-cq="робототехника" type="button">Робототехника</button>
+                </div>
+            </div>
+            <div class="search-empty" id="collegeSearchEmpty"><span class="search-empty-emoji">🔍</span>Ничего не нашлось. Попробуй другой запрос — например, «IT», «медицина», «дизайн».</div>
+            <div class="cards-grid" id="college-grid"></div>
         </section>
     </div>
 </div>
@@ -206,97 +160,48 @@
     <div class="site-footer-inner">
         <div class="footer-top">
             <div class="footer-brand">
-                <button class="footer-brand-logo" id="footerLogo" type="button" aria-label="ПрофиВУЗ — на главную">
-                    <img src="images/logo.jpg" alt="ПрофиВУЗ">
-                </button>
-                <p class="footer-brand-desc">
-                    Помогаем школьникам 10–11 классов выбрать вуз Москвы по баллам, специальностям и местам — быстро и без воды.
-                </p>
+                <button class="footer-brand-logo" id="footerLogo" type="button" aria-label="ПрофиВУЗ — на главную"><img src="images/logo.jpg" alt="ПрофиВУЗ"></button>
+                <p class="footer-brand-desc">Помогаем школьникам 9–11 классов выбрать вуз или колледж Москвы по баллам, специальностям и местам — быстро и без воды.</p>
                 <div class="footer-brand-stats">
-                    <div class="footer-stat">
-                        <span class="footer-stat-num">20</span>
-                        <span class="footer-stat-label">вузов Москвы</span>
-                    </div>
-                    <div class="footer-stat">
-                        <span class="footer-stat-num">100+</span>
-                        <span class="footer-stat-label">специальностей</span>
-                    </div>
-                    <div class="footer-stat">
-                        <span class="footer-stat-num">0 ₽</span>
-                        <span class="footer-stat-label">для школьников</span>
-                    </div>
+                    <div class="footer-stat"><span class="footer-stat-num">20</span><span class="footer-stat-label">вузов Москвы</span></div>
+                    <div class="footer-stat"><span class="footer-stat-num">8</span><span class="footer-stat-label">колледжей</span></div>
+                    <div class="footer-stat"><span class="footer-stat-num">0 ₽</span><span class="footer-stat-label">для школьников</span></div>
                 </div>
-                <div class="footer-social">
-                    <a href="#" aria-label="Telegram" title="Telegram">✈️</a>
-                    <a href="#" aria-label="ВКонтакте" title="ВКонтакте">🌐</a>
-                    <a href="#" aria-label="YouTube" title="YouTube">▶️</a>
-                </div>
+                <div class="footer-social"><a href="#" aria-label="Telegram" title="Telegram">✈️</a><a href="#" aria-label="ВКонтакте" title="ВКонтакте">🌐</a><a href="#" aria-label="YouTube" title="YouTube">▶️</a></div>
             </div>
-
             <div class="footer-col">
                 <h4>Продукт</h4>
                 <ul>
                     <li><button class="footer-link-btn" data-footer-action="vuz" type="button">Список вузов</button></li>
+                    <li><button class="footer-link-btn" data-footer-action="college" type="button">Колледжи</button></li>
                     <li><button class="footer-link-btn" data-footer-action="search" type="button">Поиск специальностей</button></li>
                     <li><button class="footer-link-btn" data-footer-action="prof" type="button">Профориентация</button></li>
                     <li><button class="footer-link-btn" data-footer-action="courses" type="button">Подбор курсов</button></li>
                 </ul>
             </div>
-
             <div class="footer-col">
                 <h4>Сотрудничество</h4>
                 <ul>
                     <li><button class="footer-link-btn" data-footer-action="ad" type="button">Разместить рекламу</button></li>
                     <li><button class="footer-link-btn" data-footer-action="donate" type="button">Поддержать проект</button></li>
-                    <li><a href="#" data-footer-action="ad">Вузам и школам</a></li>
+                    <li><a href="#" data-footer-action="ad">Вузам и колледжам</a></li>
                     <li><a href="#" data-footer-action="ad">Онлайн-курсам</a></li>
                     <li><a href="#" data-footer-action="ad">Репетиторам</a></li>
                 </ul>
             </div>
-
             <div class="footer-col">
                 <h4>Контакты</h4>
                 <ul>
-                    <li>
-                        <div class="footer-contact">
-                            <span class="footer-contact-icon">✉️</span>
-                            <span>hello@profivuz.ru</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="footer-contact">
-                            <span class="footer-contact-icon">📣</span>
-                            <span>ads@profivuz.ru</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="footer-contact">
-                            <span class="footer-contact-icon">💬</span>
-                            <span>Telegram: @profivuz</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="footer-contact">
-                            <span class="footer-contact-icon">📍</span>
-                            <span>Москва, Россия</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="footer-contact">
-                            <span class="footer-contact-icon">⏱️</span>
-                            <span>Отвечаем пн–пт, 10:00–19:00</span>
-                        </div>
-                    </li>
+                    <li><div class="footer-contact"><span class="footer-contact-icon">✉️</span><span>hello@profivuz.ru</span></div></li>
+                    <li><div class="footer-contact"><span class="footer-contact-icon">📣</span><span>ads@profivuz.ru</span></div></li>
+                    <li><div class="footer-contact"><span class="footer-contact-icon">💬</span><span>Telegram: @profivuz</span></div></li>
+                    <li><div class="footer-contact"><span class="footer-contact-icon">📍</span><span>Москва, Россия</span></div></li>
+                    <li><div class="footer-contact"><span class="footer-contact-icon">⏱️</span><span>Отвечаем пн–пт, 10:00–19:00</span></div></li>
                 </ul>
             </div>
         </div>
-
         <div class="footer-bottom">
-            <div class="footer-bottom-note">
-                <span>© 2025 ПрофиВУЗ</span>
-                <span>·</span>
-                <span>Ускоряем подбор вуза для 10–11 классов</span>
-            </div>
+            <div class="footer-bottom-note"><span>© 2025 ПрофиВУЗ</span><span>·</span><span>Ускоряем подбор вуза и колледжа для 9–11 классов</span></div>
             <div class="footer-bottom-links">
                 <a href="#" data-footer-action="privacy">Политика конфиденциальности</a>
                 <a href="#" data-footer-action="terms">Пользовательское соглашение</a>
@@ -309,28 +214,17 @@
 <div class="monetization" id="monetization">
     <button class="mono-toggle" id="monoToggle" type="button" aria-label="Монетизация" aria-expanded="false">💰</button>
     <div class="mono-card" id="monoCard">
-        <div class="mono-header">
-            <span>Поддержи ПрофиВУЗ</span>
-            <button class="mono-close" id="monoClose" type="button" aria-label="Закрыть">✕</button>
-        </div>
+        <div class="mono-header"><span>Поддержи ПрофиВУЗ</span><button class="mono-close" id="monoClose" type="button" aria-label="Закрыть">✕</button></div>
         <div class="mono-body">
             <div class="mono-item">
-                <div class="mono-item-title">
-                    <span class="icon">📣</span> Разместить рекламу
-                </div>
-                <div class="mono-value">
-                    Ваш вуз увидят <strong>10 000+ школьников</strong> Москвы каждый месяц.
-                </div>
+                <div class="mono-item-title"><span class="icon">📣</span> Разместить рекламу</div>
+                <div class="mono-value">Ваш вуз или колледж увидят <strong>10 000+ школьников</strong> Москвы каждый месяц.</div>
                 <div class="mono-price">2 000 ₽ / месяц</div>
                 <button class="mono-btn" id="btnAd" type="button">Разместить →</button>
             </div>
             <div class="mono-item">
-                <div class="mono-item-title">
-                    <span class="icon">☕</span> Задонать
-                </div>
-                <div class="mono-value">
-                    Поддержи проект — мы <strong>бесплатно</strong> помогаем школьникам.
-                </div>
+                <div class="mono-item-title"><span class="icon">☕</span> Задонать</div>
+                <div class="mono-value">Поддержи проект — мы <strong>бесплатно</strong> помогаем школьникам.</div>
                 <div class="mono-price">100 ₽ / 300 ₽ / своя сумма</div>
                 <button class="mono-btn secondary" id="btnDonate" type="button">Поддержать →</button>
             </div>
@@ -344,27 +238,18 @@
             <button class="prof-modal-close" id="profModalClose" type="button" aria-label="Закрыть">✕</button>
             <span class="prof-modal-hero-emoji">🧭</span>
             <h3 id="profModalTitle">Не знаешь, с чего начать?</h3>
-            <p>Пройди профориентацию — и мы подберём тебе вуз и специальность под твои интересы и баллы.</p>
+            <p>Пройди профориентацию — и мы подберём тебе вуз или колледж под твои интересы и баллы.</p>
         </div>
         <div class="prof-modal-body">
             <div class="prof-modal-benefits">
-                <div class="prof-modal-benefit">
-                    <span class="prof-modal-benefit-icon">🎯</span>
-                    <span>Узнаешь, какие специальности подходят именно тебе</span>
-                </div>
-                <div class="prof-modal-benefit">
-                    <span class="prof-modal-benefit-icon">🏛️</span>
-                    <span>Получишь список вузов, куда проходишь по баллам</span>
-                </div>
-                <div class="prof-modal-benefit">
-                    <span class="prof-modal-benefit-icon">⏱️</span>
-                    <span>8 вопросов · 2–3 минуты · результат можно скачать или отправить на почту</span>
-                </div>
+                <div class="prof-modal-benefit"><span class="prof-modal-benefit-icon">🎯</span><span>Узнаешь, какие специальности подходят именно тебе</span></div>
+                <div class="prof-modal-benefit"><span class="prof-modal-benefit-icon">🏛️</span><span>Получишь список вузов и колледжей, куда проходишь по баллам</span></div>
+                <div class="prof-modal-benefit"><span class="prof-modal-benefit-icon">⏱️</span><span>8 вопросов · 2–3 минуты · результат можно скачать или отправить на почту</span></div>
             </div>
             <div class="prof-modal-actions">
                 <button class="prof-modal-btn primary" id="profModalStart" type="button">Пройти профориентацию →</button>
                 <button class="prof-modal-btn ghost hidden" id="profModalViewSaved" type="button">📋 Посмотреть сохранённый результат</button>
-                <button class="prof-modal-btn ghost" id="profModalSkip" type="button">Сначала посмотрю вузы</button>
+                <button class="prof-modal-btn ghost" id="profModalSkip" type="button">Сначала посмотрю</button>
             </div>
         </div>
     </div>
@@ -373,43 +258,28 @@
 <div class="test-modal-overlay" id="testModalOverlay">
     <div class="test-modal" role="dialog" aria-modal="true" aria-labelledby="testModalTitle">
         <button class="test-close" id="testClose" type="button" aria-label="Закрыть тест">✕</button>
-
         <div class="test-header" id="testHeader">
-            <div class="test-header-top">
-                <div class="test-header-title" id="testModalTitle">🧭 Профориентация</div>
-                <div class="test-counter" id="testCounter">Вопрос 1 из 8</div>
-            </div>
-            <div class="test-progress-bar">
-                <div class="test-progress-fill" id="testProgressFill" style="width: 0%"></div>
-            </div>
+            <div class="test-header-top"><div class="test-header-title" id="testModalTitle">🧭 Профориентация</div><div class="test-counter" id="testCounter">Вопрос 1 из 8</div></div>
+            <div class="test-progress-bar"><div class="test-progress-fill" id="testProgressFill" style="width: 0%"></div></div>
         </div>
-
         <div class="test-body" id="testBody"></div>
-
         <div class="test-footer" id="testFooter">
-            <button class="prof-modal-btn test-btn-back" id="testBack" type="button" style="display:none">
-                ←<span class="test-back-label"> Назад</span>
-            </button>
+            <button class="prof-modal-btn test-btn-back" id="testBack" type="button" style="display:none">←<span class="test-back-label"> Назад</span></button>
             <button class="prof-modal-btn primary" id="testNext" type="button" disabled>Далее →</button>
         </div>
-
         <div class="test-result hidden" id="testResult"></div>
     </div>
 </div>
 
-<div class="modal-overlay" id="modalOverlay">
-    <div class="modal" id="modalContent"></div>
-</div>
+<div class="modal-overlay" id="modalOverlay"><div class="modal" id="modalContent"></div></div>
 
 <script>
 (function() {
     'use strict';
 
-    // ==================== ДАННЫЕ ВУЗОВ ====================
+    // ==================== ВУЗЫ ====================
     const UNIVERSITIES = [
-        { name: 'МГУ им. М.В. Ломоносова', emoji: '🏛️', score: 353, places: 3192, direction: 'Широкий профиль',
-          rating: 1, minScore: 281, paidFrom: 420000, budgetPlaces: 2811, paidPlaces: 500,
-          dormitory: true, military: true, exams: 'ДВИ по профилю',
+        { name: 'МГУ им. М.В. Ломоносова', emoji: '🏛️', score: 353, places: 3192, direction: 'Широкий профиль', rating: 1, minScore: 281, paidFrom: 420000, budgetPlaces: 2811, paidPlaces: 500, dormitory: true, military: true, exams: 'ДВИ по профилю',
           faculties: [
             { name: 'Вычислительная математика и кибернетика — Прикладная математика и информатика', score: 423, places: 312, budget: 312, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
             { name: 'Мехмат — Математика', score: 322, places: 250, budget: 250, paid: 0, exams: 'Математика (ДВИ)', tags: ['physics', 'it'] },
@@ -424,9 +294,7 @@
             { name: 'Журналистика — Журналистика', score: 353, places: 107, budget: 107, paid: 0, exams: 'Литература (ДВИ)', tags: ['humanities'] },
             { name: 'ИСАА — Востоковедение и африканистика', score: 358, places: 100, budget: 100, paid: 0, exams: 'История (ДВИ), иностранный язык', tags: ['humanities'] }
           ]},
-        { name: 'МГТУ им. Н.Э. Баумана', emoji: '🔧', score: 269, places: 3000, direction: 'Инженерия',
-          rating: 2, minScore: 223, paidFrom: 290000, budgetPlaces: 1335, paidPlaces: 400,
-          dormitory: true, military: true, exams: 'ДВИ по математике и физике',
+        { name: 'МГТУ им. Н.Э. Баумана', emoji: '🔧', score: 269, places: 3000, direction: 'Инженерия', rating: 2, minScore: 223, paidFrom: 290000, budgetPlaces: 1335, paidPlaces: 400, dormitory: true, military: true, exams: 'ДВИ по математике и физике',
           faculties: [
             { name: 'Инженерный бизнес и менеджмент — Бизнес-информатика', score: 286, places: 40, budget: 40, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it', 'business'] },
             { name: 'Инженерный бизнес и менеджмент — Инноватика', score: 272, places: 173, budget: 173, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['business'] },
@@ -447,9 +315,7 @@
             { name: 'Фундаментальные науки — Прикладная математика', score: 288, places: 40, budget: 40, paid: 0, exams: 'Математика (ДВИ)', tags: ['physics'] },
             { name: 'Фундаментальные науки — Техническая физика', score: 259, places: 42, budget: 42, paid: 0, exams: 'Физика (ДВИ), математика', tags: ['physics'] }
           ]},
-        { name: 'МФТИ', emoji: '⚛️', score: 298, places: 1246, direction: 'Физика, IT',
-          rating: 3, minScore: 265, paidFrom: 380000, budgetPlaces: 1246, paidPlaces: 100,
-          dormitory: true, military: true, exams: 'ДВИ по математике и физике',
+        { name: 'МФТИ', emoji: '⚛️', score: 298, places: 1246, direction: 'Физика, IT', rating: 3, minScore: 265, paidFrom: 380000, budgetPlaces: 1246, paidPlaces: 100, dormitory: true, military: true, exams: 'ДВИ по математике и физике',
           faculties: [
             { name: 'ВШМ — Фундаментальная математика', score: 288, places: 15, budget: 15, paid: 0, exams: 'Математика (ДВИ)', tags: ['physics'] },
             { name: 'ФРКТ — Радиотехника и компьютерные технологии', score: 292, places: 92, budget: 92, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['it', 'engineering'] },
@@ -470,9 +336,7 @@
             { name: 'ФПМИ — Математическое моделирование и теория управления', score: 289, places: 36, budget: 36, paid: 0, exams: 'Математика (ДВИ)', tags: ['physics'] },
             { name: 'ВШПИ — Программная инженерия', score: 299, places: 79, budget: 79, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] }
           ]},
-        { name: 'НИЯУ МИФИ', emoji: '☢️', score: 279, places: 1395, direction: 'Ядерная физика',
-          rating: 4, minScore: 259, paidFrom: 280000, budgetPlaces: 1395, paidPlaces: 200,
-          dormitory: true, military: true, exams: 'ДВИ по физике и математике',
+        { name: 'НИЯУ МИФИ', emoji: '☢️', score: 279, places: 1395, direction: 'Ядерная физика', rating: 4, minScore: 259, paidFrom: 280000, budgetPlaces: 1395, paidPlaces: 200, dormitory: true, military: true, exams: 'ДВИ по физике и математике',
           faculties: [
             { name: 'Математика и механика — Прикладная математика и информатика', score: 305, places: 52, budget: 52, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
             { name: 'Физика и астрономия — Прикладные математика и физика', score: 282, places: 117, budget: 117, paid: 0, exams: 'Физика (ДВИ), математика', tags: ['physics'] },
@@ -491,9 +355,7 @@
             { name: 'Технологии материалов — Материаловедение и технологии материалов', score: 259, places: 15, budget: 15, paid: 0, exams: 'Математика (ДВИ), химия', tags: ['engineering'] },
             { name: 'Экономика и управление — Экономика', score: 275, places: 40, budget: 40, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['economics'] }
           ]},
-        { name: 'МГИМО', emoji: '🌍', score: 310, places: 496, direction: 'Международные отношения',
-          rating: 5, minScore: 277, paidFrom: 450000, budgetPlaces: 496, paidPlaces: 300,
-          dormitory: true, military: true, exams: 'ДВИ по иностранному языку',
+        { name: 'МГИМО', emoji: '🌍', score: 310, places: 496, direction: 'Международные отношения', rating: 5, minScore: 277, paidFrom: 450000, budgetPlaces: 496, paidPlaces: 300, dormitory: true, military: true, exams: 'ДВИ по иностранному языку',
           faculties: [
             { name: 'Международные отношения — Зарубежное регионоведение', score: 366, places: 87, budget: 87, paid: 0, exams: 'Иностранный язык (ДВИ), история', tags: ['humanities'] },
             { name: 'Международные отношения — Международные отношения', score: 384, places: 29, budget: 29, paid: 0, exams: 'Иностранный язык (ДВИ), история', tags: ['humanities'] },
@@ -507,9 +369,7 @@
             { name: 'Институт международной торговли и устойчивого развития — Экология и природопользование', score: 278, places: 20, budget: 20, paid: 0, exams: 'География (ДВИ), биология', tags: ['humanities'] },
             { name: 'Институт международной торговли и устойчивого развития — Торговое дело', score: 283, places: 10, budget: 10, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['business'] }
           ]},
-        { name: 'НИУ ВШЭ', emoji: '📊', score: 276, places: 1625, direction: 'Экономика, IT',
-          rating: 6, minScore: 236, paidFrom: 350000, budgetPlaces: 1625, paidPlaces: 700,
-          dormitory: true, military: true, exams: 'ДВИ по профилю',
+        { name: 'НИУ ВШЭ', emoji: '📊', score: 276, places: 1625, direction: 'Экономика, IT', rating: 6, minScore: 236, paidFrom: 350000, budgetPlaces: 1625, paidPlaces: 700, dormitory: true, military: true, exams: 'ДВИ по профилю',
           faculties: [
             { name: 'Математика — Математика', score: 282, places: 60, budget: 60, paid: 0, exams: 'Математика (ДВИ)', tags: ['physics'] },
             { name: 'Прикладная математика и информатика — Прикладная математика и информатика', score: 300, places: 195, budget: 195, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
@@ -532,9 +392,7 @@
             { name: 'Изобразительное искусство — Дизайн', score: 291, places: 65, budget: 65, paid: 0, exams: 'Творческий экзамен', tags: ['humanities'] },
             { name: 'Востоковедение и африканистика — Востоковедение', score: 289, places: 50, budget: 50, paid: 0, exams: 'История (ДВИ), иностранный язык', tags: ['humanities'] }
           ]},
-        { name: 'РАНХиГС', emoji: '🏛️', score: 269, places: 434, direction: 'Госслужба, экономика',
-          rating: 7, minScore: 244, paidFrom: 300000, budgetPlaces: 434, paidPlaces: 800,
-          dormitory: true, military: true, exams: 'ДВИ по профилю',
+        { name: 'РАНХиГС', emoji: '🏛️', score: 269, places: 434, direction: 'Госслужба, экономика', rating: 7, minScore: 244, paidFrom: 300000, budgetPlaces: 434, paidPlaces: 800, dormitory: true, military: true, exams: 'ДВИ по профилю',
           faculties: [
             { name: 'Прикладная информатика — Цифровые технологии и разработка информационных систем', score: 261, places: 23, budget: 23, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
             { name: 'Прикладная информатика — Искусственный интеллект и машинное обучение', score: 253, places: 22, budget: 22, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
@@ -547,9 +405,7 @@
             { name: 'История — История', score: 255, places: 40, budget: 40, paid: 0, exams: 'История (ДВИ)', tags: ['humanities'] },
             { name: 'Международные отношения — Международные отношения: политика, экономика, бизнес', score: 280, places: 30, budget: 30, paid: 0, exams: 'Иностранный язык (ДВИ), история', tags: ['humanities'] }
           ]},
-        { name: 'Финансовый университет', emoji: '💰', score: 89, places: 733, direction: 'Финансы',
-          rating: 8, minScore: 82, paidFrom: 280000, budgetPlaces: 733, paidPlaces: 600,
-          dormitory: true, military: true, exams: 'ДВИ по профилю',
+        { name: 'Финансовый университет', emoji: '💰', score: 89, places: 733, direction: 'Финансы', rating: 8, minScore: 82, paidFrom: 280000, budgetPlaces: 733, paidPlaces: 600, dormitory: true, military: true, exams: 'ДВИ по профилю',
           faculties: [
             { name: 'Инноватика — Управление цифровыми инновациями', score: 88, places: 21, budget: 21, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['business'] },
             { name: 'Гостиничное дело — Гостиничный бизнес', score: 82, places: 40, budget: 40, paid: 0, exams: 'Обществознание (ДВИ)', tags: ['business'] },
@@ -563,9 +419,7 @@
             { name: 'Экономика — Международная экономика и торговля', score: 99, places: 68, budget: 68, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['economics'] },
             { name: 'Экономика — Мировая экономика, мировые финансы и международный бизнес', score: 98, places: 88, budget: 88, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['economics'] }
           ]},
-        { name: 'РУДН', emoji: '🤝', score: 236, places: 3000, direction: 'Мультидисциплинарный',
-          rating: 9, minScore: 169, paidFrom: 220000, budgetPlaces: 3000, paidPlaces: 1500,
-          dormitory: true, military: true, exams: 'ДВИ по профилю',
+        { name: 'РУДН', emoji: '🤝', score: 236, places: 3000, direction: 'Мультидисциплинарный', rating: 9, minScore: 169, paidFrom: 220000, budgetPlaces: 3000, paidPlaces: 1500, dormitory: true, military: true, exams: 'ДВИ по профилю',
           faculties: [
             { name: 'Аграрно-технологический институт — Землеустройство и кадастры', score: 206, places: 43, budget: 43, paid: 0, exams: 'Математика (ДВИ), география', tags: ['engineering'] },
             { name: 'Инженерная академия — Строительство', score: 234, places: 50, budget: 50, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
@@ -575,9 +429,7 @@
             { name: 'Факультет гуманитарных и социальных наук — Социология', score: 270, places: 30, budget: 30, paid: 0, exams: 'Обществознание (ДВИ)', tags: ['humanities'] },
             { name: 'Факультет физико-математических и естественных наук — Прикладная математика и информатика', score: 263, places: 49, budget: 49, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] }
           ]},
-        { name: 'Сеченовский университет', emoji: '🩺', score: 250, places: 1632, direction: 'Медицина',
-          rating: 10, minScore: 204, paidFrom: 320000, budgetPlaces: 1632, paidPlaces: 300,
-          dormitory: true, military: true, exams: 'ДВИ по химии и биологии',
+        { name: 'Сеченовский университет', emoji: '🩺', score: 250, places: 1632, direction: 'Медицина', rating: 10, minScore: 204, paidFrom: 320000, budgetPlaces: 1632, paidPlaces: 300, dormitory: true, military: true, exams: 'ДВИ по химии и биологии',
           faculties: [
             { name: 'Лечебное дело', score: 260, places: 800, budget: 800, paid: 0, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
             { name: 'Педиатрия', score: 250, places: 350, budget: 350, paid: 0, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
@@ -586,9 +438,7 @@
             { name: 'Бакалавриат — Менеджмент', score: 204, places: 40, budget: 40, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['business'] },
             { name: 'Бакалавриат — Биотехнология', score: 260, places: 50, budget: 50, paid: 0, exams: 'Биология (ДВИ), химия', tags: ['medicine'] }
           ]},
-        { name: 'НИТУ МИСиС', emoji: '⛏️', score: 264, places: 826, direction: 'Материаловедение',
-          rating: 11, minScore: 216, paidFrom: 200000, budgetPlaces: 826, paidPlaces: 300,
-          dormitory: true, military: true, exams: 'ДВИ по математике и физике',
+        { name: 'НИТУ МИСиС', emoji: '⛏️', score: 264, places: 826, direction: 'Материаловедение', rating: 11, minScore: 216, paidFrom: 200000, budgetPlaces: 826, paidPlaces: 300, dormitory: true, military: true, exams: 'ДВИ по математике и физике',
           faculties: [
             { name: 'Биотехнологии', score: 288, places: 30, budget: 30, paid: 0, exams: 'Биология (ДВИ), химия', tags: ['medicine'] },
             { name: 'Бизнес-информатика', score: 287, places: 40, budget: 40, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it', 'business'] },
@@ -597,9 +447,7 @@
             { name: 'Информатика и вычислительная техника', score: 265, places: 120, budget: 120, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
             { name: 'Материаловедение', score: 245, places: 90, budget: 90, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering', 'physics'] }
           ]},
-        { name: 'РЭУ им. Г.В. Плеханова', emoji: '📈', score: 268, places: 1133, direction: 'Экономика',
-          rating: 12, minScore: 205, paidFrom: 240000, budgetPlaces: 1133, paidPlaces: 900,
-          dormitory: true, military: true, exams: 'ДВИ по профилю',
+        { name: 'РЭУ им. Г.В. Плеханова', emoji: '📈', score: 268, places: 1133, direction: 'Экономика', rating: 12, minScore: 205, paidFrom: 240000, budgetPlaces: 1133, paidPlaces: 900, dormitory: true, military: true, exams: 'ДВИ по профилю',
           faculties: [
             { name: 'Журналистика', score: 298, places: 20, budget: 20, paid: 0, exams: 'Литература (ДВИ)', tags: ['humanities'] },
             { name: 'Прикладная математика и информатика', score: 291, places: 60, budget: 60, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
@@ -608,9 +456,7 @@
             { name: 'Менеджмент', score: 265, places: 100, budget: 100, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['business'] },
             { name: 'Юриспруденция', score: 280, places: 80, budget: 80, paid: 0, exams: 'Обществознание (ДВИ), история', tags: ['law'] }
           ]},
-        { name: 'РНИМУ им. Н.И. Пирогова', emoji: '🧬', score: 263, places: 1640, direction: 'Медицина',
-          rating: 13, minScore: 252, paidFrom: 310000, budgetPlaces: 1640, paidPlaces: 300,
-          dormitory: true, military: true, exams: 'ДВИ по химии и биологии',
+        { name: 'РНИМУ им. Н.И. Пирогова', emoji: '🧬', score: 263, places: 1640, direction: 'Медицина', rating: 13, minScore: 252, paidFrom: 310000, budgetPlaces: 1640, paidPlaces: 300, dormitory: true, military: true, exams: 'ДВИ по химии и биологии',
           faculties: [
             { name: 'Лечебное дело', score: 278, places: 800, budget: 800, paid: 0, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
             { name: 'Педиатрия', score: 252, places: 600, budget: 600, paid: 0, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
@@ -618,9 +464,7 @@
             { name: 'Медицинская биохимия', score: 265, places: 60, budget: 60, paid: 0, exams: 'Химия (ДВИ), биология', tags: ['medicine'] },
             { name: 'Клиническая психология', score: 260, places: 50, budget: 50, paid: 0, exams: 'Биология (ДВИ), обществознание', tags: ['humanities', 'medicine'] }
           ]},
-        { name: 'МАИ', emoji: '✈️', score: 242, places: 1700, direction: 'Авиация, IT',
-          rating: 14, minScore: 204, paidFrom: 230000, budgetPlaces: 1700, paidPlaces: 500,
-          dormitory: true, military: true, exams: 'ДВИ по математике и физике',
+        { name: 'МАИ', emoji: '✈️', score: 242, places: 1700, direction: 'Авиация, IT', rating: 14, minScore: 204, paidFrom: 230000, budgetPlaces: 1700, paidPlaces: 500, dormitory: true, military: true, exams: 'ДВИ по математике и физике',
           faculties: [
             { name: 'Программная инженерия', score: 279, places: 100, budget: 100, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
             { name: 'Приборостроение', score: 204, places: 50, budget: 50, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
@@ -628,9 +472,7 @@
             { name: 'Авиастроение', score: 255, places: 200, budget: 200, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
             { name: 'Двигатели летательных аппаратов', score: 250, places: 100, budget: 100, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] }
           ]},
-        { name: 'НИУ МЭИ', emoji: '⚡', score: 244, places: 1500, direction: 'Энергетика',
-          rating: 15, minScore: 213, paidFrom: 220000, budgetPlaces: 1500, paidPlaces: 400,
-          dormitory: true, military: true, exams: 'ДВИ по математике и физике',
+        { name: 'НИУ МЭИ', emoji: '⚡', score: 244, places: 1500, direction: 'Энергетика', rating: 15, minScore: 213, paidFrom: 220000, budgetPlaces: 1500, paidPlaces: 400, dormitory: true, military: true, exams: 'ДВИ по математике и физике',
           faculties: [
             { name: 'Фундаментальная информатика и информационные технологии', score: 271, places: 60, budget: 60, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
             { name: 'Цифровая электротехника и электроника', score: 213, places: 100, budget: 100, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
@@ -638,9 +480,7 @@
             { name: 'Электроэнергетика', score: 245, places: 120, budget: 120, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
             { name: 'Ядерная энергетика и теплофизика', score: 250, places: 80, budget: 80, paid: 0, exams: 'Физика (ДВИ), математика', tags: ['physics', 'engineering'] }
           ]},
-        { name: 'МГЮА им. О.Е. Кутафина', emoji: '⚖️', score: 268, places: 900, direction: 'Юриспруденция',
-          rating: 16, minScore: 260, paidFrom: 300000, budgetPlaces: 900, paidPlaces: 300,
-          dormitory: true, military: true, exams: 'ДВИ по обществознанию',
+        { name: 'МГЮА им. О.Е. Кутафина', emoji: '⚖️', score: 268, places: 900, direction: 'Юриспруденция', rating: 16, minScore: 260, paidFrom: 300000, budgetPlaces: 900, paidPlaces: 300, dormitory: true, military: true, exams: 'ДВИ по обществознанию',
           faculties: [
             { name: 'Юриспруденция (гражданско-правовой профиль)', score: 271, places: 300, budget: 300, paid: 0, exams: 'Обществознание (ДВИ), история', tags: ['law'] },
             { name: 'Юриспруденция (уголовно-правовой профиль)', score: 270, places: 250, budget: 250, paid: 0, exams: 'Обществознание (ДВИ), история', tags: ['law'] },
@@ -648,36 +488,28 @@
             { name: 'Судебная экспертиза', score: 265, places: 100, budget: 100, paid: 0, exams: 'Обществознание (ДВИ), химия', tags: ['law'] },
             { name: 'Право и бизнес', score: 260, places: 100, budget: 100, paid: 0, exams: 'Обществознание (ДВИ), математика', tags: ['law', 'business'] }
           ]},
-        { name: 'РГУ нефти и газа им. И.М. Губкина', emoji: '🛢️', score: 246, places: 530, direction: 'Нефтегаз',
-          rating: 17, minScore: 235, paidFrom: 250000, budgetPlaces: 530, paidPlaces: 300,
-          dormitory: true, military: true, exams: 'ДВИ по математике и физике',
+        { name: 'РГУ нефти и газа им. И.М. Губкина', emoji: '🛢️', score: 246, places: 530, direction: 'Нефтегаз', rating: 17, minScore: 235, paidFrom: 250000, budgetPlaces: 530, paidPlaces: 300, dormitory: true, military: true, exams: 'ДВИ по математике и физике',
           faculties: [
             { name: 'Нефтегазовое дело', score: 255, places: 200, budget: 200, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
             { name: 'Геология нефти и газа', score: 245, places: 150, budget: 150, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
             { name: 'Химическая технология', score: 235, places: 100, budget: 100, paid: 0, exams: 'Химия (ДВИ), математика', tags: ['engineering'] },
             { name: 'Экономика', score: 250, places: 80, budget: 80, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['economics'] }
           ]},
-        { name: 'НИУ МГСУ', emoji: '🏗️', score: 236, places: 480, direction: 'Строительство',
-          rating: 18, minScore: 220, paidFrom: 220000, budgetPlaces: 480, paidPlaces: 300,
-          dormitory: true, military: true, exams: 'ДВИ по математике и физике',
+        { name: 'НИУ МГСУ', emoji: '🏗️', score: 236, places: 480, direction: 'Строительство', rating: 18, minScore: 220, paidFrom: 220000, budgetPlaces: 480, paidPlaces: 300, dormitory: true, military: true, exams: 'ДВИ по математике и физике',
           faculties: [
             { name: 'Строительство', score: 240, places: 250, budget: 250, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
             { name: 'Строительство уникальных зданий и сооружений', score: 255, places: 100, budget: 100, paid: 0, exams: 'Математика (ДВИ), физика', tags: ['engineering'] },
             { name: 'Информационные системы и технологии', score: 230, places: 80, budget: 80, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
             { name: 'Экономика', score: 220, places: 50, budget: 50, paid: 0, exams: 'Математика (ДВИ), обществознание', tags: ['economics'] }
           ]},
-        { name: 'МПГУ', emoji: '🧑‍🏫', score: 235, places: 900, direction: 'Педагогика',
-          rating: 19, minScore: 186, paidFrom: 170000, budgetPlaces: 900, paidPlaces: 700,
-          dormitory: true, military: false, exams: 'ДВИ по профилю',
+        { name: 'МПГУ', emoji: '🧑‍🏫', score: 235, places: 900, direction: 'Педагогика', rating: 19, minScore: 186, paidFrom: 170000, budgetPlaces: 900, paidPlaces: 700, dormitory: true, military: false, exams: 'ДВИ по профилю',
           faculties: [
             { name: 'Педагогическое образование (русский язык и литература)', score: 235, places: 300, budget: 300, paid: 0, exams: 'Литература (ДВИ), русский', tags: ['humanities'] },
             { name: 'Педагогическое образование (математика и информатика)', score: 235, places: 250, budget: 250, paid: 0, exams: 'Математика (ДВИ), информатика', tags: ['it'] },
             { name: 'Педагогическое образование (история и обществознание)', score: 230, places: 200, budget: 200, paid: 0, exams: 'История (ДВИ), обществознание', tags: ['humanities'] },
             { name: 'Психология', score: 240, places: 150, budget: 150, paid: 0, exams: 'Биология (ДВИ), обществознание', tags: ['humanities'] }
           ]},
-        { name: 'МГЛУ', emoji: '🗣️', score: 251, places: 570, direction: 'Лингвистика',
-          rating: 20, minScore: 240, paidFrom: 220000, budgetPlaces: 570, paidPlaces: 300,
-          dormitory: true, military: false, exams: 'ДВИ по иностранному языку',
+        { name: 'МГЛУ', emoji: '🗣️', score: 251, places: 570, direction: 'Лингвистика', rating: 20, minScore: 240, paidFrom: 220000, budgetPlaces: 570, paidPlaces: 300, dormitory: true, military: false, exams: 'ДВИ по иностранному языку',
           faculties: [
             { name: 'Лингвистика (перевод и переводоведение)', score: 260, places: 200, budget: 200, paid: 0, exams: 'Иностранный язык (ДВИ), русский', tags: ['humanities'] },
             { name: 'Лингвистика (теория и методика преподавания)', score: 250, places: 150, budget: 150, paid: 0, exams: 'Иностранный язык (ДВИ), русский', tags: ['humanities'] },
@@ -686,6 +518,75 @@
           ]}
     ];
 
+    // ==================== КОЛЛЕДЖИ ====================
+    const COLLEGES = [
+        { name: 'Колледж «Синергия»', emoji: '🏫', direction: 'IT, бизнес, дизайн, медицина', rating: 1, budgetPlaces: 0, paidPlaces: 27300, minScore: 3, paidFrom: 50000, phone: '—', site: 'synergy.ru', address: 'Москва',
+          faculties: [
+            { name: 'Разработчик компьютерных игр, дополненной и виртуальной реальности', score: 3, places: 0, budget: 0, paid: 500, exams: 'Конкурс аттестатов', tags: ['it'] },
+            { name: 'Юрист', score: 3, places: 0, budget: 0, paid: 800, exams: 'Конкурс аттестатов', tags: ['law'] },
+            { name: 'Графический дизайнер', score: 3, places: 0, budget: 0, paid: 400, exams: 'Творческое испытание', tags: ['humanities'] },
+            { name: 'Сестринское дело', score: 3, places: 0, budget: 0, paid: 300, exams: 'Конкурс аттестатов', tags: ['medicine'] },
+            { name: 'Менеджер маркетплейсов', score: 3, places: 0, budget: 0, paid: 600, exams: 'Конкурс аттестатов', tags: ['business'] },
+            { name: 'Психология', score: 3, places: 0, budget: 0, paid: 200, exams: 'Конкурс аттестатов', tags: ['humanities'] }
+          ]},
+        { name: 'Колледж информационных технологий «ИТ.Москва»', emoji: '💻', direction: 'IT, кибербезопасность, дизайн', rating: 2, budgetPlaces: 1440, paidPlaces: 30, minScore: 3.8, paidFrom: 104672, phone: '—', site: 'it.moscow', address: 'Москва',
+          faculties: [
+            { name: 'Разработка и управление программным обеспечением', score: 4, places: 400, budget: 400, paid: 10, exams: 'Конкурс аттестатов', tags: ['it'] },
+            { name: 'Обеспечение информационной безопасности автоматизированных систем', score: 4, places: 300, budget: 300, paid: 10, exams: 'Конкурс аттестатов', tags: ['it'] },
+            { name: 'Сетевое и системное администрирование', score: 3.8, places: 250, budget: 250, paid: 5, exams: 'Конкурс аттестатов', tags: ['it'] },
+            { name: 'Разработка компьютерных игр, дополненной и виртуальной реальности', score: 4.2, places: 200, budget: 200, paid: 5, exams: 'Конкурс аттестатов', tags: ['it'] },
+            { name: 'Графический дизайнер', score: 3.9, places: 150, budget: 150, paid: 0, exams: 'Творческое испытание', tags: ['humanities'] },
+            { name: 'Интеграция решений с применением технологий искусственного интеллекта', score: 4.1, places: 140, budget: 140, paid: 0, exams: 'Конкурс аттестатов', tags: ['it'] }
+          ]},
+        { name: 'Колледж связи №54 имени П.М. Вострухина', emoji: '📡', direction: 'Связь, IT, электроника', rating: 3, budgetPlaces: 800, paidPlaces: 100, minScore: 3.5, paidFrom: 60000, phone: '—', site: 'ks54.ru', address: 'Москва',
+          faculties: [
+            { name: 'Обеспечение информационной безопасности автоматизированных систем', score: 3.8, places: 150, budget: 150, paid: 20, exams: 'Конкурс аттестатов', tags: ['it'] },
+            { name: 'Разработка и управление программным обеспечением', score: 3.7, places: 150, budget: 150, paid: 20, exams: 'Конкурс аттестатов', tags: ['it'] },
+            { name: 'Системы радиосвязи, мобильной связи и телерадиовещания', score: 3.5, places: 200, budget: 200, paid: 30, exams: 'Конкурс аттестатов', tags: ['engineering'] },
+            { name: 'Техническая эксплуатация и сопровождение информационных систем', score: 3.6, places: 150, budget: 150, paid: 15, exams: 'Конкурс аттестатов', tags: ['it'] }
+          ]},
+        { name: 'Медицинский колледж №1', emoji: '🩺', direction: 'Медицина, сестринское дело', rating: 4, budgetPlaces: 600, paidPlaces: 200, minScore: 3, paidFrom: 85250, phone: '—', site: 'mk1.ru', address: 'Москва',
+          faculties: [
+            { name: 'Сестринское дело', score: 3.5, places: 300, budget: 300, paid: 100, exams: 'Психологическое тестирование', tags: ['medicine'] },
+            { name: 'Лечебное дело', score: 3.8, places: 200, budget: 200, paid: 60, exams: 'Конкурс аттестатов', tags: ['medicine'] },
+            { name: 'Стоматология ортопедическая', score: 3.2, places: 50, budget: 50, paid: 20, exams: 'Конкурс аттестатов', tags: ['medicine'] },
+            { name: 'Лабораторная диагностика', score: 3.4, places: 50, budget: 50, paid: 20, exams: 'Конкурс аттестатов', tags: ['medicine'] }
+          ]},
+        { name: 'Московский техникум космического приборостроения (МГТУ им. Баумана)', emoji: '🚀', direction: 'Радиоэлектроника, IT, космос', rating: 5, budgetPlaces: 400, paidPlaces: 50, minScore: 3.5, paidFrom: 70000, phone: '+7 (499) 261-66-87', site: 'mtkp.bmstu.ru', address: 'Москва, Волховский пер., 11',
+          faculties: [
+            { name: 'Радиоэлектронные системы и комплексы', score: 3.8, places: 100, budget: 100, paid: 10, exams: 'Конкурс аттестатов', tags: ['engineering'] },
+            { name: 'Информационные системы и программирование', score: 4, places: 100, budget: 100, paid: 10, exams: 'Конкурс аттестатов', tags: ['it'] },
+            { name: 'Автоматические системы управления', score: 3.6, places: 100, budget: 100, paid: 15, exams: 'Конкурс аттестатов', tags: ['engineering'] },
+            { name: 'Вычислительная техника', score: 3.7, places: 100, budget: 100, paid: 15, exams: 'Конкурс аттестатов', tags: ['it'] }
+          ]},
+        { name: 'Московский промышленно-экономический колледж (РЭУ им. Плеханова)', emoji: '📈', direction: 'Экономика, IT, право', rating: 6, budgetPlaces: 500, paidPlaces: 300, minScore: 3.8, paidFrom: 65000, phone: '+7 (495) 605-62-32', site: 'mpek-rea.ru', address: 'Москва, Большой Трехгорный пер., 11',
+          faculties: [
+            { name: 'Экономика и бухгалтерский учёт', score: 4, places: 150, budget: 150, paid: 80, exams: 'Конкурс аттестатов', tags: ['economics'] },
+            { name: 'Информационные системы и программирование', score: 4.1, places: 100, budget: 100, paid: 50, exams: 'Конкурс аттестатов', tags: ['it'] },
+            { name: 'Юриспруденция', score: 4.2, places: 100, budget: 100, paid: 70, exams: 'Конкурс аттестатов', tags: ['law'] },
+            { name: 'Банковское дело', score: 3.9, places: 80, budget: 80, paid: 50, exams: 'Конкурс аттестатов', tags: ['economics'] },
+            { name: 'Операционная деятельность в логистике', score: 3.8, places: 70, budget: 70, paid: 50, exams: 'Конкурс аттестатов', tags: ['business'] }
+          ]},
+        { name: 'Колледж «Царицыно»', emoji: '🍳', direction: 'IT, дизайн, туризм, кулинария', rating: 7, budgetPlaces: 1200, paidPlaces: 0, minScore: 4.3, paidFrom: 0, phone: '—', site: 'tsaritsyno-college.ru', address: 'Москва',
+          faculties: [
+            { name: 'Разработка и управление программным обеспечением', score: 4.5, places: 300, budget: 300, paid: 0, exams: 'Конкурс аттестатов', tags: ['it'] },
+            { name: 'Интеграция решений с применением технологий искусственного интеллекта', score: 4.4, places: 200, budget: 200, paid: 0, exams: 'Конкурс аттестатов', tags: ['it'] },
+            { name: 'Веб-разработка', score: 4.3, places: 200, budget: 200, paid: 0, exams: 'Конкурс аттестатов', tags: ['it'] },
+            { name: 'Поварское и кондитерское дело', score: 4.3, places: 250, budget: 250, paid: 0, exams: 'Конкурс аттестатов', tags: ['humanities'] },
+            { name: 'Туризм и гостеприимство', score: 4.3, places: 150, budget: 150, paid: 0, exams: 'Конкурс аттестатов', tags: ['business'] },
+            { name: 'Финансы', score: 4.3, places: 100, budget: 100, paid: 0, exams: 'Конкурс аттестатов', tags: ['economics'] }
+          ]},
+        { name: 'Технологический колледж №34', emoji: '🎨', direction: 'Дизайн, сервис, транспорт', rating: 8, budgetPlaces: 300, paidPlaces: 200, minScore: 3, paidFrom: 88000, phone: '—', site: 'tk34.ru', address: 'Москва',
+          faculties: [
+            { name: 'Графический дизайнер', score: 3.5, places: 100, budget: 100, paid: 60, exams: 'Творческое испытание', tags: ['humanities'] },
+            { name: 'Дизайн среды', score: 3.4, places: 50, budget: 50, paid: 40, exams: 'Творческое испытание', tags: ['humanities'] },
+            { name: 'Реклама', score: 3.3, places: 50, budget: 50, paid: 30, exams: 'Конкурс аттестатов', tags: ['humanities'] },
+            { name: 'Предоставление визажных услуг', score: 3, places: 50, budget: 50, paid: 35, exams: 'Творческое испытание', tags: ['humanities'] },
+            { name: 'Организация перевозок и управление на транспорте', score: 3.2, places: 50, budget: 50, paid: 35, exams: 'Конкурс аттестатов', tags: ['engineering'] }
+          ]}
+    ];
+
+    // ==================== НАПРАВЛЕНИЯ ====================
     const DIRECTIONS = {
         it: { name: 'IT и программирование', emoji: '💻', desc: 'Разработка, анализ данных, кибербезопасность, искусственный интеллект' },
         engineering: { name: 'Инженерия и технологии', emoji: '🔧', desc: 'Робототехника, авиация, энергетика, материаловедение, радиоэлектроника' },
@@ -757,29 +658,18 @@
     const $$ = (sel) => document.querySelectorAll(sel);
 
     function formatMoney(n) { return n.toLocaleString('ru-RU') + ' ₽'; }
-    function normalize(str) {
-        return String(str || '').toLowerCase().replace(/ё/g, 'е').replace(/\s+/g, ' ').trim();
-    }
+    function normalize(str) { return String(str || '').toLowerCase().replace(/ё/g, 'е').replace(/\s+/g, ' ').trim(); }
     function showPage(pageId) {
         $$('.page').forEach(p => p.classList.remove('active'));
         const page = document.getElementById('page-' + pageId);
         if (page) page.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    function escapeHtml(str) {
-        return String(str || '')
-            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-    }
-    function formatDate(ts) {
-        try { return new Date(ts).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }); }
-        catch (e) { return ''; }
-    }
+    function escapeHtml(str) { return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+    function formatDate(ts) { try { return new Date(ts).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }); } catch (e) { return ''; } }
 
     const STORAGE_KEY = 'profivuz_prof_result_v1';
-    function saveTestResult(scores) {
-        try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ scores, savedAt: Date.now() })); } catch (e) {}
-    }
+    function saveTestResult(scores) { try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ scores, savedAt: Date.now() })); } catch (e) {} }
     function loadTestResult() {
         try {
             const raw = localStorage.getItem(STORAGE_KEY);
@@ -793,7 +683,6 @@
     }
     function hasTestResult() { return loadTestResult() !== null; }
     function clearTestResult() { try { localStorage.removeItem(STORAGE_KEY); } catch (e) {} }
-
     function refreshResultButtons() {
         const has = hasTestResult();
         $('#heroMyResult').classList.toggle('hidden', !has);
@@ -803,153 +692,56 @@
     }
 
     const REVIEWS_KEY = 'profivuz_reviews_v1';
-    function loadAllReviews() {
-        try {
-            const raw = localStorage.getItem(REVIEWS_KEY);
-            if (!raw) return {};
-            const data = JSON.parse(raw);
-            return (data && typeof data === 'object') ? data : {};
-        } catch (e) { return {}; }
-    }
+    function loadAllReviews() { try { const raw = localStorage.getItem(REVIEWS_KEY); if (!raw) return {}; const data = JSON.parse(raw); return (data && typeof data === 'object') ? data : {}; } catch (e) { return {}; } }
     function saveAllReviews(all) { try { localStorage.setItem(REVIEWS_KEY, JSON.stringify(all)); } catch (e) {} }
-    function getReviewsForVuz(vuzName) {
-        const all = loadAllReviews();
-        return Array.isArray(all[vuzName]) ? all[vuzName] : [];
-    }
-    function getVuzStats(vuzName) {
-        const reviews = getReviewsForVuz(vuzName);
-        if (reviews.length === 0) return { count: 0, avg: 0 };
-        const sum = reviews.reduce((s, r) => s + (Number(r.rating) || 0), 0);
-        return { count: reviews.length, avg: sum / reviews.length };
-    }
-    function addReview(vuzName, review) {
-        const all = loadAllReviews();
-        if (!Array.isArray(all[vuzName])) all[vuzName] = [];
-        all[vuzName].unshift(review);
-        saveAllReviews(all);
-    }
-    function deleteReview(vuzName, reviewId) {
-        const all = loadAllReviews();
-        if (!Array.isArray(all[vuzName])) return;
-        all[vuzName] = all[vuzName].filter(r => r.id !== reviewId);
-        saveAllReviews(all);
-    }
-    function renderStars(rating, max) {
-        max = max || 5;
-        let html = '';
-        for (let i = 1; i <= max; i++) html += `<span class="${i <= rating ? 'filled' : 'empty'}">★</span>`;
-        return html;
-    }
+    function getReviewsForVuz(vuzName) { const all = loadAllReviews(); return Array.isArray(all[vuzName]) ? all[vuzName] : []; }
+    function getVuzStats(vuzName) { const reviews = getReviewsForVuz(vuzName); if (reviews.length === 0) return { count: 0, avg: 0 }; const sum = reviews.reduce((s, r) => s + (Number(r.rating) || 0), 0); return { count: reviews.length, avg: sum / reviews.length }; }
+    function addReview(vuzName, review) { const all = loadAllReviews(); if (!Array.isArray(all[vuzName])) all[vuzName] = []; all[vuzName].unshift(review); saveAllReviews(all); }
+    function deleteReview(vuzName, reviewId) { const all = loadAllReviews(); if (!Array.isArray(all[vuzName])) return; all[vuzName] = all[vuzName].filter(r => r.id !== reviewId); saveAllReviews(all); }
+    function renderStars(rating, max) { max = max || 5; let html = ''; for (let i = 1; i <= max; i++) html += `<span class="${i <= rating ? 'filled' : 'empty'}">★</span>`; return html; }
     function formatAvg(avg) { return avg > 0 ? avg.toFixed(1) : '0.0'; }
-    function pluralReviews(n) {
-        const last = n % 10, last2 = n % 100;
-        if (last2 >= 11 && last2 <= 14) return 'отзывов';
-        if (last === 1) return 'отзыв';
-        if (last >= 2 && last <= 4) return 'отзыва';
-        return 'отзывов';
-    }
+    function pluralReviews(n) { const last = n % 10, last2 = n % 100; if (last2 >= 11 && last2 <= 14) return 'отзывов'; if (last === 1) return 'отзыв'; if (last >= 2 && last <= 4) return 'отзыва'; return 'отзывов'; }
 
     const navBurger = $('#navBurger');
     const siteNav = $('#siteNav');
-
-    navBurger.addEventListener('click', () => {
-        const open = siteNav.classList.toggle('open');
-        navBurger.setAttribute('aria-expanded', open ? 'true' : 'false');
-        navBurger.textContent = open ? '✕' : '☰';
-    });
-
-    function closeMobileNav() {
-        siteNav.classList.remove('open');
-        navBurger.setAttribute('aria-expanded', 'false');
-        navBurger.textContent = '☰';
-    }
-    function highlightNav(name) {
-        $$('.nav-btn').forEach(b => b.classList.toggle('active', b.getAttribute('data-nav') === name));
-    }
+    navBurger.addEventListener('click', () => { const open = siteNav.classList.toggle('open'); navBurger.setAttribute('aria-expanded', open ? 'true' : 'false'); navBurger.textContent = open ? '✕' : '☰'; });
+    function closeMobileNav() { siteNav.classList.remove('open'); navBurger.setAttribute('aria-expanded', 'false'); navBurger.textContent = '☰'; }
+    function highlightNav(name) { $$('.nav-btn').forEach(b => b.classList.toggle('active', b.getAttribute('data-nav') === name)); }
     function handleNavClick(name) {
         closeMobileNav();
         switch (name) {
             case 'home': showPage('home'); highlightNav('home'); break;
             case 'vuz': renderVuzCards(); showPage('vuz'); highlightNav('vuz'); break;
+            case 'college': renderCollegeCards(); showPage('college'); highlightNav('college'); break;
             case 'search': renderVuzCards(); showPage('vuz'); highlightNav('vuz'); setTimeout(() => { searchInput.focus(); }, 400); break;
             case 'prof': highlightNav('prof'); openProfModal(); break;
             case 'myresult': { const saved = loadTestResult(); if (saved) openSavedResult(saved); break; }
             case 'courses': highlightNav('courses'); openCoursesModal(); break;
         }
     }
-    siteNav.addEventListener('click', (e) => {
-        const btn = e.target.closest('[data-nav]');
-        if (!btn) return;
-        handleNavClick(btn.getAttribute('data-nav'));
-    });
+    siteNav.addEventListener('click', (e) => { const btn = e.target.closest('[data-nav]'); if (!btn) return; handleNavClick(btn.getAttribute('data-nav')); });
     $('#headerLogo').addEventListener('click', () => { closeMobileNav(); showPage('home'); highlightNav('home'); });
-    document.addEventListener('click', (e) => {
-        if (!siteNav.classList.contains('open')) return;
-        if (siteNav.contains(e.target) || navBurger.contains(e.target)) return;
-        closeMobileNav();
-    });
+    document.addEventListener('click', (e) => { if (!siteNav.classList.contains('open')) return; if (siteNav.contains(e.target) || navBurger.contains(e.target)) return; closeMobileNav(); });
 
-    $('#heroStart').addEventListener('click', () => {
-        const target = document.getElementById('ctaBlock');
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
-    $('#heroMyResult').addEventListener('click', () => {
-        const saved = loadTestResult();
-        if (saved) openSavedResult(saved);
-    });
-    $('#ctaVuz').addEventListener('click', () => {
-        renderVuzCards();
-        showPage('vuz');
-        highlightNav('vuz');
-        openProfModal();
-    });
-    $('#ctaCourses').addEventListener('click', () => { openCoursesModal(); });
+    $('#heroStart').addEventListener('click', () => { const target = document.getElementById('ctaBlock'); if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
+    $('#heroMyResult').addEventListener('click', () => { const saved = loadTestResult(); if (saved) openSavedResult(saved); });
+    $('#ctaVuz').addEventListener('click', () => { renderVuzCards(); showPage('vuz'); highlightNav('vuz'); openProfModal(); });
+    $('#ctaCollege').addEventListener('click', () => { renderCollegeCards(); showPage('college'); highlightNav('college'); });
     $('#back-from-vuz').addEventListener('click', () => { showPage('home'); highlightNav('home'); });
+    $('#back-from-college').addEventListener('click', () => { showPage('home'); highlightNav('home'); });
     $('#footerLogo').addEventListener('click', () => { showPage('home'); highlightNav('home'); });
 
     function openCoursesModal() {
         openModal(`
             <h3>📚 Найти курсы</h3>
-            <p>Подберём подготовительные курсы для поступления в вуз мечты — по нужным предметам и формату.</p>
+            <p>Подберём подготовительные курсы для поступления в вуз или колледж — по нужным предметам и формату.</p>
             <form id="coursesForm">
-                <div class="form-group">
-                    <label>Какие предметы нужно подтянуть?</label>
-                    <select name="subject" required>
-                        <option value="math">Математика</option>
-                        <option value="russian">Русский язык</option>
-                        <option value="physics">Физика</option>
-                        <option value="chemistry">Химия</option>
-                        <option value="biology">Биология</option>
-                        <option value="it">Информатика</option>
-                        <option value="social">Обществознание</option>
-                        <option value="history">История</option>
-                        <option value="english">Иностранный язык</option>
-                        <option value="literature">Литература</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Формат занятий</label>
-                    <select name="format" required>
-                        <option value="online">Онлайн</option>
-                        <option value="offline">Офлайн в Москве</option>
-                        <option value="hybrid">Гибрид</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Класс</label>
-                    <select name="grade" required>
-                        <option value="10">10 класс</option>
-                        <option value="11">11 класс</option>
-                        <option value="graduate">Выпускник</option>
-                    </select>
-                </div>
-                <div class="modal-actions">
-                    <button type="button" class="mono-btn cancel" id="coursesCancel">Отмена</button>
-                    <button type="submit" class="mono-btn">Подобрать курсы</button>
-                </div>
+                <div class="form-group"><label>Какие предметы нужно подтянуть?</label><select name="subject" required><option value="math">Математика</option><option value="russian">Русский язык</option><option value="physics">Физика</option><option value="chemistry">Химия</option><option value="biology">Биология</option><option value="it">Информатика</option><option value="social">Обществознание</option><option value="history">История</option><option value="english">Иностранный язык</option><option value="literature">Литература</option></select></div>
+                <div class="form-group"><label>Формат занятий</label><select name="format" required><option value="online">Онлайн</option><option value="offline">Офлайн в Москве</option><option value="hybrid">Гибрид</option></select></div>
+                <div class="form-group"><label>Класс</label><select name="grade" required><option value="9">9 класс</option><option value="10">10 класс</option><option value="11">11 класс</option><option value="graduate">Выпускник</option></select></div>
+                <div class="modal-actions"><button type="button" class="mono-btn cancel" id="coursesCancel">Отмена</button><button type="submit" class="mono-btn">Подобрать курсы</button></div>
             </form>
         `);
-
         setTimeout(() => {
             $('#coursesCancel').addEventListener('click', closeModal);
             $('#coursesForm').addEventListener('submit', (e) => {
@@ -964,30 +756,14 @@
     }
 
     const profModalOverlay = $('#profModalOverlay');
-    function openProfModal() {
-        refreshResultButtons();
-        profModalOverlay.classList.add('open');
-        document.body.style.overflow = 'hidden';
-    }
-    function closeProfModal() {
-        profModalOverlay.classList.remove('open');
-        if (!modalOverlay.classList.contains('open') && !testModalOverlay.classList.contains('open')) {
-            document.body.style.overflow = '';
-        }
-    }
+    function openProfModal() { refreshResultButtons(); profModalOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeProfModal() { profModalOverlay.classList.remove('open'); if (!modalOverlay.classList.contains('open') && !testModalOverlay.classList.contains('open')) document.body.style.overflow = ''; }
     $('#profModalClose').addEventListener('click', closeProfModal);
     $('#profModalSkip').addEventListener('click', closeProfModal);
     $('#profModalStart').addEventListener('click', () => { closeProfModal(); startTest(); });
-    $('#profModalViewSaved').addEventListener('click', () => {
-        const saved = loadTestResult();
-        if (saved) { closeProfModal(); openSavedResult(saved); }
-    });
-    profModalOverlay.addEventListener('click', (e) => {
-        if (e.target === profModalOverlay) closeProfModal();
-    });
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && profModalOverlay.classList.contains('open')) closeProfModal();
-    });
+    $('#profModalViewSaved').addEventListener('click', () => { const saved = loadTestResult(); if (saved) { closeProfModal(); openSavedResult(saved); } });
+    profModalOverlay.addEventListener('click', (e) => { if (e.target === profModalOverlay) closeProfModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && profModalOverlay.classList.contains('open')) closeProfModal(); });
 
     const testModalOverlay = $('#testModalOverlay');
     const testBody = $('#testBody');
@@ -998,7 +774,6 @@
     const testProgressFill = $('#testProgressFill');
     const testNextBtn = $('#testNext');
     const testBackBtn = $('#testBack');
-
     let testState = { current: 0, answers: new Array(TEST_QUESTIONS.length).fill(null), scores: {} };
 
     function startTest() {
@@ -1014,19 +789,10 @@
         document.body.style.overflow = 'hidden';
         renderQuestion();
     }
-    function closeTest() {
-        testModalOverlay.classList.remove('open');
-        if (!modalOverlay.classList.contains('open') && !profModalOverlay.classList.contains('open')) {
-            document.body.style.overflow = '';
-        }
-    }
+    function closeTest() { testModalOverlay.classList.remove('open'); if (!modalOverlay.classList.contains('open') && !profModalOverlay.classList.contains('open')) document.body.style.overflow = ''; }
     $('#testClose').addEventListener('click', closeTest);
-    testModalOverlay.addEventListener('click', (e) => {
-        if (e.target === testModalOverlay) closeTest();
-    });
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && testModalOverlay.classList.contains('open')) closeTest();
-    });
+    testModalOverlay.addEventListener('click', (e) => { if (e.target === testModalOverlay) closeTest(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && testModalOverlay.classList.contains('open')) closeTest(); });
 
     function renderQuestion() {
         const q = TEST_QUESTIONS[testState.current];
@@ -1036,26 +802,13 @@
         testBackBtn.style.display = testState.current > 0 ? 'inline-flex' : 'none';
         testNextBtn.disabled = selectedIndex === null;
         testNextBtn.textContent = testState.current === TEST_QUESTIONS.length - 1 ? 'Показать результат →' : 'Далее →';
-
-        let html = `
-            <div>
-                <div class="test-question">${q.question}</div>
-                <div class="test-question-hint">${q.hint}</div>
-            </div>
-            <div class="test-options">
-        `;
+        let html = `<div><div class="test-question">${q.question}</div><div class="test-question-hint">${q.hint}</div></div><div class="test-options">`;
         q.options.forEach((opt, i) => {
             const isSelected = selectedIndex === i;
-            html += `
-                <button class="test-option ${isSelected ? 'selected' : ''}" data-option-index="${i}" type="button">
-                    <span class="test-option-radio"></span>
-                    <span>${opt.text}</span>
-                </button>
-            `;
+            html += `<button class="test-option ${isSelected ? 'selected' : ''}" data-option-index="${i}" type="button"><span class="test-option-radio"></span><span>${opt.text}</span></button>`;
         });
         html += '</div>';
         testBody.innerHTML = html;
-
         testBody.querySelectorAll('.test-option').forEach(btn => {
             btn.addEventListener('click', () => {
                 const idx = parseInt(btn.getAttribute('data-option-index'), 10);
@@ -1071,17 +824,9 @@
         const selectedIndex = testState.answers[testState.current];
         if (selectedIndex === null) return;
         const weights = TEST_QUESTIONS[testState.current].options[selectedIndex].weights;
-        Object.entries(weights).forEach(([dir, points]) => {
-            if (testState.scores[dir] !== undefined) testState.scores[dir] += points;
-        });
-        if (testState.current < TEST_QUESTIONS.length - 1) {
-            testState.current++;
-            renderQuestion();
-        } else {
-            saveTestResult(testState.scores);
-            refreshResultButtons();
-            renderTestResult(testState.scores, { fromSaved: false });
-        }
+        Object.entries(weights).forEach(([dir, points]) => { if (testState.scores[dir] !== undefined) testState.scores[dir] += points; });
+        if (testState.current < TEST_QUESTIONS.length - 1) { testState.current++; renderQuestion(); }
+        else { saveTestResult(testState.scores); refreshResultButtons(); renderTestResult(testState.scores, { fromSaved: false }); }
     });
 
     testBackBtn.addEventListener('click', () => {
@@ -1089,24 +834,14 @@
             const prevSelected = testState.answers[testState.current];
             if (prevSelected !== null) {
                 const weights = TEST_QUESTIONS[testState.current].options[prevSelected].weights;
-                Object.entries(weights).forEach(([dir, points]) => {
-                    if (testState.scores[dir] !== undefined) testState.scores[dir] -= points;
-                });
+                Object.entries(weights).forEach(([dir, points]) => { if (testState.scores[dir] !== undefined) testState.scores[dir] -= points; });
             }
             testState.current--;
             renderQuestion();
         }
     });
 
-    function openSavedResult(saved) {
-        testHeader.style.display = 'none';
-        testFooter.style.display = 'none';
-        testBody.classList.add('hidden');
-        testResult.classList.remove('hidden');
-        testModalOverlay.classList.add('open');
-        document.body.style.overflow = 'hidden';
-        renderTestResult(saved.scores, { fromSaved: true, savedAt: saved.savedAt });
-    }
+    function openSavedResult(saved) { testHeader.style.display = 'none'; testFooter.style.display = 'none'; testBody.classList.add('hidden'); testResult.classList.remove('hidden'); testModalOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; renderTestResult(saved.scores, { fromSaved: true, savedAt: saved.savedAt }); }
 
     function renderTestResult(scores, opts) {
         opts = opts || {};
@@ -1115,85 +850,37 @@
         testFooter.style.display = 'none';
         testBody.classList.add('hidden');
         testResult.classList.remove('hidden');
-
-        const sorted = Object.entries(scores)
-            .map(([key, score]) => ({ key, score, ...DIRECTIONS[key] }))
-            .sort((a, b) => b.score - a.score);
+        const sorted = Object.entries(scores).map(([key, score]) => ({ key, score, ...DIRECTIONS[key] })).sort((a, b) => b.score - a.score);
         const maxScore = sorted[0]?.score || 1;
         const top = sorted.slice(0, 3);
         const topDirKey = top[0]?.key;
         const suitable = findVuzesByDirection(topDirKey);
-
         const topDirectionsHtml = top.map((d, i) => {
             const percent = Math.round((d.score / maxScore) * 100);
-            return `
-                <div class="test-direction-card ${i === 0 ? 'top' : ''}">
-                    <div class="test-direction-rank">${i + 1}</div>
-                    <div class="test-direction-body">
-                        <div class="test-direction-name">${d.emoji} ${d.name}</div>
-                        <div class="test-direction-desc">${d.desc}</div>
-                        <div class="test-direction-bar">
-                            <div class="test-direction-fill" style="width: ${percent}%"></div>
-                        </div>
-                    </div>
-                </div>
-            `;
+            return `<div class="test-direction-card ${i === 0 ? 'top' : ''}"><div class="test-direction-rank">${i + 1}</div><div class="test-direction-body"><div class="test-direction-name">${d.emoji} ${d.name}</div><div class="test-direction-desc">${d.desc}</div><div class="test-direction-bar"><div class="test-direction-fill" style="width: ${percent}%"></div></div></div></div>`;
         }).join('');
-
         const vuzesHtml = suitable.length > 0 ? suitable.map(item => `
             <button class="test-result-vuz-item" data-vuz-index="${item.vuzIndex}" data-faculty-query="${escapeHtml(item.query)}" type="button">
                 <div class="test-result-vuz-emoji">${item.vuz.emoji}</div>
-                <div class="test-result-vuz-body">
-                    <div class="test-result-vuz-name">${item.vuz.name}</div>
-                    <div class="test-result-vuz-faculty">${item.faculty.name}</div>
-                </div>
+                <div class="test-result-vuz-body"><div class="test-result-vuz-name">${item.vuz.name}</div><div class="test-result-vuz-faculty">${item.faculty.name}</div></div>
                 <div class="test-result-vuz-score">${item.faculty.score} б.</div>
             </button>
         `).join('') : '<p style="color: var(--gray-muted); font-size: 0.9rem;">Пока не нашли подходящих вузов — попробуй поиск по специальностям.</p>';
-
         let savedBadge = '';
         if (opts.fromSaved) {
             let savedText = '📋 Сохранённый результат';
-            if (opts.savedAt) {
-                try {
-                    const d = new Date(opts.savedAt);
-                    savedText = `📋 Сохранено ${d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })}`;
-                } catch (e) {}
-            }
+            if (opts.savedAt) { try { const d = new Date(opts.savedAt); savedText = `📋 Сохранено ${d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })}`; } catch (e) {} }
             savedBadge = `<div class="test-saved-badge">${savedText}</div>`;
         }
-
         testResult.innerHTML = `
-            <div class="test-result-hero">
-                <span class="test-result-emoji">🎉</span>
-                <h3>${opts.fromSaved ? 'Твой результат' : 'Твои направления'}</h3>
-                <p>${opts.fromSaved
-                    ? 'Мы сохранили твой прошлый результат. Можешь посмотреть направления и подходящие вузы или пройти тест заново.'
-                    : 'Вот что тебе подходит больше всего по результатам теста. Начни с первого направления — и посмотри, куда можно поступить.'}</p>
-                ${savedBadge}
-            </div>
-
+            <div class="test-result-hero"><span class="test-result-emoji">🎉</span><h3>${opts.fromSaved ? 'Твой результат' : 'Твои направления'}</h3><p>${opts.fromSaved ? 'Мы сохранили твой прошлый результат. Можешь посмотреть направления и подходящие вузы или пройти тест заново.' : 'Вот что тебе подходит больше всего по результатам теста. Начни с первого направления — и посмотри, куда можно поступить.'}</p>${savedBadge}</div>
             <div class="test-result-subtitle">Топ-3 направления</div>
             <div class="test-directions">${topDirectionsHtml}</div>
-
             <div class="test-result-subtitle">Куда можно поступить по топ-1 направлению</div>
             <div class="test-result-vuz-list">${vuzesHtml}</div>
-
-            <div class="test-share-row">
-                <div class="test-share-title">Сохранить или отправить результат</div>
-                <div class="test-share-buttons">
-                    <button class="test-share-btn" id="btnDownloadResult" type="button">⬇️ Скачать файл</button>
-                    <button class="test-share-btn" id="btnEmailResult" type="button">✉️ Отправить на почту</button>
-                </div>
-            </div>
-
-            <div class="test-result-actions">
-                <button class="prof-modal-btn primary" id="testGoToVuz" type="button">Смотреть все вузы →</button>
-                <button class="prof-modal-btn ghost" id="testRestart" type="button">Пройти тест заново</button>
-                ${opts.fromSaved ? '<button class="prof-modal-btn ghost" id="testClearResult" type="button">🗑 Удалить сохранённый результат</button>' : ''}
-            </div>
+            <div class="test-share-row"><div class="test-share-title">Сохранить или отправить результат</div><div class="test-share-buttons"><button class="test-share-btn" id="btnDownloadResult" type="button">⬇️ Скачать файл</button><button class="test-share-btn" id="btnEmailResult" type="button">✉️ Отправить на почту</button></div></div>
+            <div class="test-result-actions"><button class="prof-modal-btn primary" id="testGoToVuz" type="button">Смотреть все вузы →</button><button class="prof-modal-btn ghost" id="testRestart" type="button">Пройти тест заново</button>${opts.fromSaved ? '<button class="prof-modal-btn ghost" id="testClearResult" type="button">🗑 Удалить сохранённый результат</button>' : ''}</div>
         `;
-
         testResult.querySelectorAll('.test-result-vuz-item').forEach(btn => {
             btn.addEventListener('click', () => {
                 const idx = parseInt(btn.getAttribute('data-vuz-index'), 10);
@@ -1202,25 +889,9 @@
                 setTimeout(() => { openVuzModal(UNIVERSITIES[idx], query); }, 200);
             });
         });
-
-        $('#testGoToVuz').addEventListener('click', () => {
-            closeTest();
-            renderVuzCards();
-            showPage('vuz');
-            highlightNav('vuz');
-        });
-
+        $('#testGoToVuz').addEventListener('click', () => { closeTest(); renderVuzCards(); showPage('vuz'); highlightNav('vuz'); });
         $('#testRestart').addEventListener('click', () => { startTest(); });
-
-        if (opts.fromSaved) {
-            $('#testClearResult').addEventListener('click', () => {
-                clearTestResult();
-                refreshResultButtons();
-                closeTest();
-                alert('🗑 Сохранённый результат удалён. Можешь пройти тест заново.');
-            });
-        }
-
+        if (opts.fromSaved) { $('#testClearResult').addEventListener('click', () => { clearTestResult(); refreshResultButtons(); closeTest(); alert('🗑 Сохранённый результат удалён. Можешь пройти тест заново.'); }); }
         $('#btnDownloadResult').addEventListener('click', () => downloadTestResult(scores, top, suitable));
         $('#btnEmailResult').addEventListener('click', () => openEmailResultModal(scores, top, suitable));
     }
@@ -1229,11 +900,7 @@
         if (!dirKey) return [];
         const result = [];
         UNIVERSITIES.forEach((vuz, vuzIndex) => {
-            vuz.faculties.forEach(faculty => {
-                if (faculty.tags && faculty.tags.includes(dirKey)) {
-                    result.push({ vuz, vuzIndex, faculty, query: faculty.name });
-                }
-            });
+            vuz.faculties.forEach(faculty => { if (faculty.tags && faculty.tags.includes(dirKey)) result.push({ vuz, vuzIndex, faculty, query: faculty.name }); });
         });
         return result.sort((a, b) => a.faculty.score - b.faculty.score).slice(0, 5);
     }
@@ -1244,22 +911,14 @@
         lines.push('Дата: ' + formatDate(Date.now()));
         lines.push('');
         lines.push('ТОП-3 НАПРАВЛЕНИЯ:');
-        top.forEach((d, i) => {
-            lines.push(`${i + 1}. ${d.emoji} ${d.name} — ${d.score} балл(ов)`);
-            lines.push(`   ${d.desc}`);
-        });
+        top.forEach((d, i) => { lines.push(`${i + 1}. ${d.emoji} ${d.name} — ${d.score} балл(ов)`); lines.push(`   ${d.desc}`); });
         lines.push('');
         lines.push('КУДА МОЖНО ПОСТУПИТЬ ПО ТОП-1 НАПРАВЛЕНИЮ:');
-        if (suitable.length > 0) {
-            suitable.forEach((item, i) => {
-                lines.push(`${i + 1}. ${item.vuz.name} — ${item.faculty.name} (проходной: ${item.faculty.score})`);
-            });
-        } else {
-            lines.push('— Пока не подобрано. Попробуй поиск по специальностям на ПрофиВУЗ.');
-        }
+        if (suitable.length > 0) suitable.forEach((item, i) => lines.push(`${i + 1}. ${item.vuz.name} — ${item.faculty.name} (проходной: ${item.faculty.score})`));
+        else lines.push('— Пока не подобрано. Попробуй поиск по специальностям на ПрофиВУЗ.');
         lines.push('');
         lines.push('— — —');
-        lines.push('ПрофиВУЗ · Ускоряем подбор вуза для 10–11 классов');
+        lines.push('ПрофиВУЗ · Ускоряем подбор вуза и колледжа для 9–11 классов');
         return lines.join('\n');
     }
 
@@ -1269,11 +928,8 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         const dateStr = new Date().toISOString().slice(0, 10);
-        a.href = url;
-        a.download = `Profivuz-result-${dateStr}.txt`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        a.href = url; a.download = `Profivuz-result-${dateStr}.txt`;
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
         setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
 
@@ -1282,174 +938,63 @@
         openModal(`
             <h3>✉️ Отправить результат на почту</h3>
             <p>Результат откроется в почтовом клиенте — останется ввести свой email и отправить письмо.</p>
-            <div class="form-group">
-                <label>Кому отправить (ваш email)</label>
-                <input type="email" id="emailTo" placeholder="you@example.com" required>
-            </div>
-            <div class="form-group">
-                <label>Тема</label>
-                <input type="text" id="emailSubject" value="Мой результат профориентации на ПрофиВУЗ" readonly>
-            </div>
-            <div class="form-group">
-                <label>Текст письма (можно отредактировать)</label>
-                <textarea id="emailBody" rows="6">${escapeHtml(text)}</textarea>
-            </div>
-            <div class="modal-actions">
-                <button type="button" class="mono-btn cancel" id="emailCancel">Отмена</button>
-                <button type="button" class="mono-btn" id="emailOpen">Открыть в почте</button>
-            </div>
+            <div class="form-group"><label>Кому отправить (ваш email)</label><input type="email" id="emailTo" placeholder="you@example.com" required></div>
+            <div class="form-group"><label>Тема</label><input type="text" id="emailSubject" value="Мой результат профориентации на ПрофиВУЗ" readonly></div>
+            <div class="form-group"><label>Текст письма (можно отредактировать)</label><textarea id="emailBody" rows="6">${escapeHtml(text)}</textarea></div>
+            <div class="modal-actions"><button type="button" class="mono-btn cancel" id="emailCancel">Отмена</button><button type="button" class="mono-btn" id="emailOpen">Открыть в почте</button></div>
         `);
-
         setTimeout(() => {
             $('#emailCancel').addEventListener('click', closeModal);
             $('#emailOpen').addEventListener('click', () => {
                 const to = $('#emailTo').value.trim();
                 const subj = encodeURIComponent($('#emailSubject').value);
                 const body = encodeURIComponent($('#emailBody').value);
-                if (to && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)) {
-                    alert('Похоже, email введён с ошибкой. Проверьте адрес.');
-                    return;
-                }
-                const mailto = `mailto:${to}?subject=${subj}&body=${body}`;
-                window.location.href = mailto;
+                if (to && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)) { alert('Похоже, email введён с ошибкой. Проверьте адрес.'); return; }
+                window.location.href = `mailto:${to}?subject=${subj}&body=${body}`;
                 closeModal();
             });
         }, 0);
     }
 
     $('#profBannerStart').addEventListener('click', () => { startTest(); });
-    $('#profBannerViewResult').addEventListener('click', () => {
-        const saved = loadTestResult();
-        if (saved) openSavedResult(saved);
-    });
+    $('#profBannerViewResult').addEventListener('click', () => { const saved = loadTestResult(); if (saved) openSavedResult(saved); });
 
     const modalOverlay = $('#modalOverlay');
     const modalContent = $('#modalContent');
-    function openModal(html) {
-        modalContent.innerHTML = html;
-        modalOverlay.classList.add('open');
-        document.body.style.overflow = 'hidden';
-    }
-    function closeModal() {
-        modalOverlay.classList.remove('open');
-        if (!profModalOverlay.classList.contains('open') && !testModalOverlay.classList.contains('open')) {
-            document.body.style.overflow = '';
-        }
-    }
-    modalOverlay.addEventListener('click', (e) => {
-        if (e.target === modalOverlay) closeModal();
-    });
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modalOverlay.classList.contains('open')) closeModal();
-    });
+    function openModal(html) { modalContent.innerHTML = html; modalOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeModal() { modalOverlay.classList.remove('open'); if (!profModalOverlay.classList.contains('open') && !testModalOverlay.classList.contains('open')) document.body.style.overflow = ''; }
+    modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modalOverlay.classList.contains('open')) closeModal(); });
 
     function openVuzModal(vuz, highlightQuery) {
         const q = highlightQuery ? normalize(highlightQuery) : '';
         const facultiesHtml = vuz.faculties.map(f => {
             const isMatch = q && (normalize(f.name).includes(q) || normalize(f.exams).includes(q));
-            return `
-                <div class="faculty-item ${isMatch ? 'highlighted' : ''}">
-                    <div class="faculty-name">🎓 ${f.name}</div>
-                    <div class="faculty-stats">
-                        <span class="faculty-stat">🎯 Проходной: <span class="badge">${f.score} б.</span></span>
-                        <span class="faculty-stat">🪑 Всего мест: <span class="badge seats">${f.places}</span></span>
-                        <span class="faculty-stat">🆓 Бюджет: <span class="badge seats">${f.budget}</span></span>
-                        <span class="faculty-stat">💰 Платно: <span class="badge seats">${f.paid}</span></span>
-                        <span class="faculty-stat">📝 <span class="badge exam">${f.exams}</span></span>
-                    </div>
-                </div>
-            `;
+            return `<div class="faculty-item ${isMatch ? 'highlighted' : ''}"><div class="faculty-name">🎓 ${f.name}</div><div class="faculty-stats"><span class="faculty-stat">🎯 Проходной: <span class="badge">${f.score} б.</span></span><span class="faculty-stat">🪑 Всего мест: <span class="badge seats">${f.places}</span></span><span class="faculty-stat">🆓 Бюджет: <span class="badge seats">${f.budget}</span></span><span class="faculty-stat">💰 Платно: <span class="badge seats">${f.paid}</span></span><span class="faculty-stat">📝 <span class="badge exam">${f.exams}</span></span></div></div>`;
         }).join('');
-
         const stats = getVuzStats(vuz.name);
         const reviews = getReviewsForVuz(vuz.name);
-
         openModal(`
             <button class="modal-close-x" id="vuzModalClose" aria-label="Закрыть">✕</button>
-            <div class="vuz-modal-header">
-                <div class="vuz-modal-emoji">${vuz.emoji}</div>
-                <div>
-                    <h3>${vuz.name}</h3>
-                    <p>${vuz.direction} · Рейтинг №${vuz.rating} по Москве</p>
-                </div>
-            </div>
-
-            <div class="vuz-facts">
-                <div class="vuz-fact"><span class="vuz-fact-label">Рейтинг</span><span class="vuz-fact-value gold">🏆 №${vuz.rating}</span></div>
-                <div class="vuz-fact"><span class="vuz-fact-label">Средний проходной</span><span class="vuz-fact-value accent">${vuz.score} б.</span></div>
-                <div class="vuz-fact"><span class="vuz-fact-label">Минимальный балл</span><span class="vuz-fact-value">${vuz.minScore} б.</span></div>
-                <div class="vuz-fact"><span class="vuz-fact-label">Всего мест</span><span class="vuz-fact-value">${vuz.places.toLocaleString('ru-RU')}</span></div>
-                <div class="vuz-fact"><span class="vuz-fact-label">Бюджет / платно</span><span class="vuz-fact-value">${vuz.budgetPlaces.toLocaleString('ru-RU')} / ${vuz.paidPlaces.toLocaleString('ru-RU')}</span></div>
-                <div class="vuz-fact"><span class="vuz-fact-label">Платное обучение</span><span class="vuz-fact-value">от ${formatMoney(vuz.paidFrom)}/год</span></div>
-                <div class="vuz-fact"><span class="vuz-fact-label">ДВИ</span><span class="vuz-fact-value">${vuz.exams}</span></div>
-                <div class="vuz-fact"><span class="vuz-fact-label">Общежитие</span><span class="vuz-fact-value">${vuz.dormitory ? '✅ Есть' : '❌ Нет'}</span></div>
-                <div class="vuz-fact"><span class="vuz-fact-label">Военный учебный центр</span><span class="vuz-fact-value">${vuz.military ? '✅ Есть' : '❌ Нет'}</span></div>
-            </div>
-
+            <div class="vuz-modal-header"><div class="vuz-modal-emoji">${vuz.emoji}</div><div><h3>${vuz.name}</h3><p>${vuz.direction} · Рейтинг №${vuz.rating} по Москве</p></div></div>
+            <div class="vuz-facts"><div class="vuz-fact"><span class="vuz-fact-label">Рейтинг</span><span class="vuz-fact-value gold">🏆 №${vuz.rating}</span></div><div class="vuz-fact"><span class="vuz-fact-label">Средний проходной</span><span class="vuz-fact-value accent">${vuz.score} б.</span></div><div class="vuz-fact"><span class="vuz-fact-label">Минимальный балл</span><span class="vuz-fact-value">${vuz.minScore} б.</span></div><div class="vuz-fact"><span class="vuz-fact-label">Всего мест</span><span class="vuz-fact-value">${vuz.places.toLocaleString('ru-RU')}</span></div><div class="vuz-fact"><span class="vuz-fact-label">Бюджет / платно</span><span class="vuz-fact-value">${vuz.budgetPlaces.toLocaleString('ru-RU')} / ${vuz.paidPlaces.toLocaleString('ru-RU')}</span></div><div class="vuz-fact"><span class="vuz-fact-label">Платное обучение</span><span class="vuz-fact-value">от ${formatMoney(vuz.paidFrom)}/год</span></div><div class="vuz-fact"><span class="vuz-fact-label">ДВИ</span><span class="vuz-fact-value">${vuz.exams}</span></div><div class="vuz-fact"><span class="vuz-fact-label">Общежитие</span><span class="vuz-fact-value">${vuz.dormitory ? '✅ Есть' : '❌ Нет'}</span></div><div class="vuz-fact"><span class="vuz-fact-label">Военный учебный центр</span><span class="vuz-fact-value">${vuz.military ? '✅ Есть' : '❌ Нет'}</span></div></div>
             <p style="margin-bottom: 12px; font-weight: 600; color: var(--gray-text);">Факультеты и направления:</p>
             <div class="faculties-list">${facultiesHtml}</div>
-
-            <div class="reviews-section">
-                <div class="reviews-header">
-                    <div class="reviews-title">💬 Отзывы студентов</div>
-                    <div class="reviews-rating ${stats.count === 0 ? 'empty' : ''}">
-                        ${stats.count === 0
-                            ? 'Пока нет отзывов'
-                            : `★ ${formatAvg(stats.avg)} · ${stats.count} ${pluralReviews(stats.count)}`}
-                    </div>
-                </div>
-                <div class="reviews-list">${renderReviewsList(reviews)}</div>
-                <div style="margin-top: 12px;">
-                    <button class="btn-write-review" id="btnWriteReview" type="button" style="width:100%;justify-content:center;">✍️ Оставить отзыв</button>
-                </div>
-            </div>
-
-            <div class="modal-actions">
-                <button class="mono-btn cancel" id="vuzModalCancel" type="button">Закрыть</button>
-            </div>
+            <div class="reviews-section"><div class="reviews-header"><div class="reviews-title">💬 Отзывы студентов</div><div class="reviews-rating ${stats.count === 0 ? 'empty' : ''}">${stats.count === 0 ? 'Пока нет отзывов' : `★ ${formatAvg(stats.avg)} · ${stats.count} ${pluralReviews(stats.count)}`}</div></div><div class="reviews-list">${renderReviewsList(reviews)}</div><div style="margin-top: 12px;"><button class="btn-write-review" id="btnWriteReview" type="button" style="width:100%;justify-content:center;">✍️ Оставить отзыв</button></div></div>
+            <div class="modal-actions"><button class="mono-btn cancel" id="vuzModalCancel" type="button">Закрыть</button></div>
         `);
-
-        setTimeout(() => {
-            $('#vuzModalClose').addEventListener('click', closeModal);
-            $('#vuzModalCancel').addEventListener('click', closeModal);
-            $('#btnWriteReview').addEventListener('click', () => openReviewForm(vuz));
-        }, 0);
+        setTimeout(() => { $('#vuzModalClose').addEventListener('click', closeModal); $('#vuzModalCancel').addEventListener('click', closeModal); $('#btnWriteReview').addEventListener('click', () => openReviewForm(vuz)); }, 0);
     }
 
     function renderReviewsList(reviews) {
-        if (!reviews || reviews.length === 0) {
-            return `
-                <div class="reviews-empty">
-                    <span class="reviews-empty-emoji">💭</span>
-                    Пока никто не оставил отзыв. Будь первым — расскажи о плюсах, минусах и скрытых изъянах.
-                </div>
-            `;
-        }
+        if (!reviews || reviews.length === 0) return `<div class="reviews-empty"><span class="reviews-empty-emoji">💭</span>Пока никто не оставил отзыв. Будь первым — расскажи о плюсах, минусах и скрытых изъянах.</div>`;
         return reviews.map(r => {
             const safeAuthor = escapeHtml(r.author || 'Аноним');
             const pros = r.pros ? escapeHtml(r.pros) : '';
             const cons = r.cons ? escapeHtml(r.cons) : '';
             const flaws = r.flaws ? escapeHtml(r.flaws) : '';
             const text = r.text ? escapeHtml(r.text) : '';
-            return `
-                <div class="review-card" data-review-id="${escapeHtml(r.id)}">
-                    <button class="review-delete" data-delete-id="${escapeHtml(r.id)}" aria-label="Удалить отзыв" title="Удалить" type="button">🗑</button>
-                    <div class="review-head">
-                        <div class="review-avatar">👤</div>
-                        <div>
-                            <div class="review-author">${safeAuthor}</div>
-                            <div class="review-date">${formatDate(r.createdAt)}</div>
-                        </div>
-                        <div class="review-stars">${renderStars(r.rating)}</div>
-                    </div>
-                    <div class="review-body">
-                        ${pros ? `<div class="review-block"><span class="review-block-icon">👍</span><div class="review-block-text"><span class="review-block-label">Плюсы</span><span class="review-text">${pros}</span></div></div>` : ''}
-                        ${cons ? `<div class="review-block"><span class="review-block-icon">👎</span><div class="review-block-text"><span class="review-block-label">Минусы</span><span class="review-text">${cons}</span></div></div>` : ''}
-                        ${flaws ? `<div class="review-block"><span class="review-block-icon">🕳</span><div class="review-block-text"><span class="review-block-label">Скрытые изъяны (не из официальных источников)</span><span class="review-text">${flaws}</span></div></div>` : ''}
-                        ${text ? `<div class="review-block"><span class="review-block-icon">📝</span><div class="review-block-text"><span class="review-block-label">Общее впечатление</span><span class="review-text">${text}</span></div></div>` : ''}
-                    </div>
-                </div>
-            `;
+            return `<div class="review-card" data-review-id="${escapeHtml(r.id)}"><button class="review-delete" data-delete-id="${escapeHtml(r.id)}" aria-label="Удалить отзыв" title="Удалить" type="button">🗑</button><div class="review-head"><div class="review-avatar">👤</div><div><div class="review-author">${safeAuthor}</div><div class="review-date">${formatDate(r.createdAt)}</div></div><div class="review-stars">${renderStars(r.rating)}</div></div><div class="review-body">${pros ? `<div class="review-block"><span class="review-block-icon">👍</span><div class="review-block-text"><span class="review-block-label">Плюсы</span><span class="review-text">${pros}</span></div></div>` : ''}${cons ? `<div class="review-block"><span class="review-block-icon">👎</span><div class="review-block-text"><span class="review-block-label">Минусы</span><span class="review-text">${cons}</span></div></div>` : ''}${flaws ? `<div class="review-block"><span class="review-block-icon">🕳</span><div class="review-block-text"><span class="review-block-label">Скрытые изъяны</span><span class="review-text">${flaws}</span></div></div>` : ''}${text ? `<div class="review-block"><span class="review-block-icon">📝</span><div class="review-block-text"><span class="review-block-label">Общее впечатление</span><span class="review-text">${text}</span></div></div>` : ''}</div></div>`;
         }).join('');
     }
 
@@ -1457,78 +1002,28 @@
     function openReviewForm(vuz) {
         reviewFormState = { rating: 0, vuzName: vuz.name };
         openModal(`
-            <h3>✍️ Отзыв о вузе</h3>
+            <h3>✍️ Отзыв</h3>
             <p style="margin-bottom:8px;font-weight:600;color:var(--gray-text);">${escapeHtml(vuz.name)}</p>
             <form id="reviewForm">
-                <div class="form-group">
-                    <label>Ваша оценка <span style="color:var(--danger);">*</span></label>
-                    <div class="review-form-stars" id="reviewStars">
-                        ${[1,2,3,4,5].map(i => `<button type="button" class="review-star-btn" data-star="${i}">★</button>`).join('')}
-                    </div>
-                    <div class="review-form-hint">Нажмите на звёзды, чтобы поставить оценку от 1 до 5</div>
-                </div>
-                <div class="form-group">
-                    <label>Ваше имя (или псевдоним)</label>
-                    <input type="text" name="author" maxlength="40" placeholder="Например, Аноним или Аня, 2 курс" value="">
-                </div>
-                <div class="form-group">
-                    <label>👍 Реальные плюсы</label>
-                    <textarea name="pros" maxlength="600" placeholder="Что вам нравится: сильные преподаватели, атмосфера, возможности, общежитие…"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>👎 Реальные минусы</label>
-                    <textarea name="cons" maxlength="600" placeholder="Что не нравится: расписание, бюрократия, инфраструктура, нагрузка…"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>🕳 Скрытые изъяны (не из официальных источников)</label>
-                    <textarea name="flaws" maxlength="600" placeholder="Что не пишут на сайте: проблемы с общежитием, скрытые платежи, слабые кафедры, нюансы с пересдачей…"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>📝 Общее впечатление</label>
-                    <textarea name="text" maxlength="800" placeholder="Коротко: стоит ли идти и кому этот вуз подойдёт"></textarea>
-                </div>
-                <div class="modal-actions">
-                    <button type="button" class="mono-btn cancel" id="reviewCancel">Отмена</button>
-                    <button type="submit" class="mono-btn">Опубликовать отзыв</button>
-                </div>
+                <div class="form-group"><label>Ваша оценка <span style="color:var(--danger);">*</span></label><div class="review-form-stars" id="reviewStars">${[1,2,3,4,5].map(i => `<button type="button" class="review-star-btn" data-star="${i}">★</button>`).join('')}</div><div class="review-form-hint">Нажмите на звёзды, чтобы поставить оценку от 1 до 5</div></div>
+                <div class="form-group"><label>Ваше имя (или псевдоним)</label><input type="text" name="author" maxlength="40" placeholder="Например, Аноним или Аня, 2 курс" value=""></div>
+                <div class="form-group"><label>👍 Реальные плюсы</label><textarea name="pros" maxlength="600" placeholder="Что вам нравится: сильные преподаватели, атмосфера, возможности, общежитие…"></textarea></div>
+                <div class="form-group"><label>👎 Реальные минусы</label><textarea name="cons" maxlength="600" placeholder="Что не нравится: расписание, бюрократия, инфраструктура, нагрузка…"></textarea></div>
+                <div class="form-group"><label>🕳 Скрытые изъяны (не из официальных источников)</label><textarea name="flaws" maxlength="600" placeholder="Что не пишут на сайте: проблемы с общежитием, скрытые платежи, слабые кафедры, нюансы с пересдачей…"></textarea></div>
+                <div class="form-group"><label>📝 Общее впечатление</label><textarea name="text" maxlength="800" placeholder="Коротко: стоит ли идти и кому этот вуз подойдёт"></textarea></div>
+                <div class="modal-actions"><button type="button" class="mono-btn cancel" id="reviewCancel">Отмена</button><button type="submit" class="mono-btn">Опубликовать отзыв</button></div>
             </form>
         `);
-
         setTimeout(() => {
             const starsWrap = $('#reviewStars');
-            if (starsWrap) {
-                starsWrap.querySelectorAll('.review-star-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const val = parseInt(btn.getAttribute('data-star'), 10);
-                        reviewFormState.rating = val;
-                        starsWrap.querySelectorAll('.review-star-btn').forEach((b, idx) => {
-                            b.classList.toggle('active', idx < val);
-                        });
-                    });
-                });
-            }
+            if (starsWrap) { starsWrap.querySelectorAll('.review-star-btn').forEach(btn => { btn.addEventListener('click', () => { const val = parseInt(btn.getAttribute('data-star'), 10); reviewFormState.rating = val; starsWrap.querySelectorAll('.review-star-btn').forEach((b, idx) => { b.classList.toggle('active', idx < val); }); }); }); }
             $('#reviewCancel').addEventListener('click', closeModal);
             $('#reviewForm').addEventListener('submit', (e) => {
                 e.preventDefault();
-                if (reviewFormState.rating < 1) {
-                    alert('Поставьте оценку от 1 до 5 звёзд.');
-                    return;
-                }
+                if (reviewFormState.rating < 1) { alert('Поставьте оценку от 1 до 5 звёзд.'); return; }
                 const form = e.target;
-                const review = {
-                    id: 'r_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
-                    author: form.author.value.trim() || 'Аноним',
-                    rating: reviewFormState.rating,
-                    pros: form.pros.value.trim(),
-                    cons: form.cons.value.trim(),
-                    flaws: form.flaws.value.trim(),
-                    text: form.text.value.trim(),
-                    createdAt: Date.now()
-                };
-                if (!review.pros && !review.cons && !review.flaws && !review.text) {
-                    alert('Добавьте хотя бы один пункт: плюсы, минусы, изъяны или общее впечатление.');
-                    return;
-                }
+                const review = { id: 'r_' + Date.now() + '_' + Math.floor(Math.random() * 1000), author: form.author.value.trim() || 'Аноним', rating: reviewFormState.rating, pros: form.pros.value.trim(), cons: form.cons.value.trim(), flaws: form.flaws.value.trim(), text: form.text.value.trim(), createdAt: Date.now() };
+                if (!review.pros && !review.cons && !review.flaws && !review.text) { alert('Добавьте хотя бы один пункт: плюсы, минусы, изъяны или общее впечатление.'); return; }
                 addReview(reviewFormState.vuzName, review);
                 closeModal();
                 refreshVuzCard(reviewFormState.vuzName);
@@ -1556,7 +1051,6 @@
     });
 
     const vuzGrid = $('#vuz-grid');
-
     function initVuzCards() {
         if (vuzGrid.children.length > 0) return;
         const sorted = [...UNIVERSITIES].sort((a, b) => a.rating - b.rating);
@@ -1568,41 +1062,13 @@
             card.setAttribute('tabindex', '0');
             card.setAttribute('data-vuz-index', originalIndex);
             card.setAttribute('data-vuz-name', vuz.name);
-
             const militaryTag = vuz.military ? '<span class="card-tag green">🎖 ВУЦ</span>' : '<span class="card-tag">Без ВУЦ</span>';
             const dormTag = vuz.dormitory ? '<span class="card-tag green">🏠 Общежитие</span>' : '<span class="card-tag">Без общежития</span>';
-
             const stats = getVuzStats(vuz.name);
-            const reviewsBadge = stats.count > 0
-                ? `<span class="card-reviews" data-reviews-badge>★ ${formatAvg(stats.avg)} · ${stats.count} ${pluralReviews(stats.count)}</span>`
-                : `<span class="card-reviews empty" data-reviews-badge>💬 Пока без отзывов</span>`;
-
-            card.innerHTML = `
-                <div class="card-top">
-                    <div class="card-emoji">${vuz.emoji}</div>
-                    <div class="card-title-wrap">
-                        <h3>${vuz.name}</h3>
-                        <span class="card-rating">🏆 Рейтинг №${vuz.rating}</span>
-                    </div>
-                </div>
-                <div class="card-direction">📖 ${vuz.direction}</div>
-                <div class="card-stats">
-                    <span class="card-stat accent">🎯 Проходной: <strong>${vuz.score}</strong></span>
-                    <span class="card-stat">📉 Мин. балл: <strong>${vuz.minScore}</strong></span>
-                    <span class="card-stat">🪑 Мест: <strong>${vuz.places.toLocaleString('ru-RU')}</strong></span>
-                    <span class="card-stat">🆓 Бюджет: <strong>${vuz.budgetPlaces.toLocaleString('ru-RU')}</strong></span>
-                    <span class="card-stat">💰 Платно: <strong>${vuz.paidPlaces.toLocaleString('ru-RU')}</strong></span>
-                    <span class="card-stat">💵 от <strong>${(vuz.paidFrom / 1000).toFixed(0)}к ₽/год</strong></span>
-                </div>
-                <div class="card-tags">${militaryTag}${dormTag}</div>
-                ${reviewsBadge}
-                <div class="card-hint">👆 Нажми, чтобы увидеть факультеты и отзывы</div>
-            `;
-
+            const reviewsBadge = stats.count > 0 ? `<span class="card-reviews" data-reviews-badge>★ ${formatAvg(stats.avg)} · ${stats.count} ${pluralReviews(stats.count)}</span>` : `<span class="card-reviews empty" data-reviews-badge>💬 Пока без отзывов</span>`;
+            card.innerHTML = `<div class="card-top"><div class="card-emoji">${vuz.emoji}</div><div class="card-title-wrap"><h3>${vuz.name}</h3><span class="card-rating">🏆 Рейтинг №${vuz.rating}</span></div></div><div class="card-direction">📖 ${vuz.direction}</div><div class="card-stats"><span class="card-stat accent">🎯 Проходной: <strong>${vuz.score}</strong></span><span class="card-stat">📉 Мин. балл: <strong>${vuz.minScore}</strong></span><span class="card-stat">🪑 Мест: <strong>${vuz.places.toLocaleString('ru-RU')}</strong></span><span class="card-stat">🆓 Бюджет: <strong>${vuz.budgetPlaces.toLocaleString('ru-RU')}</strong></span><span class="card-stat">💰 Платно: <strong>${vuz.paidPlaces.toLocaleString('ru-RU')}</strong></span><span class="card-stat">💵 от <strong>${(vuz.paidFrom / 1000).toFixed(0)}к ₽/год</strong></span></div><div class="card-tags">${militaryTag}${dormTag}</div>${reviewsBadge}<div class="card-hint">👆 Нажми, чтобы увидеть факультеты и отзывы</div>`;
             card.onclick = () => openVuzModal(vuz);
-            card.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openVuzModal(vuz); }
-            });
+            card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openVuzModal(vuz); } });
             vuzGrid.appendChild(card);
         });
     }
@@ -1613,13 +1079,8 @@
         const badge = card.querySelector('[data-reviews-badge]');
         if (!badge) return;
         const stats = getVuzStats(vuzName);
-        if (stats.count > 0) {
-            badge.className = 'card-reviews';
-            badge.textContent = `★ ${formatAvg(stats.avg)} · ${stats.count} ${pluralReviews(stats.count)}`;
-        } else {
-            badge.className = 'card-reviews empty';
-            badge.textContent = '💬 Пока без отзывов';
-        }
+        if (stats.count > 0) { badge.className = 'card-reviews'; badge.textContent = `★ ${formatAvg(stats.avg)} · ${stats.count} ${pluralReviews(stats.count)}`; }
+        else { badge.className = 'card-reviews empty'; badge.textContent = '💬 Пока без отзывов'; }
     }
 
     const searchInput = $('#searchInput');
@@ -1627,25 +1088,20 @@
     const searchHint = $('#searchHint');
     const searchChips = $('#searchChips');
     const searchEmpty = $('#searchEmpty');
-
     function matchVuz(vuz, query) {
         const q = normalize(query);
         if (!q) return { matches: [], hasMatch: true };
         const matches = [];
         if (normalize(vuz.direction).includes(q)) matches.push({ type: 'direction', text: vuz.direction });
         if (normalize(vuz.name).includes(q)) matches.push({ type: 'name', text: vuz.name });
-        vuz.faculties.forEach(f => {
-            if (normalize(f.name).includes(q) || normalize(f.exams).includes(q)) matches.push({ type: 'faculty', text: f.name });
-        });
+        vuz.faculties.forEach(f => { if (normalize(f.name).includes(q) || normalize(f.exams).includes(q)) matches.push({ type: 'faculty', text: f.name }); });
         return { matches, hasMatch: matches.length > 0 };
     }
-
     function applySearch() {
         const query = searchInput.value.trim();
         searchClear.classList.toggle('visible', query.length > 0);
         const cards = Array.from(vuzGrid.children);
         let visibleCount = 0;
-
         cards.forEach(card => {
             const idx = parseInt(card.getAttribute('data-vuz-index'), 10);
             if (isNaN(idx)) return;
@@ -1664,121 +1120,181 @@
                     badge.textContent = facultyMatches.length > 0 ? `🔍 ${facultyMatches.length} факультет(ов) по запросу` : `🔍 Совпадение по направлению`;
                     card.appendChild(badge);
                 }
-            } else {
-                card.style.display = 'none';
-            }
+            } else { card.style.display = 'none'; }
         });
-
         searchEmpty.classList.toggle('visible', query && visibleCount === 0);
-        if (query) {
-            searchHint.innerHTML = visibleCount > 0 ? `Найдено вузов: <strong>${visibleCount}</strong>` : '';
-            searchChips.style.display = 'none';
-        } else {
-            searchHint.innerHTML = 'Популярные запросы:';
-            searchChips.style.display = '';
-        }
+        if (query) { searchHint.innerHTML = visibleCount > 0 ? `Найдено вузов: <strong>${visibleCount}</strong>` : ''; searchChips.style.display = 'none'; }
+        else { searchHint.innerHTML = 'Популярные запросы:'; searchChips.style.display = ''; }
     }
-
     searchInput.addEventListener('input', applySearch);
     searchClear.addEventListener('click', () => { searchInput.value = ''; applySearch(); searchInput.focus(); });
-    searchChips.addEventListener('click', (e) => {
-        const chip = e.target.closest('.search-chip');
-        if (!chip) return;
-        searchInput.value = chip.getAttribute('data-q') || '';
-        applySearch();
-        searchInput.focus();
-    });
+    searchChips.addEventListener('click', (e) => { const chip = e.target.closest('.search-chip'); if (!chip) return; searchInput.value = chip.getAttribute('data-q') || ''; applySearch(); searchInput.focus(); });
+
+    const collegeGrid = $('#college-grid');
+    function initCollegeCards() {
+        if (collegeGrid.children.length > 0) return;
+        const sorted = [...COLLEGES].sort((a, b) => a.rating - b.rating);
+        sorted.forEach((college) => {
+            const originalIndex = COLLEGES.indexOf(college);
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.setAttribute('role', 'button');
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('data-college-index', originalIndex);
+            card.setAttribute('data-college-name', college.name);
+            const budgetTag = college.budgetPlaces > 0 ? `<span class="card-tag green">🆓 Бюджет: ${college.budgetPlaces}</span>` : `<span class="card-tag">Без бюджета</span>`;
+            const paidTag = college.paidPlaces > 0 ? `<span class="card-tag">💰 Платно: ${college.paidPlaces}</span>` : '';
+            card.innerHTML = `
+                <div class="card-top">
+                    <div class="card-emoji">${college.emoji}</div>
+                    <div class="card-title-wrap">
+                        <h3>${college.name}</h3>
+                        <span class="card-rating">🏆 Рейтинг №${college.rating}</span>
+                    </div>
+                </div>
+                <div class="card-direction">📖 ${college.direction}</div>
+                <div class="card-stats">
+                    <span class="card-stat accent">📉 Мин. балл: <strong>${college.minScore}</strong></span>
+                    <span class="card-stat">🪑 Мест: <strong>${(college.budgetPlaces + college.paidPlaces).toLocaleString('ru-RU')}</strong></span>
+                    <span class="card-stat">🆓 Бюджет: <strong>${college.budgetPlaces.toLocaleString('ru-RU')}</strong></span>
+                    <span class="card-stat">💰 Платно: <strong>${college.paidPlaces.toLocaleString('ru-RU')}</strong></span>
+                    <span class="card-stat">💵 от <strong>${college.paidFrom > 0 ? (college.paidFrom / 1000).toFixed(0) + 'к ₽/год' : 'бесплатно'}</strong></span>
+                    <span class="card-stat">📍 <strong>${college.address.split(',')[0]}</strong></span>
+                </div>
+                <div class="card-tags">${budgetTag}${paidTag}</div>
+                <div class="card-hint">👆 Нажми, чтобы увидеть специальности и контакты</div>
+            `;
+            card.onclick = () => openCollegeModal(college);
+            card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openCollegeModal(college); } });
+            collegeGrid.appendChild(card);
+        });
+    }
+    function renderCollegeCards() { initCollegeCards(); }
+
+    function openCollegeModal(college) {
+        const facultiesHtml = college.faculties.map(f => `
+            <div class="faculty-item">
+                <div class="faculty-name">🎓 ${f.name}</div>
+                <div class="faculty-stats">
+                    <span class="faculty-stat">📉 Мин. балл: <span class="badge">${f.score}</span></span>
+                    <span class="faculty-stat">🪑 Всего мест: <span class="badge seats">${f.places}</span></span>
+                    <span class="faculty-stat">🆓 Бюджет: <span class="badge seats">${f.budget}</span></span>
+                    <span class="faculty-stat">💰 Платно: <span class="badge seats">${f.paid}</span></span>
+                    <span class="faculty-stat">📝 <span class="badge exam">${f.exams}</span></span>
+                </div>
+            </div>
+        `).join('');
+        openModal(`
+            <button class="modal-close-x" id="collegeModalClose" aria-label="Закрыть">✕</button>
+            <div class="vuz-modal-header">
+                <div class="vuz-modal-emoji">${college.emoji}</div>
+                <div><h3>${college.name}</h3><p>${college.direction} · Рейтинг №${college.rating} по Москве</p></div>
+            </div>
+            <div class="vuz-facts">
+                <div class="vuz-fact"><span class="vuz-fact-label">Рейтинг</span><span class="vuz-fact-value gold">🏆 №${college.rating}</span></div>
+                <div class="vuz-fact"><span class="vuz-fact-label">Мин. балл</span><span class="vuz-fact-value accent">${college.minScore}</span></div>
+                <div class="vuz-fact"><span class="vuz-fact-label">Бюджет / платно</span><span class="vuz-fact-value">${college.budgetPlaces.toLocaleString('ru-RU')} / ${college.paidPlaces.toLocaleString('ru-RU')}</span></div>
+                <div class="vuz-fact"><span class="vuz-fact-label">Стоимость</span><span class="vuz-fact-value">${college.paidFrom > 0 ? 'от ' + formatMoney(college.paidFrom) + '/год' : 'бесплатно (бюджет)'}</span></div>
+                <div class="vuz-fact"><span class="vuz-fact-label">Телефон</span><span class="vuz-fact-value">${college.phone}</span></div>
+                <div class="vuz-fact"><span class="vuz-fact-label">Сайт</span><span class="vuz-fact-value">${college.site}</span></div>
+                <div class="vuz-fact"><span class="vuz-fact-label">Адрес</span><span class="vuz-fact-value">${college.address}</span></div>
+            </div>
+            <p style="margin-bottom: 12px; font-weight: 600; color: var(--gray-text);">Специальности и направления:</p>
+            <div class="faculties-list">${facultiesHtml}</div>
+            <div class="modal-actions"><button class="mono-btn cancel" id="collegeModalCancel" type="button">Закрыть</button></div>
+        `);
+        setTimeout(() => { $('#collegeModalClose').addEventListener('click', closeModal); $('#collegeModalCancel').addEventListener('click', closeModal); }, 0);
+    }
+
+    const collegeSearchInput = $('#collegeSearchInput');
+    const collegeSearchClear = $('#collegeSearchClear');
+    const collegeSearchHint = $('#collegeSearchHint');
+    const collegeSearchChips = $('#collegeSearchChips');
+    const collegeSearchEmpty = $('#collegeSearchEmpty');
+    function matchCollege(college, query) {
+        const q = normalize(query);
+        if (!q) return { matches: [], hasMatch: true };
+        const matches = [];
+        if (normalize(college.name).includes(q)) matches.push({ type: 'name', text: college.name });
+        if (normalize(college.direction).includes(q)) matches.push({ type: 'direction', text: college.direction });
+        college.faculties.forEach(f => { if (normalize(f.name).includes(q) || normalize(f.exams).includes(q)) matches.push({ type: 'faculty', text: f.name }); });
+        return { matches, hasMatch: matches.length > 0 };
+    }
+    function applyCollegeSearch() {
+        const query = collegeSearchInput.value.trim();
+        collegeSearchClear.classList.toggle('visible', query.length > 0);
+        const cards = Array.from(collegeGrid.children);
+        let visibleCount = 0;
+        cards.forEach(card => {
+            const idx = parseInt(card.getAttribute('data-college-index'), 10);
+            if (isNaN(idx)) return;
+            const college = COLLEGES[idx];
+            const { matches, hasMatch } = matchCollege(college, query);
+            const oldBadge = card.querySelector('.match-badge');
+            if (oldBadge) oldBadge.remove();
+            card.onclick = () => openCollegeModal(college);
+            if (!query || hasMatch) {
+                card.style.display = '';
+                visibleCount++;
+                if (query && matches.length > 0) {
+                    const badge = document.createElement('div');
+                    badge.className = 'match-badge';
+                    const facultyMatches = matches.filter(m => m.type === 'faculty');
+                    badge.textContent = facultyMatches.length > 0 ? `🔍 ${facultyMatches.length} специальностей по запросу` : `🔍 Совпадение по названию`;
+                    card.appendChild(badge);
+                }
+            } else { card.style.display = 'none'; }
+        });
+        collegeSearchEmpty.classList.toggle('visible', query && visibleCount === 0);
+        if (query) { collegeSearchHint.innerHTML = visibleCount > 0 ? `Найдено колледжей: <strong>${visibleCount}</strong>` : ''; collegeSearchChips.style.display = 'none'; }
+        else { collegeSearchHint.innerHTML = 'Популярные запросы:'; collegeSearchChips.style.display = ''; }
+    }
+    collegeSearchInput.addEventListener('input', applyCollegeSearch);
+    collegeSearchClear.addEventListener('click', () => { collegeSearchInput.value = ''; applyCollegeSearch(); collegeSearchInput.focus(); });
+    collegeSearchChips.addEventListener('click', (e) => { const chip = e.target.closest('.search-chip'); if (!chip) return; collegeSearchInput.value = chip.getAttribute('data-cq') || ''; applyCollegeSearch(); collegeSearchInput.focus(); });
 
     const monetization = $('#monetization');
     const monoToggle = $('#monoToggle');
     const monoClose = $('#monoClose');
     function openMono() { monetization.classList.add('open'); monoToggle.setAttribute('aria-expanded', 'true'); }
     function closeMono() { monetization.classList.remove('open'); monoToggle.setAttribute('aria-expanded', 'false'); }
-    monoToggle.addEventListener('click', () => {
-        if (monetization.classList.contains('open')) closeMono();
-        else openMono();
-    });
+    monoToggle.addEventListener('click', () => { if (monetization.classList.contains('open')) closeMono(); else openMono(); });
     monoClose.addEventListener('click', (e) => { e.stopPropagation(); closeMono(); });
-    document.addEventListener('click', (e) => {
-        if (!monetization.classList.contains('open')) return;
-        if (!monetization.contains(e.target)) closeMono();
-    });
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && monetization.classList.contains('open')) closeMono();
-    });
+    document.addEventListener('click', (e) => { if (!monetization.classList.contains('open')) return; if (!monetization.contains(e.target)) closeMono(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && monetization.classList.contains('open')) closeMono(); });
 
     function openAdModal() {
         openModal(`
             <h3>📣 Разместить рекламу</h3>
-            <p>Расскажите о своём вузе <strong>10 000+ школьникам</strong> Москвы. Мы покажем ваш баннер в подборке вузов.</p>
+            <p>Расскажите о своём вузе или колледже <strong>10 000+ школьникам</strong> Москвы. Мы покажем ваш баннер в подборке.</p>
             <form id="adForm">
-                <div class="form-group"><label>Название вуза / компании</label><input type="text" name="name" required placeholder="Например, МГУ"></div>
+                <div class="form-group"><label>Название вуза / колледжа / компании</label><input type="text" name="name" required placeholder="Например, МГУ"></div>
                 <div class="form-group"><label>Email для связи</label><input type="email" name="email" required placeholder="you@example.com"></div>
-                <div class="form-group">
-                    <label>Тариф</label>
-                    <select name="tariff" required>
-                        <option value="month">1 месяц — 2 000 ₽</option>
-                    </select>
-                </div>
-                <div class="modal-actions">
-                    <button type="button" class="mono-btn cancel" id="adCancel">Отмена</button>
-                    <button type="submit" class="mono-btn">Отправить заявку</button>
-                </div>
+                <div class="form-group"><label>Тариф</label><select name="tariff" required><option value="month">1 месяц — 2 000 ₽</option></select></div>
+                <div class="modal-actions"><button type="button" class="mono-btn cancel" id="adCancel">Отмена</button><button type="submit" class="mono-btn">Отправить заявку</button></div>
             </form>
         `);
-
         setTimeout(() => {
             $('#adCancel').addEventListener('click', closeModal);
-            $('#adForm').addEventListener('submit', (e) => {
-                e.preventDefault();
-                const name = e.target.name.value;
-                const tariffLabel = '1 месяц — 2 000 ₽';
-                closeModal();
-                alert(`✅ Спасибо, ${name}!\nЗаявка на тариф «${tariffLabel}» принята.\nМы свяжемся с вами в течение дня.`);
-            });
+            $('#adForm').addEventListener('submit', (e) => { e.preventDefault(); const name = e.target.name.value; closeModal(); alert(`✅ Спасибо, ${name}!\nЗаявка на тариф «1 месяц — 2 000 ₽» принята.\nМы свяжемся с вами в течение дня.`); });
         }, 0);
     }
 
     function openDonateModal() {
         openModal(`
             <h3>☕ Поддержать ПрофиВУЗ</h3>
-            <p>Мы <strong>бесплатно</strong> помогаем школьникам выбирать вуз и кормим котиков. Любая сумма — это вклад в будущее образование.</p>
+            <p>Мы <strong>бесплатно</strong> помогаем школьникам выбирать вуз или колледж и кормим котиков. Любая сумма — это вклад в будущее образование.</p>
             <form id="donateForm">
-                <div class="form-group">
-                    <label>Сумма (₽)</label>
-                    <select name="amount" required>
-                        <option value="100">100 ₽ — чашка кофе</option>
-                        <option value="300">300 ₽ — корм для котика</option>
-                        <option value="500">500 ₽ — поддержка сервера</option>
-                        <option value="custom">Своя сумма</option>
-                    </select>
-                </div>
-                <div class="form-group hidden" id="customAmountGroup">
-                    <label>Введите сумму</label>
-                    <input type="number" name="customAmount" min="1" placeholder="1000">
-                </div>
-                <div class="form-group">
-                    <label>Способ оплаты</label>
-                    <select name="method" required>
-                        <option value="card">Банковская карта</option>
-                        <option value="sbp">СБП</option>
-                        <option value="yoomoney">ЮMoney</option>
-                    </select>
-                </div>
-                <div class="modal-actions">
-                    <button type="button" class="mono-btn cancel" id="donateCancel">Отмена</button>
-                    <button type="submit" class="mono-btn">Перейти к оплате</button>
-                </div>
+                <div class="form-group"><label>Сумма (₽)</label><select name="amount" required><option value="100">100 ₽ — чашка кофе</option><option value="300">300 ₽ — корм для котика</option><option value="500">500 ₽ — поддержка сервера</option><option value="custom">Своя сумма</option></select></div>
+                <div class="form-group hidden" id="customAmountGroup"><label>Введите сумму</label><input type="number" name="customAmount" min="1" placeholder="1000"></div>
+                <div class="form-group"><label>Способ оплаты</label><select name="method" required><option value="card">Банковская карта</option><option value="sbp">СБП</option><option value="yoomoney">ЮMoney</option></select></div>
+                <div class="modal-actions"><button type="button" class="mono-btn cancel" id="donateCancel">Отмена</button><button type="submit" class="mono-btn">Перейти к оплате</button></div>
             </form>
         `);
-
         setTimeout(() => {
             const amountSelect = $('#donateForm select[name="amount"]');
             const customGroup = $('#customAmountGroup');
-            amountSelect.addEventListener('change', (e) => {
-                if (e.target.value === 'custom') customGroup.classList.remove('hidden');
-                else customGroup.classList.add('hidden');
-            });
+            amountSelect.addEventListener('change', (e) => { if (e.target.value === 'custom') customGroup.classList.remove('hidden'); else customGroup.classList.add('hidden'); });
             $('#donateCancel').addEventListener('click', closeModal);
             $('#donateForm').addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -1800,6 +1316,7 @@
             const action = el.getAttribute('data-footer-action');
             switch (action) {
                 case 'vuz': renderVuzCards(); showPage('vuz'); highlightNav('vuz'); break;
+                case 'college': renderCollegeCards(); showPage('college'); highlightNav('college'); break;
                 case 'search': renderVuzCards(); showPage('vuz'); highlightNav('vuz'); setTimeout(() => { searchInput.focus(); }, 400); break;
                 case 'prof': openProfModal(); break;
                 case 'courses': openCoursesModal(); break;
@@ -1813,6 +1330,7 @@
     });
 
     initVuzCards();
+    initCollegeCards();
     refreshResultButtons();
     highlightNav('home');
 })();
