@@ -765,7 +765,9 @@
         business: { name: 'Менеджмент и бизнес', emoji: '💼', desc: 'Менеджмент, маркетинг, предпринимательство, управление' },
         law: { name: 'Юриспруденция', emoji: '⚖️', desc: 'Право, международное право, судебные экспертизы, бизнес-право' },
         humanities: { name: 'Гуманитарные науки', emoji: '📚', desc: 'История, филология, международные отношения, журналистика' },
-        physics: { name: 'Физика и математика', emoji: '🔬', desc: 'Фундаментальная физика, ядерная физика, прикладная математика' }
+        physics: { name: 'Физика и математика', emoji: '🔬', desc: 'Фундаментальная физика, ядерная физика, прикладная математика' },
+        linguistics: { name: 'Лингвистика и языки', emoji: '🌍', desc: 'Перевод, иностранные языки, межкультурная коммуникация, филология и локализация' },
+        pedagogy: { name: 'Педагогика и образование', emoji: '🍎', desc: 'Учитель-предметник, дошкольное и начальное образование, педагогика, специальное образование' }
     };
 
     const TEST_QUESTIONS = [
@@ -820,7 +822,29 @@
             { text: 'Космос, самолёты, новые материалы', weights: { engineering: 2, physics: 2 } },
             { text: 'Генетика, мозг, новые лекарства', weights: { medicine: 2 } },
             { text: 'Биржи, инвестиции, стартапы', weights: { economics: 2, business: 2 } },
-            { text: 'Права человека, политика, культура', weights: { law: 2, humanities: 2 } }
+            { text: 'Права человека, политика, культура', weights: { law: 2, humanities: 2 } },
+            { text: 'Языки, перевод, общение между культурами', weights: { linguistics: 3, humanities: 1 } },
+            { text: 'Обучение, развитие детей и помощь ученикам', weights: { pedagogy: 3, humanities: 1 } }
+        ]},
+        { question: 'Что тебе было бы интереснее объяснять другим?', hint: 'Представь, что одноклассник просит тебя помочь разобраться', options: [
+            { text: 'Математику, физику или информатику', weights: { pedagogy: 3, physics: 1, it: 1 } },
+            { text: 'Историю, литературу или обществознание', weights: { pedagogy: 2, humanities: 2 } },
+            { text: 'Иностранный язык и особенности другой культуры', weights: { linguistics: 3, pedagogy: 1 } },
+            { text: 'Как устроены люди, эмоции и общение', weights: { pedagogy: 2, medicine: 1, humanities: 1 } },
+            { text: 'Мне больше нравится самому исследовать, а не объяснять', weights: { physics: 1, it: 1, engineering: 1 } }
+        ]},
+        { question: 'Как ты относишься к иностранным языкам?', hint: 'Выбери наиболее близкий вариант', options: [
+            { text: 'Люблю изучать языки, грамматику и произношение', weights: { linguistics: 3 } },
+            { text: 'Интересно переводить и передавать смысл без потерь', weights: { linguistics: 3, humanities: 1 } },
+            { text: 'Хочу использовать язык в бизнесе, туризме или международной сфере', weights: { linguistics: 2, business: 1 } },
+            { text: 'Языки не особенно интересуют', weights: { it: 1, engineering: 1, economics: 1 } }
+        ]},
+        { question: 'В какой рабочей атмосфере ты чувствуешь себя лучше?', hint: 'Выбери один вариант', options: [
+            { text: 'Класс, группа учеников, общение и объяснение материала', weights: { pedagogy: 3 } },
+            { text: 'Бюро переводов, международная команда, тексты и языки', weights: { linguistics: 3, humanities: 1 } },
+            { text: 'Лаборатория, мастерская или техническая команда', weights: { engineering: 2, physics: 1 } },
+            { text: 'Офис, проекты, переговоры и организация процессов', weights: { business: 2, economics: 1 } },
+            { text: 'Клиника, социальная или исследовательская организация', weights: { medicine: 2, humanities: 1 } }
         ]}
     ];
 
@@ -948,18 +972,93 @@
     const testBackBtn = $('#testBack');
     let testState = { current: 0, answers: new Array(TEST_QUESTIONS.length).fill(null), scores: {} };
 
+    const EXAM_SUBJECTS = ['Русский язык','Математика (профильная)','Математика (базовая)','Физика','Информатика','Химия','Биология','История','Обществознание','География','Литература','Иностранный язык'];
+    const SUBJECT_DIRECTIONS = {
+        'Русский язык': ['Филология','Журналистика','Педагогическое образование','Лингвистика','Юриспруденция','Реклама и связи с общественностью'],
+        'Математика (профильная)': ['Прикладная математика и информатика','Экономика','Финансы и кредит','Бизнес-информатика','Инженерные направления','Педагогическое образование (математика)'],
+        'Математика (базовая)': ['Для многих программ колледжей — конкурс аттестатов; набор зависит от специальности'],
+        'Физика': ['Физика','Радиотехника','Электроэнергетика','Машиностроение','Робототехника','Строительство'],
+        'Информатика': ['Программная инженерия','Информатика и вычислительная техника','Прикладная информатика','Информационная безопасность','Бизнес-информатика'],
+        'Химия': ['Химия','Фармация','Химическая технология','Материаловедение','Педагогическое образование (химия)'],
+        'Биология': ['Биология','Биотехнология','Психология','Педагогическое образование (биология)','Ветеринария','Сестринское дело'],
+        'История': ['История','Юриспруденция','Международные отношения','Документоведение','Педагогическое образование (история)'],
+        'Обществознание': ['Юриспруденция','Социология','Психология','Государственное и муниципальное управление','Педагогическое образование','Менеджмент'],
+        'География': ['География','Картография и геоинформатика','Туризм','Экология и природопользование','Педагогическое образование (география)'],
+        'Литература': ['Филология','Журналистика','Издательское дело','Театральное искусство','Педагогическое образование (литература/русский язык)'],
+        'Иностранный язык': ['Лингвистика','Перевод и переводоведение','Педагогическое образование (иностранный язык)','Международные отношения','Зарубежное регионоведение']
+    };
+    let selectedExamSubjects = [];
+
+    function renderExamPicker() {
+        testCounter.textContent = 'Подбор по экзаменам';
+        testProgressFill.style.width = '0%';
+        testBackBtn.style.display = 'none';
+        testNextBtn.style.display = 'none';
+        testBody.innerHTML = `
+            <div class="test-question">Сначала выберем экзамены</div>
+            <div class="test-question-hint">Отметь предметы, которые уже выбрал(а) или рассматриваешь. Можно выбрать несколько. Для ОГЭ это поможет сориентироваться при выборе профиля и колледжа, для ЕГЭ — при поиске программ вузов.</div>
+            <div class="form-group" style="margin:14px 0"><label for="examLevel">Для какого этапа выбираешь предметы?</label><select id="examLevel" class="filter-select" style="width:100%"><option value="ЕГЭ">ЕГЭ — поступление в вуз</option><option value="ОГЭ">ОГЭ — выбор профиля и колледжа</option><option value="Оба">Пока выбираю и то и другое</option></select></div>
+            <div class="exam-subject-grid">${EXAM_SUBJECTS.map(subject => `<label class="exam-subject-option"><input type="checkbox" value="${subject}" ${selectedExamSubjects.includes(subject) ? 'checked' : ''}><span>${subject}</span></label>`).join('')}</div>
+            <div class="test-question-hint" style="margin-top:12px">Важно: конкретные комбинации вступительных испытаний устанавливает вуз для каждой программы и года приёма. Для колледжей после 9/11 класса чаще учитывают конкурс аттестатов и дополнительные испытания, если они предусмотрены.</div>
+            <div class="exam-picker-actions"><button class="prof-modal-btn primary" id="findByExams" type="button">Подобрать специальности по предметам →</button><button class="prof-modal-btn ghost" id="continueCareerTest" type="button">Продолжить тест по интересам →</button></div>`;
+        testBody.querySelectorAll('.exam-subject-option input').forEach(input => input.addEventListener('change', () => {
+            selectedExamSubjects = [...testBody.querySelectorAll('.exam-subject-option input:checked')].map(el => el.value);
+        }));
+        $('#findByExams').addEventListener('click', () => {
+            if (!selectedExamSubjects.length) { alert('Выбери хотя бы один предмет.'); return; }
+            renderSubjectResults($('#examLevel').value, selectedExamSubjects);
+        });
+        $('#continueCareerTest').addEventListener('click', () => {
+            testState.current = 0;
+            testState.answers = new Array(TEST_QUESTIONS.length).fill(null);
+            testState.scores = {};
+            Object.keys(DIRECTIONS).forEach(k => testState.scores[k] = 0);
+            testNextBtn.style.display = '';
+            renderQuestion();
+        });
+    }
+
+    function renderSubjectResults(level, subjects) {
+        testHeader.style.display = 'none'; testFooter.style.display = 'none';
+        testBody.classList.add('hidden'); testResult.classList.remove('hidden');
+        const majors = [...new Set(subjects.flatMap(subject => SUBJECT_DIRECTIONS[subject] || []))];
+        const subjectTags = subjects.map(escapeHtml).join(' · ');
+        const subjectCards = subjects.map(subject => `<div class="subject-result-group"><strong>${escapeHtml(subject)}</strong><ul>${(SUBJECT_DIRECTIONS[subject] || []).map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul></div>`).join('');
+        const matching = [];
+        UNIVERSITIES.forEach((vuz, vuzIndex) => vuz.faculties.forEach(faculty => {
+            const examText = normalize(faculty.exams || '');
+            const matches = subjects.some(subject => {
+                const aliases = subject === 'Математика (профильная)' || subject === 'Математика (базовая)' ? ['математ'] :
+                    subject === 'Иностранный язык' ? ['иностран', 'англий'] :
+                    subject === 'Обществознание' ? ['обществозн'] : [normalize(subject).split(' ')[0]];
+                return aliases.some(alias => examText.includes(alias));
+            });
+            if (matches) matching.push({vuz,vuzIndex,faculty});
+        }));
+        const matchedHtml = matching.slice(0,12).map(item => `<button class="test-result-vuz-item" data-vuz-index="${item.vuzIndex}" data-faculty-query="${escapeHtml(item.faculty.name)}" type="button"><div class="test-result-vuz-emoji">${item.vuz.emoji}</div><div class="test-result-vuz-body"><div class="test-result-vuz-name">${escapeHtml(item.vuz.name)}</div><div class="test-result-vuz-faculty">${escapeHtml(item.faculty.name)}<br><small>В карточке указано: ${escapeHtml(item.faculty.exams || 'уточняется')}</small></div></div></button>`).join('');
+        testResult.innerHTML = `<div class="test-result-hero"><span class="test-result-emoji">📝</span><h3>Подбор по предметам ${level}</h3><p>Выбрано: ${subjectTags}</p></div><div class="test-result-subtitle">Какие специальности могут подойти</div><div class="subject-result-grid">${subjectCards}</div><div class="test-result-subtitle">Программы вузов из каталога с совпадением по выбранным предметам</div><div class="test-result-vuz-list">${matchedHtml || '<p>Пока нет программ с явно указанным совпадением. Проверь требования на сайте выбранного вуза.</p>'}</div><p class="test-question-hint">Это предварительный ориентир, а не гарантия допуска к конкурсу. Список предметов, обязательные ЕГЭ, ДВИ и минимальные баллы проверяй в правилах приёма конкретного года. ${level === 'ОГЭ' ? 'ОГЭ не заменяет вступительные испытания в вуз; при поступлении в колледж обычно важны аттестат и дополнительные испытания, если они предусмотрены.' : ''}</p><div class="test-result-actions"><button class="prof-modal-btn primary" id="subjectBack" type="button">← Изменить предметы</button><button class="prof-modal-btn ghost" id="subjectCareer" type="button">Пройти тест по интересам</button></div>`;
+        testResult.querySelectorAll('.test-result-vuz-item').forEach(btn => btn.addEventListener('click', () => {
+            const idx = Number(btn.dataset.vuzIndex), query = btn.dataset.facultyQuery || '';
+            closeTest(); setTimeout(() => openVuzModal(UNIVERSITIES[idx], query), 200);
+        }));
+        $('#subjectBack').addEventListener('click', () => { testResult.classList.add('hidden'); testBody.classList.remove('hidden'); testHeader.style.display=''; testFooter.style.display=''; renderExamPicker(); });
+        $('#subjectCareer').addEventListener('click', () => { testResult.classList.add('hidden'); testBody.classList.remove('hidden'); testHeader.style.display=''; testFooter.style.display=''; testNextBtn.style.display=''; testState.current=0; testState.answers=new Array(TEST_QUESTIONS.length).fill(null); testState.scores={}; Object.keys(DIRECTIONS).forEach(k=>testState.scores[k]=0); renderQuestion(); });
+    }
+
     function startTest() {
         testState.current = 0;
         testState.answers = new Array(TEST_QUESTIONS.length).fill(null);
         testState.scores = {};
         Object.keys(DIRECTIONS).forEach(k => testState.scores[k] = 0);
+        testNextBtn.style.display = 'none';
+        selectedExamSubjects = [];
         testHeader.style.display = '';
         testFooter.style.display = '';
         testBody.classList.remove('hidden');
         testResult.classList.add('hidden');
         testModalOverlay.classList.add('open');
         document.body.style.overflow = 'hidden';
-        renderQuestion();
+        renderExamPicker();
     }
     function closeTest() { testModalOverlay.classList.remove('open'); if (!modalOverlay.classList.contains('open') && !profModalOverlay.classList.contains('open')) document.body.style.overflow = ''; }
     $('#testClose').addEventListener('click', closeTest);
@@ -967,6 +1066,7 @@
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && testModalOverlay.classList.contains('open')) closeTest(); });
 
     function renderQuestion() {
+        testNextBtn.style.display = '';
         const q = TEST_QUESTIONS[testState.current];
         const selectedIndex = testState.answers[testState.current];
         testCounter.textContent = `Вопрос ${testState.current + 1} из ${TEST_QUESTIONS.length}`;

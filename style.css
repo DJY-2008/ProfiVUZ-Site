@@ -912,3 +912,181 @@ body { padding-top: var(--header-height); }
 .college-card .photo-overlay { position:absolute; left:12px; bottom:12px; color:white; background:#172b25bb; padding:6px 10px; border-radius:999px; font-size:12px; }
 .review-video-note { background:#ecfdf5; border:1px solid #bbf7d0; color:#166534; border-radius:12px; padding:12px 14px; margin:8px 0 14px; font-size:13px; line-height:1.5; }
 .review-form-hint + small, .form-group small { display:block; color:var(--gray-text); font-size:12px; margin-top:5px; }
+
+/* ============================================================
+   ВЫБОР ЕГЭ И ОГЭ
+   ============================================================ */
+
+.exam-subject-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.exam-subject-option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 54px;
+    padding: 13px 15px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #fff;
+    color: #374151;
+    cursor: pointer;
+    transition: border-color .2s ease, background .2s ease,
+                box-shadow .2s ease, transform .2s ease;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.exam-subject-option:hover {
+    border-color: #6ee7b7;
+    background: #f0fdf7;
+    transform: translateY(-1px);
+}
+
+.exam-subject-option:has(input:checked) {
+    border-color: #10b981;
+    background: #ecfdf5;
+    color: #047857;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, .10);
+}
+
+.exam-subject-option input {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+    margin: 0 10px 0 0;
+    accent-color: #10b981;
+    cursor: pointer;
+}
+
+.exam-subject-option span {
+    line-height: 1.35;
+}
+
+#examLevel {
+    min-height: 48px;
+    padding: 11px 14px;
+    border: 1px solid #e5e7eb;
+    border-radius: 13px;
+    background: #fff;
+    color: #1f2937;
+    font: inherit;
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+#examLevel:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, .12);
+}
+
+.exam-picker-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.exam-picker-actions .prof-modal-btn {
+    flex: 1 1 220px;
+    min-height: 48px;
+    justify-content: center;
+    border-radius: 13px;
+}
+
+/* Результаты подбора по предметам */
+
+.subject-result-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin: 16px 0 24px;
+}
+
+.subject-result-group {
+    padding: 17px;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    background: #fff;
+}
+
+.subject-result-group strong {
+    display: block;
+    margin-bottom: 10px;
+    color: #047857;
+    font-size: 15px;
+}
+
+.subject-result-group ul {
+    padding-left: 19px;
+    color: #4b5563;
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+.test-result-vuz-item {
+    display: flex;
+    width: 100%;
+    gap: 13px;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #e5e7eb;
+    border-radius: 15px;
+    background: #fff;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color .2s ease, background .2s ease,
+                transform .2s ease;
+}
+
+.test-result-vuz-item:hover {
+    border-color: #6ee7b7;
+    background: #f0fdf7;
+    transform: translateY(-1px);
+}
+
+.test-result-vuz-emoji {
+    font-size: 25px;
+}
+
+.test-result-vuz-name {
+    margin-bottom: 5px;
+    color: #1f2937;
+    font-weight: 700;
+}
+
+.test-result-vuz-faculty {
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.test-result-vuz-faculty small {
+    display: inline-block;
+    margin-top: 5px;
+    color: #059669;
+}
+
+@media (max-width: 600px) {
+    .exam-subject-grid,
+    .subject-result-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .exam-subject-option {
+        min-height: 50px;
+    }
+
+    .exam-picker-actions {
+        flex-direction: column;
+    }
+
+    .exam-picker-actions .prof-modal-btn {
+        width: 100%;
+        flex-basis: auto;
+    }
+}
